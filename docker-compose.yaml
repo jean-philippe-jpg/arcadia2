@@ -1,0 +1,10 @@
+version: '4.32.0'
+services:
+  mongodb:
+    image: mongo:7.0
+    restart: always
+    ports:
+      - 8090:27017
+    environment:  
+      MONGO_INITDB_ROOT_USERNAME: jean-phi
+      MONGO_INITDB_ROOT_PASSWORD: J25061984c
