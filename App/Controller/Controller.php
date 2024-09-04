@@ -1,49 +1,80 @@
 <?php
 
 
+
+
 namespace App\Controller;
 
 
-class Controller{
 
+class Controller{
+   
     public function route(): void {
 
-        if (isset($_GET['controller'])){
+try { 
+    
+    if (isset($_GET['controller'])){
 
-            switch($_GET['controller']){
+    switch($_GET['controller']){
 
-                case 'pages':
+        case 'pages':
 
-                    $pagecontroller = new PagesController();
-                    $pagecontroller->route();
-                    
-                    break;
-                case 'habitat':
-                    var_dump('chargement de habitatcontroller');
-                   
-                    break;
-                case 'pages':
-                    var_dump('chargement de pagescontroller');
-                   
-                    break;
-                default:
+            $pagecontroller = new PagesController();
+            $pagecontroller->route();
+            
+            break;
+        case 'habitats':
 
-                  break;
-                    
+            $habitat = new HabitatsController;
+            $habitat->route();
+            
+            break;
+        case 'pages':
+            var_dump('chargement de pagescontroller');
+           
+            break;
+        default:
+            throw new \Exception('erreur de controller');
+            
+          break;
+            
 
-        }
-        }  else {
+}
+}  else {
 
-            echo 'erreur de controller';
-        }
+    $pagecontroller = new PagesController();
+    $pagecontroller->home();
+}
+} catch(\Exception $e){
+$this->render('errors/errors', [
+    'errors' => $e->getMessage()
+]);
+
+}
 
                 }
 
                 protected function render(string $path, array $params = []): void
                  {
-                    
-                    require _ROOTPATH_ . '/templates/showanimals.php';
-                }
+                    $filePath = _ROOTPATH_.'/templates/'.$path.'.php';
+                  
+
+
+                    try{
+                        if(!file_exists($filePath)){
+
+                        throw new \Exception('fichier introuvable');
+                            } else {
+                                extract($params);
+                                require_once $filePath;
+                            }
+
+                    } catch(\Exception $e) {
+
+                        echo $e->getMessage();
+                    }
+                          /*require _ROOTPATH_ . '/templates/showanimals.php';*/            
     }
+}
 
                 

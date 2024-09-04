@@ -12,6 +12,9 @@ require_once './templates/partial/_carrousel.php';
 
 
 
+
+
 <?php
-require_once './partial/_footer.php';
+require_once './templates/partial/_presentation.php';
+require_once './templates/partial/_footer.php';
 ?>
