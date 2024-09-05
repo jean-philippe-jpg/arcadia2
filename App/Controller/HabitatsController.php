@@ -69,11 +69,12 @@ class HabitatsController extends Controller{
                             // charger l'id d'un element avec le repository//
 
                             $habitatRrepository = new HabitatsRepository();
-                            $habitat = $habitatRrepository->findOneById($id);
+                            $habitation = $habitatRrepository->findOneById($id);
 
                             $this->render('habitat/show', [
 
-                                'logement' => $habitat
+                                'logement' => $habitation,
+                                
                                          
                                 ] );
 
