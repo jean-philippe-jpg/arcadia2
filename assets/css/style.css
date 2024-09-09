@@ -1,4 +1,4 @@
-
+carroussel
 
 .logo_header{
 
@@ -6,10 +6,6 @@
     border-radius: 50%;
 }
 
-
-
-
-  
   img {
     display: block;
     max-width: 100%;
@@ -104,3 +100,27 @@
   }
   
   
+
+  .show{
+    
+    margin-left: 35vw;
+    text-align: center;
+    width: 600px;
+    border:2px solid blue;
+    border-radius: 8px;
+
+  }
+
+  .form-create{
+
+    border:2px solid;
+    padding: 20px;
+    width: 40vw;
+    margin-left: 35vw;
+  }
+
+  .create-nom-habitat{
+
+    margin-bottom: 10px;
+    margin-left: 50px;
+  }

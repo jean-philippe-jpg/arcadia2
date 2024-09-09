@@ -5,6 +5,8 @@
 
 namespace App\Controller;
 
+use App\Repository\HabitatsRepository;
+
 
 
 class Controller{
@@ -23,12 +25,16 @@ try {
             $pagecontroller->route();
             
             break;
-        case 'habitats':
+            case 'Habitats':
 
-            $habitat = new HabitatsController;
-            $habitat->route();
-            
-            break;
+                /*$admin = new AdminController;
+                $admin->route();*/
+
+                $habitat = new HabitatsController;
+                $habitat->route();
+
+                
+                break;
         case 'pages':
             var_dump('chargement de pagescontroller');
            

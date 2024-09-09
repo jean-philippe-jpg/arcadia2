@@ -1,13 +1,11 @@
 <?php
 
-
-
-  namespace App\Controller;
+namespace App\Controller;
 
   use App\Repository\HabitatsRepository;
 
 
-class HabitatsController extends Controller{
+class AdminController extends Controller{
 
     public function route(): void {
 
@@ -16,31 +14,27 @@ class HabitatsController extends Controller{
 
             switch($_GET['action']){
 
+                case 'create':
+                    
+                    $this->create();
+                   
+                    break;
+                    
+                        case 'update':
+
+                            $this->update();
+                            
+                            break;
+                            case 'delete':
+
+                                $this->delete();
+                                
+                                break;
                 case 'show':
 
                     $this->show();
                     
                     break;
-                case 'create':
-                   
-                    $this->create();
-                   
-                    break;
-                case 'edit':
-                    var_dump('chargement de pagescontroller');
-                   
-                    break;
-                    case 'add':
-                        var_dump('chargement de pagescontroller');
-
-                    break;
-                    case 'update':
-                        var_dump('chargement de pagescontroller');
-                       
-                    break;
-                    case 'delete':
-                        var_dump('chargement de pagescontroller');
-                       
 
                 default:
                 throw new \Exception('page introuvable :/');
@@ -58,28 +52,41 @@ class HabitatsController extends Controller{
 
       }
 
-                }
+    }
 
-
-                protected function create()
+               
                 
-                {
-                   
-                       
-                            // charger l'id d'un element avec le repository//
+    protected function create()
+                
+    {
+        $this->render('/Admin/Habitat/create', [
+             
+            ] );  
+    }
 
-                            $habitatRrepository = new HabitatsRepository();
+    protected function read()
+                
+    {
+        $this->render('/Admin/Habitat/read', [
+             
+            ] );  
+    }
 
+    protected function update()
+                
+    {
+        $this->render('/Admin/Habitat/update', [
+             
+            ] );  
+    }
 
-                            /*$habitation = $habitatRrepository->findOneById($id);*/
-
-                            $this->render('/Admin/Habitat/create', [
-                                
-                                'form' => $habitatRrepository
-                                    
-                                ] );
-
-                    }
+    protected function delete()
+                
+    {
+        $this->render('/Admin/Habitat/read', [
+             
+            ] );  
+    }
 
                 protected function show()
                 
@@ -115,21 +122,6 @@ class HabitatsController extends Controller{
                             //require_once 'templates/showanimals.php';//
                   
                 }
-
-               // protected function create()
-                
-                //{
-                    //$this->render('/Admin/Habitat/create', [
-
-                       
-                        
-                                 
-                       // ] );
-
-                   
-                //}
                 
 
 }
-
-
