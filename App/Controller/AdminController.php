@@ -32,7 +32,7 @@ class AdminController extends Controller{
                                 break;
                 case 'show':
 
-                    $this->show();
+                    //$this->show();
                     
                     break;
 
@@ -88,40 +88,7 @@ class AdminController extends Controller{
             ] );  
     }
 
-                protected function show()
-                
-                {
-                    try {
-                        if(isset($_GET['id'])){
-
-                            $id = (int)$_GET['id'];
-                            // charger l'id d'un element avec le repository//
-
-                            $habitatRrepository = new HabitatsRepository();
-                            $habitation = $habitatRrepository->findOneById($id);
-
-                            $this->render('/Admin/Habitat/show', [
-
-                                'logement' => $habitation,
-                                
-                                         
-                                ] );
-
-                        } else {
-                            throw new \Exception('id introuvable');
-
-                        }
-
-                    } catch(\Exception $e){
-                        $this->render('errors/errors', [
-                            'errors' => $e->getMessage()
-
-                        ]);}
-                
-                        
-                            //require_once 'templates/showanimals.php';//
-                  
-                }
+               
                 
 
 }

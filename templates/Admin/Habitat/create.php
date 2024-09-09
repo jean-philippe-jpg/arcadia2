@@ -1,5 +1,5 @@
 <?php
-require_once _ROOTPATH_.'/Repository/HabitatsRepository.php';
+
 require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
 ?>
 <h1>create</h1>
@@ -8,7 +8,7 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
 <form action="/App/Repository/HabitatsRepository.php" method="POST">
     <div class="create-nom-habitat">
     <label for="name"><strong>nom: </strong></label>
-    <input name="name" id="nom" type="text">
+    <input name="name" id="name" type="text">
     </div>
     
     <div class="create-description-habitat">
@@ -16,7 +16,7 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
     <input name="description" id="description" type="text">
     </div>
 
-    <button style="margin-top: 20px;" type="submit" class="btn btn-success" name="insert">Create</button>
+    <input type="submit" name="insert" value="create">
 
     
 </form>

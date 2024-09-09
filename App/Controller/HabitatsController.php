@@ -1,7 +1,6 @@
 <?php
 
 
-
   namespace App\Controller;
 
   use App\Repository\HabitatsRepository;
@@ -22,9 +21,9 @@ class HabitatsController extends Controller{
                     
                     break;
                 case 'create':
-                   
+
                     $this->create();
-                   
+
                     break;
                 case 'edit':
                     var_dump('chargement de pagescontroller');
@@ -61,26 +60,7 @@ class HabitatsController extends Controller{
                 }
 
 
-                protected function create()
                 
-                {
-                   
-                       
-                            // charger l'id d'un element avec le repository//
-
-                            $habitatRrepository = new HabitatsRepository();
-
-
-                            /*$habitation = $habitatRrepository->findOneById($id);*/
-
-                            $this->render('/Admin/Habitat/create', [
-                                
-                                'form' => $habitatRrepository
-                                    
-                                ] );
-
-                    }
-
                 protected function show()
                 
                 {
@@ -116,18 +96,32 @@ class HabitatsController extends Controller{
                   
                 }
 
-               // protected function create()
+                protected function create()
                 
-                //{
-                    //$this->render('/Admin/Habitat/create', [
+                {
+                    try {
+                        if(isset($_POST['insert'])){
+
+                            $habitatRrepository = new HabitatsRepository();
+                            $habitatRrepository->createHabitat($_POST['name'], $_POST['description']);
+                           
+                           
+                        } else {
+                            throw new \Exception(' erreur de creation');
+                        }
+                        $this->render('/Admin/Habitat/create', [
+                            
+                        ] );
+                    } catch(\Exception $e){
+                        $this->render('errors/errors', [
+                            'errors' => $e->getMessage()
+                        ]);
 
                        
-                        
-                                 
-                       // ] );
-
+                    }
+                    
                    
-                //}
+                }
                 
 
 }
