@@ -27,9 +27,6 @@ try {
             break;
             case 'Habitats':
 
-                /*$admin = new AdminController;
-                $admin->route();*/
-
                 $habitat = new HabitatsController;
                 $habitat->route();
 

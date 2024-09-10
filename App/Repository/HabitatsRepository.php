@@ -39,11 +39,7 @@ class HabitatsRepository {
 
 
 
-    public function createHabitat(string $name , string $description ){
-
-        
-
-            if(isset($_POST['insert'])){
+    public function createHabitat( ){
 
                 try{
                 $mysql = Mysql::getInstance();
@@ -66,17 +62,31 @@ class HabitatsRepository {
     
             } catch(\Exception $e){
                 echo 'erreur d\'insertion'. $e->getMessage();
-               
-    
             }
-    
-            }
+    }
 
+    public function readHabitat(){
+
+        try{
+            $mysql = Mysql::getInstance();
+            $pdo = $mysql->getPDO();
+            $read = $pdo->prepare("SELECT * FROM habitat ");
+            $read->execute();
+            //$row = $read->fetchAll($pdo::FETCH_ASSOC);//
+             //$habitatEntity = new Habitats();
+
+             //return $habitatEntity;//
            
 
+        } catch(\Exception $e){
+            echo 'erreur d\'insertion'. $e->getMessage();
+           
+
+        }
        
-       
-    }
+        }
+
+
 
 
     protected function updateHabitat(string $name, string $description){

@@ -7,7 +7,7 @@ class Habitats
 protected int $id;
 protected string $name;
 protected  string $description;
-protected string $animals_list;
+protected string $animals_list = 'null';
 
 
 public function getId(): int

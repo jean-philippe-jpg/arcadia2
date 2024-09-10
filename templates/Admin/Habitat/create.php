@@ -5,7 +5,7 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
 <h1>create</h1>
 
 <div class="form-create">
-<form action="/App/Repository/HabitatsRepository.php" method="POST">
+<form action="" method="post">
     <div class="create-nom-habitat">
     <label for="name"><strong>nom: </strong></label>
     <input name="name" id="name" type="text">

@@ -25,8 +25,8 @@ class HabitatsController extends Controller{
                     $this->create();
 
                     break;
-                case 'edit':
-                    var_dump('chargement de pagescontroller');
+                case 'read':
+                    $this->read();
                    
                     break;
                     case 'add':
@@ -99,27 +99,58 @@ class HabitatsController extends Controller{
                 protected function create()
                 
                 {
-                    try {
-                        if(isset($_POST['insert'])){
+                        try {     
+                        $habitatRrepository = new HabitatsRepository();
+                        $habitatRrepository->createHabitat();
+ 
+                         $this->render('/Admin/Habitat/create', [
+      
+                                      
+                             ] );
+ 
+                        } catch(\Exception $e ) {
+                            $this->render('errors/errors', [
+                                'errors' => $e->getMessage()
+    
+                            ]);
 
-                            $habitatRrepository = new HabitatsRepository();
-                            $habitatRrepository->createHabitat($_POST['name'], $_POST['description']);
-                           
-                           
-                        } else {
-                            throw new \Exception(' erreur de creation');
+
                         }
-                        $this->render('/Admin/Habitat/create', [
-                            
-                        ] );
-                    } catch(\Exception $e){
-                        $this->render('errors/errors', [
-                            'errors' => $e->getMessage()
-                        ]);
-
-                       
-                    }
                     
+                        // charger l'id d'un element avec le repository//
+
+                        
+                            //require_once 'templates/showanimals.php';//
+                 
+                   
+                       
+              
+                    
+                   
+                }
+
+                protected function read()
+                
+                {
+                        try {       
+                        $habitatRrepository = new HabitatsRepository();
+                        $read = $habitatRrepository->readHabitat();
+ 
+                         $this->render('/Admin/Habitat/read', [
+
+                            'read' => $read
+                            
+                             ] );
+                         
+ 
+                        } catch(\Exception $e ) {
+                            $this->render('errors/errors', [
+                                'errors' => $e->getMessage()
+    
+                            ]);
+
+
+                        }   
                    
                 }
                 
