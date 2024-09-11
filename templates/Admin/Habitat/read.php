@@ -18,16 +18,42 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
     </thead>
     <tbody>
       <tr>
-       <?php foreach($read as $key => $reads) { ?>
-         <td><?= $reads->getName(); ?></td>
+
+
+      <?php foreach( $read as  $reads ) { ?>
+      <?php if(!isset($_GET['modify']) || $_GET['modify'] !==$_GET['id']){ ?>  
+      <tr>
+          <td><?= $reads['id'] ?></td>
+          <td><?= $reads['name'] ?></td>
+          <td><?= $reads['description'] ?></td>
+          <td><a href="?controller=Habitats&action=update&modify=<?= $reads['id'] ?>" class="btn btn-warning">update</a></td>
+          <td><a href="?controller=Habitats&action=delete&suprimer=<?= $reads['id'] ?>" class="btn btn-danger">delete</a></td>
+      </tr>
+        <?php  } else {  ?>
+
+
+        <form action="" method="post">
+
+        <input type="hidden" name="id" value="<?= $reads['id']?>" />
+<td><?= $reads['id'] ?></td>
+<td><input type="text" name="name" value="<?=$reads['name'] ?>"/></td>
+<td><input type="text" name="description" value="<?=$reads['description'] ?>"/></td>
+<td><input type="submit" class="btn btn-success" value="valider"/></td>
+<td><a href="?controller=Habitats&action=read " class="btn btn-danger">annuler</a></td>
+
+        
+        </form>
+        
+        <?php } ?>
+        <?php } ?>
      
-    <?php } ?>
-       </tr>
-      
+  
+  
+
+ 
+
     </tbody>
     
-    
-
 </table>
 
 

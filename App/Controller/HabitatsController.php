@@ -29,12 +29,12 @@ class HabitatsController extends Controller{
                     $this->read();
                    
                     break;
-                    case 'add':
-                        var_dump('chargement de pagescontroller');
+                    case 'delete':
+                       $this->delete();
 
                     break;
                     case 'update':
-                        var_dump('chargement de pagescontroller');
+                        $this->update();
                        
                     break;
                     case 'delete':
@@ -103,10 +103,10 @@ class HabitatsController extends Controller{
                         $habitatRrepository = new HabitatsRepository();
                         $habitatRrepository->createHabitat();
  
-                         $this->render('/Admin/Habitat/create', [
-      
+                        $this->render('/Admin/Habitat/create', [
+                                
                                       
-                             ] );
+                            ] );
  
                         } catch(\Exception $e ) {
                             $this->render('errors/errors', [
@@ -133,15 +133,80 @@ class HabitatsController extends Controller{
                 
                 {
                         try {       
-                        $habitatRrepository = new HabitatsRepository();
-                        $read = $habitatRrepository->readHabitat();
- 
-                         $this->render('/Admin/Habitat/read', [
-
-                            'read' => $read
                             
-                             ] );
-                         
+                                $habitatRrepository = new HabitatsRepository();
+                                $read = $habitatRrepository->readHabitat();
+
+                                $this->render('/Admin/Habitat/read', [
+
+                                    'read' => $read
+                                    
+                                     ] );
+         
+                             
+ 
+                        } catch(\Exception $e ) {
+                            $this->render('errors/errors', [
+                                'errors' => $e->getMessage()
+    
+                            ]);
+
+
+                        }   
+                   
+                }
+
+                protected function delete()
+                
+                {
+                        try {       
+
+                            if(isset($_GET['suprimer'])){
+                                $id = $_GET['suprimer'];
+                                $habitatRrepository = new HabitatsRepository();
+                                $read = $habitatRrepository->deleteHabitat($id);
+                            }
+                            
+                                $this->render('/Admin/Habitat/read', [
+
+                                    'read' => $read
+                                    
+                                     ] );
+         
+                             
+ 
+                        } catch(\Exception $e ) {
+                            $this->render('errors/errors', [
+                                'errors' => $e->getMessage()
+    
+                            ]);
+
+
+                        }   
+                   
+                }
+                
+
+                protected function update()
+                
+                {
+                        try {       
+
+                            if(isset($_GET['id'])){
+
+
+                               
+                                $habitatRrepository = new HabitatsRepository();
+                                $read = $habitatRrepository->updateHabitat();
+                            }
+                            
+                            $this->render('/Admin/Habitat/read', [
+
+                                          'read' => $read
+                                
+                                 ] );
+         
+                             
  
                         } catch(\Exception $e ) {
                             $this->render('errors/errors', [

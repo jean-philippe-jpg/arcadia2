@@ -4,9 +4,9 @@ namespace App\Entity;
 class Habitats
 {
 
-protected int $id;
-protected string $name;
-protected  string $description;
+protected int $id ;
+protected string $name ;
+protected  string $description ;
 protected string $animals_list = 'null';
 
 

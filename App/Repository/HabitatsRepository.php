@@ -54,6 +54,8 @@ class HabitatsRepository {
                 $stmt->bindParam(':description', $description, $pdo::PARAM_STR);
                 $stmt->execute();
              
+
+                
                 if($stmt->execute()){
                     echo 'insertion reussie';
                 } else {
@@ -68,15 +70,21 @@ class HabitatsRepository {
     public function readHabitat(){
 
         try{
-            $mysql = Mysql::getInstance();
-            $pdo = $mysql->getPDO();
-            $read = $pdo->prepare("SELECT * FROM habitat ");
-            $read->execute();
-            //$row = $read->fetchAll($pdo::FETCH_ASSOC);//
-             //$habitatEntity = new Habitats();
 
-             //return $habitatEntity;//
            
+
+                $mysql = Mysql::getInstance();
+                $pdo = $mysql->getPDO();
+                $read = $pdo->prepare("SELECT * FROM habitat ");
+                $read->execute();
+                $classHabitats = $read->fetchAll($pdo::FETCH_ASSOC);//
+                $habitatEntity = new Habitats();
+               
+              return $classHabitats;
+
+
+                  
+          
 
         } catch(\Exception $e){
             echo 'erreur d\'insertion'. $e->getMessage();
@@ -85,22 +93,29 @@ class HabitatsRepository {
         }
        
         }
-
-
-
-
-    protected function updateHabitat(string $name, string $description){
+    public function updateHabitat(){
 
         try{
+
             $mysql = Mysql::getInstance();
             $pdo = $mysql->getPDO();
-              
-            $query = $pdo->prepare('UPDATE habitat (name, description) VALUES (:name, :description)');
+
+            $id = $_GET['id'];
+            $name = $_GET['name'];
+            $description = $_GET['description'];
+
+            $query = $pdo->prepare('UPDATE habitat set name = :name, description = :description WHERE id = :id');
+            $query->bindParam(':id', $id, $pdo::PARAM_INT);
             $query->bindParam(':name', $name, $pdo::PARAM_STR);
             $query->bindParam(':description', $description, $pdo::PARAM_STR);
             $query->execute();
+            $habitat = $query->setFetchMode($pdo::FETCH_CLASS, 'Habitats');
+
+            $habitatEntity = new Habitats();
             
-            return $query;
+            return $habitatEntity;
+            
+           
 
         } catch(\Exception $e){
             echo 'erreur d\'insertion'. $e->getMessage();
@@ -111,18 +126,19 @@ class HabitatsRepository {
     }
 
 
-    protected function deleteHabitat(string $name, string $description){
+    public function deleteHabitat(int $id){
 
         try{
+
             $mysql = Mysql::getInstance();
             $pdo = $mysql->getPDO();
-              
-            $query = $pdo->prepare('DELETE FROM habitat (name, description) VALUES (:name, :description)');
-            $query->bindParam(':name', $name, $pdo::PARAM_STR);
-            $query->bindParam(':description', $description, $pdo::PARAM_STR);
+
+            $query = $pdo->prepare('DELETE FROM habitat WHERE id = :id');
+            $query->bindValue(':id', $id, $pdo::PARAM_INT);
             $query->execute();
             
-            return $query;
+            return  $query;
+
         } catch(\Exception $e){
             echo 'erreur d\'insertion'. $e->getMessage();
            
