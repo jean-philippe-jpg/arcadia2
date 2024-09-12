@@ -2,8 +2,8 @@
 
 require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
 ?>
-<h1>create</h1>
-<a href="?controller=Habitats&action=read" class="btn btn-success">retour</a>
+
+<a href="?controller=Race&action=read" class="btn btn-success">retour</a>
 
 <div class="form-create">
 <form action="" method="post">
@@ -13,16 +13,6 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
     <input name="name" id="name" type="text">
     </div>
     
-    <div class="create">
-    <label for="description"><strong>description:</strong> </label>
-    <input name="description" id="description" type="text">
-    </div>
-
-    <div class="create">
-    <label for="animaux"><strong>animaux:</strong> </label>
-    <input name="animals_list" id="animaux" type="text">
-    </div>
-
     <input type="submit" name="insert" value="create">
 
     

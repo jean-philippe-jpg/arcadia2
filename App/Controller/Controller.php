@@ -32,6 +32,20 @@ try {
 
                 
                 break;
+
+                case 'Animals':
+
+                    $habitat = new AnimalsController;
+                    $habitat->route();
+
+                    break;
+
+                    case 'Race':
+
+                        $habitat = new RaceController;
+                        $habitat->route();
+    
+                        break;
         case 'pages':
             var_dump('chargement de pagescontroller');
            

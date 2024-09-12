@@ -68,6 +68,8 @@ class AdminController extends Controller{
                 
     {
         $this->render('/Admin/Habitat/read', [
+
+             
              
             ] );  
     }
@@ -75,9 +77,10 @@ class AdminController extends Controller{
     protected function update()
                 
     {
-        $this->render('/Admin/Habitat/update', [
+        $this->render('/Admin/Habitat/read', [
+
              
-            ] );  
+            ] );
     }
 
     protected function delete()

@@ -2,26 +2,27 @@
 
 require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
 ?>
-<h1>create</h1>
-<a href="?controller=Habitats&action=read" class="btn btn-success">retour</a>
+
+<a href="?controller=Animals&action=read" class="btn btn-success">retour</a>
 
 <div class="form-create">
 <form action="" method="post">
 
     <div class="create">
-    <label for="name"><strong>nom: </strong></label>
+    <label for="name"><strong>prenom: </strong></label>
     <input name="name" id="name" type="text">
     </div>
     
     <div class="create">
-    <label for="description"><strong>description:</strong> </label>
-    <input name="description" id="description" type="text">
+    <label for="race"><strong>race:</strong> </label>
+    <input name="race" id="race" type="text">
+    </div>
+    <div class="create">
+    <label for="home"><strong>habitat:</strong> </label>
+    <input name="home" id="home" type="text">
     </div>
 
-    <div class="create">
-    <label for="animaux"><strong>animaux:</strong> </label>
-    <input name="animals_list" id="animaux" type="text">
-    </div>
+   
 
     <input type="submit" name="insert" value="create">
 

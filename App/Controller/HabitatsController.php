@@ -6,6 +6,7 @@
   use App\Repository\HabitatsRepository;
 
 
+
 class HabitatsController extends Controller{
 
     public function route(): void {
@@ -67,7 +68,7 @@ class HabitatsController extends Controller{
                     try {
                         if(isset($_GET['id'])){
 
-                            $id = (int)$_GET['id'];
+                            $id = $_GET['id'];
                             // charger l'id d'un element avec le repository//
 
                             $habitatRrepository = new HabitatsRepository();
@@ -79,11 +80,13 @@ class HabitatsController extends Controller{
                                 
                                          
                                 ] );
+                           
 
                         } else {
                             throw new \Exception('id introuvable');
 
                         }
+                       
 
                     } catch(\Exception $e){
                         $this->render('errors/errors', [
@@ -120,12 +123,7 @@ class HabitatsController extends Controller{
                         // charger l'id d'un element avec le repository//
 
                         
-                            //require_once 'templates/showanimals.php';//
-                 
-                   
-                       
-              
-                    
+                            //require_once 'templates/showanimals.php';//    
                    
                 }
 
@@ -137,11 +135,6 @@ class HabitatsController extends Controller{
                                 $habitatRrepository = new HabitatsRepository();
                                $read = $habitatRrepository->readHabitat();
                                 
-                               
-                              
-                               
-                                
-
                                 $this->render('/Admin/Habitat/read', [
                                     
                                     'read' => $read
@@ -197,19 +190,24 @@ class HabitatsController extends Controller{
                 {
                         try {       
 
-                            if(isset($_GET['id'])){
+                            if(isset($_GET['modify'])){
 
-
-                               
+                                $id = $_GET['modify'];
                                 $habitatRrepository = new HabitatsRepository();
-                                $read = $habitatRrepository->updateHabitat();
-                            }
-                            
-                            $this->render('/Admin/Habitat/read', [
+                                $read = $habitatRrepository->updateHabitat($id);
 
-                                          'read' => $read
-                                
-                                 ] );
+                                $this->render('/Admin/Habitat/read', [
+
+                                    'read' => $read
+                          
+                           ] );
+                               
+                                } else {
+                                    throw new \Exception('modification impossible :/');
+    
+                                }
+                            
+                          
          
                              
  

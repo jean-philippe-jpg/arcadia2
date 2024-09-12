@@ -7,8 +7,8 @@ use App\Entity\Habitats;
 use App\Bdd\Mysql;
 use App\Tools\StringTools;
 
-require_once 'App/Entity/Habitats.php';
-class HabitatsRepository {
+
+class AnimalsRepository {
 
 
     public function findOneById( int $id)
@@ -16,7 +16,7 @@ class HabitatsRepository {
         $mysql = Mysql::getInstance();
         $pdo = $mysql->getPDO();
 
-        $query = $pdo->prepare('SELECT * FROM habitat WHERE id = :id');
+        $query = $pdo->prepare('SELECT * FROM animals WHERE id = :id');
         $query->bindParam(':id', $id, $pdo::PARAM_INT);
         $query->execute();
         $habitat = $query->Fetch($pdo::FETCH_ASSOC);
@@ -40,7 +40,7 @@ class HabitatsRepository {
 
     
 
-    public function createHabitat( ){
+    public function createAnimals( ){
 
                 try{
                 $mysql = Mysql::getInstance();
@@ -48,35 +48,31 @@ class HabitatsRepository {
                   
                 
     
-                $stmt = $pdo->prepare('INSERT INTO habitat (name, description, animals_list) VALUES (:name, :description, :animals_list)');
-                $stmt->bindParam(':name', $_POST['name'], $pdo::PARAM_STR);
-                $stmt->bindParam(':description', $_POST['description'], $pdo::PARAM_STR);
-                $stmt->bindParam(':animals_list', $_POST['animals_list'], $pdo::PARAM_INT);
+                $stmt = $pdo->prepare('INSERT INTO animals (first_name, race, habitat) VALUES (:first_name, :race, :habitat)');
+                $stmt->bindParam(':first_name', $_POST['name'], $pdo::PARAM_STR);
+                $stmt->bindParam(':race', $_POST['race'], $pdo::PARAM_STR);
+                $stmt->bindParam(':habitat', $_POST['home'], $pdo::PARAM_STR);
+                //$stmt->bindParam(':state', $_POST['state'], $pdo::PARAM_STR);
+                
                 
                 //$stmt->execute();
              
-
-                
-                if($stmt->execute()){
-                    echo 'insertion reussie';
-                } else {
+                if(!$stmt->execute()){
                     echo 'erreur d\'insertion';
-                }
+                } 
     
             } catch(\Exception $e){
                 echo 'erreur d\'insertion'. $e->getMessage();
             }
     }
 
-    public function readHabitat(){
+    public function readAnimals(){
 
         try{
 
-           
-
                 $mysql = Mysql::getInstance();
                 $pdo = $mysql->getPDO();
-                $stmt = $pdo->prepare("SELECT * FROM habitat ");
+                $stmt = $pdo->prepare("SELECT * FROM animals ");
                 //$stmt->setFetchMode($pdo::FETCH_CLASS, 'Habitats');
                 $stmt->fetch($pdo::FETCH_ASSOC);
                 //$stmt->fetchAll();
@@ -89,21 +85,11 @@ class HabitatsRepository {
                    //return $stmt->setFetchMode($pdo::FETCH_CLASS, 'Habitats');
                    return $stmt->fetchAll();
                   
-                         
-
                 } else {
                     echo 'erreur';
                 }
               
                
-               
-             
-
-
-
-                  
-          
-
         } catch(\Exception $e){
             echo 'erreur d\'insertion'. $e->getMessage();
            
@@ -113,7 +99,7 @@ class HabitatsRepository {
         }
 
 
-    public function updateHabitat(){
+    public function updateAnimals(){
 
         try{
 
@@ -121,10 +107,14 @@ class HabitatsRepository {
             $pdo = $mysql->getPDO();
                
          
-            $query = $pdo->prepare('UPDATE habitat set name = :name, description = :description WHERE id = :id');
+            $query = $pdo->prepare('UPDATE animals set firs_name = :name, race = :race, habitat = :home, state = :etat WHERE id = :id');
             $query->bindParam(':id', $_POST['id'], $pdo::PARAM_INT);
+            $query->bindParam(':name', $_POST['id'], $pdo::PARAM_STR);
+            $query->bindParam(':race', $_POST['id'], $pdo::PARAM_INT);
+            $query->bindParam(':home', $_POST['id'], $pdo::PARAM_INT);
+            $query->bindParam(':state', $_POST['id'], $pdo::PARAM_INT);
             //$query->bindParam(':name', $name, $pdo::PARAM_STR);
-            $query->bindParam(':description', $description, $pdo::PARAM_STR);
+            //$query->bindParam(':description', $description, $pdo::PARAM_STR);
             $query->fetch($pdo::FETCH_ASSOC);
             $query->execute();
             
@@ -141,14 +131,14 @@ class HabitatsRepository {
     }
 
 
-    public function deleteHabitat(int $id){
+    public function deleteAnimals(int $id){
 
         try{
 
             $mysql = Mysql::getInstance();
             $pdo = $mysql->getPDO();
 
-            $query = $pdo->prepare('DELETE FROM habitat WHERE id = :id');
+            $query = $pdo->prepare('DELETE FROM animals WHERE id = :id');
             $query->bindValue(':id', $id, $pdo::PARAM_INT);
             $query->execute();
             
@@ -162,6 +152,8 @@ class HabitatsRepository {
        
     }
 
+
+    
 
 
 }
