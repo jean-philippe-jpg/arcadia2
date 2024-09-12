@@ -75,12 +75,22 @@ class HabitatsRepository {
 
                 $mysql = Mysql::getInstance();
                 $pdo = $mysql->getPDO();
-                $read = $pdo->prepare("SELECT * FROM habitat ");
-                $read->execute();
-                $classHabitats = $read->fetchAll($pdo::FETCH_ASSOC);//
-                $habitatEntity = new Habitats();
+                $stmt = $pdo->prepare("SELECT * FROM habitat ");    
+
+                if($stmt->execute()){
+                    //$stmt->fetchObject('Habitats');
+                    $stmt->fetchAll();
+                   return $stmt->setFetchMode($pdo::FETCH_CLASS, 'Habitats');
+                         
+
+                } else {
+                    echo 'erreur';
+                }
+              
                
-              return $classHabitats;
+               
+             
+
 
 
                   

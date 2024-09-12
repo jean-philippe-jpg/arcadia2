@@ -23,11 +23,11 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
       <?php foreach( $read as  $reads ) { ?>
       <?php if(!isset($_GET['modify']) || $_GET['modify'] !==$_GET['id']){ ?>  
       <tr>
-          <td><?= $reads['id'] ?></td>
-          <td><?= $reads['name'] ?></td>
-          <td><?= $reads['description'] ?></td>
-          <td><a href="?controller=Habitats&action=update&modify=<?= $reads['id'] ?>" class="btn btn-warning">update</a></td>
-          <td><a href="?controller=Habitats&action=delete&suprimer=<?= $reads['id'] ?>" class="btn btn-danger">delete</a></td>
+          <td><?= $reads->getId(); ?></td>
+          <td><?= $reads->getName();?></td>
+          <td><?= $reads->getDescription(); ?></td>
+          <td><a href="?controller=Habitats&action=update&modify=<?= $reads->getId(); ?>" class="btn btn-warning">update</a></td>
+          <td><a href="?controller=Habitats&action=delete&suprimer=<?= $reads->getId(); ?>" class="btn btn-danger">delete</a></td>
       </tr>
         <?php  } else {  ?>
 
