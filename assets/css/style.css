@@ -124,3 +124,9 @@ carroussel
     margin-bottom: 10px;
     margin-left: 50px;
   }
+
+  .selected {
+     
+    color: yellow;
+
+  }

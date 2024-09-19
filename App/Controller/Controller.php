@@ -19,12 +19,7 @@ try {
 
     switch($_GET['controller']){
 
-        case 'pages':
-
-            $pagecontroller = new PagesController();
-            $pagecontroller->route();
-            
-            break;
+       
             case 'Habitats':
 
                 $habitat = new HabitatsController;
@@ -46,10 +41,13 @@ try {
                         $habitat->route();
     
                         break;
-        case 'pages':
-            var_dump('chargement de pagescontroller');
-           
-            break;
+                        case 'Contact':
+
+                            $pagecontroller = new ContactController();
+                            $pagecontroller->route();
+                            
+                            break;
+                           
         default:
             throw new \Exception('erreur de controller');
             

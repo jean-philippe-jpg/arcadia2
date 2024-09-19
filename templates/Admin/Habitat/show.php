@@ -9,7 +9,7 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php'
 
 <p><strong>habitat:  </strong><?= $logement['name']?></p>
 <p><strong>description:  </strong><?= $logement['description']?></p>
-<p><strong>animaux:  </strong><?= $logement['animals_list']?></p>
+<p><strong>animaux:  </strong><?= $logement['first_name']?></p>
 
 
 </div>

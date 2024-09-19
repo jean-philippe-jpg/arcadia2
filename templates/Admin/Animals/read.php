@@ -14,7 +14,7 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
     <th scope="col">#</th>
     <th scope="col">prenom</th>
     <th scope="col">race</th>
-    <th scope="col">habitat</th>
+    
     <th scope="col">état</th>
     <th scope="col">update</th>
     <th scope="col">show</th>
@@ -28,15 +28,13 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
       
       <?php foreach($read as $reads) { ?>
         
-
       <tr>
           <td><?= $reads['id'] ?></td>
           <td><?= $reads['first_name']?></td>
-          <td><?= $reads['race']?></td>
-          <td><?= $reads['habitat']?></td>
-          <td><?= $reads['state']?></td>
+          <td><?= $reads['namerace']?></td>
+          
          
-          <td>animaux</td>
+          <td>state</td>
           <td><a href="?controller=Animals&action=update&modify=<?= $reads['id']; ?>" class="btn btn-warning">update</a></td>
           <td><a href="?controller=Animals&action=show&show=<?= $reads['id']; ?>" class="btn btn-warning">voir</a></td>
           <td><a href="?controller=Animals&action=delete&suprimer=<?= $reads['id']; ?>" class="btn btn-danger">delete</a></td>
@@ -47,9 +45,9 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
         <form action="" method="post">
             <input type="hidden" name="id" value="<?= $reads['id'] ?>" />
             <td><input type="text" name="name" value="<?= $reads['name'] ?>" /></td>
-            <td><input type="text" name="race" value="<?= $reads['race'] ?>" /></td>
+            <td><input type="text" name="race" value="<?= $read['habitat']?>" /></td>
             <td><input type="text" name="home" value="<?= $reads['home'] ?>" /></td>
-            <td><input type="text" name="state" value="<?= $reads['state'] ?>" /></td>
+           
             <td><a type="submit" class="btn btn-success">update</a></td>
             <td><a href="?controller=Habitats&action=read<?= $reads['id']; ?>" class="btn btn-danger">annuler</a></td>
         </form>

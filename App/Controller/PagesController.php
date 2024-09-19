@@ -2,7 +2,7 @@
 
   namespace App\Controller;
 
-
+  use App\Repository\CommentsRepository;
 class PagesController extends Controller{
 
     public function route(): void {
@@ -57,8 +57,13 @@ class PagesController extends Controller{
                 protected function home(): void
                 
                 {
+
+                    $comments = new CommentsRepository();
+                    $comments->createComments();
+                    $comments = $comments->readComments();
                 
                     $this->render('home', [
+                            'avis' => $comments
                     ] );
                     //require_once 'templates/showanimals.php';//
                   

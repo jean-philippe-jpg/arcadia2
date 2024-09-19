@@ -1,3 +1,4 @@
+const { data } = require("jquery");
 
 
 const container = document.querySelector(".container");
@@ -130,4 +131,22 @@ const initEvents = () => {
 
 initEvents();
 
-alert("Hola, soy un carrousel 3D");
+
+
+
+/*const stars = document.querySelectorAll(".star");
+stars.forEach(star => {
+    star.addEventListener('mouseover', selectStar);
+    /*star.addEventListener('mouseleave', unSelectStar);  */  
+// })*
+
+// *function selectStar(e) {
+  //const data = e.target;
+  /*priviousSiblings(data);
+  /*const etoiles = priviousSiblings(data);*/
+  /*etoiles.forEach(etoile  => {*/
+    //data.classList.add('selected');
+  /*});*/
+
+
+alert("hola");

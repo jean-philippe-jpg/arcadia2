@@ -43,9 +43,9 @@ class AnimalsRepository {
     public function createAnimals( ){
 
                 try{
-                $mysql = Mysql::getInstance();
-                $pdo = $mysql->getPDO();
-                  
+                    $mysql = Mysql::getInstance();
+                    $pdo = $mysql->getPDO();
+                      
                 
     
                 $stmt = $pdo->prepare('INSERT INTO animals (first_name, race, habitat) VALUES (:first_name, :race, :habitat)');
@@ -53,8 +53,7 @@ class AnimalsRepository {
                 $stmt->bindParam(':race', $_POST['race'], $pdo::PARAM_STR);
                 $stmt->bindParam(':habitat', $_POST['home'], $pdo::PARAM_STR);
                 //$stmt->bindParam(':state', $_POST['state'], $pdo::PARAM_STR);
-                
-                
+
                 //$stmt->execute();
              
                 if(!$stmt->execute()){
@@ -66,13 +65,32 @@ class AnimalsRepository {
             }
     }
 
+    /*public function innerRaceAnimals( ){
+
+        try{
+        $mysql = Mysql::getInstance();
+        $pdo = $mysql->getPDO();
+          
+        $stmt = $pdo->prepare('SELECT * FROM animals INNER JOIN race ON animals.race = race.id') ;
+        
+        $stmt->fetch($pdo::FETCH_ASSOC);
+        if($stmt->execute()){
+            return $stmt->fetch();
+        } 
+
+    } catch(\Exception $e){
+        echo 'erreur d\'insertion'. $e->getMessage();
+    }
+}*/
+
     public function readAnimals(){
 
         try{
 
                 $mysql = Mysql::getInstance();
                 $pdo = $mysql->getPDO();
-                $stmt = $pdo->prepare("SELECT * FROM animals ");
+                $stmt = $pdo->prepare("SELECT a.id as id, a.first_name as first_name, r.name as namerace FROM animals a
+                INNER JOIN race r ON a.race = r.id");
                 //$stmt->setFetchMode($pdo::FETCH_CLASS, 'Habitats');
                 $stmt->fetch($pdo::FETCH_ASSOC);
                 //$stmt->fetchAll();

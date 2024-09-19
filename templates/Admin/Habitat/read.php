@@ -23,31 +23,28 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
       <tr>
 
       
+      
       <?php foreach($read as $reads) { ?>
-        
-
       <tr>
-          <td><?= $reads['id'] ?></td>
-          <td><?= $reads['name']?></td>
+        
+         <td><?= $reads['id']; ?></td>
+          <td><?= $reads['name'];?></td>
           <td><?= $reads['description']; ?></td>
-            <td><?= $reads['animals_list']; ?></td>
-          <td>animaux</td>
+          <td><?= $reads['first_name'];?></td>
+          
           <td><a href="?controller=Habitats&action=update&modify=<?= $reads['id']; ?>" class="btn btn-warning">update</a></td>
           <td><a href="?controller=Habitats&action=show&id=<?= $reads['id']; ?>" class="btn btn-warning">voir</a></td>
           <td><a href="?controller=Habitats&action=delete&suprimer=<?= $reads['id']; ?>" class="btn btn-danger">delete</a></td>
       </tr>
         <?php } ?>
         <?php } else { ?>
-      
-
-        <form action="" method="post">
-            <input type="hidden" name="id" value="<?= $reads['id'] ?>" />
-            <td><input type="text" name="name" value="<?= $reads['name'] ?>" /></td>
-            <td><input type="text" name="description" value="<?= $reads['description'] ?>" /></td>
-            <td><input type="text" name="animals_list" value="<?= $reads['animals_list'] ?>" /></td>
-            <td><a type="submit" class="btn btn-success">update</a></td>
-            <td><a href="?controller=Habitats&action=read<?= $reads['id']; ?>" class="btn btn-danger">annuler</a></td>
-        </form>
+             
+            <form action="" method="post">
+                <td><input type="text" name="name" value="<?= $reads['name'] ?>" /></td>
+                <td><input type="text" name="description" value="<?= $reads['description'] ?>" /></td>
+                <td><a type="submit" name"update" class="btn btn-success">update</a></td>
+                
+            </form>
         
         <?php } ?>
         

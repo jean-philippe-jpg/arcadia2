@@ -133,8 +133,10 @@ class AnimalsController extends Controller{
                           
                               $habitatRrepository = new AnimalsRepository();
                              $read = $habitatRrepository->readAnimals();
+                             //$race=$habitatRrepository->innerRaceAnimals();
                               
                               $this->render('/Admin/Animals/read', [
+
                                   
                                   'read' => $read
                                   
