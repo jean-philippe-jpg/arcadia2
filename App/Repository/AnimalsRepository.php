@@ -3,7 +3,7 @@
 namespace App\Repository;
 
 
-use App\Entity\Habitats;
+use App\Entity\Animals;
 use App\Bdd\Mysql;
 use App\Tools\StringTools;
 
@@ -16,27 +16,29 @@ class AnimalsRepository {
         $mysql = Mysql::getInstance();
         $pdo = $mysql->getPDO();
 
-        $query = $pdo->prepare('SELECT * FROM animals WHERE id = :id');
+        $query = $pdo->prepare('SELECT a.id as id, a.first_name as name, r.name as race_name FROM animals a
+                INNER JOIN race r ON a.race = r.id where a.id = :id');   
         $query->bindParam(':id', $id, $pdo::PARAM_INT);
         $query->execute();
-        $habitat = $query->Fetch($pdo::FETCH_ASSOC);
+        $animals = $query->Fetch($pdo::FETCH_ASSOC);
    
 
-        $habitatEntity = new Habitats();
+        $animalsEntity = new Animals();
         
-        foreach($habitat as $key => $value){
+        foreach($animals as $key => $value){
 
-            $habitatEntity->{'set'.StringTools::toPascaleCase($key) } ($value);
-            /*if(method_exists($habitatEntity, $method)){
-                $habitatEntity->$method($value);*/
+            $animalsEntity->{'set'.StringTools::toPascaleCase($key) } ($value);
+            //if(method_exists($habitatEntity, $method)){
+                //$habitatEntity->$method($value);
             //}
 
-            //$habitatEntity->{'set' .StringTools::toPascaleCase($key)}($value);
+            //$animalsEntity->{'set' .StringTools::toPascaleCase($key)}($value);
 
-        return $habitat;
+        return $animals;
         
     }
 }
+    
 
     
 

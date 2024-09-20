@@ -7,6 +7,8 @@ use App\Entity\Habitats;
 use App\Bdd\Mysql;
 use App\Tools\StringTools;
 
+
+
 //require_once 'App/Entity/Habitats.php';
 class HabitatsRepository {
 
@@ -16,7 +18,8 @@ class HabitatsRepository {
         $mysql = Mysql::getInstance();
         $pdo = $mysql->getPDO();
 
-        $query = $pdo->prepare('SELECT * FROM habitat WHERE id = :id');
+        $query = $pdo->prepare('SELECT h.id as id, h.name as name, h.description as description, a.first_name as first_name FROM habitat h
+                INNER JOIN animals a ON h.animals_list = a.id where h.id = :id');   
         $query->bindParam(':id', $id, $pdo::PARAM_INT);
         $query->execute();
         $habitat = $query->Fetch($pdo::FETCH_ASSOC);
@@ -27,8 +30,8 @@ class HabitatsRepository {
         foreach($habitat as $key => $value){
 
             $habitatEntity->{'set'.StringTools::toPascaleCase($key) } ($value);
-            /*if(method_exists($habitatEntity, $method)){
-                $habitatEntity->$method($value);*/
+            //if(method_exists($habitatEntity, $method)){
+                //$habitatEntity->$method($value);
             //}
 
             //$habitatEntity->{'set' .StringTools::toPascaleCase($key)}($value);

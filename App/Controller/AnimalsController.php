@@ -70,12 +70,12 @@ class AnimalsController extends Controller{
                           $id = $_GET['id'];
                           // charger l'id d'un element avec le repository//
 
-                          $habitatRrepository = new AnimalsRepository();
-                          $habitation = $habitatRrepository->findOneById($id);
+                          $animalsRrepository = new AnimalsRepository();
+                          $animals = $animalsRrepository->findOneById($id);
 
                           $this->render('/Admin/Animals/show', [
 
-                              'logement' => $habitation,
+                              'animals' => $animals,
                               
                                        
                               ] );

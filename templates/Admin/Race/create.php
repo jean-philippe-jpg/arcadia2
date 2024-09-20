@@ -3,7 +3,7 @@
 require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
 ?>
 
-<a href="?controller=Race&action=read" class="btn btn-success">retour</a>
+<a href="?controller=race&action=read" class="btn btn-success">retour</a>
 
 <div class="form-create">
 <form action="" method="post">

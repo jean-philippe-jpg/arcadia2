@@ -6,9 +6,9 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
 <?php if(!isset($_GET['modify'])) {  ?>
 
 <table class="table">
-<a href="?controller=Race&action=create" class="btn btn-success">ajouter</a>
-<a href="?controller=Habitats&action=read" class="btn btn-warning">habitats</a>
-<a href="?controller=Animals&action=read" class="btn btn-warning">animaux</a>
+<a href="?controller=race&action=create" class="btn btn-success">ajouter</a>
+<a href="?controller=habitats&action=read" class="btn btn-warning">habitats</a>
+<a href="?controller=animals&action=read" class="btn btn-warning">animaux</a>
     <thead>
     <tr>
     <th scope="col">#</th>
@@ -29,11 +29,12 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
           
          
           <td>animaux</td>
-          <td><a href="?controller=Race&action=update&modify=<?= $reads['id']; ?>" class="btn btn-warning">update</a></td>
-          <td><a href="?controller=Race&action=show&show=<?= $reads['id']; ?>" class="btn btn-warning">voir</a></td>
-          <td><a href="?controller=Race&action=delete&suprimer=<?= $reads['id']; ?>" class="btn btn-danger">delete</a></td>
+          <td><a href="?controller=race&action=update&modify=<?= $reads['id']; ?>" class="btn btn-warning">update</a></td>
+          <td><a href="?controller=race&action=show&show=<?= $reads['id']; ?>" class="btn btn-warning">voir</a></td>
+          <td><a href="?controller=race&action=delete&suprimer=<?= $reads['id']; ?>" class="btn btn-danger">delete</a></td>
       </tr>
         <?php } ?>
+        <a href="index.php" class="btn btn-danger">home</a>
         <?php } else { ?>
 
         <form action="" method="post">

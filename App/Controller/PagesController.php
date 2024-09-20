@@ -2,7 +2,8 @@
 
   namespace App\Controller;
 
-  use App\Repository\CommentsRepository;
+  use App\Repository\UsersRepository;
+    use App\Repository\CommentsRepository;
 class PagesController extends Controller{
 
     public function route(): void {
@@ -12,19 +13,17 @@ class PagesController extends Controller{
 
             switch($_GET['action']){
 
-                case 'animals':
-
-                    $this->animals();
-                    
-                    break;
+                
                 case 'home':
                     $this->home();
                    
                     break;
-                case 'pages':
-                    var_dump('chargement de pagescontroller');
-                   
+                case 'register':
+                    $this->register();
                     break;
+                    case 'connect':
+                        $this->connected();
+                        break;
                 default:
                 throw new \Exception('page introuvable :/');
                   break;
@@ -43,17 +42,7 @@ class PagesController extends Controller{
 
                 }
 
-                protected function animals(): void
-                
-                {
-                
-                    $this->render('showanimals', [
-
-                        'test1' =>'toto'
-                    ] );
-                    //require_once 'templates/showanimals.php';//
-                  
-                }
+               
                 protected function home(): void
                 
                 {
@@ -64,6 +53,34 @@ class PagesController extends Controller{
                 
                     $this->render('home', [
                             'avis' => $comments
+                    ] );
+                    //require_once 'templates/showanimals.php';//
+                  
+                }
+
+                protected function register(): void
+                
+                {
+                        $register = new UsersRepository();
+                        $register->addRegister();
+                  
+                    $this->render('Admin/Inscription', [
+                            
+                    ] );
+                    //require_once 'templates/showanimals.php';//
+                  
+                }
+
+                protected function connected(): void
+                
+                {    
+                    $connected = new UsersRepository();
+                    $connected->connect();
+                       
+                    $this->render('Admin/Connexion', [
+
+                        'user' => $connected
+                            
                     ] );
                     //require_once 'templates/showanimals.php';//
                   

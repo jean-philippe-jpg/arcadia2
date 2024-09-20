@@ -20,7 +20,7 @@ try {
     switch($_GET['controller']){
 
        
-            case 'Habitats':
+            case 'habitats':
 
                 $habitat = new HabitatsController;
                 $habitat->route();
@@ -28,25 +28,31 @@ try {
                 
                 break;
 
-                case 'Animals':
+                case 'animals':
 
                     $habitat = new AnimalsController;
                     $habitat->route();
 
                     break;
 
-                    case 'Race':
+                    case 'race':
 
                         $habitat = new RaceController;
                         $habitat->route();
     
                         break;
-                        case 'Contact':
+                        case 'contact':
 
                             $pagecontroller = new ContactController();
                             $pagecontroller->route();
                             
                             break;
+                            case 'countusers':
+
+                                $registercontroller = new PagesController();
+                                $registercontroller->route();
+                                break;
+
                            
         default:
             throw new \Exception('erreur de controller');
