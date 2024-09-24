@@ -24,12 +24,6 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
     <input type="submit" value="Envoyer">
 </form>
 
-
- 
-
-   
-
-
 <?php
 require_once _ROOTPATH_.'/templates/Admin/Partial/_footer.php';
 ?>

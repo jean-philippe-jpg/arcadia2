@@ -71,6 +71,32 @@ class UsersRepository {
             }
     }
 
+
+    public function addRoles( ){
+
+        try{
+        $mysql = Mysql::getInstance();
+        $pdo = $mysql->getPDO();
+          
+        
+
+        $stmt = $pdo->prepare('INSERT INTO roles_users (user_id, role_id) VALUES (:user, :role)');
+        $stmt->bindParam(':user', $_POST['user'], $pdo::PARAM_INT);
+        $stmt->bindParam(':role', $_POST['role'], $pdo::PARAM_INT);
+        
+        
+        //$stmt->execute();
+        if($stmt->execute()){
+            echo 'role attribué';
+        } else {
+            echo 'role non attribué';
+        }
+
+    } catch(\Exception $e){
+        echo 'erreur d\'attribution'. $e->getMessage();
+    }
+}
+
     public function connect(){
 
         try{
@@ -78,8 +104,8 @@ class UsersRepository {
                 $mysql = Mysql::getInstance();
                 $pdo = $mysql->getPDO();
 
-                $email = $_POST['email'];
-                $pass = $_POST['password'];
+                //$email = $_POST['email'];
+                //$pass = $_POST['password'];
                 $statement = $pdo->prepare('SELECT * FROM users WHERE email = :email');
                 // On récupère un utilisateur ayant le même login (ici, e-mail)
                 $statement->bindParam(':email', $email, $pdo::PARAM_STR);
@@ -90,6 +116,7 @@ class UsersRepository {
                         // Si aucun utilisateur ne correspond au login entré, on affiche une erreur
                         echo 'Identifiants invalide';
                     } else {
+                        $pass = $_POST['password'];
                         if(password_verify($pass, $user->getPassword()))  {
                                 $userStatement = $pdo->prepare('SELECT * FROM roles_users JOIN roles ON role_id = id WHERE user_id = :id');
                                 //echo 'Bienvenue ' . $user->getUsername();

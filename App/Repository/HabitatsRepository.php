@@ -8,7 +8,7 @@ use App\Bdd\Mysql;
 use App\Tools\StringTools;
 
 
-
+require_once 'App/Entity/Habitats.php';
 //require_once 'App/Entity/Habitats.php';
 class HabitatsRepository {
 
@@ -23,6 +23,7 @@ class HabitatsRepository {
         $query->bindParam(':id', $id, $pdo::PARAM_INT);
         $query->execute();
         $habitat = $query->Fetch($pdo::FETCH_ASSOC);
+       
    
 
         $habitatEntity = new Habitats();
@@ -105,10 +106,12 @@ class HabitatsRepository {
 
 
                 if($stmt->execute()){
+                    
                     //$stmt->fetchObject('Habitats');
                     //$stmt->fetchAll();
                    //return $stmt->setFetchMode($pdo::FETCH_CLASS, 'Habitats::class');
                    return $stmt->fetchAll();
+                  
                   
                 } else {
                     echo 'erreur';
@@ -131,18 +134,27 @@ class HabitatsRepository {
             $mysql = Mysql::getInstance();
             $pdo = $mysql->getPDO();
                
-         
-            $update = $pdo->prepare('UPDATE habitat set name = :name, description = :description WHERE id = :id');
-            $update->bindParam(':id', $_POST['id'], $pdo::PARAM_INT);
-            //$query->bindParam(':name', $name, $pdo::PARAM_STR);
-            $update->bindParam(':description', $description, $pdo::PARAM_STR);
-            $update->bindParam(':name', $name, $pdo::PARAM_STR);
-            $update->fetch($pdo::FETCH_ASSOC);
             
+               if(isset($_GET['id']) && !empty($_GET['id'])){
+              
+                $name = $_POST['name'];
+                $description = $_POST['description'];
+                $first_name = $_POST['animal'];
+                //$last_name = $_POST['last_name'];
 
-            if($update->execute()){
-                  $update->fetch();
 
+                $update = $pdo->prepare('UPDATE habitat set name = :name, description = :description, animals_list = :animal  WHERE id = :id');
+                $update->bindParam(':id', $id, $pdo::PARAM_INT);
+                //$query->bindParam(':name', $name, $pdo::PARAM_STR);
+                $update->bindParam(':description', $description, $pdo::PARAM_STR);
+                $update->bindParam(':name', $name, $pdo::PARAM_STR);
+                $update->bindParam(':animal', $first_name, $pdo::PARAM_STR);
+                $update->fetch($pdo::FETCH_ASSOC);
+
+
+                if($update->execute()){
+                      
+                    $update->fetch();
                   echo 'modification reussie';
             } else {
                 echo 'modification echouée';
@@ -150,6 +162,14 @@ class HabitatsRepository {
             
             return  $update;
          
+ 
+        }
+                
+    
+               
+            
+         
+           
            
 
         } catch(\Exception $e){

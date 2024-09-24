@@ -47,7 +47,7 @@ try {
                             $pagecontroller->route();
                             
                             break;
-                            case 'countusers':
+                            case 'users':
 
                                 $registercontroller = new PagesController();
                                 $registercontroller->route();

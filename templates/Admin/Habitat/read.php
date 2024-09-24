@@ -39,27 +39,32 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
         <?php } ?>
         <a href="index.php" class="btn btn-danger">home</a>
         <?php } else { ?>
-             
-            <form action="" method="post">
-                <td><input type="text" name="name" value="<?= $reads['name'] ?>" /></td>
-                <td><input type="text" name="description" value="<?= $reads['description'] ?>" /></td>
-                <td><a type="submit" name"update" class="btn btn-success">update</a></td>
-                
-            </form>
-        
-        <?php } ?>
-        
-
 
            
-
-       
+            <form action="" method="post">
+                <div>
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name"?>  
+                </div>
+                <br>
+                <div>
+                <label for="description">Description</label>
+                <input type="text" id="description" name="description"?>  
+                </div>
+                <br>
+                <div>
+                <label for="animal">Animals</label>
+                <input type="text" id="animal" name="animal"?>  
+                </div>
+                
+                
+               
+               <input type="submit"  class="btn btn-success" name="update" value="Update">
+                
+            </form>
+           
+        <?php } ?>
         
-     
-  
-  
-
- 
 
     </tbody>
     

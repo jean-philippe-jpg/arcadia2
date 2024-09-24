@@ -21,6 +21,9 @@ class PagesController extends Controller{
                 case 'register':
                     $this->register();
                     break;
+                    case 'roles':
+                        $this->roles();
+                        break;
                     case 'connect':
                         $this->connected();
                         break;
@@ -65,6 +68,21 @@ class PagesController extends Controller{
                         $register->addRegister();
                   
                     $this->render('Admin/Inscription', [
+                            
+                    ] );
+                    //require_once 'templates/showanimals.php';//
+                  
+                }
+
+                protected function roles(): void
+                
+                {
+                       $roles = new UsersRepository();
+                       $roles->addRoles();
+                  
+                    $this->render('Admin/Roles', [
+
+                        
                             
                     ] );
                     //require_once 'templates/showanimals.php';//
