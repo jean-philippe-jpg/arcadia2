@@ -14,8 +14,9 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
     <th scope="col">#</th>
     <th scope="col">prenom</th>
     <th scope="col">race</th>
-    
+    <th scope="col">habitat</th>
     <th scope="col">état</th>
+
     <th scope="col">update</th>
     <th scope="col">show</th>
     <th scope="col">delete</th>
@@ -32,9 +33,11 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
           <td><?= $reads['id'] ?></td>
           <td><?= $reads['first_name']?></td>
           <td><?= $reads['namerace']?></td>
+          <td><?= $reads['home']?></td>
+          <td><?= $reads['state']?></td>
           
-         
-          <td>state</td>
+          
+          
           <td><a href="?controller=animals&action=update&modify=<?= $reads['id']; ?>" class="btn btn-warning">update</a></td>
           <td><a href="?controller=animals&action=show&show=<?= $reads['id']; ?>" class="btn btn-warning">voir</a></td>
           <td><a href="?controller=animals&action=delete&suprimer=<?= $reads['id']; ?>" class="btn btn-danger">delete</a></td>
@@ -45,15 +48,34 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
         <a href="index.php" class="btn btn-danger">home</a>
         <?php } else { ?>
 
-        <form action="" method="post">
-            <input type="hidden" name="id" value="<?= $reads['id'] ?>" />
-            <td><input type="text" name="name" value="<?= $reads['name'] ?>" /></td>
-            <td><input type="text" name="race" value="<?= $read['habitat']?>" /></td>
-            <td><input type="text" name="home" value="<?= $reads['home'] ?>" /></td>
-           
-            <td><a type="submit" class="btn btn-success">update</a></td>
-            <td><a href="?controller=Habitats&action=read<?= $reads['id']; ?>" class="btn btn-danger">annuler</a></td>
-        </form>
+            <form action="" method="post">
+                <div>
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" >  
+                </div>
+                <br>
+                <div>
+                <label for="race">Race</label>
+                <input type="number" id="race" name="race" >  
+                </div>
+                <br>
+                <div>
+                <label for="home">Habitat</label>
+                <input type="number" id="home" name="home" >  
+                </div>
+                <br>
+                <div>
+                <label for="state">Etat</label>
+                <input type="number" id="state" name="state" >  
+                </div>
+                <br>
+                
+                
+                
+               
+               <input type="submit"  class="btn btn-success" name="update" value="Update">
+                
+            </form>
         
         <?php } ?>
         

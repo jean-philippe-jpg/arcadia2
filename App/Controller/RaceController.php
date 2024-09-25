@@ -190,14 +190,13 @@ class RaceController extends Controller{
                       try {       
 
                           if(isset($_GET['modify'])){
-
                               $id = $_GET['modify'];
                               $habitatRrepository = new RaceRepository();
                               $read = $habitatRrepository->updateRace($id);
 
                               $this->render('/Admin/Race/read', [
 
-                                  'read' => $read
+                                  //'read' => $read
                         
                          ] );
                              

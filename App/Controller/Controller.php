@@ -41,6 +41,13 @@ try {
                         $habitat->route();
     
                         break;
+
+                        case 'veto':
+
+                            $veto = new VetoController;
+                            $veto->route();
+        
+                            break;
                         case 'contact':
 
                             $pagecontroller = new ContactController();

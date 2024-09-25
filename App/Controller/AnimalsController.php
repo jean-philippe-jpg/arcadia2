@@ -136,8 +136,6 @@ class AnimalsController extends Controller{
                              //$race=$habitatRrepository->innerRaceAnimals();
                               
                               $this->render('/Admin/Animals/read', [
-
-                                  
                                   'read' => $read
                                   
                                    ] );
@@ -192,14 +190,13 @@ class AnimalsController extends Controller{
                       try {       
 
                           if(isset($_GET['modify'])){
-
                               $id = $_GET['modify'];
                               $habitatRrepository = new AnimalsRepository();
                               $read = $habitatRrepository->updateAnimals($id);
 
-                              $this->render('/Admin/Habitat/read', [
+                              $this->render('/Admin/Animals/read', [
 
-                                  'read' => $read
+                               
                         
                          ] );
                              

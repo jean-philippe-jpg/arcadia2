@@ -9,6 +9,35 @@ use App\Tools\StringTools;
 
 class RaceRepository {
 
+    public function findOneById( int $id)
+    {
+        $mysql = Mysql::getInstance();
+        $pdo = $mysql->getPDO();
+
+        $query = $pdo->prepare('SELECT h.id as id, h.name as name, h.description as description, a.first_name as first_name FROM habitat h
+                INNER JOIN animals a ON h.animals_list = a.id where h.id = :id');   
+        $query->bindParam(':id', $id, $pdo::PARAM_INT);
+        $query->execute();
+        $habitat = $query->Fetch($pdo::FETCH_ASSOC);
+       
+   
+
+        $habitatEntity = new Habitats();
+        
+        foreach($habitat as $key => $value){
+
+            $habitatEntity->{'set'.StringTools::toPascaleCase($key) } ($value);
+            //if(method_exists($habitatEntity, $method)){
+                //$habitatEntity->$method($value);
+            //}
+
+            //$habitatEntity->{'set' .StringTools::toPascaleCase($key)}($value);
+
+        return $habitat;
+        
+    }
+}
+
 
    
     public function createRace( ){
@@ -70,7 +99,7 @@ class RaceRepository {
         }
 
 
-    public function updateRace(){
+    public function updateRace(int $id){
 
         try{
 
@@ -78,9 +107,9 @@ class RaceRepository {
             $pdo = $mysql->getPDO();
                
          
-            $query = $pdo->prepare('UPDATE animals set name = :name WHERE id = :id');
-            $query->bindParam(':id', $_POST['id'], $pdo::PARAM_INT);
-            $query->bindParam(':name', $_POST['id'], $pdo::PARAM_STR);
+            $query = $pdo->prepare('UPDATE race set name = :name WHERE id = :id');
+            $query->bindParam(':id', $id, $pdo::PARAM_INT);
+            $query->bindParam(':name', $_POST['name'], $pdo::PARAM_STR);
            
             //$query->bindParam(':name', $name, $pdo::PARAM_STR);
             //$query->bindParam(':description', $description, $pdo::PARAM_STR);

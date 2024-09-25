@@ -1,13 +1,12 @@
 <?php
 
-
-  namespace App\Controller;
-
-  use App\Repository\HabitatsRepository;
-
+//use App\Repository\VetoRepository;
+namespace App\Controller;
+use App\Repository\VetoRepository;
 
 
-class HabitatsController extends Controller{
+
+class VetoController extends Controller{
 
     public function route(): void {
 
@@ -71,7 +70,7 @@ class HabitatsController extends Controller{
                             $id = $_GET['id'];
                             // charger l'id d'un element avec le repository//
 
-                            $habitatRrepository = new HabitatsRepository();
+                            $habitatRrepository = new VetoRepository();
                             $habitation = $habitatRrepository->findOneById($id);
 
                             $this->render('/Admin/Habitat/show', [
@@ -103,10 +102,10 @@ class HabitatsController extends Controller{
                 
                 {
                         try {     
-                        $habitatRrepository = new HabitatsRepository();
-                        $habitatRrepository->createHabitat();
+                        $vetoRrepository = new VetoRepository();
+                        $vetoRrepository->createStateAnimals();
  
-                        $this->render('/Admin/Habitat/create', [
+                        $this->render('/Admin/Veto/Create', [
                                 
                                       
                             ] );
@@ -132,10 +131,10 @@ class HabitatsController extends Controller{
                 {
                         try {       
                             
-                                $habitatRrepository = new HabitatsRepository();
-                               $read = $habitatRrepository->readHabitat();
+                                $vetoRrepository = new VetoRepository();
+                               $read = $vetoRrepository->readStateAnimal();
                                 
-                                $this->render('/Admin/Habitat/read', [
+                                $this->render('/Admin/Veto/Read', [
                                     
                                     'read' => $read
                                     
@@ -161,11 +160,11 @@ class HabitatsController extends Controller{
 
                             if(isset($_GET['suprimer'])){
                                 $id = $_GET['suprimer'];
-                                $habitatRrepository = new HabitatsRepository();
-                                $read = $habitatRrepository->deleteHabitat($id);
+                                $habitatRrepository = new VetoRepository();
+                                $read = $habitatRrepository->deleteStateAnimals($id);
                             }
                             
-                                $this->render('/Admin/Habitat/read', [
+                                $this->render('/Admin/Veto/read', [
 
                                     'read' => $read
                                     
@@ -192,13 +191,14 @@ class HabitatsController extends Controller{
 
                             if(isset($_GET['modify'])){
                                 $id = $_GET['modify'];
-                               
-                                $habitatRrepository = new HabitatsRepository();
-                                $read = $habitatRrepository->updateHabitat($id);
+                                
+                    
+                                $habitatRrepository = new VetoRepository();
+                                $read = $habitatRrepository->updateStateAnimals($id);
 
-                                $this->render('/Admin/Habitat/read', [
+                                $this->render('/Admin/Veto/read', [
 
-                                    //'read' => $read
+                                    
                           
                            ] );
                                

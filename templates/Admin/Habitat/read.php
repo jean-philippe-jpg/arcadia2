@@ -22,8 +22,6 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
     <tbody>
       <tr>
 
-      
-      
       <?php foreach($read as $reads) { ?>
       <tr>
         
@@ -44,17 +42,17 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
             <form action="" method="post">
                 <div>
                 <label for="name">Name</label>
-                <input type="text" id="name" name="name"?>  
+                <input type="text" id="name" name="name" >  
                 </div>
                 <br>
                 <div>
                 <label for="description">Description</label>
-                <input type="text" id="description" name="description"?>  
+                <input type="text" id="description" name="description" >  
                 </div>
                 <br>
                 <div>
-                <label for="animal">Animals</label>
-                <input type="text" id="animal" name="animal"?>  
+                <label for="animals">Animals</label>
+                <input type="text" id="animals" name="animals" >  
                 </div>
                 
                 

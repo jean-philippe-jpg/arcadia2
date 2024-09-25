@@ -38,11 +38,11 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
         <?php } else { ?>
 
         <form action="" method="post">
-            <input type="hidden" name="id" value="<?= $reads['id'] ?>" />
-            <td><input type="text" name="name" value="<?= $reads['name'] ?>" /></td>
             
-            <td><a type="submit" class="btn btn-success">update</a></td>
-            <td><a href="?controller=Race&action=read<?= $reads['id']; ?>" class="btn btn-danger">annuler</a></td>
+            <input type="text" name="name"  />
+            
+            <input type="submit" class="btn btn-success"  />
+            <a href="?controller=Race&action=read<?= $reads['id']; ?>" class="btn btn-danger">annuler</a>
         </form>
         
         <?php } ?>

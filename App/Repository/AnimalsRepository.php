@@ -91,7 +91,7 @@ class AnimalsRepository {
 
                 $mysql = Mysql::getInstance();
                 $pdo = $mysql->getPDO();
-                $stmt = $pdo->prepare("SELECT a.id as id, a.first_name as first_name, r.name as namerace FROM animals a
+                $stmt = $pdo->prepare("SELECT a.id as id, a.first_name as first_name, a.race as race, a.habitat as home, a.state as state, r.name as namerace FROM animals a
                 INNER JOIN race r ON a.race = r.id");
                 //$stmt->setFetchMode($pdo::FETCH_CLASS, 'Habitats');
                 $stmt->fetch($pdo::FETCH_ASSOC);
@@ -119,7 +119,7 @@ class AnimalsRepository {
         }
 
 
-    public function updateAnimals(){
+    public function updateAnimals(int $id){
 
         try{
 
@@ -127,23 +127,34 @@ class AnimalsRepository {
             $pdo = $mysql->getPDO();
                
          
-            $query = $pdo->prepare('UPDATE animals set firs_name = :name, race = :race, habitat = :home, state = :etat WHERE id = :id');
-            $query->bindParam(':id', $_POST['id'], $pdo::PARAM_INT);
-            $query->bindParam(':name', $_POST['id'], $pdo::PARAM_STR);
-            $query->bindParam(':race', $_POST['id'], $pdo::PARAM_INT);
-            $query->bindParam(':home', $_POST['id'], $pdo::PARAM_INT);
-            $query->bindParam(':state', $_POST['id'], $pdo::PARAM_INT);
+            $query = $pdo->prepare('UPDATE animals set first_name = :name, race = :race, habitat = :home, state = :state WHERE id = :id');
+            $query->bindParam(':id',$id, $pdo::PARAM_INT);
+            $query->bindParam(':name', $_POST['name'], $pdo::PARAM_STR);
+            $query->bindParam(':race', $_POST['race'], $pdo::PARAM_INT);
+            $query->bindParam(':home', $_POST['home'], $pdo::PARAM_INT);
+            $query->bindParam(':state', $_POST['state'], $pdo::PARAM_INT);
             //$query->bindParam(':name', $name, $pdo::PARAM_STR);
             //$query->bindParam(':description', $description, $pdo::PARAM_STR);
             $query->fetch($pdo::FETCH_ASSOC);
-            $query->execute();
+
+            if( $query->execute()){
+
+                $query->fetch();
+
+                echo 'modification éffectuée';
+
+            } else {
+
+                echo 'erreur de modification';
+            }
+           
             
             return  $query;
          
            
 
         } catch(\Exception $e){
-            echo 'erreur d\'insertion'. $e->getMessage();
+            echo 'modification impossible'. $e->getMessage();
            
 
         }
