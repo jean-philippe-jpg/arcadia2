@@ -3,12 +3,12 @@
 namespace App\Repository;
 
 
-use App\Entity\Veto;
+use App\Entity\AnimalsState;
 use App\Bdd\Mysql;
 use App\Tools\StringTools;
 
 
-//require_once 'App/Entity/Veto.php';
+require_once 'App/Entity/AnimalsState.php';
 //require_once 'App/Entity/Habitats.php';
 class VetoRepository {
 
@@ -18,48 +18,25 @@ class VetoRepository {
         $mysql = Mysql::getInstance();
         $pdo = $mysql->getPDO();
 
-        $query = $pdo->prepare('SELECT h.id as id, h.name as name, h.description as description, a.first_name as first_name FROM habitat h
-                INNER JOIN animals a ON h.animals_list = a.id where h.id = :id');   
+        $query = $pdo->prepare('SELECT a_s.id as id, a_s.nourriture, a_s.quantitee as quantitee, a_s.state as state, a_s.detail as detail, a_s.date_de_passage as date, a.first_name as name FROM animals_state a_s
+                INNER JOIN animals a ON a_s.animal = a.id where a_s.id = :id');   
         $query->bindParam(':id', $id, $pdo::PARAM_INT);
-        $query->execute();
-        $habitat = $query->Fetch($pdo::FETCH_ASSOC);
+        //$animals_state = $query->Fetch($pdo::FETCH_ASSOC);
        
-   
+            if($query->execute()){
 
-        //$habitatEntity = new Veto();
+                $query->setFetchMode($pdo::FETCH_CLASS, AnimalsState::class);
+
+                return $query->fetch();
+            } else {
+                echo 'erreur d\'affichage des rapport de santé';
+            }
+
+         
+
+       
         
-        //foreach($habitat as $key => $value){
-
-           // $habitatEntity->{'set'.StringTools::toPascaleCase($key) } ($value);
-            //if(method_exists($habitatEntity, $method)){
-                //$habitatEntity->$method($value);
-            //}
-
-            //$habitatEntity->{'set' .StringTools::toPascaleCase($key)}($value);
-
-       // return $habitat;
-        
-    //}
-}
-
-/*public function innerRaceAnimals( ){
-
-    try{
-    $mysql = Mysql::getInstance();
-    $pdo = $mysql->getPDO();
-      
-    $stmt = $pdo->prepare('SELECT * FROM habitats INNER JOIN  ON animals.race = race.id') ;
-    
-    $stmt->fetch($pdo::FETCH_ASSOC);
-    if($stmt->execute()){
-        return $stmt->fetch();
-    } 
-
-} catch(\Exception $e){
-    echo 'erreur d\'insertion'. $e->getMessage();
-}
-}*/
-
+    }
 
     
 
@@ -95,16 +72,12 @@ class VetoRepository {
 
                 $mysql = Mysql::getInstance();
                 $pdo = $mysql->getPDO();
-                $stmt = $pdo->prepare("SELECT a_s.id as id, a_s.nourriture as nourriture, a_s.quantitee as quantitee, a_s.state as state, a_s.detail as detail, a_s.date_de_passage as date_de_passage, a.first_name as first_name FROM animals_state a_s
+                $stmt = $pdo->prepare("SELECT a_s.id as id, a_s.nourriture as nourriture, a_s.quantitee as quantitee, a_s.state as state, a_s.detail as detail, a_s.date_de_passage as date, a.first_name as first_name FROM animals_state a_s
                 INNER JOIN animals a ON a_s.animal = a.id");
-                //$stmt->setFetchMode($pdo::FETCH_CLASS, 'Habitats');
-                $stmt->fetch($pdo::FETCH_ASSOC);
-                //$stmt->fetchAll();
-                //$stmt->execute();
-
-
+               
                 if($stmt->execute()){
                     
+                    $stmt->setFetchMode($pdo::FETCH_CLASS, AnimalsState::class );
                     //$stmt->fetchObject('Habitats');
                     //$stmt->fetchAll();
                    //return $stmt->setFetchMode($pdo::FETCH_CLASS, 'Habitats::class');

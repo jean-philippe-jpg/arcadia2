@@ -4,6 +4,7 @@
   namespace App\Controller;
 
   use App\Repository\HabitatsRepository;
+  use App\Entity\Habitats;
 
 
 
@@ -24,8 +25,10 @@ class HabitatsController extends Controller{
                 case 'create':
 
                     $this->create();
-
+                    
+                   
                     break;
+
                 case 'read':
                     $this->read();
                    
@@ -119,14 +122,9 @@ class HabitatsController extends Controller{
 
 
                         }
-                    
-                        // charger l'id d'un element avec le repository//
+                    }
 
-                        
-                            //require_once 'templates/showanimals.php';//    
-                   
-                }
-
+                       
                 protected function read()
                 
                 {

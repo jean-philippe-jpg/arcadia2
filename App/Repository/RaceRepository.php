@@ -2,7 +2,7 @@
 
 namespace App\Repository;
 
-use App\Entity\Habitats;
+use App\Entity\Races;
 use App\Bdd\Mysql;
 use App\Tools\StringTools;
 
@@ -17,29 +17,16 @@ class RaceRepository {
         $query = $pdo->prepare('SELECT h.id as id, h.name as name, h.description as description, a.first_name as first_name FROM habitat h
                 INNER JOIN animals a ON h.animals_list = a.id where h.id = :id');   
         $query->bindParam(':id', $id, $pdo::PARAM_INT);
-        $query->execute();
-        $habitat = $query->Fetch($pdo::FETCH_ASSOC);
        
-   
-
-        $habitatEntity = new Habitats();
         
-        foreach($habitat as $key => $value){
+        if($query->execute()){
 
-            $habitatEntity->{'set'.StringTools::toPascaleCase($key) } ($value);
-            //if(method_exists($habitatEntity, $method)){
-                //$habitatEntity->$method($value);
-            //}
+            $query->setFetchMode($pdo::FETCH_CLASS, Races::class);
 
-            //$habitatEntity->{'set' .StringTools::toPascaleCase($key)}($value);
-
-        return $habitat;
-        
+            return $query->fetch(); 
     }
 }
 
-
-   
     public function createRace( ){
 
                 try{
@@ -50,12 +37,7 @@ class RaceRepository {
     
                 $stmt = $pdo->prepare('INSERT INTO race (name) VALUES (:name)');
                 $stmt->bindParam(':name', $_POST['name'], $pdo::PARAM_STR);
-                //$stmt->bindParam(':race', $_POST['race'], $pdo::PARAM_STR);
-               // $stmt->bindParam(':habitat', $_POST['home'], $pdo::PARAM_STR);
-               // $stmt->bindParam(':state', $_POST['state'], $pdo::PARAM_STR);
-                
-                
-                //$stmt->execute();
+
              
                 if(!$stmt->execute()){
                     echo 'erreur d\'insertion';
@@ -73,16 +55,12 @@ class RaceRepository {
                 $mysql = Mysql::getInstance();
                 $pdo = $mysql->getPDO();
                 $stmt = $pdo->prepare("SELECT * FROM race ");
-                //$stmt->setFetchMode($pdo::FETCH_CLASS, 'Habitats');
-                $stmt->fetch($pdo::FETCH_ASSOC);
-                //$stmt->fetchAll();
-                //$stmt->execute();
-
-
+                
                 if($stmt->execute()){
-                    //$stmt->fetchObject('Habitats');
-                    //$stmt->fetchAll();
-                   //return $stmt->setFetchMode($pdo::FETCH_CLASS, 'Habitats');
+                    
+                    $stmt->setFetchMode($pdo::FETCH_CLASS, Races::class);
+                    
+
                    return $stmt->fetchAll();
                   
                 } else {

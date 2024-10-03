@@ -66,16 +66,14 @@ class VetoController extends Controller{
                 {
                     try {
                         if(isset($_GET['id'])){
-
                             $id = $_GET['id'];
                             // charger l'id d'un element avec le repository//
-
                             $habitatRrepository = new VetoRepository();
-                            $habitation = $habitatRrepository->findOneById($id);
+                            $animals_state = $habitatRrepository->findOneById($id);
 
-                            $this->render('/Admin/Habitat/show', [
+                            $this->render('/Admin/Veto/Show', [
 
-                                'logement' => $habitation,
+                                'show' => $animals_state,
                                 
                                          
                                 ] );

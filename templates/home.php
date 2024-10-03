@@ -1,13 +1,18 @@
 
 
 <?php
-//require_once './bdd/connexion.php';
+
 require_once './templates/partial/_header.php';
-require_once './templates/partial/_carrousel.php';
+require_once './templates/partial/_animals.php';
+require_once './templates/partial/_habitatslist.php';
+
 ?>
 <h1>Home</h1>
 
+
+
 <h3>laisser un avis</h3>
+
 <form action="" method="post">
     <label for="pseudo">pseudo</label>
     <input type="text" id="pseudo" name="pseudo" placeholder="indiquer votre pseudo">
@@ -20,25 +25,30 @@ require_once './templates/partial/_carrousel.php';
 </form>
 
   <h3>list des commantaires</h3>
-  <?php foreach($avis as $commentaire) { ?>
+
+  <?php if(isset($_GET['check_comment'])){ ?>
+
+    <?php  foreach($avis as $commentaire) { ?>
     
             
-            <div style="margin-left: 10vw;">
-            <i class="star">&#9733</i>
-            <i class="star">&#9733</i>
-            <i class="star">&#9733</i>
-            <i class="star">&#9733</i>
-            <i class="star">&#9733</i>
-            <br>
-            <strong><?= $commentaire['pseudo'] ?></strong>
-       
-            <p><?=$commentaire['message']?></p>
-            </div>
-            
-       
-<?php } ?>
+  <div style="margin-left: 10vw;">
+  <i class="star">&#9733</i>
+  <i class="star">&#9733</i>
+  <i class="star">&#9733</i>
+  <i class="star">&#9733</i>
+  <i class="star">&#9733</i>
+  <br>
+  <strong><?= $commentaire->getPseudo(); ?></strong>
+   <p><?=$commentaire->getMessage();?></p>
+  </div>
   
 
+<?php } ?>
+<?php } else{
+  
+    echo 'commentaire en cours de traitement';
+}
+  ?>
 
 <?php
 require_once './templates/partial/_presentation.php';

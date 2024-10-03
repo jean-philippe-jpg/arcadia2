@@ -6,9 +6,11 @@ namespace App\Repository;
 use App\Entity\Habitats;
 use App\Bdd\Mysql;
 use App\Tools\StringTools;
+//use PDO;
 
+//use PDO;
 
-require_once 'App/Entity/Habitats.php';
+//require_once 'App/Entity/Habitats.php';
 //require_once 'App/Entity/Habitats.php';
 class HabitatsRepository {
 
@@ -21,14 +23,19 @@ class HabitatsRepository {
         $query = $pdo->prepare('SELECT h.id as id, h.name as name, h.description as description, a.first_name as first_name FROM habitat h
                 INNER JOIN animals a ON h.animals_list = a.id where h.id = :id');   
         $query->bindParam(':id', $id, $pdo::PARAM_INT);
-        $query->execute();
-        $habitat = $query->Fetch($pdo::FETCH_ASSOC);
-       
-   
-
-        $habitatEntity = new Habitats();
         
-        foreach($habitat as $key => $value){
+            if($query->execute()){
+
+               $query->setFetchMode($pdo::FETCH_CLASS, Habitats::class);
+
+                return $query->fetch();
+
+            } 
+
+
+        //$habitatEntity = new Habitats();
+        
+        /*foreach($habitat as $key => $value){
 
             $habitatEntity->{'set'.StringTools::toPascaleCase($key) } ($value);
             //if(method_exists($habitatEntity, $method)){
@@ -39,8 +46,8 @@ class HabitatsRepository {
 
         return $habitat;
         
-    }
-}
+    }*/
+
 
 /*public function innerRaceAnimals( ){
 
@@ -61,7 +68,7 @@ class HabitatsRepository {
 }*/
 
 
-    
+        }
 
     public function createHabitat( ){
 
@@ -75,11 +82,7 @@ class HabitatsRepository {
                 $stmt->bindParam(':name', $_POST['name'], $pdo::PARAM_STR);
                 $stmt->bindParam(':description', $_POST['description'], $pdo::PARAM_STR);
                 $stmt->bindParam(':animals_list', $_POST['animals_list'], $pdo::PARAM_INT);
-                
-                //$stmt->execute();
-             
 
-                
                 if($stmt->execute()){
                     echo 'insertion reussie';
                 } else {
@@ -89,8 +92,10 @@ class HabitatsRepository {
             } catch(\Exception $e){
                 echo 'erreur d\'insertion'. $e->getMessage();
             }
-    }
 
+            }
+
+           
     public function readHabitat(){
 
         try{
@@ -99,20 +104,14 @@ class HabitatsRepository {
                 $pdo = $mysql->getPDO();
                 $stmt = $pdo->prepare("SELECT h.id as id, h.name as name, h.description as description, a.first_name as first_name FROM habitat h
                 INNER JOIN animals a ON h.animals_list = a.id");
-                //$stmt->setFetchMode($pdo::FETCH_CLASS, 'Habitats');
-                $stmt->fetch($pdo::FETCH_ASSOC);
-                //$stmt->fetchAll();
-                //$stmt->execute();
-
-
+                
                 if($stmt->execute()){
                     
-                    //$stmt->fetchObject('Habitats');
-                    //$stmt->fetchAll();
-                   //return $stmt->setFetchMode($pdo::FETCH_CLASS, 'Habitats::class');
-                   return $stmt->fetchAll();
-                  
-                  
+                    $stmt->setFetchMode($pdo::FETCH_CLASS, Habitats::class);
+
+              
+                    return $stmt->fetchAll();
+        
                 } else {
                     echo 'erreur';
                 }
@@ -124,7 +123,7 @@ class HabitatsRepository {
 
         }
        
-        }
+    }
 
 
     public function updateHabitat(int $id){
@@ -134,9 +133,6 @@ class HabitatsRepository {
             $mysql = Mysql::getInstance();
             $pdo = $mysql->getPDO();
                
-            
-               
-              
                 $name = $_POST['name'];
                 $description = $_POST['description'];
                 $animals = $_POST['animals'];

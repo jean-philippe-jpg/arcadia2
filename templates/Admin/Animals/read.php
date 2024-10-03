@@ -9,6 +9,7 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
 <a href="?controller=animals&action=create" class="btn btn-success">ajouter</a>
 <a href="?controller=habitats&action=read" class="btn btn-warning">habitats</a>
 <a href="?controller=race&action=read" class="btn btn-warning">race</a>
+<a href="?controller=comments&action=read" class="btn btn-warning">commentaires</a>
     <thead>
     <tr>
     <th scope="col">#</th>
@@ -30,17 +31,17 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
       <?php foreach($read as $reads) { ?>
         
       <tr>
-          <td><?= $reads['id'] ?></td>
-          <td><?= $reads['first_name']?></td>
-          <td><?= $reads['namerace']?></td>
-          <td><?= $reads['home']?></td>
-          <td><?= $reads['state']?></td>
+          <td><?= $reads->getId(); ?></td>
+          <td><?= $reads->getFirstName();?></td>
+          <td><?= $reads->getRace();?></td>
+          <td><?= $reads->getHabitat();?></td>
+          <td><?= $reads->getState();?></td>
           
           
           
-          <td><a href="?controller=animals&action=update&modify=<?= $reads['id']; ?>" class="btn btn-warning">update</a></td>
-          <td><a href="?controller=animals&action=show&show=<?= $reads['id']; ?>" class="btn btn-warning">voir</a></td>
-          <td><a href="?controller=animals&action=delete&suprimer=<?= $reads['id']; ?>" class="btn btn-danger">delete</a></td>
+          <td><a href="?controller=animals&action=update&modify=<?= $reads->getId(); ?>" class="btn btn-warning">update</a></td>
+          <td><a href="?controller=animals&action=show&show=<?= $reads->getId(); ?>" class="btn btn-warning">voir</a></td>
+          <td><a href="?controller=animals&action=delete&suprimer=<?= $reads->getId(); ?>" class="btn btn-danger">delete</a></td>
       </tr>
      
 
@@ -73,7 +74,7 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
                 
                 
                
-               <input type="submit"  class="btn btn-success" name="update" value="Update">
+               <input type="submit"  class="btn btn-success"  value="Update">
                 
             </form>
         

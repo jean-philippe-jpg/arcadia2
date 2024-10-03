@@ -5,8 +5,8 @@
 <a href="?controller=Habitats&action=read" class="btn btn-success">retour</a>
 <div class="show">
 
-<p><strong>habitat:  </strong><?= $animals['name']?></p>
-<p><strong>description:  </strong><?= $animals['race_name']?></p>
+<p><strong>habitat:  </strong><?= $animals->getFirstName()?></p>
+<p><strong>description:  </strong><?= $animals->getRace()?></p>
 
 
 

@@ -3,15 +3,16 @@
 namespace App\Repository;
 
 
-
+use App\Entity\Comments;
 use App\Bdd\Mysql;
 use App\Tools\StringTools;
-use PDO;
+
+
 
 class CommentsRepository {
 
 
-    public function createComments( ){
+    public function create( ){
 
      try {
 
@@ -24,8 +25,8 @@ class CommentsRepository {
                 $message=$_POST['message'];
 
                $comment= $pdo->prepare('INSERT INTO avis (pseudo, message) VALUES (:pseudo, :message)');
-                $comment->bindParam(':pseudo', $pseudo, PDO::PARAM_STR);
-                $comment->bindParam(':message', $message, PDO::PARAM_STR);
+                $comment->bindParam(':pseudo', $pseudo, $pdo::PARAM_STR);
+                $comment->bindParam(':message', $message, $pdo::PARAM_STR);
                $comment->execute();
            
 
@@ -34,33 +35,38 @@ class CommentsRepository {
             echo 'veuillez remplir tous les champs';
      
         }
-
-   
-
      } catch(\Exception $e){
          echo 'erreur d\'insertion'. $e->getMessage();
      }
                
 }
 
-public function readComments(){
+public function read(){
 
-    try {
+    try{
 
-       $mysql = Mysql::getInstance();
-       $pdo = $mysql->getPDO();
-      
-           $cmts = $pdo->prepare("SELECT * FROM avis");
-           $cmts->fetch($pdo::FETCH_ASSOC);
-
-           $cmts->execute();
-
-           return $cmts->fetchAll(); 
-
+            $mysql = Mysql::getInstance();
+            $pdo = $mysql->getPDO();
+            $cmts = $pdo->prepare('SELECT * FROM avis ');
+            $cmts->setFetchMode($pdo::FETCH_CLASS,  Comments::class);
+            
+            if($cmts->execute()){
+                
+               
+            
+                   return $cmts->fetchAll();
+                  
+                   
+            } else {
+                echo 'erreur';
+            }
+          
+           
     } catch(\Exception $e){
-        echo 'erreur d\'affichage'. $e->getMessage();
+        echo 'erreur d\'insertion'. $e->getMessage();
+       
+
     }
-              
+}
 }
 
-}

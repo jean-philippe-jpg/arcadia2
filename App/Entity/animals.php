@@ -6,7 +6,9 @@ class Animals
 
 protected int $id ;
 protected string $first_name ;
-protected  string $race ;
+protected  int $race ;
+protected int $home ;
+protected int $state;
 
 
 
@@ -40,5 +42,28 @@ public function setRace(string $race)
      $this->race = $race;
 }
 
+public function getHabitat() :int
+{
+return $this->home;
+}
 
+public function setHabitat($habitat)
+{
+$this->home = $habitat;
+
+return $this;
+}
+
+
+public function getState() : int
+{
+return $this->state;
+}
+
+public function setState($state)
+{
+$this->state = $state;
+
+return $this;
+}
 }

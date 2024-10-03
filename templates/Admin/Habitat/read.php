@@ -7,6 +7,7 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
 <a href="?controller=habitats&action=create" class="btn btn-success">ajouter</a>
 <a href="?controller=animals&action=read" class="btn btn-warning">animaux</a>
 <a href="?controller=race&action=read" class="btn btn-warning">race</a>
+<a href="?controller=comments&action=read" class="btn btn-warning">commentaires</a>
     <thead>
     <tr>
     <th scope="col">#</th>
@@ -20,19 +21,18 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
     </tr>
     </thead>
     <tbody>
-      <tr>
 
       <?php foreach($read as $reads) { ?>
       <tr>
         
-         <td><?= $reads['id']; ?></td>
-          <td><?= $reads['name'];?></td>
-          <td><?= $reads['description']; ?></td>
-          <td><?= $reads['first_name'];?></td>
+      <td><?= $reads->getId(); ?></td>
+         <td><?= $reads->getName();?></td>
+          <td><?= $reads->getDescription(); ?></td>
+          <td><?= $reads->getAnimalsList();?></td>
           
-          <td><a href="?controller=habitats&action=update&modify=<?= $reads['id']; ?>" class="btn btn-warning">update</a></td>
-          <td><a href="?controller=habitats&action=show&id=<?= $reads['id']; ?>" class="btn btn-warning">voir</a></td>
-          <td><a href="?controller=habitats&action=delete&suprimer=<?= $reads['id']; ?>" class="btn btn-danger">delete</a></td>
+          <td><a href="?controller=habitats&action=update&modify=<?= $reads->getId(); ?>" class="btn btn-warning">update</a></td>
+          <td><a href="?controller=habitats&action=show&id=<?= $reads->getId(); ?>" class="btn btn-warning">voir</a></td>
+          <td><a href="?controller=habitats&action=delete&suprimer=<?= $reads->getId(); ?>" class="btn btn-danger">delete</a></td>
       </tr>
         <?php } ?>
         <a href="index.php" class="btn btn-danger">home</a>
@@ -54,9 +54,7 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
                 <label for="animals">Animals</label>
                 <input type="text" id="animals" name="animals" >  
                 </div>
-                
-                
-               
+    
                <input type="submit"  class="btn btn-success" name="update" value="Update">
                 
             </form>

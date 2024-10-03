@@ -16,31 +16,22 @@ class AnimalsRepository {
         $mysql = Mysql::getInstance();
         $pdo = $mysql->getPDO();
 
-        $query = $pdo->prepare('SELECT a.id as id, a.first_name as name, r.name as race_name FROM animals a
+        $query = $pdo->prepare('SELECT a.id as id, a.first_name as first_name, r.name as race_name FROM animals a
                 INNER JOIN race r ON a.race = r.id where a.id = :id');   
         $query->bindParam(':id', $id, $pdo::PARAM_INT);
-        $query->execute();
-        $animals = $query->Fetch($pdo::FETCH_ASSOC);
-   
-
-        $animalsEntity = new Animals();
         
-        foreach($animals as $key => $value){
+                if($query->execute()) {
 
-            $animalsEntity->{'set'.StringTools::toPascaleCase($key) } ($value);
-            //if(method_exists($habitatEntity, $method)){
-                //$habitatEntity->$method($value);
-            //}
+                    $query->setFetchMode($pdo::FETCH_CLASS, Animals::class);
+                    return $query->fetch();
 
-            //$animalsEntity->{'set' .StringTools::toPascaleCase($key)}($value);
-
-        return $animals;
+                }
         
     }
-}
-    
 
     
+
+
 
     public function createAnimals( ){
 
@@ -50,13 +41,11 @@ class AnimalsRepository {
                       
                 
     
-                $stmt = $pdo->prepare('INSERT INTO animals (first_name, race, habitat) VALUES (:first_name, :race, :habitat)');
+                $stmt = $pdo->prepare('INSERT INTO animals (first_name, race, habitat, state) VALUES (:first_name, :race, :habitat, :state)');
                 $stmt->bindParam(':first_name', $_POST['name'], $pdo::PARAM_STR);
-                $stmt->bindParam(':race', $_POST['race'], $pdo::PARAM_STR);
-                $stmt->bindParam(':habitat', $_POST['home'], $pdo::PARAM_STR);
-                //$stmt->bindParam(':state', $_POST['state'], $pdo::PARAM_STR);
-
-                //$stmt->execute();
+                $stmt->bindParam(':race', $_POST['race'], $pdo::PARAM_INT);
+                $stmt->bindParam(':habitat', $_POST['home'], $pdo::PARAM_INT);
+                $stmt->bindParam(':state', $_POST['state'], $pdo::PARAM_INT);
              
                 if(!$stmt->execute()){
                     echo 'erreur d\'insertion';
@@ -93,16 +82,11 @@ class AnimalsRepository {
                 $pdo = $mysql->getPDO();
                 $stmt = $pdo->prepare("SELECT a.id as id, a.first_name as first_name, a.race as race, a.habitat as home, a.state as state, r.name as namerace FROM animals a
                 INNER JOIN race r ON a.race = r.id");
-                //$stmt->setFetchMode($pdo::FETCH_CLASS, 'Habitats');
-                $stmt->fetch($pdo::FETCH_ASSOC);
-                //$stmt->fetchAll();
-                //$stmt->execute();
-
-
+               
                 if($stmt->execute()){
-                    //$stmt->fetchObject('Habitats');
-                    //$stmt->fetchAll();
-                   //return $stmt->setFetchMode($pdo::FETCH_CLASS, 'Habitats');
+
+                    $stmt->setFetchMode($pdo::FETCH_CLASS, Animals::class);
+                    
                    return $stmt->fetchAll();
                   
                 } else {
@@ -131,15 +115,15 @@ class AnimalsRepository {
             $query->bindParam(':id',$id, $pdo::PARAM_INT);
             $query->bindParam(':name', $_POST['name'], $pdo::PARAM_STR);
             $query->bindParam(':race', $_POST['race'], $pdo::PARAM_INT);
-            $query->bindParam(':home', $_POST['home'], $pdo::PARAM_INT);
+            $query->bindParam(':home', $_POST['home'], $pdo::PARAM_STR);
             $query->bindParam(':state', $_POST['state'], $pdo::PARAM_INT);
             //$query->bindParam(':name', $name, $pdo::PARAM_STR);
             //$query->bindParam(':description', $description, $pdo::PARAM_STR);
-            $query->fetch($pdo::FETCH_ASSOC);
-
             if( $query->execute()){
 
-                $query->fetch();
+                $query->setFetchMode($pdo::FETCH_CLASS, Animals::class);
+
+                //$query->fetch();
 
                 echo 'modification éffectuée';
 

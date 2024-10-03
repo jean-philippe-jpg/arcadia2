@@ -7,6 +7,7 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
 <a href="?controller=veto&action=create" class="btn btn-success">ajouter</a>
 <a href="?controller=animals&action=read" class="btn btn-warning">animaux</a>
 <a href="?controller=race&action=read" class="btn btn-warning">race</a>
+<a href="?controller=comments&action=read" class="btn btn-warning">commentaires</a>
     <thead>
     <tr>
     <th scope="col">#</th>
@@ -24,17 +25,16 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
       <?php foreach($read as $reads) { ?>
       <tr>
         
-         <td><?= $reads['id']; ?></td>
-          <td><?= $reads['nourriture'];?></td>
-          <td><?= $reads['quantitee']; ?></td>
-          <td><?= $reads['state'];?></td>
-          <td><?= $reads['detail'];?></td>
-          <td><?= $reads['first_name'];?></td>
-          <td><?= $reads['date_de_passage'];?></td>
+         <td><?= $reads->getId(); ?></td>
+          <td><?= $reads->getNourriture();?></td>
+          <td><?= $reads->getQuantitee(); ?></td>
+          <td><?= $reads->getState();?></td>
+          <td><?= $reads->getDetail();?></td>
+          <td><?= $reads->getdate();?></td>
           
-          <td><a href="?controller=veto&action=update&modify=<?= $reads['id']; ?>" class="btn btn-warning">update</a></td>
-          <td><a href="?controller=habitats&action=show&id=<?= $reads['id']; ?>" class="btn btn-warning">voir</a></td>
-          <td><a href="?controller=veto&action=delete&suprimer=<?= $reads['id']; ?>" class="btn btn-danger">delete</a></td>
+          <td><a href="?controller=veto&action=update&modify=<?= $reads->getId(); ?>" class="btn btn-warning">update</a></td>
+          <td><a href="?controller=veto&action=show&id=<?= $reads->getId(); ?>" class="btn btn-warning">voir</a></td>
+          <td><a href="?controller=veto&action=delete&suprimer=<?= $reads->getId(); ?>" class="btn btn-danger">delete</a></td>
       </tr>
         <?php } ?>
         <a href="index.php" class="btn btn-danger">home</a>

@@ -70,12 +70,12 @@ class RaceController extends Controller{
                           $id = $_GET['id'];
                           // charger l'id d'un element avec le repository//
 
-                          $habitatRrepository = new RaceRepository();
-                          $habitation = $habitatRrepository->findOneById($id);
+                          $raceRrepository = new RaceRepository();
+                          $race = $raceRrepository->findOneById($id);
 
                           $this->render('/Admin/Race/show', [
 
-                              'logement' => $habitation,
+                              'race' => $race,
                               
                                        
                               ] );

@@ -5,7 +5,8 @@
 
 namespace App\Controller;
 
-use App\Repository\HabitatsRepository;
+//use App\Repository\HabitatsRepository;
+
 
 
 
@@ -56,9 +57,27 @@ try {
                             break;
                             case 'users':
 
-                                $registercontroller = new PagesController();
-                                $registercontroller->route();
+                                $pagecontroller = new PagesController();
+                                $pagecontroller->route();
+                                
                                 break;
+                                case 'services':
+
+                                    $pagecontroller = new PagesController();
+                                    $pagecontroller->route();
+                                    
+                                    break;
+
+                                    case 'comments':
+
+                                        $pagecontroller = new CommentsController();
+                                        $pagecontroller->route();
+
+                                        //$pagecontroller = new PagesController();
+                                        //$pagecontroller->route();
+                                        
+                                        break;
+    
 
                            
         default:

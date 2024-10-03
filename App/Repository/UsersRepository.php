@@ -104,34 +104,36 @@ class UsersRepository {
                 $mysql = Mysql::getInstance();
                 $pdo = $mysql->getPDO();
 
-                //$email = $_POST['email'];
+                $email = $_POST['email'];
                 //$pass = $_POST['password'];
                 $statement = $pdo->prepare('SELECT * FROM users WHERE email = :email');
                 // On récupère un utilisateur ayant le même login (ici, e-mail)
                 $statement->bindParam(':email', $email, $pdo::PARAM_STR);
                 $statement->execute();
                 $user = $statement->fetchObject( 'Users'::class);
+               // $user->fetch();
 
                     if ($user === false) {
+                        
                         // Si aucun utilisateur ne correspond au login entré, on affiche une erreur
-                        echo 'Identifiants invalide';
+                        echo 'Utilisateur non trouvé';
                     } else {
                         $pass = $_POST['password'];
                         if(password_verify($pass, $user->getPassword()))  {
                                 $userStatement = $pdo->prepare('SELECT * FROM roles_users JOIN roles ON role_id = id WHERE user_id = :id');
-                                //echo 'Bienvenue ' . $user->getUsername();
+                                
                         };
                         $userStatement->bindValue(':id', $user->getId(), $pdo::PARAM_INT);
                        
                         if($userStatement->execute()){
                             //$roles = $userStatement->fetch($pdo::FETCH_ASSOC);
-                            while($roles = $userStatement->fetch($pdo::FETCH_ASSOC)){
-                                $user->addRole($roles['name']);
-                               
+                            //while($roles = $userStatement->fetch($pdo::FETCH_ASSOC)){
+                                //$user->addRole($roles['name']);
+                                echo '<div >'.$user->getEmail().'<br>'. $user->getUsername().'<br>';
                             }
                            
                         }
-                    }
+                    
                         
         } catch(\Exception $e){
             echo 'erreur d\'insertion'. $e->getMessage();
@@ -149,19 +151,20 @@ class UsersRepository {
                     $mysql = Mysql::getInstance();
                     $pdo = $mysql->getPDO();
     
-                    $email = $_POST['usersShow'];
     
-                    $statement = $pdo->prepare('SELECT * FROM users WHERE email = :email');
+                    $statement = $pdo->prepare('SELECT * FROM users');
                     // On récupère un utilisateur ayant le même login (ici, e-mail)
-                    $statement->bindParam(':email', $email, $pdo::PARAM_STR);
-                    $statement->execute();
-                    $user = $statement->fetch($pdo::FETCH_ASSOC);
     
-                        if ($user === false) {
+                        if ( $statement->execute()) {
+
+                            $statement->setFetchMode($pdo::FETCH_CLASS, Users::class);
                             // Si aucun utilisateur ne correspond au login entré, on affiche une erreur
-                            echo 'Identifiants invalides';
+                            return $statement->fetchAll();
+                            
+                              echo 'utilisateurs affichés';
+                            
                         } else {
-                               
+                               echo 'erreur d\'affichege des utilisateurs';
                            
                             }
                         

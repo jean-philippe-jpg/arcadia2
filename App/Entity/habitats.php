@@ -1,7 +1,11 @@
 <?php
 
 namespace App\Entity;
-class Habitats
+
+
+
+
+class Habitats 
 {
 
 protected int $id ;
@@ -49,10 +53,6 @@ public function setAnimalsList(int $animals_list)
 {
      $this->animals_list = $animals_list;
 }
-
-   
-
-
 
 
 }
