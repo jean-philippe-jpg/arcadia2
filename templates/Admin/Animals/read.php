@@ -28,12 +28,12 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
       <tr>
 
       
-      <?php foreach($read as $reads) { ?>
+      <?php foreach($animal as $reads) { ?>
         
       <tr>
           <td><?= $reads->getId(); ?></td>
           <td><?= $reads->getFirstName();?></td>
-          <td><?= $reads->getRace();?></td>
+          <td><?= $reads->getNameRace();?></td>
           <td><?= $reads->getHabitat();?></td>
           <td><?= $reads->getState();?></td>
           

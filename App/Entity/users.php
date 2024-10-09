@@ -2,14 +2,14 @@
 namespace App\Entity;
 class Users
 {
-    private string $id;
+    private int $id;
     private string $email;
     private string $password;
     private string $username;
     // Tableau de rôles
     private array $roles = [];
 
-    public function getId(): string
+    public function getId(): int
     {
         return $this->id;
     }

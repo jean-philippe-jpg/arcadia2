@@ -37,6 +37,9 @@ class PagesController extends Controller{
                             case 'collection':
                                 $this->readServices();
                                 break;
+                                case 'readsusers':
+                                    $this->readUsers();
+                                    break;
                 default:
                 throw new \Exception('page introuvable :/');
                   break;
@@ -92,28 +95,34 @@ class PagesController extends Controller{
 
                 protected function roles(): void
                 
-                {
-                       $roles = new UsersRepository();
-                       $roles->addRoles();
-                  
-                    $this->render('Admin/Roles', [
+                {    
 
-                        
-                            
-                    ] );
-                    //require_once 'templates/showanimals.php';//
-                  
-                }
+                    if(isset($_GET['addroles'])) {
+                        $id = $_GET['addroles'];
+
+                        $roles = new UsersRepository();
+                        $roles->Roles($id);
+                   
+                     $this->render('Admin/Users', [
+          
+                     ] );
+                     //require_once 'templates/showanimals.php';//
+                   
+                    }
+                      
+                    }
+
+            
 
                 protected function connected(): void
                 
                 {    
                     $connected = new UsersRepository();
-                    $connected->connect();
+                    $connect = $connected->connect();
                        
                     $this->render('Admin/Connexion', [
 
-                        'user' => $connected
+                        'user' => $connect
                             
                     ] );
                     //require_once 'templates/showanimals.php';//
@@ -124,11 +133,13 @@ class PagesController extends Controller{
                 
                 {    
                     $read = new UsersRepository();
-                    $read->read();
+                    $users = $read->read();
+                  
                        
                     $this->render('Admin/Users', [
 
-                        'users' => $read
+                        'users' => $users,
+                        
                             
                     ] );
                     //require_once 'templates/showanimals.php';//

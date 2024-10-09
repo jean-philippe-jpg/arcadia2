@@ -63,7 +63,7 @@ try {
                                 break;
                                 case 'services':
 
-                                    $pagecontroller = new PagesController();
+                                    $pagecontroller = new ServicesController();
                                     $pagecontroller->route();
                                     
                                     break;
@@ -72,10 +72,6 @@ try {
 
                                         $pagecontroller = new CommentsController();
                                         $pagecontroller->route();
-
-                                        //$pagecontroller = new PagesController();
-                                        //$pagecontroller->route();
-                                        
                                         break;
     
 

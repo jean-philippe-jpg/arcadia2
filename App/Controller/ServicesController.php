@@ -2,11 +2,11 @@
 
 namespace App\Controller;
 
-use App\Repository\AnimalsRepository;
+use App\Repository\ServicesRepository;
 
 
 
-class AnimalsController extends Controller{
+class ServicesController extends Controller{
 
   public function route(): void {
 
@@ -70,12 +70,12 @@ class AnimalsController extends Controller{
                           $id = $_GET['id'];
                           // charger l'id d'un element avec le repository//
 
-                          $animalsRrepository = new AnimalsRepository();
-                          $animals = $animalsRrepository->findOneById($id);
+                          $serviceRrepository = new ServicesRepository();
+                          $service = $serviceRrepository->findOneById($id);
 
-                          $this->render('/Admin/Animals/show', [
+                          $this->render('/Admin/Services/show', [
 
-                              'animals' => $animals,
+                              'services' => $service,
                               
                                        
                               ] );
@@ -102,10 +102,10 @@ class AnimalsController extends Controller{
               
               {
                       try {     
-                      $habitatRrepository = new AnimalsRepository();
-                      $habitatRrepository->createAnimals();
+                      $habitatRrepository = new ServicesRepository();
+                      $habitatRrepository->create();
 
-                      $this->render('/Admin/Animals/create', [
+                      $this->render('/Admin/Services/create', [
                               
                                     
                           ] );
@@ -131,12 +131,12 @@ class AnimalsController extends Controller{
               {
                       try {       
                           
-                              $animalsRrepository = new AnimalsRepository();
-                             $animals = $animalsRrepository->readAnimals();
-                             //$race=$habitatRrepository->innerRaceAnimals();
+                              $habitatRrepository = new ServicesRepository();
+                             $read = $habitatRrepository->read();
                               
-                              $this->render('/Admin/Animals/read', [
-                                  'animal' => $animals
+                              $this->render('/Admin/Services/read', [
+                                  
+                                  'read' => $read
                                   
                                    ] );
        
@@ -160,13 +160,13 @@ class AnimalsController extends Controller{
 
                           if(isset($_GET['suprimer'])){
                               $id = $_GET['suprimer'];
-                              $habitatRrepository = new AnimalsRepository();
-                              $read = $habitatRrepository->deleteAnimals($id);
+                              $servicesRrepository = new ServicesRepository();
+                              $delete = $servicesRrepository->deleteRace($id);
                           }
                           
-                              $this->render('/Admin/Habitat/read', [
+                              $this->render('/Admin/Services/read', [
 
-                                  'read' => $read
+                                  'read' => $delete
                                   
                                    ] );
        
@@ -191,12 +191,12 @@ class AnimalsController extends Controller{
 
                           if(isset($_GET['modify'])){
                               $id = $_GET['modify'];
-                              $habitatRrepository = new AnimalsRepository();
-                              $read = $habitatRrepository->updateAnimals($id);
+                              $servicesRrepository = new ServicesRepository();
+                              $servicesRrepository->updateRace($id);
 
-                              $this->render('/Admin/Animals/read', [
+                              $this->render('/Admin/Services/read', [
 
-                               
+                                  //'read' => $read
                         
                          ] );
                              

@@ -11,7 +11,7 @@ class Habitats
 protected int $id ;
 protected string $name ;
 protected  string $description ;
-protected string $animals_list = 'null';
+protected string $animals_list ;
 
 
 public function getId(): int
@@ -24,7 +24,7 @@ public function setId(int $id)
      $this->id = $id;
 }
 
-public function getName():string
+public function getName(): string
 {
       return $this->name;
 }

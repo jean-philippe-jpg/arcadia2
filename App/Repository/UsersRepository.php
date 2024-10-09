@@ -72,7 +72,7 @@ class UsersRepository {
     }
 
 
-    public function addRoles( ){
+    public function Roles( ){
 
         try{
         $mysql = Mysql::getInstance();
@@ -97,6 +97,32 @@ class UsersRepository {
     }
 }
 
+public function addRoles( ){
+
+    try{
+    $mysql = Mysql::getInstance();
+    $pdo = $mysql->getPDO();
+      
+    
+  
+    $stmt = $pdo->prepare('SELECT * FROM roles_users JOIN roles ON role_id = id WHERE user_id = :id');
+    $stmt->bindParam(':id', $_POST['id'], $pdo::PARAM_INT);
+    //$stmt->execute();
+    if($stmt->execute()){
+        $roles = $stmt->fetch($pdo::FETCH_ASSOC);
+        while($roles = $stmt->fetch($pdo::FETCH_ASSOC)){
+            echo $roles['name'];
+        }
+           echo 'role attribué';
+    } else {
+        echo 'role non attribué';
+    }
+
+} catch(\Exception $e){
+    echo 'erreur d\'attribution'. $e->getMessage();
+}
+}
+
     public function connect(){
 
         try{
@@ -107,32 +133,41 @@ class UsersRepository {
                 $email = $_POST['email'];
                 //$pass = $_POST['password'];
                 $statement = $pdo->prepare('SELECT * FROM users WHERE email = :email');
+              
                 // On récupère un utilisateur ayant le même login (ici, e-mail)
-                $statement->bindParam(':email', $email, $pdo::PARAM_STR);
-                $statement->execute();
-                $user = $statement->fetchObject( 'Users'::class);
-               // $user->fetch();
+                $statement->bindValue(':email', $email, $pdo::PARAM_STR);
 
-                    if ($user === false) {
+               if($statement->execute()){
+                $user = $statement->fetchObject( Users::class);
+               if ($user === false) {
                         
-                        // Si aucun utilisateur ne correspond au login entré, on affiche une erreur
-                        echo 'Utilisateur non trouvé';
-                    } else {
-                        $pass = $_POST['password'];
-                        if(password_verify($pass, $user->getPassword()))  {
-                                $userStatement = $pdo->prepare('SELECT * FROM roles_users JOIN roles ON role_id = id WHERE user_id = :id');
-                                
-                        };
-                        $userStatement->bindValue(':id', $user->getId(), $pdo::PARAM_INT);
-                       
-                        if($userStatement->execute()){
-                            //$roles = $userStatement->fetch($pdo::FETCH_ASSOC);
-                            //while($roles = $userStatement->fetch($pdo::FETCH_ASSOC)){
-                                //$user->addRole($roles['name']);
-                                echo '<div >'.$user->getEmail().'<br>'. $user->getUsername().'<br>';
-                            }
-                           
-                        }
+                // Si aucun utilisateur ne correspond au login entré, on affiche une erreur
+                echo 'Utilisateur non trouvé';
+            } else {
+                // sinon on vérifie le mot de passe
+                $pass = $_POST['password'];
+                if(password_verify($pass, $user->getPassword())){
+                     $rolesStatement = $pdo->prepare(
+                        // Requête pour récupérer les rôles de l'utilisateur
+                        'SELECT * FROM roles_users JOIN roles
+                         ON role_id = id WHERE user_id = :id
+                         ');
+                                $rolesStatement->bindValue(':id', $user->getId(), $pdo::PARAM_INT);
+                                if($rolesStatement->execute()){
+                                    while($roles = $rolesStatement->fetch($pdo::FETCH_ASSOC)){
+                                        $user->addRole($roles['name']);
+                                        //var_dump($user);    
+                                        echo '<div>'.$user->getEmail().'<br>'. $user->getUsername().'<br>';
+                                    }
+                                   
+                                }
+                } else {
+                    echo 'Mot de passe incorrect';
+                }
+               }
+
+                   
+                    }
                     
                         
         } catch(\Exception $e){
@@ -152,14 +187,20 @@ class UsersRepository {
                     $pdo = $mysql->getPDO();
     
     
+                    //$statement = $pdo->prepare('SELECT u.id as id, u.email as email, r.role_id as name FROM users u
+                    //INNER JOIN roles_users r ON r. = u.id');
+                    
                     $statement = $pdo->prepare('SELECT * FROM users');
                     // On récupère un utilisateur ayant le même login (ici, e-mail)
     
                         if ( $statement->execute()) {
 
-                            $statement->setFetchMode($pdo::FETCH_CLASS, Users::class);
+                           
+                          $statement->setFetchMode($pdo::FETCH_CLASS, Users::class);
+                        
                             // Si aucun utilisateur ne correspond au login entré, on affiche une erreur
                             return $statement->fetchAll();
+                            
                             
                               echo 'utilisateurs affichés';
                             

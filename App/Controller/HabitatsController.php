@@ -131,15 +131,13 @@ class HabitatsController extends Controller{
                         try {       
                             
                                 $habitatRrepository = new HabitatsRepository();
-                               $read = $habitatRrepository->readHabitat();
-                                
-                                $this->render('/Admin/Habitat/read', [
-                                    
-                                    'read' => $read
-                                    
-                                     ] );
-         
-                             
+                                $read = $habitatRrepository->readHabitat();
+                              
+                                 $this->render('/Admin/Habitat/read', [
+                                     
+                                     'read' => $read
+                                         
+                                          ] );     
  
                         } catch(\Exception $e ) {
                             $this->render('errors/errors', [

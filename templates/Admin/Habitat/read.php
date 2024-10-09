@@ -2,6 +2,10 @@
 require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
 ?>
 <h1>Habitats</h1>
+
+<?php try { ?>
+
+
 <?php if(!isset($_GET['modify'])) {  ?>
 <table class="table">
 <a href="?controller=habitats&action=create" class="btn btn-success">ajouter</a>
@@ -28,7 +32,7 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
       <td><?= $reads->getId(); ?></td>
          <td><?= $reads->getName();?></td>
           <td><?= $reads->getDescription(); ?></td>
-          <td><?= $reads->getAnimalsList();?></td>
+        
           
           <td><a href="?controller=habitats&action=update&modify=<?= $reads->getId(); ?>" class="btn btn-warning">update</a></td>
           <td><a href="?controller=habitats&action=show&id=<?= $reads->getId(); ?>" class="btn btn-warning">voir</a></td>
@@ -66,8 +70,12 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
     
 </table>
 
+<?php } catch (Exception $e) { 
+    
 
-<?php
+    echo $e->getMessage();
+    
+} 
 require_once _ROOTPATH_.'/templates/Admin/Partial/_footer.php';
 ?>
 

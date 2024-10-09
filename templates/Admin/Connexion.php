@@ -1,9 +1,8 @@
 <?php
 require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
-require_once './App/Entity/Users.php';
+//require_once './App/Entity/Users.php';
 ?>
 <h1>Connecxion</h1>
-
 
 
 <a href="https://front.codes/" class="logo" target="_blank">
@@ -31,7 +30,7 @@ require_once './App/Entity/Users.php';
     <input type="submit" value="Envoyer" />
 </form>
 
-  <form action="" method="post">
+
 	<div class="section">
 		<div class="container">
 			<div class="row full-height justify-content-center">
@@ -91,7 +90,7 @@ require_once './App/Entity/Users.php';
 	      	</div>
 	    </div>
 	</div>
-  </form>
+
 
   
 <?php

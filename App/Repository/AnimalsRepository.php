@@ -8,7 +8,7 @@ use App\Bdd\Mysql;
 use App\Tools\StringTools;
 
 
-class AnimalsRepository {
+  class AnimalsRepository {
 
 
     public function findOneById( int $id)
@@ -80,8 +80,8 @@ class AnimalsRepository {
 
                 $mysql = Mysql::getInstance();
                 $pdo = $mysql->getPDO();
-                $stmt = $pdo->prepare("SELECT a.id as id, a.first_name as first_name, a.race as race, a.habitat as home, a.state as state, r.name as namerace FROM animals a
-                INNER JOIN race r ON a.race = r.id");
+                $stmt = $pdo->prepare("SELECT a.id as id, a.first_name as first_name, a.race as race, a.habitat as home, a.state as state, r.name as namerace, h.name as home, a_s.state as state FROM animals a
+                INNER JOIN race r ON a.race = r.id JOIN habitat h ON a.habitat = h.id JOIN animals_state a_s ON a.state = a_s.id");
                
                 if($stmt->execute()){
 

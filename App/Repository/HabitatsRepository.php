@@ -4,6 +4,8 @@ namespace App\Repository;
 
 
 use App\Entity\Habitats;
+use App\Entity\Users;
+use App\Entity\Animals;
 use App\Bdd\Mysql;
 use App\Tools\StringTools;
 //use PDO;

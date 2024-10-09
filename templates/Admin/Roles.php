@@ -1,11 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
+<?php require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php'; ?>
     <h3>roles users</h3>
     <form action="" method="post">
   <ul>
@@ -23,6 +16,5 @@
 </form>
 
 
-
-</body>
-</html>
+<?php
+require_once _ROOTPATH_.'/templates/Admin/Partial/_footer.php'; ?>
