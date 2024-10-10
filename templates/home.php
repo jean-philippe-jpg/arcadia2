@@ -5,6 +5,7 @@
 require_once './templates/partial/_header.php';
 require_once './templates/partial/_animals.php';
 require_once './templates/partial/_habitatslist.php';
+require_once './templates/partial/_services.php';
 
 ?>
 <h1>Home</h1>

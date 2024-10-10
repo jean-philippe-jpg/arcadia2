@@ -5,6 +5,7 @@
 
   use App\Repository\HabitatsRepository;
   use App\Entity\Habitats;
+  use App\Repository\AnimalsRepository;
 
 
 
@@ -20,19 +21,22 @@ class HabitatsController extends Controller{
                 case 'show':
 
                     $this->show();
+                    $this->showMore();
                     
                     break;
                 case 'create':
 
                     $this->create();
-                    
-                   
                     break;
 
                 case 'read':
                     $this->read();
                    
                     break;
+                    case 'readvisiteur':
+                        $this->readVisiteur();
+                       
+                        break;
                     case 'delete':
                        $this->delete();
 
@@ -108,6 +112,7 @@ class HabitatsController extends Controller{
                         try {     
                         $habitatRrepository = new HabitatsRepository();
                         $habitatRrepository->createHabitat();
+                         $habitatRrepository->transfert();
  
                         $this->render('/Admin/Habitat/create', [
                                 
@@ -135,7 +140,60 @@ class HabitatsController extends Controller{
                               
                                  $this->render('/Admin/Habitat/read', [
                                      
-                                     'read' => $read
+                                     'habitat' => $read
+                                         
+                                          ] );     
+ 
+                        } catch(\Exception $e ) {
+                            $this->render('errors/errors', [
+                                'errors' => $e->getMessage()
+    
+                            ]);
+
+
+                        }   
+                   
+                }
+
+                protected function showMore()
+                
+                {
+                        try {       
+                            
+
+                            if(isset($_GET['detailAnimal'])) {
+                                $id = $_GET['detailAnimal'];
+
+                                $animalsRrepository = new AnimalsRepository();
+                                $detail = $animalsRrepository->detail($id);
+                              
+                                 $this->render('/Admin/Habitat/show', [
+                                     
+                                     'animal' => $detail
+                                         
+                                          ] );  
+                                 
+                            }
+ 
+                        } catch(\Exception $e ) {
+                            $this->render('errors/errors', [
+                                'errors' => $e->getMessage()
+    
+                            ]);
+                        }
+                }
+
+                protected function readvisiteur()
+                
+                {
+                        try {       
+                            
+                                $habitatRrepository = new HabitatsRepository();
+                                $habitat = $habitatRrepository->readHabitat();
+                              
+                                 $this->render('habitats', [
+                                     
+                                     'habitat' => $habitat
                                          
                                           ] );     
  

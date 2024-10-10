@@ -22,8 +22,11 @@ class HabitatsRepository {
         $mysql = Mysql::getInstance();
         $pdo = $mysql->getPDO();
 
-        $query = $pdo->prepare('SELECT h.id as id, h.name as name, h.description as description, a.first_name as first_name FROM habitat h
-                INNER JOIN animals a ON h.animals_list = a.id where h.id = :id');   
+       /* $query = $pdo->prepare('SELECT h.id as id, h.name as name, h.description as description, h.animals_list as animals, a.first_name as first_name FROM habitat h
+                INNER JOIN animals a ON h.id = a.habitat where h.id = :id');*/
+                 $query = $pdo->prepare("SELECT h.id as id, h.name as name_habitat, h.description as description, h.animals_list as animals, a.first_name as name, a.id as animal_id FROM habitat h
+                INNER JOIN animals a ON h.id = a.habitat  where h.id = :id ");
+
         $query->bindParam(':id', $id, $pdo::PARAM_INT);
         
             if($query->execute()){
@@ -97,6 +100,35 @@ class HabitatsRepository {
 
             }
 
+            
+    public function transfert(){
+        $ret        = false;
+        $img_blob   = '';
+        $img_taille = 0;
+        $img_type   = '';
+        $img_nom    = '';
+        $taille_max = 250000;
+        $ret        = is_uploaded_file($_FILES['fic']['tmp_name']);
+        
+        if (!$ret) {
+            echo "Problème de transfert";
+            return false;
+        } else {
+            // Le fichier a bien été reçu
+            $img_taille = $_FILES['fic']['size'];
+            
+            if ($img_taille > $taille_max) {
+                echo "Trop gros !";
+                return false;
+            }
+
+            $img_type = $_FILES['fic']['type'];
+            $img_nom  = $_FILES['fic']['name'];
+        }
+    }
+
+
+
            
     public function readHabitat(){
 
@@ -104,14 +136,16 @@ class HabitatsRepository {
 
                 $mysql = Mysql::getInstance();
                 $pdo = $mysql->getPDO();
-                $stmt = $pdo->prepare("SELECT h.id as id, h.name as name, h.description as description, a.first_name as first_name FROM habitat h
-                INNER JOIN animals a ON h.animals_list = a.id");
+                $stmt = $pdo->prepare("SELECT h.id as id, h.name as name_habitat, h.description as description, h.animals_list as animals, a.first_name as name FROM habitat h
+                INNER JOIN animals a ON h.id = a.habitat");
+                   // $stmt->bindParam(':id', $id, $pdo::PARAM_INT);
+                /*$stmt = $pdo->prepare("SELECT * FROM habitat 
+                INNER JOIN animals  ON habitat.animals_list = animals.id");*/
                 
                 if($stmt->execute()){
                     
                     $stmt->setFetchMode($pdo::FETCH_CLASS, Habitats::class);
 
-              
                     return $stmt->fetchAll();
         
                 } else {

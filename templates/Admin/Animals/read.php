@@ -3,13 +3,14 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
 ?>
 <h1>Animaux</h1>
 
-<?php if(!isset($_GET['modify'])) {  ?>
+<?php if(!isset($_GET['modify']) && !isset($_GET['soignant'])) {  ?>
 
 <table class="table">
 <a href="?controller=animals&action=create" class="btn btn-success">ajouter</a>
-<a href="?controller=habitats&action=read" class="btn btn-warning">habitats</a>
-<a href="?controller=race&action=read" class="btn btn-warning">race</a>
-<a href="?controller=comments&action=read" class="btn btn-warning">commentaires</a>
+<?php
+require_once _ROOTPATH_.'/templates/Admin/Partial/_button.php';
+?>
+
     <thead>
     <tr>
     <th scope="col">#</th>
@@ -17,6 +18,7 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
     <th scope="col">race</th>
     <th scope="col">habitat</th>
     <th scope="col">état</th>
+    
 
     <th scope="col">update</th>
     <th scope="col">show</th>
@@ -40,7 +42,8 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
           
           
           <td><a href="?controller=animals&action=update&modify=<?= $reads->getId(); ?>" class="btn btn-warning">update</a></td>
-          <td><a href="?controller=animals&action=show&show=<?= $reads->getId(); ?>" class="btn btn-warning">voir</a></td>
+          <td><a href="?controller=animals&action=update&soignant=<?= $reads->getId(); ?>" class="btn btn-warning">soignant animals</a></td>
+          <td><a href="?controller=animals&action=show&id=<?= $reads->getId(); ?>" class="btn btn-warning">voir</a></td>
           <td><a href="?controller=animals&action=delete&suprimer=<?= $reads->getId(); ?>" class="btn btn-danger">delete</a></td>
       </tr>
      
@@ -70,32 +73,41 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
                 <input type="number" id="state" name="state" >  
                 </div>
                 <br>
+                <div>
                 
-                
-                
-               
                <input type="submit"  class="btn btn-success"  value="Update">
                 
             </form>
         
-        <?php } ?>
-        
-
-
-           
-
        
         
-     
-  
-  
-
- 
-
     </tbody>
     
 </table>
+<?php } if(isset($_GET['soignant'])) {?>
 
+    <form action="" method="post">
+                <div>
+                <label for="nourriture">Nourriture</label>
+               <textarea name="nourriture" id="nourriture"></textarea>  
+                </div>
+                <br>
+                <div>
+                <label for="quantitee">Quantitée</label>
+                <input type="number" id="quantitee" name="quantitee" >  
+                </div>
+                <br>
+                <div>
+                <label for="date">Habitat</label>
+                <input type="datetime-local" id="date" name="date" >  
+                </div>
+                <br>
+                
+               <input type="submit"  class="btn btn-success"  value="Update">
+               <a href="index.php?controller=animals&action=read" class="btn">retour</a>
+                
+            </form>
+<?php } ?>
 
 <?php
 require_once _ROOTPATH_.'/templates/Admin/Partial/_footer.php';

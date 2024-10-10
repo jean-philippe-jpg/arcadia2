@@ -9,9 +9,9 @@ class Habitats
 {
 
 protected int $id ;
-protected string $name ;
+protected string $name_habitat ;
 protected  string $description ;
-protected string $animals_list ;
+protected string $name ;
 
 
 public function getId(): int
@@ -26,12 +26,12 @@ public function setId(int $id)
 
 public function getName(): string
 {
-      return $this->name;
+      return $this->name_habitat;
 }
 
-public function setName(string $name)
+public function setName(string $name_habitat)
 {
-     $this->name = $name;
+     $this->name_habitat = $name_habitat;
 }
 
 public function getDescription(): string
@@ -46,12 +46,12 @@ public function setDescription(string $description)
 
 public function getAnimalsList(): string
 {
-      return $this->animals_list;
+      return $this->name;
 }
 
-public function setAnimalsList(int $animals_list)
+public function setAnimalsList( $name)
 {
-     $this->animals_list = $animals_list;
+     $this->name = $name;
 }
 
 

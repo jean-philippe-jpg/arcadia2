@@ -16,8 +16,26 @@ use App\Tools\StringTools;
         $mysql = Mysql::getInstance();
         $pdo = $mysql->getPDO();
 
-        $query = $pdo->prepare('SELECT a.id as id, a.first_name as first_name, r.name as race_name FROM animals a
-                INNER JOIN race r ON a.race = r.id where a.id = :id');   
+        $query = $pdo->prepare('SELECT a.id as id, a.first_name as first_name, a.nourriture as nourriture, a.quantitee as quantitee, a.date_heure as date, r.name as namerace, h.name as home, a_s.state as state FROM animals a
+                INNER JOIN race r ON a.race = r.id JOIN habitat h ON a.habitat = h.id JOIN animals_state a_s ON a.state = a_s.id where a.id = :id');   
+        $query->bindParam(':id', $id, $pdo::PARAM_INT);
+        
+                if($query->execute()) {
+
+                    $query->setFetchMode($pdo::FETCH_CLASS, Animals::class);
+                    return $query->fetch();
+
+                }
+        
+    }
+
+    public function detail( int $id)
+    {
+        $mysql = Mysql::getInstance();
+        $pdo = $mysql->getPDO();
+
+        $query = $pdo->prepare("SELECT  a.first_name as first_name, a.race as race, a.habitat as home, a.state as state, r.name as namerace, h.name as home, a_s.state as state FROM animals a
+                INNER JOIN race r ON a.race = r.id JOIN habitat h ON a.habitat = h.id JOIN animals_state a_s ON a.state = a_s.id where a.id = :id");
         $query->bindParam(':id', $id, $pdo::PARAM_INT);
         
                 if($query->execute()) {
@@ -109,21 +127,22 @@ use App\Tools\StringTools;
 
             $mysql = Mysql::getInstance();
             $pdo = $mysql->getPDO();
-               
-         
-            $query = $pdo->prepare('UPDATE animals set first_name = :name, race = :race, habitat = :home, state = :state WHERE id = :id');
+            $query = $pdo->prepare('UPDATE animals set first_name = :name, race = :race,  habitat = :home, state = :state WHERE id = :id');
             $query->bindParam(':id',$id, $pdo::PARAM_INT);
             $query->bindParam(':name', $_POST['name'], $pdo::PARAM_STR);
             $query->bindParam(':race', $_POST['race'], $pdo::PARAM_INT);
             $query->bindParam(':home', $_POST['home'], $pdo::PARAM_STR);
             $query->bindParam(':state', $_POST['state'], $pdo::PARAM_INT);
+            /*$query->bindParam(':nourriture', $_POST['nourriture'], $pdo::PARAM_INT);
+            $query->bindParam(':quantitee', $_POST['quantitee'], $pdo::PARAM_INT);
+            $query->bindParam(':date', $_POST['date'], $pdo::PARAM_STR);*/
             //$query->bindParam(':name', $name, $pdo::PARAM_STR);
             //$query->bindParam(':description', $description, $pdo::PARAM_STR);
             if( $query->execute()){
 
                 $query->setFetchMode($pdo::FETCH_CLASS, Animals::class);
 
-                //$query->fetch();
+            
 
                 echo 'modification éffectuée';
 
@@ -144,6 +163,51 @@ use App\Tools\StringTools;
         }
        
     }
+
+    public function updateSoignant(int $id){
+
+        try{
+
+            $mysql = Mysql::getInstance();
+            $pdo = $mysql->getPDO();
+            $query = $pdo->prepare('UPDATE animals set nourriture = :nourriture, quantitee = :quantitee, date_heure = :date WHERE id = :id');
+            $query->bindParam(':id',$id, $pdo::PARAM_INT);
+           /* $query->bindParam(':name', $_POST['name'], $pdo::PARAM_STR);
+            $query->bindParam(':race', $_POST['race'], $pdo::PARAM_INT);
+            $query->bindParam(':home', $_POST['home'], $pdo::PARAM_STR);
+            $query->bindParam(':state', $_POST['state'], $pdo::PARAM_INT);*/
+            $query->bindParam(':nourriture', $_POST['nourriture'], $pdo::PARAM_STR);
+            $query->bindParam(':quantitee', $_POST['quantitee'], $pdo::PARAM_INT);
+            $query->bindParam(':date', $_POST['date'], $pdo::PARAM_STR);
+            //$query->bindParam(':name', $name, $pdo::PARAM_STR);
+            //$query->bindParam(':description', $description, $pdo::PARAM_STR);
+            if( $query->execute()){
+
+                $query->setFetchMode($pdo::FETCH_CLASS, Animals::class);
+
+            
+
+                echo 'modification éffectuée';
+
+            } else {
+
+                echo 'erreur de modification';
+            }
+           
+            
+            return  $query;
+         
+           
+
+        } catch(\Exception $e){
+            echo 'modification impossible'. $e->getMessage();
+           
+
+        }
+       
+    }
+
+    
 
 
     public function deleteAnimals(int $id){

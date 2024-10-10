@@ -6,10 +6,12 @@ class Animals
 
 protected int $id ;
 protected string $first_name ;
-//protected  int $race ;
-protected  string $namerace ;
+protected string $namerace ;
 protected string $home ;
 protected string $state;
+protected string $nourriture;
+protected float $quantitee;
+protected string $date;
 
 
 
@@ -78,6 +80,48 @@ return $this->namerace;
 public function setNameRace($namerace)
 {
 $this->namerace = $namerace;
+
+return $this;
+}
+
+
+public function getNourriture(): string
+{
+return $this->nourriture;
+}
+
+
+public function setNourriture(string $nourriture)
+{
+$this->nourriture = $nourriture;
+
+return $this;
+}
+
+
+public function getQuantitee()
+{
+return $this->quantitee;
+}
+
+
+public function setQuantitee($quantitee)
+{
+$this->quantitee = $quantitee;
+
+return $this;
+}
+
+ 
+public function getDate_heure(): string
+{
+return $this->date;
+}
+
+
+public function setDate_heure($date)
+{
+$this->date = $date;
 
 return $this;
 }

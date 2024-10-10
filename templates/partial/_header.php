@@ -13,14 +13,18 @@
    
 <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
       <div class="col-md-3 mb-2 mb-md-0">
-        <a href="/" class="d-inline-flex link-body-emphasis text-decoration-none">
+        <a href="index.php" class="d-inline-flex link-body-emphasis text-decoration-none">
           <img class="logo_header" src="assets/images/long-neck-giraffe-surrounded-by-grass-plants-zoo.jpg" alt="logo arcadia" width="150" height="150">
         </a>
       </div>
 
       <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-        
+      <li><a href="index.php" class="nav-link px-2">Accueil</a></li>
+      <li><a href="?controller=services&action=readvisiteur" class="nav-link px-2">Services</a></li>
+      <li><a href="?controller=habitats&action=readvisiteur" class="nav-link px-2">Habitats</a></li>
+      <li><a href="?controller=users&action=connect" class="nav-link px-2">Connexion</a></li>
         <li><a href="?controller=contact&action=formcontact" class="nav-link px-2">Contact</a></li>
+
         <li><a href="?controller=habitats&action=read" class="nav-link px-2">Admin</a></li>
        
       </ul>

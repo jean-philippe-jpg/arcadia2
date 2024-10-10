@@ -9,9 +9,9 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
 <?php if(!isset($_GET['modify'])) {  ?>
 <table class="table">
 <a href="?controller=habitats&action=create" class="btn btn-success">ajouter</a>
-<a href="?controller=animals&action=read" class="btn btn-warning">animaux</a>
-<a href="?controller=race&action=read" class="btn btn-warning">race</a>
-<a href="?controller=comments&action=read" class="btn btn-warning">commentaires</a>
+<?php
+require_once _ROOTPATH_.'/templates/Admin/Partial/_button.php';
+?>
     <thead>
     <tr>
     <th scope="col">#</th>
@@ -26,17 +26,19 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
     </thead>
     <tbody>
 
-      <?php foreach($read as $reads) { ?>
+      <?php foreach($habitat as $habitats) { ?>
       <tr>
         
-      <td><?= $reads->getId(); ?></td>
-         <td><?= $reads->getName();?></td>
-          <td><?= $reads->getDescription(); ?></td>
+      <td><?= $habitats->getId(); ?></td>
+         <td><?= $habitats->getName();?></td>
+          <td><?= $habitats->getDescription(); ?></td>
+          <td><?= $habitats->getAnimalsList(); ?></td>
+           
         
           
-          <td><a href="?controller=habitats&action=update&modify=<?= $reads->getId(); ?>" class="btn btn-warning">update</a></td>
-          <td><a href="?controller=habitats&action=show&id=<?= $reads->getId(); ?>" class="btn btn-warning">voir</a></td>
-          <td><a href="?controller=habitats&action=delete&suprimer=<?= $reads->getId(); ?>" class="btn btn-danger">delete</a></td>
+          <td><a href="?controller=habitats&action=update&modify=<?= $habitats->getId(); ?>" class="btn btn-warning">update</a></td>
+          <td><a href="?controller=habitats&action=show&id=<?= $habitats->getId(); ?>" class="btn btn-warning">voir</a></td>
+          <td><a href="?controller=habitats&action=delete&suprimer=<?= $habitats->getId(); ?>" class="btn btn-danger">delete</a></td>
       </tr>
         <?php } ?>
         <a href="index.php" class="btn btn-danger">home</a>

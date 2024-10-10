@@ -2,11 +2,19 @@
 
 <h1>show</h1>
 
-<a href="?controller=Habitats&action=read" class="btn btn-success">retour</a>
+<a href="index.php?controller=animals&action=read" class="btn btn-success">retour</a>
 <div class="show">
 
-<p><strong>habitat:  </strong><?= $animals->getFirstName()?></p>
-<p><strong>description:  </strong><?= $animals->getRace()?></p>
+<p><strong>Prenom:  </strong><?= $animals->getFirstName()?></p>
+<p><strong>Race:  </strong><?= $animals->getNameRace()?></p>
+<p><strong>Habitat:  </strong><?= $animals->getHabitat()?></p>
+<p><strong>Etat:  </strong><?= $animals->getState()?></p>
+<p><strong>Nourriture:  </strong><?= $animals->getNourriture()?></p>
+<p><strong>Quantitee:  </strong><?= $animals->getQuantitee()?></p>
+<p><strong>Date:  </strong><?= $animals->getDate_heure()?></p>
+
+
+
 
 
 

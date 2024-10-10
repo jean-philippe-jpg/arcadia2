@@ -34,12 +34,12 @@ class PagesController extends Controller{
                         case 'readusers':
                             $this->readUsers();
                             break;
-                            case 'collection':
+                            /*case 'collection':
                                 $this->readServices();
-                                break;
-                                case 'readsusers':
+                                break;*/
+                                /*case 'readsusers':
                                     $this->readUsers();
-                                    break;
+                                    break;*/
                 default:
                 throw new \Exception('page introuvable :/');
                   break;
@@ -70,9 +70,13 @@ class PagesController extends Controller{
                     $home = new HabitatsRepository();
                     $environement =  $home->readHabitat();
 
+                    $service = new ServicesRepository();
+                    $prestation =  $service->read();
+
                     $this->render('home', [
                             'avis' => $cmt,
-                            'habitat' => $environement
+                            'habitat' => $environement,
+                            'service' => $prestation
                             
                     ] );
                     //require_once 'templates/showanimals.php';//
@@ -146,7 +150,7 @@ class PagesController extends Controller{
                   
                 }
 
-                protected function readServices(): void
+                /*protected function readServices(): void
                 
                 {    
                     $read = new ServicesRepository();
@@ -159,7 +163,7 @@ class PagesController extends Controller{
                     ] );
                     //require_once 'templates/showanimals.php';//
                   
-                }
+                }*/
 
 
 

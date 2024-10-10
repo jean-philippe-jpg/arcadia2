@@ -29,6 +29,10 @@ class ServicesController extends Controller{
                   $this->read();
                  
                   break;
+                  case 'readvisiteur':
+                    $this->readVisiteur();
+                   
+                    break;
                   case 'delete':
                      $this->delete();
 
@@ -131,12 +135,39 @@ class ServicesController extends Controller{
               {
                       try {       
                           
-                              $habitatRrepository = new ServicesRepository();
-                             $read = $habitatRrepository->read();
+                              $servicesRrepository = new ServicesRepository();
+                             $services = $servicesRrepository->read();
                               
                               $this->render('/Admin/Services/read', [
                                   
-                                  'read' => $read
+                                  'read' => $services
+                                  
+                                   ] );
+       
+                           
+
+                      } catch(\Exception $e ) {
+                          $this->render('errors/errors', [
+                              'errors' => $e->getMessage()
+  
+                          ]);
+
+
+                      }   
+                 
+              }
+
+              protected function readVisiteur()
+              
+              {
+                      try {       
+                          
+                              $servicesRrepository = new ServicesRepository();
+                             $services = $servicesRrepository->read();
+                              
+                              $this->render('Services', [
+                                  
+                                  'service' => $services
                                   
                                    ] );
        

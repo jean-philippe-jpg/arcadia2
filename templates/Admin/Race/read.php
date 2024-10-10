@@ -7,9 +7,10 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
 
 <table class="table">
 <a href="?controller=race&action=create" class="btn ">ajouter</a>
-<a href="?controller=habitats&action=read" class="btn ">habitats</a>
-<a href="?controller=animals&action=read" class="btn ">animaux</a>
-<a href="?controller=comments&action=read" class="btn ">commentaires</a>
+<?php
+require_once _ROOTPATH_.'/templates/Admin/Partial/_button.php';
+?>
+
     <thead>
     <tr>
     <th scope="col">#</th>
@@ -29,7 +30,7 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
           <td><?= $reads->getName();?></td>
           
           <td><a href="?controller=race&action=update&modify=<?= $reads->getId(); ?>" class="btn ">update</a></td>
-          <td><a href="?controller=race&action=show&show=<?= $reads->getId(); ?>" class="btn ">voir</a></td>
+          
           <td><a href="?controller=race&action=delete&suprimer=<?= $reads->getId(); ?>" class="btn ">delete</a></td>
       </tr>
         <?php } ?>

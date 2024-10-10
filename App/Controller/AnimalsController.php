@@ -27,7 +27,7 @@ class AnimalsController extends Controller{
                   break;
               case 'read':
                   $this->read();
-                 
+                  
                   break;
                   case 'delete':
                      $this->delete();
@@ -35,7 +35,7 @@ class AnimalsController extends Controller{
                   break;
                   case 'update':
                       $this->update();
-                     
+                     $this->updateSoignant();
                   break;
                   case 'delete':
                       var_dump('chargement de pagescontroller');
@@ -191,11 +191,46 @@ class AnimalsController extends Controller{
 
                           if(isset($_GET['modify'])){
                               $id = $_GET['modify'];
-                              $habitatRrepository = new AnimalsRepository();
-                              $read = $habitatRrepository->updateAnimals($id);
+                              $animalsRrepository = new AnimalsRepository();
+                              $animalsRrepository->updateAnimals($id);
 
                               $this->render('/Admin/Animals/read', [
 
+                               
+                        
+                         ] );
+                             
+                              } else {
+                                  throw new \Exception('modification impossible :/');
+  
+                              }
+                          
+                        
+       
+                           
+
+                      } catch(\Exception $e ) {
+                          $this->render('errors/errors', [
+                              'errors' => $e->getMessage()
+  
+                          ]);
+
+
+                      }   
+                 
+              }
+
+              protected function updateSoignant()
+              
+              {
+                      try {       
+
+                          if(isset($_GET['soignant'])){
+                              $id = $_GET['soignant'];
+                              $animalsRrepository = new AnimalsRepository();
+                              $animalsRrepository->updateSoignant($id);
+
+                              $this->render('/Admin/Animals/read', [
                                
                         
                          ] );
