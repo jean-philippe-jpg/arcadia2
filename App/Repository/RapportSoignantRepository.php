@@ -36,7 +36,7 @@ class RapportSoignantRepository {
                 $stmt = $pdo->prepare('INSERT INTO rapport_soignant (nourriture, quantitee, date_heure,  animal) VALUES (:nourriture, :quantitee, :date_heure, :animal)');
                 $stmt->bindParam(':nourriture', $_POST['nourriture'], $pdo::PARAM_STR);
                 $stmt->bindParam(':quantitee', $_POST['quantitee'], $pdo::PARAM_INT);
-                $stmt->bindParam(':date_heure', $_POST['date_heure'], $pdo::PARAM_INT);
+                $stmt->bindParam(':date_heure', $_POST['date_heure'], $pdo::PARAM_STR);
                 $stmt->bindParam(':animal', $_POST['animal'], $pdo::PARAM_INT);
 
              

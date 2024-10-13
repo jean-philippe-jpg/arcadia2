@@ -16,7 +16,7 @@
 <div class="form-create">
 <form action="" method="post">
 
-    <div class="nourriture">
+    <div class="create">
     <label for="nourriture"><strong>Nourriture: </strong></label>
     <input name="nourriture" id="nourriture" type="text">
     </div>
@@ -25,13 +25,14 @@
     <input name="quantitee" id="quantitee" type="number">
     </div>
     <div class="create">
-    <label for="date_heure"><strong>Date:</strong> </label>
-    <input name="date_heure" id="date_heure" type="datetime-local">
+    <label for="date_heure"><strong>Date et Heure:</strong> </label>
+    <input name="date_heure" value="2024-06-25"  id="date_heure" type="datetime">
     </div>
+   
 
     <div class="create">
-    <label for="animal"><strong>animal: </strong> <?= $soin->getId(); ?></label>
-    <input name="animal" value="<?= $soin->getId(); ?>"  id="animal" type="number">
+    <label for="animal"><strong>animal: </strong></label>
+    <input name="animal" value="<?= $soin->getId();?>"  id="animal" type="number">
     </div>
 
     <input type="submit"  value="create">
