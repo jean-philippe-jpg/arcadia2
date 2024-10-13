@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+use App\Entity\RapportSoignant;
 use App\Repository\AnimalsRepository;
+use App\Repository\RapportSoignantRepository;
 
 
 
@@ -29,6 +31,10 @@ class AnimalsController extends Controller{
                   $this->read();
                   
                   break;
+                  case 'soins':
+                    $this->animalSoignant();
+                    $this->soins();
+                    break;
                   case 'delete':
                      $this->delete();
 
@@ -132,8 +138,7 @@ class AnimalsController extends Controller{
                       try {       
                           
                               $animalsRrepository = new AnimalsRepository();
-                             $animals = $animalsRrepository->readAnimals();
-                             //$race=$habitatRrepository->innerRaceAnimals();
+                             $animals = $animalsRrepository->read();
                               
                               $this->render('/Admin/Animals/read', [
                                   'animal' => $animals
@@ -141,6 +146,67 @@ class AnimalsController extends Controller{
                                    ] );
        
                            
+
+                      } catch(\Exception $e ) {
+                          $this->render('errors/errors', [
+                              'errors' => $e->getMessage()
+  
+                          ]);
+
+
+                      }   
+                 
+              }
+
+              protected function animalSoignant()
+              
+              {
+                      try {       
+
+                       
+                        
+                                if(isset($_GET['id'])){
+
+                                    $id = $_GET['id'];
+                                    $animalsRrepository = new AnimalsRepository();
+                                    $animals = $animalsRrepository->showAnimalSoignant($id);
+                                    
+                                   
+                                     $this->render('/Admin/Animals/soins', [
+                                         'soin' => $animals
+                                         
+                                          ] );
+              
+                                  
+
+                                }
+
+
+                      } catch(\Exception $e ) {
+                          $this->render('errors/errors', [
+                              'errors' => $e->getMessage()
+  
+                          ]);
+
+
+                      }   
+                 
+              }
+
+              protected function soins()
+              
+              {
+                      try {       
+                               
+                                    $rapportSoignantRrepository = new RapportSoignantRepository();
+                                   $rapportSoignantRrepository->createRapportSoignant();
+                                     
+                                     $this->render('/Admin/Animals/soins', [
+                                        
+                                         
+                                          ] );
+              
+
 
                       } catch(\Exception $e ) {
                           $this->render('errors/errors', [

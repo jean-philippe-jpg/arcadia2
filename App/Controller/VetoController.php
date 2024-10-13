@@ -3,6 +3,7 @@
 //use App\Repository\VetoRepository;
 namespace App\Controller;
 use App\Repository\VetoRepository;
+use App\Repository\AnimalsRepository;
 
 
 
@@ -129,14 +130,44 @@ class VetoController extends Controller{
                 {
                         try {       
                             
-                                $vetoRrepository = new VetoRepository();
-                               $read = $vetoRrepository->readStateAnimal();
+                               
+
+                               if(isset($_GET['soignant'])){
+
+                                    $id = $_GET['soignant'];
+
+                                    $animalsRepository = new AnimalsRepository();
+                                    $animal = $animalsRepository->readAnimals($id);
+                                    $this->render('/Admin/Veto/Read', [
+                                    
+                                        'animals' => $animal
+                                        
+                                         ] );
+                               } elseif (isset($_GET['entretient'])) {
+
+                                $id = $_GET['entretient'];
+                                $animalsRepository = new AnimalsRepository();
+                                $animalsRepository->findOneById($id);
+                                $animal = $animalsRepository->readAnimals($id);
+                                $this->render('/Admin/Veto/Read', [
                                 
+                                    'animals' => $animal
+                                    
+                                     ] );
+                               } 
+                                else {
+
+                                $vetoRrepository = new VetoRepository();
+                                $read = $vetoRrepository->readStateAnimal();
                                 $this->render('/Admin/Veto/Read', [
                                     
                                     'read' => $read
                                     
                                      ] );
+                               }
+                            
+                                
+                               
          
                              
  

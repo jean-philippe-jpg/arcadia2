@@ -10,7 +10,7 @@ class RapportSoignant
 
 protected int $id ;
 protected string $nourriture ;
-protected string $quantitee ;
+protected int $quantitee ;
 protected string $date_heure ;
 
 
@@ -42,7 +42,7 @@ return $this;
 }
 
 
-public function getQuantitee()
+public function getQuantitee(): int
 {
 return $this->quantitee;
 }

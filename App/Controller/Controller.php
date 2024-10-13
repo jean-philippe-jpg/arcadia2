@@ -73,6 +73,12 @@ try {
                                         $pagecontroller = new CommentsController();
                                         $pagecontroller->route();
                                         break;
+
+                                        case 'rapportsoignant':
+
+                                            $pagecontroller = new AnimalsController();
+                                            $pagecontroller->route();
+                                            break;
     
 
                            

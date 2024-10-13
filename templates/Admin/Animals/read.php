@@ -3,13 +3,14 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
 ?>
 <h1>Animaux</h1>
 
-<?php if(!isset($_GET['modify']) && !isset($_GET['soignant'])) {  ?>
+<?php if(!isset($_GET['modify'])) {  ?>
 
 <table class="table">
 <a href="?controller=animals&action=create" class="btn btn-success">ajouter</a>
 <?php
 require_once _ROOTPATH_.'/templates/Admin/Partial/_button.php';
 ?>
+<a href="index.php" class="btn btn-danger">home</a>
 
     <thead>
     <tr>
@@ -39,8 +40,6 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_button.php';
           <td><?= $reads->getHabitat();?></td>
           <td><?= $reads->getState();?></td>
           
-          
-          
           <td><a href="?controller=animals&action=update&modify=<?= $reads->getId(); ?>" class="btn btn-warning">update</a></td>
           <td><a href="?controller=animals&action=update&soignant=<?= $reads->getId(); ?>" class="btn btn-warning">soignant animals</a></td>
           <td><a href="?controller=animals&action=show&id=<?= $reads->getId(); ?>" class="btn btn-warning">voir</a></td>
@@ -49,64 +48,40 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_button.php';
      
 
         <?php } ?>
-        <a href="index.php" class="btn btn-danger">home</a>
-        <?php } else { ?>
+     <?php } else { ?>
 
-            <form action="" method="post">
-                <div>
-                <label for="name">Name</label>
-                <input type="text" id="name" name="name" >  
-                </div>
-                <br>
-                <div>
-                <label for="race">Race</label>
-                <input type="number" id="race" name="race" >  
-                </div>
-                <br>
-                <div>
-                <label for="home">Habitat</label>
-                <input type="number" id="home" name="home" >  
-                </div>
-                <br>
-                <div>
-                <label for="state">Etat</label>
-                <input type="number" id="state" name="state" >  
-                </div>
-                <br>
-                <div>
-                
-               <input type="submit"  class="btn btn-success"  value="Update">
-                
-            </form>
-        
-       
-        
-    </tbody>
+<form action="" method="post">
+    <div>
+    <label for="name">Name</label>
+    <input type="text" id="name" name="name" >  
+    </div>
+    <br>
+    <div>
+    <label for="race">Race</label>
+    <input type="number" id="race" name="race" >  
+    </div>
+    <br>
+    <div>
+    <label for="home">Habitat</label>
+    <input type="number" id="home" name="home" >  
+    </div>
+    <br>
+    <div>
+    <label for="state">Etat</label>
+    <input type="number" id="state" name="state" >  
+    </div>
+    <br>
+    <div>
     
-</table>
-<?php } if(isset($_GET['soignant'])) {?>
+   <input type="submit"  class="btn btn-success"  value="Update">
+    
+</form>
 
-    <form action="" method="post">
-                <div>
-                <label for="nourriture">Nourriture</label>
-               <textarea name="nourriture" id="nourriture"></textarea>  
-                </div>
-                <br>
-                <div>
-                <label for="quantitee">Quantitée</label>
-                <input type="number" id="quantitee" name="quantitee" >  
-                </div>
-                <br>
-                <div>
-                <label for="date">Habitat</label>
-                <input type="datetime-local" id="date" name="date" >  
-                </div>
-                <br>
-                
-               <input type="submit"  class="btn btn-success"  value="Update">
-               <a href="index.php?controller=animals&action=read" class="btn">retour</a>
-                
-            </form>
+
+
+</tbody>
+
+</table>
 <?php } ?>
 
 <?php

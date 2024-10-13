@@ -14,7 +14,7 @@
 <p><strong>Date:  </strong><?= $animals->getDate_heure()?></p>
 
 
-
+</div>
 
 
 

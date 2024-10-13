@@ -1,0 +1,44 @@
+<?php require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php' ?>
+
+<h1>show</h1>
+
+<a href="index.php?controller=animals&action=read" class="btn btn-success">retour</a>
+<div class="show">
+
+<p><strong>Prenom:  </strong><?= $soin->getFirstName()?></p>
+<p><strong>Race:  </strong><?= $soin->getNameRace()?></p>
+<p><strong>Habitat:  </strong><?= $soin->getHabitat()?></p>
+<p><strong>Id:  </strong><?= $soin->getId()?></p>
+
+
+</div>
+
+<div class="form-create">
+<form action="" method="post">
+
+    <div class="nourriture">
+    <label for="nourriture"><strong>Nourriture: </strong></label>
+    <input name="nourriture" id="nourriture" type="text">
+    </div>
+    <div class="create">
+    <label for="quantitee"><strong>Quantitée:</strong> </label>
+    <input name="quantitee" id="quantitee" type="number">
+    </div>
+    <div class="create">
+    <label for="date_heure"><strong>Date:</strong> </label>
+    <input name="date_heure" id="date_heure" type="datetime-local">
+    </div>
+
+    <div class="create">
+    <label for="animal"><strong>animal: </strong> <?= $soin->getId(); ?></label>
+    <input name="animal" value="<?= $soin->getId(); ?>"  id="animal" type="number">
+    </div>
+
+    <input type="submit"  value="create">
+
+    
+</form>
+
+</div>
+
+

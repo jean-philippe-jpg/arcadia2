@@ -2,12 +2,14 @@
 require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
 ?>
 <h1>Habitats</h1>
-<?php if(!isset($_GET['modify'])) {  ?>
+<?php if(!isset($_GET['modify'])  && !isset($_GET['soignant'])) {  ?>
 <table class="table">
 <a href="?controller=veto&action=create" class="btn btn-success">ajouter</a>
 <?php
 require_once _ROOTPATH_.'/templates/Admin/Partial/_button.php';
 ?>
+<a href="?controller=veto&action=read&soignant" class="btn ">bilan de l'animal</a>
+
     <thead>
     <tr>
     <th scope="col">#</th>
@@ -39,7 +41,16 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_button.php';
       </tr>
         <?php } ?>
         <a href="index.php" class="btn btn-danger">home</a>
-        <?php } else { ?>
+        <?php } elseif (isset($_GET['soignant'])) {
+            
+        require_once _ROOTPATH_.'/templates/Admin/Partial/_dropdownAnimals.php'; ?>
+            
+            
+            
+
+            
+
+       <?php } else { ?>
 
            
             <form action="" method="post">
