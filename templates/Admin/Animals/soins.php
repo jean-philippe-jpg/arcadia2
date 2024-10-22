@@ -1,7 +1,13 @@
 <?php require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php' ?>
 
-<h1>show</h1>
+<h1>soins animals</h1>
 
+<?php if(isset($_GET['soignant'])){ 
+
+    echo '<h3 style="color: red;">dropdown animals soignant</h3>';
+        require_once _ROOTPATH_.'/templates/Admin/Partial/_dropdownAnimals.php';
+
+} else { ?>
 <a href="index.php?controller=animals&action=read" class="btn btn-success">retour</a>
 <div class="show">
 
@@ -42,4 +48,4 @@
 
 </div>
 
-
+<?php } ?>

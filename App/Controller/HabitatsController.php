@@ -21,7 +21,7 @@ class HabitatsController extends Controller{
                 case 'show':
 
                     $this->show();
-                    $this->showMore();
+                    //$this->showMore();
                     
                     break;
                 case 'create':
@@ -80,15 +80,25 @@ class HabitatsController extends Controller{
 
                             $habitatRrepository = new HabitatsRepository();
                             $habitation = $habitatRrepository->findOneById($id);
+                           
+                            $this->render('showanimals', [
 
-                            $this->render('/Admin/Habitat/show', [
+                                'logement' => $habitation
+                                     
+                                ] );
 
-                                'logement' => $habitation,
+                            } elseif(isset($_GET['detailAnimal'])) {  
+                                $id = $_GET['detailAnimal'];
+                            // afficher le detail de l'element//
+                            $habitatRrepository = new HabitatsRepository();
+                            $animals = $habitatRrepository->findOneById($id);
+                            $this->render('showanimals', [
+
+                                'logement' => $animals,
                                 
                                          
                                 ] );
                            
-
                         } else {
                             throw new \Exception('id introuvable');
 
@@ -112,7 +122,7 @@ class HabitatsController extends Controller{
                         try {     
                         $habitatRrepository = new HabitatsRepository();
                         $habitatRrepository->createHabitat();
-                         $habitatRrepository->transfert();
+                         $habitatRrepository->images();
  
                         $this->render('/Admin/Habitat/create', [
                                 
@@ -136,7 +146,7 @@ class HabitatsController extends Controller{
                         try {       
                             
                                 $habitatRrepository = new HabitatsRepository();
-                                $read = $habitatRrepository->readHabitat();
+                                $read = $habitatRrepository->read();
                               
                                  $this->render('/Admin/Habitat/read', [
                                      
@@ -155,7 +165,7 @@ class HabitatsController extends Controller{
                    
                 }
 
-                protected function showMore()
+                /*protected function showMore()
                 
                 {
                         try {       
@@ -167,7 +177,7 @@ class HabitatsController extends Controller{
                                 $animalsRrepository = new AnimalsRepository();
                                 $detail = $animalsRrepository->detail($id);
                               
-                                 $this->render('/Admin/Habitat/show', [
+                                 $this->render('showanimals', [
                                      
                                      'animal' => $detail
                                          
@@ -181,7 +191,7 @@ class HabitatsController extends Controller{
     
                             ]);
                         }
-                }
+                }*/
 
                 protected function readvisiteur()
                 
@@ -189,7 +199,7 @@ class HabitatsController extends Controller{
                         try {       
                             
                                 $habitatRrepository = new HabitatsRepository();
-                                $habitat = $habitatRrepository->readHabitat();
+                                $habitat = $habitatRrepository->read();
                               
                                  $this->render('habitats', [
                                      

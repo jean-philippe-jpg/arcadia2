@@ -5,6 +5,8 @@
 
 namespace App\Controller;
 
+use App\Repository\AvisHabitatsRepository;
+
 //use App\Repository\HabitatsRepository;
 
 
@@ -20,6 +22,18 @@ try {
 
     switch($_GET['controller']){
 
+        case 'admin':
+
+            $pagecontroller = new VetoController();
+            $pagecontroller->route();
+            break;
+
+            case 'profil':
+
+                $pagecontroller = new PagesController();
+                $pagecontroller->route();
+                break;
+    
        
             case 'habitats':
 
@@ -47,7 +61,6 @@ try {
 
                             $veto = new VetoController;
                             $veto->route();
-        
                             break;
                         case 'contact':
 
@@ -61,6 +74,13 @@ try {
                                 $pagecontroller->route();
                                 
                                 break;
+
+                                /*case 'deconnection':
+
+                                   $pagecontroller = new PagesController();
+                                    $pagecontroller->route();
+                                    
+                                    break;*/
                                 case 'services':
 
                                     $pagecontroller = new ServicesController();
@@ -79,7 +99,8 @@ try {
                                             $pagecontroller = new AnimalsController();
                                             $pagecontroller->route();
                                             break;
-    
+                                           
+        
 
                            
         default:

@@ -11,7 +11,10 @@ class AnimalsState {
       protected string $state;
       protected string $detail;
       protected int $animal;
+      protected string $first_name;
       protected string $date;
+      protected string $date_de_passage;
+      protected string $race;
      
 
 public function getId(): int
@@ -104,6 +107,47 @@ public function setId(int $id)
       public function setDate($date)
       {
             $this->date = $date;
+
+            return $this;
+      }
+
+      
+      public function getFirst_name(): string
+      {
+            return $this->first_name;
+      }
+
+      
+      public function setFirst_name($first_name)
+      {
+            $this->first_name = $first_name;
+
+            return $this;
+      }
+
+       
+      public function getRace()
+      {
+            return $this->race;
+      }
+
+      public function setRace($race)
+      {
+            $this->race = $race;
+
+            return $this;
+      }
+
+      
+      public function getDate_de_passage()
+      {
+            return $this->date_de_passage;
+      }
+
+      
+      public function setDate_de_passage($date_de_passage)
+      {
+            $this->date_de_passage = $date_de_passage;
 
             return $this;
       }

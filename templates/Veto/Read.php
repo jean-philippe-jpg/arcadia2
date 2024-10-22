@@ -1,14 +1,18 @@
 <?php
+session_start();
 require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
 ?>
-<h1>Habitats</h1>
-<?php if(!isset($_GET['modify'])  && !isset($_GET['soignant'])) {  ?>
+<h3 style="color: red; margin-top:200px;">tableau etat animals</h3>
+<?php //if(!in_array('ROLE_SOIGNANT', $user->getRoles())){ ?>
+<?php if( !isset($_GET['modify']) && !isset($_GET['animalslist'])  && !isset($_GET['readsoins'])) {  ?>
 <table class="table">
 <a href="?controller=veto&action=create" class="btn btn-success">ajouter</a>
 <?php
-require_once _ROOTPATH_.'/templates/Admin/Partial/_button.php';
+require_once _ROOTPATH_.'/templates/Admin/Partial/_buttonVeto.php';
 ?>
-<a href="?controller=veto&action=read&soignant" class="btn ">bilan de l'animal</a>
+<a href="?controller=rapportsoignant&action=soins&soignant" class="btn ">soins</a> m
+<a href="index.php" class="btn btn-danger">home</a>
+
 
     <thead>
     <tr>
@@ -31,28 +35,31 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_button.php';
           <td><?= $reads->getNourriture();?></td>
           <td><?= $reads->getQuantitee(); ?></td>
           <td><?= $reads->getState();?></td>
-          <td><?= $reads->getDetail();?></td>
-          <td><?= $reads->getdate();?></td>
+          <td><?= $reads->getAnimal();?></td>
+          
           
           <td><a href="?controller=veto&action=update&modify=<?= $reads->getId(); ?>" class="btn btn-warning">update</a></td>
           <td><a href="?controller=veto&action=show&id=<?= $reads->getId(); ?>" class="btn btn-warning">voir</a></td>
           
           <td><a href="?controller=veto&action=delete&suprimer=<?= $reads->getId(); ?>" class="btn btn-danger">delete</a></td>
       </tr>
-        <?php } ?>
-        <a href="index.php" class="btn btn-danger">home</a>
-        <?php } elseif (isset($_GET['soignant'])) {
-            
-        require_once _ROOTPATH_.'/templates/Admin/Partial/_dropdownAnimals.php'; ?>
-            
-            
-            
+      
+        <?php } ?>  
 
-            
-
-       <?php } else { ?>
-
+        <?php } elseif (isset($_GET['animalslist'])){
            
+           echo '<h4>vue globals des soins</h4>';
+          
+                require_once _ROOTPATH_.'/templates/Admin/Partial/Veto/_showSoins.php';
+
+
+        } elseif (isset($_GET['readsoins'])) {
+
+                echo 'coucou';
+                require_once _ROOTPATH_.'/templates/Admin/Partial/Veto/_allSoins.php';
+
+        } else { ?>
+                      
             <form action="" method="post">
                 <div>
                 <label for="nourriture">Nourritures</label>
@@ -81,19 +88,17 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_button.php';
                 <label for="date">Date</label>
                 <input type="date" id="date" name="date" >  
                 </div>
-                
-                
-               
+                    
                <input type="submit"  class="btn btn-success" name="update" value="Update">
                 
             </form>
            
         <?php } ?>
-        
 
     </tbody>
     
 </table>
+        <?php //} ?>
 
 
 <?php

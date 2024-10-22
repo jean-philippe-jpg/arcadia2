@@ -35,6 +35,7 @@ class AnimalsController extends Controller{
                     $this->animalSoignant();
                     $this->soins();
                     break;
+
                   case 'delete':
                      $this->delete();
 
@@ -158,29 +159,29 @@ class AnimalsController extends Controller{
                  
               }
 
+              
               protected function animalSoignant()
               
               {
                       try {       
 
-                       
-                        
                                 if(isset($_GET['id'])){
 
-                                    $id = $_GET['id'];
+                                         $id = $_GET['id'];
                                     $animalsRrepository = new AnimalsRepository();
                                     $animals = $animalsRrepository->showAnimalSoignant($id);
-                                    
-                                   
                                      $this->render('/Admin/Animals/soins', [
                                          'soin' => $animals
                                          
                                           ] );
-              
-                                  
-
-                                }
-
+                                }      else {
+                                $animalsRrepository = new AnimalsRepository();
+                                $animals = $animalsRrepository->read();
+                                 $this->render('/Admin/Animals/soins', [
+                                     'animals' => $animals
+                                     
+                                      ] );
+                                 }
 
                       } catch(\Exception $e ) {
                           $this->render('errors/errors', [
@@ -203,7 +204,8 @@ class AnimalsController extends Controller{
                                      
                                      $this->render('/Admin/Animals/soins', [
                                         
-                                         
+                                              
+
                                           ] );
               
 

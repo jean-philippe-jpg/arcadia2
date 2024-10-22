@@ -7,6 +7,8 @@ use App\Repository\UsersRepository;
     use App\Repository\CommentsRepository;
 use App\Repository\HabitatsRepository;
 use App\Repository\ServicesRepository;
+use App\Repository\AnimalsRepository;
+use App\Repository\PagesRepository;
 
 class PagesController extends Controller{
 
@@ -22,6 +24,10 @@ class PagesController extends Controller{
                     $this->home();
                    
                     break;
+
+                    case 'user':
+                        $this->profilUser();
+                        break;
                 case 'register':
                     $this->register();
                     break;
@@ -31,6 +37,10 @@ class PagesController extends Controller{
                     case 'connect':
                         $this->connected();
                         break;
+
+                        case 'disconnect':
+                            $this->disconnected();
+                            break;
                         case 'readusers':
                             $this->readUsers();
                             break;
@@ -68,15 +78,23 @@ class PagesController extends Controller{
                     $cmt = $comments->read();
                            
                     $home = new HabitatsRepository();
-                    $environement =  $home->readHabitat();
+                    $environement =  $home->read();
+
+                    $home = new HabitatsRepository();
+                    $images =  $home->readImages();
 
                     $service = new ServicesRepository();
                     $prestation =  $service->read();
 
+                    $animals = new AnimalsRepository();
+                    $animal =  $animals->read();
+
                     $this->render('home', [
                             'avis' => $cmt,
                             'habitat' => $environement,
-                            'service' => $prestation
+                            'service' => $prestation,
+                            'animal' => $animal,
+                            'images' => $images
                             
                     ] );
                     //require_once 'templates/showanimals.php';//
@@ -91,6 +109,22 @@ class PagesController extends Controller{
                         $register->addRegister();
                   
                     $this->render('Admin/Inscription', [
+                            
+                    ] );
+                    //require_once 'templates/showanimals.php';//
+                  
+                }
+
+                protected function profilUser(): void
+                
+                {
+                        $register = new UsersRepository();
+                        $register->profil();
+
+                  
+                    $this->render('Admin/Profil', [
+
+                        'profil' => $register
                             
                     ] );
                     //require_once 'templates/showanimals.php';//
@@ -127,6 +161,21 @@ class PagesController extends Controller{
                     $this->render('Admin/Connexion', [
 
                         'user' => $connect
+                            
+                    ] );
+                    //require_once 'templates/showanimals.php';//
+                  
+                }
+
+                protected function disconnected(): void
+                
+                {    
+                    /*$connected = new UsersRepository();
+                    $connect = $connected->connect();*/
+                       
+                    $this->render('Admin/Deconnexion', [
+
+                        
                             
                     ] );
                     //require_once 'templates/showanimals.php';//

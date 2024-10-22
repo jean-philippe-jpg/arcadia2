@@ -12,6 +12,11 @@ protected int $id ;
 protected string $name_habitat ;
 protected  string $description ;
 protected string $name ;
+protected int $animal_id ;
+protected string $race_name ;
+protected string $state ;
+protected int $avis_id ;
+
 
 
 public function getId(): int
@@ -55,4 +60,60 @@ public function setAnimalsList( $name)
 }
 
 
+
+
+public function getAnimal_id()
+{
+return $this->animal_id;
+}
+
+
+public function setAnimal_id($animal_id)
+{
+$this->animal_id = $animal_id;
+
+return $this;
+}
+
+ 
+public function getRace(): string
+{
+return $this->race_name;
+}
+
+
+public function setRace($race)
+{
+$this->race_name = $race;
+
+return $this;
+}
+
+ 
+public function getState()
+{
+return $this->state;
+}
+
+
+public function setState($state)
+{
+$this->state = $state;
+
+return $this;
+}
+
+
+public function getAvis_id(): int
+{
+return $this->avis_id;
+}
+
+
+public function setAvis_id($avis_id)
+{
+$this->avis_id = $avis_id;
+
+return $this;
+}
 }

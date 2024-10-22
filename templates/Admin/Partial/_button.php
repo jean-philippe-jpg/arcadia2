@@ -4,3 +4,5 @@
 <a href="?controller=habitats&action=read" class="btn btn-warning">habitats</a>
 <a href="?controller=services&action=read" class="btn ">services</a>
 <a href="?controller=veto&action=read" class="btn ">bilan de l'animal</a>
+<a href="?controller=rapportsoignant&action=soins&soignant" class="btn ">soins</a>
+<a href="?controller=rapportsoignant&action=soins&soignant" class="btn ">recap rapport veto</a>

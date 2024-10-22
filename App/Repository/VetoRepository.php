@@ -4,6 +4,7 @@ namespace App\Repository;
 
 
 use App\Entity\AnimalsState;
+use App\Entity\Animals;
 use App\Bdd\Mysql;
 use App\Tools\StringTools;
 
@@ -54,6 +55,7 @@ class VetoRepository {
                 $stmt->bindParam(':detail', $_POST['detail'], $pdo::PARAM_STR);
                 $stmt->bindParam(':animal', $_POST['animal'], $pdo::PARAM_INT);
                 
+                
                 //$stmt->execute();
                 if($stmt->execute()){
                     echo 'insertion reussie';
@@ -72,20 +74,18 @@ class VetoRepository {
 
                 $mysql = Mysql::getInstance();
                 $pdo = $mysql->getPDO();
-                $stmt = $pdo->prepare("SELECT a_s.id as id, a_s.nourriture as nourriture, a_s.quantitee as quantitee, a_s.state as state, a_s.detail as detail, a_s.date_de_passage as date, a.first_name as first_name FROM animals_state a_s
-                INNER JOIN animals a ON a_s.animal = a.id");
+                $stmt = $pdo->prepare('SELECT a.id as id, a.first_name,  a_s.animal as animal, a_s.nourriture as nourriture, a_s.quantitee as quantitee, a_s.state as state, a_s.detail as datail, a_s.date_de_passage as date FROM animals a
+                INNER JOIN animals_state a_s ON a.state = a_s.id');
                
                 if($stmt->execute()){
                     
-                    $stmt->setFetchMode($pdo::FETCH_CLASS, AnimalsState::class );
-                    //$stmt->fetchObject('Habitats');
-                    //$stmt->fetchAll();
-                   //return $stmt->setFetchMode($pdo::FETCH_CLASS, 'Habitats::class');
+                    $stmt->setFetchMode($pdo::FETCH_CLASS, Animals::class );
+                    
                    return $stmt->fetchAll();
                   
                   
                 } else {
-                    echo 'erreur d\'affichage des rapport de santé';
+                    echo 'erreur d\'affichage des filtres';
                 }
               
                
@@ -98,6 +98,68 @@ class VetoRepository {
         }
 
 
+        /*public function filterDate(){
+
+            try{
+    
+                    $mysql = Mysql::getInstance();
+                    $pdo = $mysql->getPDO();
+                    $stmt = $pdo->prepare('SELECT *  FROM animals_state a_s
+                    INNER JOIN animals a ON a.state = a_s.id ');
+                   
+                    if($stmt->execute()){
+                        
+                        $stmt->setFetchMode($pdo::FETCH_CLASS, AnimalsState::class );
+                        
+                       return $stmt->fetchAll();
+                      
+                      
+                    } else {
+                        echo 'erreur d\'affichage des filtres';
+                    }
+                  
+                   
+            } catch(\Exception $e){
+                echo 'erreur d\'insertion'. $e->getMessage();
+               
+    
+            }
+           
+            }*/
+    
+        public function readStateAdmin(int $id){
+
+            try{
+    
+                    $mysql = Mysql::getInstance();
+                    $pdo = $mysql->getPDO();
+
+                    $stmt = $pdo->prepare('SELECT a_s.id as id, a_s.nourriture as nourriture, a_s.quantitee as quantitee, a_s.state as state, a_s.detail as detail , a_s.date_de_passage as date , a.first_name as first_name, a.first_name as first_name FROM animals_state a_s
+                    INNER JOIN animals a ON a_s.animal = a.id WHERE a.id = :id ');
+                    $stmt->bindParam(':id', $id, $pdo::PARAM_INT);
+
+
+                    if($stmt->execute()){
+                        
+                        $stmt->setFetchMode($pdo::FETCH_CLASS, AnimalsState::class );
+                        
+                       return $stmt->fetchAll();
+                      
+                      
+                    } else {
+                        echo 'erreur d\'affichage des filtres';
+                    }
+                  
+                   
+            } catch(\Exception $e){
+                echo 'erreur d\'insertion'. $e->getMessage();
+               
+    
+            }
+           
+            }
+    
+            
     public function updateStateAnimals(int $id){
        
         try{

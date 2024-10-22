@@ -1,8 +1,10 @@
 <?php
+session_start();
 require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
 //require_once './App/Entity/Users.php';
 ?>
-<h1>Connecxion</h1>
+<h1>Connexion</h1>
+
 
 
 <a href="https://front.codes/" class="logo" target="_blank">
@@ -29,6 +31,8 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
 
     <input type="submit" value="Envoyer" />
 </form>
+
+<a href="?controller=veto&action=read">rapport veto</a>
 
 
 	<div class="section">
@@ -94,6 +98,7 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
 
   
 <?php
+
 require_once _ROOTPATH_.'/templates/Admin/Partial/_footer.php';
 ?>
 

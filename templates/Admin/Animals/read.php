@@ -11,7 +11,7 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
 require_once _ROOTPATH_.'/templates/Admin/Partial/_button.php';
 ?>
 <a href="index.php" class="btn btn-danger">home</a>
-
+              <h3>salut</h3>
     <thead>
     <tr>
     <th scope="col">#</th>
@@ -41,7 +41,7 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_button.php';
           <td><?= $reads->getState();?></td>
           
           <td><a href="?controller=animals&action=update&modify=<?= $reads->getId(); ?>" class="btn btn-warning">update</a></td>
-          <td><a href="?controller=animals&action=update&soignant=<?= $reads->getId(); ?>" class="btn btn-warning">soignant animals</a></td>
+          <td><a href="?controller=animals&action=soins&id=<?= $reads->getId(); ?>" class="btn btn-warning">soins animal</a></td>
           <td><a href="?controller=animals&action=show&id=<?= $reads->getId(); ?>" class="btn btn-warning">voir</a></td>
           <td><a href="?controller=animals&action=delete&suprimer=<?= $reads->getId(); ?>" class="btn btn-danger">delete</a></td>
       </tr>

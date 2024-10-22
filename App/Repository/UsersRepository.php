@@ -123,6 +123,42 @@ public function addRoles( ){
 }
 }
 
+public function profil( ){
+
+    try{
+    $mysql = Mysql::getInstance();
+    $pdo = $mysql->getPDO();
+      
+    if(isset($_GET['id']) AND $_GET['id'] > 0){
+
+        $takeid = intval($_GET['id']);
+        $stmt = $pdo->prepare('SELECT * FROM users WHERE id = ?');
+       // $stmt->bindParam(':id', $_GET['id'], $pdo::PARAM_INT);
+        $stmt->execute(array($takeid));
+
+        $takinfo = $stmt->fetch();
+        echo $takinfo['username'].'<br>';
+        echo $takinfo['email'];
+        
+       
+        //$stmt->execute();
+        /*if($stmt->execute()){
+            $user = $stmt->fetch($pdo::FETCH_ASSOC);
+            echo $user['username'];
+        } else {
+            echo 'role non attribué';
+        }*/
+    }
+    
+  
+  
+       
+} catch(\Exception $e){
+    echo 'erreur d\'attribution'. $e->getMessage();
+}
+}
+
+
     public function connect(){
 
         try{
@@ -139,6 +175,7 @@ public function addRoles( ){
 
                if($statement->execute()){
                 $user = $statement->fetchObject( Users::class);
+                
                if ($user === false) {
                         
                 // Si aucun utilisateur ne correspond au login entré, on affiche une erreur
@@ -154,10 +191,18 @@ public function addRoles( ){
                          ');
                                 $rolesStatement->bindValue(':id', $user->getId(), $pdo::PARAM_INT);
                                 if($rolesStatement->execute()){
+
+                                    
                                     while($roles = $rolesStatement->fetch($pdo::FETCH_ASSOC)){
                                         $user->addRole($roles['name']);
+
+                                        $_SESSION['id'] = $user->getId();
+                                        $_SESSION['email'] = $user->getEmail();
+                                        $_SESSION['username'] = $user->getUsername();
+                                        $_SESSION['roles'] = $user->getRoles();
+                                        header('Location: index.php?controller=profil&action=user&id='.$_SESSION['id']);
                                         //var_dump($user);    
-                                        echo '<div>'.$user->getEmail().'<br>'. $user->getUsername().'<br>';
+                                        //echo '<div>'.$user->getUsername().'<br>'. $user->getEmail().'<br>';
                                     }
                                    
                                 }

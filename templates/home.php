@@ -6,8 +6,28 @@ require_once './templates/partial/_header.php';
 require_once './templates/partial/_animals.php';
 require_once './templates/partial/_habitatslist.php';
 require_once './templates/partial/_services.php';
+require_once './templates/partial/_animalsliste.php';
 
+//$images = $this->readImages();
+
+if (!empty($images)) {
+    foreach ($images as $image)
+        if (isset($image['id']) && is_string($image['id'])) { ?>
+            <div>
+                <p><?=($image['id']); ?></p>
+            </div>
+        <?php } else { ?>
+            <div>
+                <p>Source non disponible</p>
+            </div>
+        <?php }
+    
+} else {
+    echo 'Aucune image trouvée.';
+}
 ?>
+
+
 <h1>Home</h1>
 
 

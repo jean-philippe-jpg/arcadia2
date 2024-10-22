@@ -6,12 +6,15 @@ class Animals
 
 protected int $id ;
 protected string $first_name ;
+protected string $animal ;
 protected string $namerace ;
 protected string $home ;
 protected string $state;
 protected string $nourriture;
 protected float $quantitee;
+protected string $detail;
 protected string $date;
+protected string $date_de_passage;
 
 
 
@@ -122,6 +125,48 @@ return $this->date;
 public function setDate_heure($date)
 {
 $this->date = $date;
+
+return $this;
+}
+
+
+public function getDate_de_passage()
+{
+return $this->date_de_passage;
+}
+
+
+public function setDate_de_passage($date_de_passage)
+{
+$this->date_de_passage = $date_de_passage;
+
+return $this;
+}
+
+
+public function getDetail(): string
+{
+return $this->detail;
+}
+
+
+public function setDetail($detail)
+{
+$this->detail = $detail;
+
+return $this;
+}
+
+ 
+public function getAnimal()
+{
+return $this->animal;
+}
+
+
+public function setAnimal($animal)
+{
+$this->animal = $animal;
 
 return $this;
 }

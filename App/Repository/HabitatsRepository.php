@@ -24,10 +24,9 @@ class HabitatsRepository {
 
        /* $query = $pdo->prepare('SELECT h.id as id, h.name as name, h.description as description, h.animals_list as animals, a.first_name as first_name FROM habitat h
                 INNER JOIN animals a ON h.id = a.habitat where h.id = :id');*/
-                 $query = $pdo->prepare("SELECT h.id as id, h.name as name_habitat, h.description as description, h.animals_list as animals, a.first_name as name, a.id as animal_id FROM habitat h
-                INNER JOIN animals a ON h.id = a.habitat  where h.id = :id ");
-
-        $query->bindParam(':id', $id, $pdo::PARAM_INT);
+                 $query = $pdo->prepare("SELECT h.id as id, h.name as name_habitat, h.description as description, h.animals_list as animals, a.first_name as name, a.id as animal_id, r.name as race_name, a_s.state as state FROM habitat h
+                INNER JOIN animals a ON h.id = a.habitat JOIN race r ON r.id = a.race JOIN animals_state a_s ON a_s.id = a.state  where h.id = :id ");
+                $query->bindParam(':id', $id, $pdo::PARAM_INT);
         
             if($query->execute()){
 
@@ -91,7 +90,7 @@ class HabitatsRepository {
                 if($stmt->execute()){
                     echo 'insertion reussie';
                 } else {
-                    echo 'erreur d\'insertion';
+                    echo 'veuillez remplir tous les champs';
                 }
     
             } catch(\Exception $e){
@@ -101,36 +100,76 @@ class HabitatsRepository {
             }
 
             
-    public function transfert(){
-        $ret        = false;
-        $img_blob   = '';
-        $img_taille = 0;
-        $img_type   = '';
-        $img_nom    = '';
-        $taille_max = 250000;
-        $ret        = is_uploaded_file($_FILES['fic']['tmp_name']);
-        
-        if (!$ret) {
-            echo "Problème de transfert";
-            return false;
-        } else {
-            // Le fichier a bien été reçu
-            $img_taille = $_FILES['fic']['size'];
-            
-            if ($img_taille > $taille_max) {
-                echo "Trop gros !";
-                return false;
-            }
+    public function images(){
 
-            $img_type = $_FILES['fic']['type'];
-            $img_nom  = $_FILES['fic']['name'];
+        try {
+            $mysql = Mysql::getInstance();
+            $pdo = $mysql->getPDO();
+        
+            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                if (empty($_FILES['images']['tmp_name'])) {
+                    echo 'Veuillez sélectionner un fichier.';
+                } else {
+                    $file_basename = pathinfo($_FILES['images']['name'], PATHINFO_FILENAME);
+                    $file_ext = pathinfo($_FILES['images']['name'], PATHINFO_EXTENSION);
+        
+                    $new_name = $file_basename . '_' . date("Ymd_His") . '.' . $file_ext;
+        
+                    $images = $pdo->prepare('INSERT INTO uploads (libele) VALUES (:libele)');
+                    $images->bindParam(':libele', $new_name, $pdo::PARAM_STR);
+        
+                    if ($images->execute()) {
+                        $target_dir = "uploads/";
+                        $target_path = $target_dir . $new_name;
+        
+                        if (move_uploaded_file($_FILES['images']['tmp_name'], $target_path)) {
+                            echo 'Téléchargement réussi : ' . htmlspecialchars($new_name);
+                        } else {
+                            echo 'Erreur lors du déplacement du fichier.';
+                        }
+                    } else {
+                        echo 'Erreur lors de l\'insertion dans la base de données.';
+                    }
+                }
+            }
+        } catch (\Exception $e) {
+            echo 'Erreur : ' . $e->getMessage();
+        }
+
+    }
+
+           
+    public function readImages(){
+
+        try{
+            $mysql = Mysql::getInstance();
+            $pdo = $mysql->getPDO();
+
+            $image = $pdo->prepare("SELECT * FROM images ");
+        
+           
+            if($image->execute()){
+                $image->fetch($pdo::FETCH_ASSOC);
+                return $image->fetchAll();
+                
+            } else {
+                echo 'veuillez remplir tous les champs';
+            }
+              
+
+            
+
+           
+
+        } catch(\Exception $e){
+            echo 'erreur d\'insertion'. $e->getMessage();
         }
     }
 
 
 
            
-    public function readHabitat(){
+    public function read(){
 
         try{
 
@@ -160,6 +199,32 @@ class HabitatsRepository {
         }
        
     }
+
+    public function createAvis( ){
+
+        try{
+        $mysql = Mysql::getInstance();
+        $pdo = $mysql->getPDO();
+          
+        
+
+        $stmt = $pdo->prepare('INSERT INTO avis_habitat (avis, etat, habitat_id, images) VALUES (:avis, :etat, :habitat_id, :images)');
+        $stmt->bindParam(':avis', $_POST['avis'], $pdo::PARAM_STR);
+        $stmt->bindParam(':etat', $_POST['etat'], $pdo::PARAM_STR);
+        $stmt->bindParam(':habitat_id', $_POST['habitat_id'], $pdo::PARAM_INT);
+        $stmt->bindParam(':images', $_POST['images'], $pdo::PARAM_INT);
+
+     
+        if(!$stmt->execute()){
+            echo 'erreur d\'insertion';
+        } 
+
+        echo 'avis crée';
+
+    } catch(\Exception $e){
+        echo 'erreur d\'insertion'. $e->getMessage();
+    }
+}
 
 
     public function updateHabitat(int $id){
