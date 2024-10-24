@@ -38,7 +38,7 @@ class PagesController extends Controller{
                         $this->connected();
                         break;
 
-                        case 'disconnect':
+                        case 'profil':
                             $this->disconnected();
                             break;
                         case 'readusers':
@@ -107,6 +107,9 @@ class PagesController extends Controller{
                 {
                         $register = new UsersRepository();
                         $register->addRegister();
+                        $roles = new UsersRepository();
+                        $roles->roles();
+                        
                   
                     $this->render('Admin/Inscription', [
                             
@@ -135,18 +138,20 @@ class PagesController extends Controller{
                 
                 {    
 
-                    if(isset($_GET['addroles'])) {
-                        $id = $_GET['addroles'];
+                    //if(isset($_GET['addroles'])) {
+                        $id = $_GET['addroles'];  
+                        $roles = new UsersRepository();
+                        $role = $roles->findOneById($id);
 
                         $roles = new UsersRepository();
-                        $roles->Roles($id);
-                   
+                        $roles->Roles();
+
                      $this->render('Admin/Users', [
-          
+                            'roles' => $role
                      ] );
                      //require_once 'templates/showanimals.php';//
                    
-                    }
+                    
                       
                     }
 
@@ -173,7 +178,7 @@ class PagesController extends Controller{
                     /*$connected = new UsersRepository();
                     $connect = $connected->connect();*/
                        
-                    $this->render('Admin/Deconnexion', [
+                    $this->render('Admin/Profil', [
 
                         
                             
@@ -187,10 +192,9 @@ class PagesController extends Controller{
                 {    
                     $read = new UsersRepository();
                     $users = $read->read();
-                  
-                       
-                    $this->render('Admin/Users', [
 
+                       
+                    $this->render('Admin/Users', [   
                         'users' => $users,
                         
                             

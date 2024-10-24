@@ -77,10 +77,13 @@ class CommentsController extends Controller{
 
                         $comments = new CommentsRepository();
                        $toto = $comments->read();
+
+                       
                   
                     $this->render('Admin/Comments', [
 
                         'comments' => $toto
+                        
                             
                     ] );
                     //require_once 'templates/showanimals.php';//

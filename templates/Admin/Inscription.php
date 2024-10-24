@@ -19,6 +19,7 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
       <label for="password">Password&nbsp;:</label>
       <input id="text" name="password"></input>
     </li>
+    
   </ul>
 
     <input type="submit" value="Envoyer">

@@ -6,7 +6,7 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
 <a href="?controller=habitats&action=read" class="btn btn-success">retour</a>
 
 <div class="form-create">
-<form  method="POST" >
+<form  method="POST" enctype="multipart/formdata" >
 
     <div class="create">
     <label for="name"><strong>nom: </strong></label>
@@ -26,25 +26,12 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
     <label for="state"><strong>état:</strong> </label>
     <input name="state" id="state" type="number">
     </div>
+    <input type="file" name="images"   />
 
-   
-    
 
     <input type="submit" name="insert" value="create">
-</form>
-<form action="" method="post" enctype="multipart/formdata">
 
 
-<input type="file" name="images"   />
-
-
-<button type="submit" name="libele">Ajouter</button>
-
-
-</form>
-
-
-               
 <?php
 require_once _ROOTPATH_.'/templates/Admin/Partial/_footer.php';
 ?>

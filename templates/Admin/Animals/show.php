@@ -1,4 +1,4 @@
-<?php require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php' ?>
+<?php require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php'?>
 
 <h1>show</h1>
 
@@ -11,6 +11,7 @@
 <p><strong>Etat:  </strong><?= $animals->getState()?></p>
 
 </div>
+
 
 
 

@@ -6,11 +6,13 @@
 if(!isset($_GET['deconnexion'])){
    
 session_start();
-
+$username = $_SESSION['username'];
 require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
 ?>
 
-<a href="?controller=profil&action=user&deconnexion"><i class="fa fa-power-off mt-2 fa-2x">toto</i></a>
+
+       <p>bonjour <?= $username ?></p> 
+<a href="?controller=profil&action=user&deconnexion"><i class="fa fa-power-off mt-2 fa-2x">deconnexion</i></a>
        
 <?php 
 
@@ -22,7 +24,7 @@ else {
     $_SESSION = array();
     session_destroy();
     header('location:index.php');
-    echo 'vous etes connecté';
+    echo 'deconnecter';
 }
 ?>
 

@@ -1,5 +1,6 @@
 <?php
 
+
 namespace App\Repository;
 
 use App\Entity\Users;
@@ -9,22 +10,32 @@ use Exception;
 
 require_once './App/Entity/Users.php';
 class UsersRepository {
-
+    
+    
+   
 
     public function findOneById( int $id)
     {
         $mysql = Mysql::getInstance();
         $pdo = $mysql->getPDO();
 
-        /*$query = $pdo->prepare('SELECT * FROM race WHERE id = :id');
+        $query = $pdo->prepare('SELECT  u.id FROM roles r
+         JOIN users u ON u.id = r.user_id WHERE r.id = :id');
         $query->bindParam(':id', $id, $pdo::PARAM_INT);
-        $query->execute();
-        $habitat = $query->Fetch($pdo::FETCH_ASSOC);
-   
+
+        if($query->execute()){
+
+            $query->setFetchMode($pdo::FETCH_CLASS, Users::class);
+
+            return $query->fetch();
+        } else {
+            echo 'erreur de recherche';
+        }
+       
 
         //$habitatEntity = new Habitats();//
         
-        foreach($habitat as $key => $value){
+        //foreach($habitat as $key => $value){
 
            // $habitatEntity->{'set'.StringTools::toPascaleCase($key) } ($value);
             /*if(method_exists($habitatEntity, $method)){
@@ -80,9 +91,9 @@ class UsersRepository {
           
         
 
-        $stmt = $pdo->prepare('INSERT INTO roles_users (user_id, role_id) VALUES (:user, :role)');
-        $stmt->bindParam(':user', $_POST['user'], $pdo::PARAM_INT);
-        $stmt->bindParam(':role', $_POST['role'], $pdo::PARAM_INT);
+        $stmt = $pdo->prepare('INSERT INTO roles (name, user_id) VALUES (:name, :user_id)');
+        $stmt->bindParam(':name', $_POST['name'], $pdo::PARAM_STR);
+        $stmt->bindParam(':user_id', $_POST['user_id'], $pdo::PARAM_INT);
         
         
         //$stmt->execute();
@@ -162,6 +173,7 @@ public function profil( ){
     public function connect(){
 
         try{
+              
 
                 $mysql = Mysql::getInstance();
                 $pdo = $mysql->getPDO();
@@ -176,24 +188,60 @@ public function profil( ){
                if($statement->execute()){
                 $user = $statement->fetchObject( Users::class);
                 
+                //$user = $_SESSION['username'] = $user->getId();
+            
+               
+                //echo $_SESSION['username'] = $user->getUsername();
+                //var_dump($user);
+
                if ($user === false) {
                         
                 // Si aucun utilisateur ne correspond au login entré, on affiche une erreur
-                echo 'Utilisateur non trouvé';
+                //echo 'Utilisateur non trouvé';
+                //$_SESSION['error'][]='Utilisateur non trouvé';
+
             } else {
                 // sinon on vérifie le mot de passe
                 $pass = $_POST['password'];
                 if(password_verify($pass, $user->getPassword())){
                      $rolesStatement = $pdo->prepare(
                         // Requête pour récupérer les rôles de l'utilisateur
-                        'SELECT * FROM roles_users JOIN roles
-                         ON role_id = id WHERE user_id = :id
-                         ');
+                        'SELECT COUNT(*) as count FROM roles WHERE user_id = :id');
+
                                 $rolesStatement->bindValue(':id', $user->getId(), $pdo::PARAM_INT);
                                 if($rolesStatement->execute()){
+                                       
+                                    $count  = $rolesStatement->fetch($pdo::FETCH_ASSOC);
+                                    //var_dump($count);
+                                   if($count['count'] > 0 && isset($_GET['admin']) && !isset($_GET['veto']) && !isset($_GET['soignant'])){ 
+                                        //echo 'bonjour ADMIN  <br style="margin-top:50px;">';
+                                       
+                                        $user->addRole('ROLE_SOIGNANT');
+                                        $user->addRole('ROLE_ADMIN');
+                                        //$_SESSION['user'] = ['pseudo' => $user['username'], 'email' => $user['email'], 'roles' => ['ROLE_ADMIN']];
+                                        var_dump($user);
+                                   
 
-                                    
-                                    while($roles = $rolesStatement->fetch($pdo::FETCH_ASSOC)){
+                                    } elseif ( isset($_GET['veto']) && !isset($_GET['admin']) && !isset($_GET['soignant'])) {
+
+                                        //echo 'bonjour'.'  '.$user->getUsername().'  '. 'vous avez le role VETO  <br style="margin-top:50px;">';
+                                        $user->addRole('ROLE_VETO');
+                                        var_dump($user);
+                                       
+
+
+                                    } else {
+
+                                        //echo 'bonjour'.'  '.$user->getUsername().'  '. 'vous ètes un soignant  <br style="margin-top:50px;">';
+                                        $user->addRole('ROLE_SOIGNANT');
+
+                                       
+                                    var_dump($user);
+                                       
+                                    }
+                                   
+                            
+                                    /*while($roles = $rolesStatement->fetch($pdo::FETCH_ASSOC)){
                                         $user->addRole($roles['name']);
 
                                         $_SESSION['id'] = $user->getId();
@@ -203,19 +251,21 @@ public function profil( ){
                                         header('Location: index.php?controller=profil&action=user&id='.$_SESSION['id']);
                                         //var_dump($user);    
                                         //echo '<div>'.$user->getUsername().'<br>'. $user->getEmail().'<br>';
-                                    }
+                                    }*/
                                    
+                                
+                //} else {
+                   // echo 'Mot de passe incorrect';
+                //}
+               
+                                
+                
                                 }
-                } else {
-                    echo 'Mot de passe incorrect';
-                }
-               }
-
-                   
-                    }
-                    
+                            }
+                        }
+        }
                         
-        } catch(\Exception $e){
+                 } catch(\Exception $e){
             echo 'erreur d\'insertion'. $e->getMessage();
            
 
@@ -261,8 +311,49 @@ public function profil( ){
                
     
             }
+
+        }
+
+        public function readRoles(){
+
+            try{
+    
+                    $mysql = Mysql::getInstance();
+                    $pdo = $mysql->getPDO();
+    
+    
+                    //$statement = $pdo->prepare('SELECT u.id as id, u.email as email, r.role_id as name FROM users u
+                    //INNER JOIN roles_users r ON r. = u.id');
+                    
+                    $statement = $pdo->prepare('SELECT name as roles FROM roles');
+                    // On récupère un utilisateur ayant le même login (ici, e-mail)
+    
+                        if ( $statement->execute()) {
+
+                           
+                          $statement->setFetchMode($pdo::FETCH_CLASS, Users::class);
+                        
+                            // Si aucun utilisateur ne correspond au login entré, on affiche une erreur
+                            return $statement->fetchAll();
+                            
+                            
+                              echo 'utilisateurs affichés';
+                            
+                        } else {
+                               echo 'erreur d\'affichege des utilisateurs';
+                           
+                            }
+                        
+                    
+                   
+            } catch(\Exception $e){
+                echo 'erreur d\'insertion'. $e->getMessage();
+               
+    
+            }
            
             }
-    }
+        
 
-    
+
+    }

@@ -1,4 +1,8 @@
-<?php require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php' ?>
+<?php 
+session_start();
+$username = $_SESSION['username'];
+
+require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php' ?>
 
 <h1>soins animals</h1>
 
@@ -43,9 +47,30 @@
 
     <input type="submit"  value="create">
 
+   
+
     
 </form>
+  
 
 </div>
+
+<?php 
+
+ echo $username ;
+        if(isset($_SESSION['username']) && $_SESSION['romain'] == true) { ?>
+
+                <a class="btn" href="?controller=users&action=profil">mon compte</a>
+            
+
+
+
+       <?php } else {
+
+echo '<br>';
+echo 'fonction non autorisé';
+       }?>
+
+
 
 <?php } ?>

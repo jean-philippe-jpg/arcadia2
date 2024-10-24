@@ -3,12 +3,12 @@
     <form action="" method="post">
   <ul>
     
-      <label for="user">User_id&nbsp;:</label>
-      <input type="int" id="user" name="user" />
+      <label for="name">Role:</label>
+      <input type="int" id="name" name="name" />
     </li>
     <li>
-      <label for="role">Role:</label>
-      <input type="int" id="role" name="role" />
+      <label for="user_id">User:</label>
+      <input type="text" id="user_id" name="user_id" />
     </li>
   </ul>
 

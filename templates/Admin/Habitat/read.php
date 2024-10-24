@@ -1,4 +1,9 @@
 <?php
+session_start();
+
+var_dump($_SESSION);
+
+$_SESSION['user'] = ['veto', 'admin', 'user'];
 require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
 ?>
 <h1>Habitats</h1>

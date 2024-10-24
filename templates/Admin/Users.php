@@ -1,4 +1,7 @@
 <?php
+
+session_start();
+
 require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
 ?>
 <h1>Users List</h1>
@@ -6,8 +9,8 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
 <?php if(!isset($_GET['addroles'])){?>
 
 <table class="table">
-<a href="?controller=habitats&action=read" class="btn btn-warning">habitats</a>
-<a href="?controller=animals&action=read" class="btn btn-warning">animaux</a>
+<a href="?controller=habitats&action=read" class="btn ">habitats</a>
+<a href="?controller=animals&action=read" class="btn ">animaux</a>
     <thead>
     <tr>
     <th scope="col">#</th>
@@ -25,6 +28,9 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
           <td><?= $user->getId(); ?></td>
           <td><?= $user->getUsername();?></td>
           <td><?= $user->getEmail();?></td>
+          
+            
+            
          
           
           
@@ -38,14 +44,17 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
     
 </table>
 <?php } else { ?>
+   
+    
+    
     <form action="" method="post">
     <div>
-    <label for="user">User_id&nbsp;:</label>
-    <input type="int" id="user" name="user" />
+    
+    <input style="visibility: hidden;" type="int" id="user_id" name="user_id" value="<?= $roles->getId(); ?>"/>
     </div>
     <div>
-    <label for="role">Role:</label>
-    <input type="int" id="role" name="role" />
+    <label for="name">Role:</label>
+    <input type="text" id="role" name="name" />
     </div>
     <input class="btn" type="submit" value="Envoyer">
 </form>
@@ -56,6 +65,11 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
 
 <?php
 require_once _ROOTPATH_.'/templates/Admin/Partial/_footer.php';
+
+if (!in_array('ROLE_ADMIN', $users->getRoles())) {
+    echo 'vous n\'avez pas les droits';
+    
+}
 ?>
 
 
