@@ -3,7 +3,15 @@ session_start();
 
 var_dump($_SESSION);
 
-$_SESSION['user'] = ['veto', 'admin', 'user'];
+$_SESSION['username'];
+
+
+if (isset($_SESSION['username']) && $_SESSION['romain'] == false) {
+
+    echo '<h1 style="color:purple;  text-align: center; margin-top: 30vh;">vous n\'avez pas l\'acces à cette page  :/</h1>';
+  
+  
+  } else {
 require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
 ?>
 <h1>Habitats</h1>
@@ -15,7 +23,7 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
 <table class="table">
 <a href="?controller=habitats&action=create" class="btn btn-success">ajouter</a>
 <?php
-require_once _ROOTPATH_.'/templates/Admin/Partial/_button.php';
+require_once _ROOTPATH_.'/templates/Admin/Partial/_btnadmin.php';
 ?>
     <thead>
     <tr>
@@ -84,6 +92,7 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_button.php';
     
 } 
 require_once _ROOTPATH_.'/templates/Admin/Partial/_footer.php';
+  }
 ?>
 
 

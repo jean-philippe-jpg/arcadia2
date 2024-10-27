@@ -1,8 +1,17 @@
 <?php
 session_start();
+$username = $_SESSION['username'];
+
+if (isset($_SESSION['username']) && $_SESSION['gégé'] == false) {
+
+    echo '<h1 style="color:purple;  text-align:center; margin-top: 30vh;">vous n\'avez pas le ou les roles d\'acces à cette page</h1>';
+
+
+} else {
 require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
 ?>
 <h3 style="color: red; margin-top:200px;">tableau etat animals</h3>
+<h4><?= $username ?></h4>
 <?php //if(!in_array('ROLE_SOIGNANT', $user->getRoles())){ ?>
 <?php if( !isset($_GET['modify']) && !isset($_GET['animalslist'])  && !isset($_GET['readsoins'])) {  ?>
 <table class="table">
@@ -10,7 +19,6 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
 <?php
 require_once _ROOTPATH_.'/templates/Admin/Partial/_buttonVeto.php';
 ?>
-<a href="?controller=rapportsoignant&action=soins&soignant" class="btn ">soins</a> m
 <a href="index.php" class="btn btn-danger">home</a>
 
 
@@ -103,6 +111,8 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_buttonVeto.php';
 
 <?php
 require_once _ROOTPATH_.'/templates/Admin/Partial/_footer.php';
+
+        }
 ?>
 
 

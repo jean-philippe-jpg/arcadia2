@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-//$_SESSION['roles'] = $_POST['roles']; 
+
 var_dump($_SESSION);
 
 //echo $user->getUsername();
@@ -70,7 +70,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 		//redirection
 
-		header('location:?controller=users&action=readusers');
+		header('location:?controller=users&action=profil');
 
 
 
@@ -87,7 +87,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
 	
 		//redirection
 	
-		header('location:?controller=animals&action=soins&soignant');
+		header('location:?controller=users&action=profil');
 	
 	
 	

@@ -8,7 +8,7 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
 <table class="table">
 <a href="?controller=race&action=create" class="btn ">ajouter</a>
 <?php
-require_once _ROOTPATH_.'/templates/Admin/Partial/_button.php';
+require_once _ROOTPATH_.'/templates/Admin/Partial/_btnadmin.php';
 ?>
 
     <thead>
@@ -23,7 +23,10 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_button.php';
 
     <tbody>
    
-      <?php foreach($read as $reads) { ?>
+      <?php
+      
+
+      foreach($read as $reads) { ?>
         
       <tr>
           <td><?= $reads->getId(); ?></td>

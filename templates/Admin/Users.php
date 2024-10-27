@@ -1,7 +1,7 @@
 <?php
 
 session_start();
-
+$name = $_SESSION['name'];
 require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
 ?>
 <h1>Users List</h1>
@@ -66,10 +66,10 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
 <?php
 require_once _ROOTPATH_.'/templates/Admin/Partial/_footer.php';
 
-if (!in_array('ROLE_ADMIN', $users->getRoles())) {
+/*if (!in_array('ROLE_ADMIN', $users->getRoles())) {
     echo 'vous n\'avez pas les droits';
     
-}
+}*/
 ?>
 
 
