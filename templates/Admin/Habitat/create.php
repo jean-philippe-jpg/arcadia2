@@ -6,7 +6,8 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
 <a href="?controller=habitats&action=read" class="btn btn-success">retour</a>
 
 <div class="form-create">
-<form  method="POST" enctype="multipart/formdata" >
+
+<form  action=""  method="POST" enctype="multipart/form-data" >
 
     <div class="create">
     <label for="name"><strong>nom: </strong></label>

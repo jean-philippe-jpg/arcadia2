@@ -108,13 +108,14 @@ class HabitatsRepository {
         
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 if (empty($_FILES['images']['tmp_name'])) {
+                    
                     echo 'Veuillez sélectionner un fichier.';
                 } else {
                     $file_basename = pathinfo($_FILES['images']['name'], PATHINFO_FILENAME);
                     $file_ext = pathinfo($_FILES['images']['name'], PATHINFO_EXTENSION);
         
                     $new_name = $file_basename . '_' . date("Ymd_His") . '.' . $file_ext;
-        
+                        
                     $images = $pdo->prepare('INSERT INTO uploads (libele) VALUES (:libele)');
                     $images->bindParam(':libele', $new_name, $pdo::PARAM_STR);
         
