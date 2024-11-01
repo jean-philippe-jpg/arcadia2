@@ -187,8 +187,8 @@ public function profil( ){
 
                if($statement->execute()){
                 $user = $statement->fetchObject( Users::class);
-                
-                //$user = $_SESSION['username'] = $user->getId();
+                  
+                //$user = $_SESSION['roles'] = $user->getRoles();
             
                
                 //echo $_SESSION['username'] = $user->getUsername();
@@ -220,9 +220,8 @@ public function profil( ){
                                         $user->addRole('ROLE_ADMIN');
                                         //$_SESSION['user'] = ['pseudo' => $user['username'], 'email' => $user['email'], 'roles' => ['ROLE_ADMIN']];
                                         var_dump($user);
-                                   
-
-                                    } elseif ( isset($_GET['veto']) && !isset($_GET['admin']) && !isset($_GET['soignant'])) {
+                                        
+                                    } elseif  (isset($_GET['veto']) && !isset($_GET['admin']) && !isset($_GET['soignant'])) {
 
                                         //echo 'bonjour'.'  '.$user->getUsername().'  '. 'vous avez le role VETO  <br style="margin-top:50px;">';
                                         $user->addRole('ROLE_VETO');
@@ -236,7 +235,7 @@ public function profil( ){
                                         $user->addRole('ROLE_SOIGNANT');
 
                                        
-                                    var_dump($user);
+                                    //var_dump($count);
                                        
                                     }
                                    

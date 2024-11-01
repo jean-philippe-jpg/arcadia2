@@ -51,6 +51,7 @@ public function setDescription(string $description)
 
 public function getAnimalsList(): string
 {
+
       return $this->name;
 }
 

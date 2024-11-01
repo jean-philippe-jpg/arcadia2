@@ -4,6 +4,7 @@ session_start();
 var_dump($_SESSION);
 
 $_SESSION['username'];
+$_SESSION['roles'];
 
 
 if (isset($_SESSION['username']) && $_SESSION['romain'] == false) {

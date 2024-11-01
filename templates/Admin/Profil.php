@@ -8,17 +8,19 @@ if(!isset($_GET['deconnexion'])){
 session_start();
 
 $username = $_SESSION['username'];
+//$roles = $_SESSION['roles']['ROLE_SOIGNANT'];
 
 require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
 ?>
    
-      <?php if(isset($_SESSION['username']) AND $_SESSION['gégé'] == true ) { ?>
+      <?php if(isset($_SESSION['username']) && $_SESSION['gégé'] == true &&  $_SESSION['romain'] == false) { ?>
     <h4><?= $username ?></h4>
+    
     
             <a class="btn" href="?controller=veto&action=read">rapport animaux</a>  
             <a href="?controller=profil&action=user&deconnexion"><i class="btn fa fa-power-off mt-2 fa-2x">deconnexion</i></a>
        
-<?php } if (isset($_SESSION['username']) AND $_SESSION['romain'] == true ) { ?>
+<?php } if (isset($_SESSION['username']) && $_SESSION['romain'] == true ) { ?>
     <h4><?= $username ?></h4>
 
     <a href="#"><i class="btn fa fa-power-off mt-2 fa-2x">horaires</i></a>
