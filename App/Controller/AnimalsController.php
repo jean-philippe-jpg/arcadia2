@@ -134,7 +134,9 @@ class AnimalsController extends Controller{
                         $animals = $animalsRrepository->findOneById($id);
   
                         $this->render('/Admin/Animals/create', [
-                            'animals_id' => $animals,
+
+                            'animals_id' => $animals
+                            
                             ] );  
 
                         }

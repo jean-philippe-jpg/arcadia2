@@ -111,7 +111,7 @@ use App\Tools\StringTools;
         
                     $images = $pdo->prepare('INSERT INTO img_animals (libele, animals_id) VALUES (:libele, :animals_id)');
                     $images->bindParam(':libele', $new_name, $pdo::PARAM_STR);
-                    $images->bindParam(':animals_id', $_GET['animals_id'], $pdo::PARAM_INT);
+                    $images->bindParam(':animals_id', $_POST['animals_id'], $pdo::PARAM_INT);
         
                     if ($images->execute()) {
                         $target_dir = "uploads/";
