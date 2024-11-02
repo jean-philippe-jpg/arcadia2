@@ -2,12 +2,16 @@
 
 require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
 ?>
+
+
+<?php if(!isset($_GET['photo'])) { ?>
 <h1>create</h1>
+
 <a href="?controller=habitats&action=read" class="btn btn-success">retour</a>
 
 <div class="form-create">
 
-<form  action=""  method="POST" enctype="multipart/form-data" >
+<form  action=""  method="POST" >
 
     <div class="create">
     <label for="name"><strong>nom: </strong></label>
@@ -27,13 +31,30 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
     <label for="state"><strong>état:</strong> </label>
     <input name="state" id="state" type="number">
     </div>
-    <input type="file" name="images"   />
-
-
+    
     <input type="submit" name="insert" value="create">
+<?php } else { ?>
+
+
+    <h1>photo</h1>
+  
+
+<a href="?controller=habitats&action=read" class="btn btn-success">retour</a>
+<div class="show">
+<form action="" method="post"  enctype="multipart/form-data">
+<label for="habitat_id">habitat</label>
+<input type="text" name="habitat_id" id="habitat_id">
+
+<input type="file" name="images"/>
+
+<input type="submit" name="insert" value="create">
+</form>
+
+</div>
 
 
 <?php
+}
 require_once _ROOTPATH_.'/templates/Admin/Partial/_footer.php';
 ?>
 

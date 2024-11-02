@@ -116,8 +116,9 @@ class HabitatsRepository {
         
                     $new_name = $file_basename . '_' . date("Ymd_His") . '.' . $file_ext;
                         
-                    $images = $pdo->prepare('INSERT INTO uploads (libele) VALUES (:libele)');
+                    $images = $pdo->prepare('INSERT INTO uploads (libele, habitat_id) VALUES (:libele, :habitat_id)');
                     $images->bindParam(':libele', $new_name, $pdo::PARAM_STR);
+                    $images->bindParam(':habitat_id', $_POST['habitat_id'], $pdo::PARAM_INT);
         
                     if ($images->execute()) {
                         $target_dir = "uploads/";
