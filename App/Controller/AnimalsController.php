@@ -112,6 +112,9 @@ class AnimalsController extends Controller{
                       $habitatRrepository = new AnimalsRepository();
                       $habitatRrepository->createAnimals();
 
+                      $habitatRrepository = new AnimalsRepository();
+                      $habitatRrepository->images();
+
                       $this->render('/Admin/Animals/create', [
                               
                                     
