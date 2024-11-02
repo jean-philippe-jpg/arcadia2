@@ -32,11 +32,11 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
     <input name="state" id="state" type="number">
     </div>
     
-    <input type="submit" name="insert" value="create">
+    <input  type="submit" name="insert" value="create">
 <?php } else { ?>
 
 
-    <?= $hab_id->getId(); ?>
+    <?= $hab_id->getName(); ?>
 
     <h1>photo</h1>
   
@@ -44,8 +44,8 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
 <a href="?controller=habitats&action=read" class="btn btn-success">retour</a>
 <div class="show">
 <form action="" method="post"  enctype="multipart/form-data">
-<label for="habitat_id">habitat</label>
-<input type="text" name="habitat_id" id="habitat_id" value="<?= $hab_id->getId(); ?>">
+
+<input style="visibility: hidden;" type="text" name="habitat_id" id="habitat_id" value="<?= $hab_id->getId(); ?>">
 
 <input type="file" name="images"/>
 
