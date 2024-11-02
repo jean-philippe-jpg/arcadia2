@@ -36,6 +36,8 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
 <?php } else { ?>
 
 
+    <?= $hab_id->getId(); ?>
+
     <h1>photo</h1>
   
 
@@ -43,7 +45,7 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
 <div class="show">
 <form action="" method="post"  enctype="multipart/form-data">
 <label for="habitat_id">habitat</label>
-<input type="text" name="habitat_id" id="habitat_id">
+<input type="text" name="habitat_id" id="habitat_id" value="<?= $hab_id->getId(); ?>">
 
 <input type="file" name="images"/>
 

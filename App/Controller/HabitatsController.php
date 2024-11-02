@@ -131,12 +131,12 @@ class HabitatsController extends Controller{
                             ] );
                             } else {
 
-                              $id = $_GET['id'];
-                            $uploadsRrepository = new HabitatsRepository();
-                            $hab_id = $uploadsRrepository->findOneById($id);
-
                             $uploadsRrepository = new HabitatsRepository();
                              $uploadsRrepository->images();
+
+                             $id = $_GET['id'];
+                             $uploadsRrepository = new HabitatsRepository();
+                             $hab_id = $uploadsRrepository->findOneById($id);
 
                          $this->render('/Admin/Habitat/create', [
                                     'hab_id' => $hab_id
