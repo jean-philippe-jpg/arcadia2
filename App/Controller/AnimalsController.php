@@ -109,16 +109,35 @@ class AnimalsController extends Controller{
               
               {
                       try {     
-                      $habitatRrepository = new AnimalsRepository();
-                      $habitatRrepository->createAnimals();
 
-                      $habitatRrepository = new AnimalsRepository();
-                      $habitatRrepository->images();
+
+                        if(!isset($_GET['photo'])) {
+                      $animalsRrepository = new AnimalsRepository();
+                      $animalsRrepository->createAnimals();
+
+                      $animalsRrepository = new AnimalsRepository();
+                      $animalsRrepository->images();
 
                       $this->render('/Admin/Animals/create', [
                               
                                     
                           ] );
+
+                      } else {
+                            
+  
+                        $animalsRrepository = new AnimalsRepository();
+                        $animalsRrepository->images();
+
+                            $id = $_GET['id'];
+                        $animalsRrepository = new AnimalsRepository();
+                        $animals = $animalsRrepository->findOneById($id);
+  
+                        $this->render('/Admin/Animals/create', [
+                            'animals_id' => $animals,
+                            ] );  
+
+                        }
 
                       } catch(\Exception $e ) {
                           $this->render('errors/errors', [

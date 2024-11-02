@@ -35,12 +35,16 @@ if(!isset($_GET['photo'])) { ?>
 </form>
 </div>
 <?php } else { ?>
+
+    <h1>photo animals</h1>
+
+    <?= $animals_id->getFirstName(); ?>
     <a href="?controller=animals&action=read" class="btn btn-success">retour</a>
     <div class="show">
         <form action="" method="post" enctype="multipart/form-data">
 
-        <label for="animals_id">animal</label>
-        <input type="text" name="animals_id" id="animals_id">
+        
+        <input type="text" name="animals_id" id="animals_id" value="<?= $animals_id->getId(); ?>">
         <input type="file" name="images" id="images">
         <input type="submit" name="insert" value="create">
         </form>
