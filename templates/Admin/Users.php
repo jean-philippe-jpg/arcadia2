@@ -1,13 +1,13 @@
 <?php
 
 session_start();
-$name = $_SESSION['name'];
+//$name = $_SESSION['name'];
 require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
 ?>
-<h1>Users List</h1>
 
-<?php if(!isset($_GET['addroles'])){?>
 
+<?php if(!isset($_GET['id'])){?>
+    <h1>Users list</h1>
 <table class="table">
 <a href="?controller=habitats&action=read" class="btn ">habitats</a>
 <a href="?controller=animals&action=read" class="btn ">animaux</a>
@@ -29,12 +29,14 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
           <td><?= $user->getUsername();?></td>
           <td><?= $user->getEmail();?></td>
           
+          
             
             
          
           
           
-          <td><a href="?controller=users&action=roles&addroles=<?= $user->getId(); ?>" class="btn btn-warning">roles</a></td>
+          <td><a href="?controller=users&action=roles&r_soignant&id=<?= $user->getId(); ?>" class="btn btn-warning">roles_soignant</a></td>
+          <td><a href="?controller=users&action=roles&id=<?= $user->getId(); ?>" class="btn btn-warning">roles_veto</a></td>
           <td><a href="?controller=race&action=show&show=<?= $user->getId(); ?>" class="btn btn-warning">voir</a></td>
           <td><a href="?controller=race&action=delete&suprimer=<?= $user->getId(); ?>" class="btn btn-danger">delete</a></td>
       </tr>
@@ -46,17 +48,28 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
 <?php } else { ?>
    
     
-    
+    <h4>Confirmation des roles</h4>
     <form action="" method="post">
     <div>
     
-    <input style="visibility: hidden;" type="int" id="user_id" name="user_id" value="<?= $roles->getId(); ?>"/>
+    <input style="visibility: hidden;"  type="int" id="user_id" name="user_id" value="<?= $roles->getId(); ?>"/>
     </div>
     <div>
-    <label for="name">Role:</label>
-    <input type="text" id="role" name="name" />
+    
+        <?php if(isset($_GET['r_soignant'])) { ?>
+            <input style="visibility: hidden;" type="text" id="name" name="name" value="ROLE_SOIGNANT " />
+        <?php } else { ?>
+            <input style="visibility: hidden;" type="text" id="name" name="name" value="ROLE_VETO" />
+            
+       <?php }?>
+    
     </div>
-    <input class="btn" type="submit" value="Envoyer">
+    <?php if (isset($_GET['r_soignant'])) { ?>
+    <input class="btn" type="submit" value="Soignant">
+    <?php } else { ?>
+        <input class="btn" type="submit" value="Veto">
+   <?php } ?>
+    
 </form>
 <a href="?controller=users&action=readusers" class="btn ">retour</a>
 <?php } ?>

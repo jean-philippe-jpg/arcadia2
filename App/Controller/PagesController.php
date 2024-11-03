@@ -139,12 +139,15 @@ class PagesController extends Controller{
                 {    
 
                     //if(isset($_GET['addroles'])) {
-                        $id = $_GET['addroles'];  
+
+                    $roles = new UsersRepository();
+                    $roles->Roles();
+
+
+                        $id = $_GET['id'];  
                         $roles = new UsersRepository();
                         $role = $roles->findOneById($id);
 
-                        $roles = new UsersRepository();
-                        $roles->Roles();
 
                      $this->render('Admin/Users', [
                             'roles' => $role

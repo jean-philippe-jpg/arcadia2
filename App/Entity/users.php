@@ -8,6 +8,7 @@ class Users
     private string $username;
     // Tableau de rôles
     private array $roles = [];
+    //private string $roles ;
 
     public function getId(): int
     {
@@ -29,9 +30,9 @@ class Users
         return $this->username;
     }
 
-    public function addRole(string $role): void
+    public function addRoles(string $roles): void
     {
-        $this->roles[] = $role;
+        $this->roles[] = $roles;
     }
 
     public function getRoles(): array

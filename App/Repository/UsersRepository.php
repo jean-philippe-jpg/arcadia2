@@ -19,8 +19,11 @@ class UsersRepository {
         $mysql = Mysql::getInstance();
         $pdo = $mysql->getPDO();
 
-        $query = $pdo->prepare('SELECT  u.id FROM roles r
+        /*$query = $pdo->prepare('SELECT  u.id FROM roles r
          JOIN users u ON u.id = r.user_id WHERE r.id = :id');
+        $query->bindParam(':id', $id, $pdo::PARAM_INT);*/
+
+             $query = $pdo->prepare('SELECT * FROM users WHERE id = :id');
         $query->bindParam(':id', $id, $pdo::PARAM_INT);
 
         if($query->execute()){
@@ -29,7 +32,7 @@ class UsersRepository {
 
             return $query->fetch();
         } else {
-            echo 'erreur de recherche';
+            echo 'erreur d\'attribution';
         }
        
 
