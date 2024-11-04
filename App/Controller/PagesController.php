@@ -165,6 +165,9 @@ class PagesController extends Controller{
                 {    
                     $connected = new UsersRepository();
                     $connect = $connected->connect();
+
+                   /* $connected = new UsersRepository();
+                    $connect = $connected->showRoles();*/
                        
                     $this->render('Admin/Connexion', [
 

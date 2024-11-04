@@ -84,8 +84,7 @@ class UsersRepository {
                 echo  $e->getMessage();
             }
     }
-
-
+    
     public function Roles( ){
 
         try{
@@ -137,6 +136,36 @@ public function addRoles( ){
 }
 }
 
+public function showRoles(){
+
+    try{
+    $mysql = Mysql::getInstance();
+    $pdo = $mysql->getPDO();
+      
+    
+  
+    $stmt = $pdo->prepare('SELECT * FROM roles JOIN users ON roles.user_id = users.id WHERE user_id = :id');
+    $stmt->bindParam(':id', $_POST['id'], $pdo::PARAM_INT);
+    //$stmt->execute();
+    if($stmt->execute()){
+        $roles = $stmt->fetch($pdo::FETCH_ASSOC);
+
+        /*while($roles = $stmt->fetch($pdo::FETCH_ASSOC)){
+            echo $roles['name'];
+        }*/
+        var_dump($roles);
+           echo 'roles ok';
+    } else {
+        echo 'erreur de roles';
+    }
+
+} catch(\Exception $e){
+    echo 'erreur d\'attribution'. $e->getMessage();
+}
+}
+
+
+
 public function profil( ){
 
     try{
@@ -181,33 +210,55 @@ public function profil( ){
                 $mysql = Mysql::getInstance();
                 $pdo = $mysql->getPDO();
 
-                $email = $_POST['email'];
-                //$pass = $_POST['password'];
-                $statement = $pdo->prepare('SELECT * FROM users WHERE email = :email');
+                
+                
+                //$statement = $pdo->prepare('SELECT * FROM users WHERE email = :email');
+                $statement = $pdo->prepare('SELECT r.name as roles FROM users
+                 INNER JOIN roles r ON r.user_id = users.id WHERE email = :email');
               
                 // On récupère un utilisateur ayant le même login (ici, e-mail)
-                $statement->bindValue(':email', $email, $pdo::PARAM_STR);
+                $email = $_GET['email'];
+                $statement->bindValue(':email',$email, $pdo::PARAM_STR);
 
                if($statement->execute()){
                 $user = $statement->fetchObject( Users::class);
-                  
+             
+                //password_verify($pass, $user->getPassword());
                 //$user = $_SESSION['roles'] = $user->getRoles();
-            
+               
                
                 //echo $_SESSION['username'] = $user->getUsername();
-                //var_dump($user);
+                
 
                if ($user === false) {
                         
                 // Si aucun utilisateur ne correspond au login entré, on affiche une erreur
-                //echo 'Utilisateur non trouvé';
-                //$_SESSION['error'][]='Utilisateur non trouvé';
+                echo 'Utilisateur non trouvé';
+               
 
             } else {
+                if(password_verify($_GET['password'], $user->getPassword())){
+
+                    
+                   
+
+                } else {
+
+                    echo 'identifiant introuvable';
+                }
+                
+            }
+        } else {
+
+            echo 'imposible de récuperer l\'utilisateur';
+        }
                 // sinon on vérifie le mot de passe
-                $pass = $_POST['password'];
-                if(password_verify($pass, $user->getPassword())){
-                     $rolesStatement = $pdo->prepare(
+                //$pass = $_POST['password'];
+                //$username = $_GET['username'];
+                //if(password_verify($pass, $user->getPassword())){
+
+                    //echo 'bienvenue';
+                    /* $rolesStatement = $pdo->prepare(
                         // Requête pour récupérer les rôles de l'utilisateur
                         'SELECT COUNT(*) as count FROM roles WHERE user_id = :id');
 
@@ -262,10 +313,10 @@ public function profil( ){
                
                                 
                 
-                                }
-                            }
-                        }
-        }
+                                
+        
+    
+        
                         
                  } catch(\Exception $e){
             echo 'erreur d\'insertion'. $e->getMessage();
@@ -287,14 +338,17 @@ public function profil( ){
                     //$statement = $pdo->prepare('SELECT u.id as id, u.email as email, r.role_id as name FROM users u
                     //INNER JOIN roles_users r ON r. = u.id');
                     
-                    $statement = $pdo->prepare('SELECT * FROM users');
+                    $statement = $pdo->prepare('SELECT u.id, u.username, u.email, roles.name as rolesname FROM users u
+                    INNER JOIN roles ON roles.user_id = u.id');
+                    /*$statement = $pdo->prepare('SELECT u.id,u.username, u.email FROM users u
+                    ');*/
                     // On récupère un utilisateur ayant le même login (ici, e-mail)
-    
+                  
                         if ( $statement->execute()) {
 
                            
                           $statement->setFetchMode($pdo::FETCH_CLASS, Users::class);
-                        
+                          
                             // Si aucun utilisateur ne correspond au login entré, on affiche une erreur
                             return $statement->fetchAll();
                             

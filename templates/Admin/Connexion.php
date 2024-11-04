@@ -1,14 +1,15 @@
 <?php
 session_start();
 
-
-var_dump($_SESSION);
+ var_dump($_SESSION);
 
 //echo $user->getUsername();
 
 require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
+
 //require_once './App/Entity/Users.php';
 ?>
+  
 <h1>Connexion</h1>
 
 
@@ -35,19 +36,8 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
 
     <input type="submit" value="Envoyer" />
 </form>
-<?php 
-		
 
-			
-	
-
-?>
 <a href="?controller=veto&action=read">rapport veto</a>
-
-
-	
-
-
   
 <?php
 
@@ -56,7 +46,10 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_footer.php';
 if($_SERVER['REQUEST_METHOD'] === 'POST') {
 	$username = $_SESSION['username'] = $_POST['username'];
 	$email = $_SESSION['email'] = $_POST['email'];
+	$roles =  $_SESSION['roles'] = [];
 	$_SESSION['password'] = $_POST['password'];
+
+	
 
 	if($username === 'romain') {
 
@@ -66,7 +59,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 		// definition du cooki
 
-		setcookie('user', 'romain', time() + 3600, '/');
+		setcookie('username', 'romain', time() + 3600, '/');
 
 		//redirection
 

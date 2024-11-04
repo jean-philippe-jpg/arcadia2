@@ -6,6 +6,7 @@ class Users
     private string $email;
     private string $password;
     private string $username;
+    private string $rolesname;
     // Tableau de rôles
     private array $roles = [];
     //private string $roles ;
@@ -38,5 +39,19 @@ class Users
     public function getRoles(): array
     {
         return $this->roles;
+    }
+
+    
+    public function getRolesname() :string
+    {
+        return $this->rolesname;
+    }
+
+    
+    public function setRolesname($rolesname)
+    {
+        $this->rolesname = $rolesname;
+
+        return $this;
     }
 }
