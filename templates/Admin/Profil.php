@@ -7,18 +7,18 @@ if(!isset($_GET['deconnexion'])){
    
 session_start();
 
-$username = $_SESSION['username'];
+
 $email = $_SESSION['email'];
-$roles = $_SESSION['roles']=[];
+//$roles = $_SESSION['roles']=[];
 
 
 require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
 
 ?>
-   
+   <?php var_dump($user);?>
       <?php if(isset($_SESSION['username']) && $_SESSION['romain'] == true ) { ?>
       
-    <h4><?= $username?></h4>
+    
     <h5><?= $email?></h5>
     
     
@@ -29,7 +29,7 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
             <a href="?controller=profil&action=user&deconnexion"><i class="btn fa fa-power-off mt-2 fa-2x">deconnexion</i></a>
        
 <?php } if (isset($_SESSION['roles']) && $_SESSION['ROLE_VETO'] == true ) { ?>
-    <h4><?= $username ?></h4>
+    <h4><?= $email ?></h4>
     
 
     <a href="#"><i class="btn fa fa-power-off mt-2 fa-2x">horaires</i></a>
@@ -39,7 +39,7 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
     <a href="?controller=profil&action=user&deconnexion"><i class="btn fa fa-power-off mt-2 fa-2x">deconnexion</i></a>
         
 <?php } if (isset($_SESSION['roles']) && $_SESSION['toto'] == true){ ?>
-    <h4><?= $username ?></h4>
+    
   
     <a href="?controller=comments&action=read"><i class="btn fa fa-power-off mt-2 fa-2x">commentaire</i></a>
     <a href="?controller=services&action=read"><i class="btn fa fa-power-off mt-2 fa-2x">services</i></a>

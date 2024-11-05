@@ -5,8 +5,8 @@ class Users
     private int $id;
     private string $email;
     private string $password;
-    private string $username;
-    private string $rolesname;
+    
+   
     // Tableau de rôles
     private array $roles = [];
     //private string $roles ;
@@ -26,14 +26,11 @@ class Users
         return $this->password;
     }
 
-    public function getUsername(): string
-    {
-        return $this->username;
-    }
+   
 
-    public function addRoles(string $roles): void
+    public function addRoles(string $role): void
     {
-        $this->roles[] = $roles;
+        $this->roles[] = $role;
     }
 
     public function getRoles(): array
@@ -42,16 +39,5 @@ class Users
     }
 
     
-    public function getRolesname() :string
-    {
-        return $this->rolesname;
-    }
-
     
-    public function setRolesname($rolesname)
-    {
-        $this->rolesname = $rolesname;
-
-        return $this;
-    }
 }

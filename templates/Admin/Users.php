@@ -26,7 +26,7 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
       <?php foreach($users as $user) { ?>  
       <tr>
           <td><?= $user->getId(); ?></td>
-          <td><?= $user->getUsername();?></td>
+          
           <td><?= $user->getEmail();?></td>
           <td><?= $user->getRolesname();?></td>
           

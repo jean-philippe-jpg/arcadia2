@@ -1,13 +1,14 @@
 <?php
 session_start();
 
- var_dump($_SESSION);
+ //var_dump($_SESSION);
 
 //echo $user->getUsername();
 
 require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
 
 //require_once './App/Entity/Users.php';
+
 ?>
   
 <h1>Connexion</h1>
@@ -20,10 +21,7 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
 
 	<form action="" method="post">
   <ul>
-    <li>
-      <label for="username">Username&nbsp;:</label>
-      <input type="text" id="username" name="username" />
-    </li>
+    
     <li>
       <label for="email">E-mail&nbsp;:</label>
       <input type="email" id="email" name="email" />
@@ -38,20 +36,20 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
 </form>
 
 <a href="?controller=veto&action=read">rapport veto</a>
-  
-<?php
 
+<?php
+var_dump($user);
 require_once _ROOTPATH_.'/templates/Admin/Partial/_footer.php';
 
 if($_SERVER['REQUEST_METHOD'] === 'POST') {
-	$username = $_SESSION['username'] = $_POST['username'];
+	
 	$email = $_SESSION['email'] = $_POST['email'];
-	$roles =  $_SESSION['roles'] = [];
+	//$roles =  $_SESSION['roles'] = $_GET['roles'];
 	$_SESSION['password'] = $_POST['password'];
 
 	
 
-	if($username === 'romain') {
+	/*if($username === 'romain') {
 
 		//initiation de notre session
 
@@ -84,7 +82,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
 	
 	
 	
-	}
+	}*/
 	
 
 }

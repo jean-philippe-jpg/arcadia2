@@ -6,15 +6,12 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
 
 <form action="" method="post">
   <ul>
-    
+      <li>
       <label for="email">E-mail&nbsp;:</label>
       <input type="email" id="email" name="email" />
     </li>
-    <li>
-      <label for="username">Pseudo:</label>
-      <input type="text" id="username" name="username" />
-    </li>
-    <li>
+   
+    
     <li>
       <label for="password">Password&nbsp;:</label>
       <input id="text" name="password"></input>

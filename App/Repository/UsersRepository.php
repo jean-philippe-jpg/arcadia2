@@ -61,11 +61,10 @@ class UsersRepository {
                 $pdo = $mysql->getPDO();
                 $password = $_POST['password'];
                 $email = $_POST['email'];
-                $username = $_POST['username'];
-                $statement = $pdo->prepare('INSERT INTO users(email, username, password) VALUES (:email, :username, :password)');
+                
+                $statement = $pdo->prepare('INSERT INTO users(email, password) VALUES (:email, :password)');
 
             $statement->bindParam(':email', $email, $pdo::PARAM_STR);
-            $statement->bindParam(':username', $username, $pdo::PARAM_STR);
             // Hash du mot de passe en utilisant BCRYPT //
             $statement->bindParam(':password', password_hash($password, PASSWORD_BCRYPT));
             
@@ -213,22 +212,14 @@ public function profil( ){
                 
                 
                 //$statement = $pdo->prepare('SELECT * FROM users WHERE email = :email');
-                $statement = $pdo->prepare('SELECT r.name as roles FROM users
-                 INNER JOIN roles r ON r.user_id = users.id WHERE email = :email');
+                $statement = $pdo->prepare('SELECT * FROM users WHERE email = :email');
               
                 // On récupère un utilisateur ayant le même login (ici, e-mail)
-                $email = $_GET['email'];
+                $email = $_POST['email'];
                 $statement->bindValue(':email',$email, $pdo::PARAM_STR);
-
-               if($statement->execute()){
+                $statement->execute();
                 $user = $statement->fetchObject( Users::class);
-             
-                //password_verify($pass, $user->getPassword());
-                //$user = $_SESSION['roles'] = $user->getRoles();
-               
-               
-                //echo $_SESSION['username'] = $user->getUsername();
-                
+
 
                if ($user === false) {
                         
@@ -237,21 +228,33 @@ public function profil( ){
                
 
             } else {
-                if(password_verify($_GET['password'], $user->getPassword())){
+                if(password_verify($_POST['password'], $user->getPassword())){
+                        $rolesStatement = $pdo->prepare('SELECT * FROM roles_users 
+                        JOIN roles ON role_id = id WHERE user_id = :id');
+                        $rolesStatement->bindValue(':id', $user->getId(), $pdo::PARAM_INT);
 
-                    
-                   
+                        if( $rolesStatement->execute()){
 
+                            while($roles = $rolesStatement->fetch($pdo::FETCH_ASSOC)){
+                                $user->addRoles($roles['name']);
+                            }
+
+                        }
+                       
+                       
+
+                    var_dump($user);
+              
                 } else {
 
                     echo 'identifiant introuvable';
                 }
                 
-            }
-        } else {
+            
+        /*} else {
 
             echo 'imposible de récuperer l\'utilisateur';
-        }
+        }*/
                 // sinon on vérifie le mot de passe
                 //$pass = $_POST['password'];
                 //$username = $_GET['username'];
@@ -312,12 +315,7 @@ public function profil( ){
                 //}
                
                                 
-                
-                                
-        
-    
-        
-                        
+            }    
                  } catch(\Exception $e){
             echo 'erreur d\'insertion'. $e->getMessage();
            
