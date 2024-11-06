@@ -14,7 +14,7 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
     <thead>
     <tr>
     <th scope="col">#</th>
-    <th scope="col">nom d'utilisateur</th>
+    
     <th scope="col">email</th>
     <th scope="col">roles</th>
     
@@ -26,10 +26,10 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
       <?php foreach($users as $user) { ?>  
       <tr>
           <td><?= $user->getId(); ?></td>
-          
           <td><?= $user->getEmail();?></td>
-          <td><?= $user->getRolesname();?></td>
+          <td><?= $user->getRoles();?></td>
           
+       
           
             
             
@@ -50,6 +50,7 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
    
     
     <h4>Confirmation des roles</h4>
+
     <form action="" method="post">
     <div>
     
@@ -58,9 +59,9 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
     <div>
     
         <?php if(isset($_GET['r_soignant'])) { ?>
-            <input style="visibility: hidden;" type="text" id="name" name="name" value="ROLE_SOIGNANT " />
+            <input style="visibility: hidden;" type="text" id="role_id" name="role_id" value="214 " />
         <?php } else { ?>
-            <input style="visibility: hidden;" type="text" id="name" name="name" value="ROLE_VETO" />
+            <input style="visibility: hidden;" type="text" id="role_id" name="role_id" value="213" />
             
        <?php }?>
     

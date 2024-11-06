@@ -1,7 +1,12 @@
 <?php
 session_start();
 
- //var_dump($_SESSION);
+var_dump($_SESSION);
+
+$_SESSION['email'] = $_POST['email'];
+//$_SESSION['id'] = $user->getId();
+ //$_SESSION['password'] = $_POST['password'];
+	$_SESSION['name'] =[]; 
 
 //echo $user->getUsername();
 
@@ -38,35 +43,35 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
 <a href="?controller=veto&action=read">rapport veto</a>
 
 <?php
-var_dump($user);
+//var_dump($user);
 require_once _ROOTPATH_.'/templates/Admin/Partial/_footer.php';
 
-if($_SERVER['REQUEST_METHOD'] === 'POST') {
+/*if($_SERVER['REQUEST_METHOD'] === 'POST') {
 	
-	$email = $_SESSION['email'] = $_POST['email'];
-	//$roles =  $_SESSION['roles'] = $_GET['roles'];
-	$_SESSION['password'] = $_POST['password'];
+	$email =  $_POST['email'];
+	 $password =  $_POST['password'];
+	//$_SESSION['password'] = $_POST['password'];
 
 	
 
-	/*if($username === 'romain') {
+	if($email === 'jphilippe.champion@gmail.com' && $password === 'root') {
 
 		//initiation de notre session
 
-		$_SESSION['romain'] = true;
+		$_SESSION['root'] = true;
 
 		// definition du cooki
 
-		setcookie('username', 'romain', time() + 3600, '/');
+		setcookie('role', 'admin', time() + 3600, '/');
 
 		//redirection
 
-		header('location:?controller=users&action=profil');
+		header('location:?controller=users&action=connect');
 
 
 
 	}
-	if($username === 'gégé') {
+	/*if($username === 'gégé') {
 
 		//initiation de notre session
 	
@@ -83,9 +88,9 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
 	
 	
 	}*/
-	
 
-}
+
+
 
 
 

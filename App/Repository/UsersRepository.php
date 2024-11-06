@@ -92,8 +92,8 @@ class UsersRepository {
           
         
 
-        $stmt = $pdo->prepare('INSERT INTO roles (name, user_id) VALUES (:name, :user_id)');
-        $stmt->bindParam(':name', $_POST['name'], $pdo::PARAM_STR);
+        $stmt = $pdo->prepare('INSERT INTO roles_users (role_id, user_id) VALUES (:role_id, :user_id)');
+        $stmt->bindParam(':role_id', $_POST['role_id'], $pdo::PARAM_STR);
         $stmt->bindParam(':user_id', $_POST['user_id'], $pdo::PARAM_INT);
         
         
@@ -229,21 +229,26 @@ public function profil( ){
 
             } else {
                 if(password_verify($_POST['password'], $user->getPassword())){
-                        $rolesStatement = $pdo->prepare('SELECT * FROM roles_users 
+                    
+
+                        $rolesStatement = $pdo->prepare('SELECT name FROM roles_users 
                         JOIN roles ON role_id = id WHERE user_id = :id');
                         $rolesStatement->bindValue(':id', $user->getId(), $pdo::PARAM_INT);
-
+                        $result = $rolesStatement->fetchAll();
+                        
                         if( $rolesStatement->execute()){
-
+                                
                             while($roles = $rolesStatement->fetch($pdo::FETCH_ASSOC)){
-                                $user->addRoles($roles['name']);
+                                $user->addRoles( $roles['name']);
+                               
                             }
-
+                            var_dump($user);
+                           
                         }
                        
                        
 
-                    var_dump($user);
+                   
               
                 } else {
 
@@ -336,8 +341,8 @@ public function profil( ){
                     //$statement = $pdo->prepare('SELECT u.id as id, u.email as email, r.role_id as name FROM users u
                     //INNER JOIN roles_users r ON r. = u.id');
                     
-                    $statement = $pdo->prepare('SELECT u.id, u.username, u.email, roles.name as rolesname FROM users u
-                    INNER JOIN roles ON roles.user_id = u.id');
+                    $statement = $pdo->prepare('SELECT u.id as id, u.email as email, r.name as rolesname FROM roles_users 
+                    INNER JOIN roles r ON role_id = r.id JOIN users u ON user_id = u.id');
                     /*$statement = $pdo->prepare('SELECT u.id,u.username, u.email FROM users u
                     ');*/
                     // On récupère un utilisateur ayant le même login (ici, e-mail)
