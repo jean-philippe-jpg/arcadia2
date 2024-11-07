@@ -11,6 +11,7 @@ class Comments
 protected int $id ;
 protected string $pseudo ;
 protected string $message;
+protected bool $isValid;
 
 
 
@@ -53,6 +54,20 @@ return $this->id;
 public function setId($id)
 {
 $this->id = $id;
+
+return $this;
+}
+
+
+public function getIsValid(): bool
+{
+return $this->isValid;
+}
+
+
+public function setIsValid($isvalid)
+{
+$this->isValid = $isvalid;
 
 return $this;
 }
