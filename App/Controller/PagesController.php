@@ -107,8 +107,8 @@ class PagesController extends Controller{
                 {
                         $register = new UsersRepository();
                         $register->addRegister();
-                        $roles = new UsersRepository();
-                        $roles->roles();
+                       // $roles = new UsersRepository();
+                        //$roles->roles();
                         
                   
                     $this->render('Admin/Inscription', [
@@ -172,6 +172,7 @@ class PagesController extends Controller{
                     $this->render('Admin/Connexion', [
 
                         'user' => $connect
+                        
                             
                     ] );
                     //require_once 'templates/showanimals.php';//

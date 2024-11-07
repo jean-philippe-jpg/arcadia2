@@ -231,10 +231,10 @@ public function profil( ){
                 if(password_verify($_POST['password'], $user->getPassword())){
                     
 
-                        $rolesStatement = $pdo->prepare('SELECT name FROM roles_users 
+                        $rolesStatement = $pdo->prepare('SELECT * FROM roles_users 
                         JOIN roles ON role_id = id WHERE user_id = :id');
                         $rolesStatement->bindValue(':id', $user->getId(), $pdo::PARAM_INT);
-                        $result = $rolesStatement->fetchAll();
+                        //$result = $rolesStatement->fetchAll();
                         
                         if( $rolesStatement->execute()){
                                 
@@ -242,6 +242,8 @@ public function profil( ){
                                 $user->addRoles( $roles['name']);
                                
                             }
+
+                            
                             var_dump($user);
                            
                         }

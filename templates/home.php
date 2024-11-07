@@ -47,7 +47,7 @@ if (!empty($images)) {
 
   <h3>list des commantaires</h3>
 
-  <?php if(isset($_GET['check_comment'])){ ?>
+  <?php if(empty($_GET['isValid'])){ ?>
 
     <?php  foreach($avis as $commentaire) { ?>
     
