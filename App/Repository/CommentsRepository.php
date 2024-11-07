@@ -27,6 +27,7 @@ class CommentsRepository {
                $comment= $pdo->prepare('INSERT INTO avis (pseudo, message) VALUES (:pseudo, :message)');
                 $comment->bindParam(':pseudo', $pseudo, $pdo::PARAM_STR);
                 $comment->bindParam(':message', $message, $pdo::PARAM_STR);
+               
                $comment->execute();
            
 
@@ -52,10 +53,11 @@ public function read(){
             
             if($cmts->execute()){
                 
-               
-            
+
+
                    return $cmts->fetchAll();
-                  
+
+
                    
             } else {
                 echo 'erreur';

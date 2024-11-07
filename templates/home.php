@@ -10,24 +10,7 @@ require_once './templates/partial/_animalsliste.php';
 
 //$images = $this->readImages();
 
-if (!empty($images)) {
-    foreach ($images as $image)
-        if (isset($image['id']) && is_string($image['id'])) { ?>
-            <div>
-                <p><?=($image['id']); ?></p>
-            </div>
-        <?php } else { ?>
-            <div>
-                <p>Source non disponible</p>
-            </div>
-        <?php }
-    
-} else {
-    echo 'Aucune image trouvée.';
-}
 ?>
-
-
 <h1>Home</h1>
 
 
@@ -47,11 +30,12 @@ if (!empty($images)) {
 
   <h3>list des commantaires</h3>
 
-  <?php if($avis->getIsValid()){ ?>
+  
 
     <?php  foreach($avis as $commentaire) { ?>
     
-            
+        <?php if( $_GET['isValid'] = true) { ?>
+
   <div style="margin-left: 10vw;">
   <i class="star">&#9733</i>
   <i class="star">&#9733</i>
@@ -60,16 +44,14 @@ if (!empty($images)) {
   <i class="star">&#9733</i>
   <br>
   <strong><?= $commentaire->getPseudo(); ?></strong>
-   <p><?=$commentaire->getMessage();?></p>
+        <p><?=$commentaire->getMessage();?></p>
+    
   </div>
-  
+    
+  <?php } ?>
 
 <?php } ?>
-<?php } else{
-  
-    echo 'commentaire en cours de traitement';
-}
-  ?>
+
 
 <?php
 require_once './templates/partial/_presentation.php';

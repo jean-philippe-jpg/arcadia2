@@ -11,7 +11,7 @@ class Comments
 protected int $id ;
 protected string $pseudo ;
 protected string $message;
-protected bool $isValid;
+protected bool $isValid = true;
 
 
 
