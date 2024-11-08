@@ -70,5 +70,61 @@ public function read(){
 
     }
 }
+
+public function findOneById( int $id)
+{
+    $mysql = Mysql::getInstance();
+    $pdo = $mysql->getPDO();
+
+    $query = $pdo->prepare('SELECT * FROM avis where id = :id');   
+    $query->bindParam(':id', $id, $pdo::PARAM_INT);
+    
+            if($query->execute()) {
+
+                $query->setFetchMode($pdo::FETCH_CLASS, Comments::class);
+                return $query->fetch();
+
+            }
+    
+}
+
+
+public function update(int $id){
+
+    try{
+
+        $mysql = Mysql::getInstance();
+        $pdo = $mysql->getPDO();
+           
+            //$isValid = $_POST['isValid'];
+            
+            $update = $pdo->prepare('UPDATE avis set isValid = :isValid WHERE id = :id');
+            $update->bindParam(':id', $id, $pdo::PARAM_INT);
+            $update->bindParam(':isValid', $isValid, $pdo::PARAM_BOOL);
+           
+            $update->fetch($pdo::FETCH_ASSOC);
+
+
+            if($update->execute()){
+                  
+                $update->fetch();
+              echo 'commentaire validé';
+        } else {
+            echo 'echèque de validation';
+        }
+        
+        return  $update;
+     
+
+    
+             
+
+    } catch(\Exception $e){
+        echo 'erreur d\'insertion'. $e->getMessage();
+       
+
+    }
+   
+}
 }
 

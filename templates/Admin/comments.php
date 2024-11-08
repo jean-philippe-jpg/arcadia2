@@ -1,21 +1,35 @@
 <?php
 session_start();
 
-$username = $_SESSION['username'];
+//$username = $_SESSION['username'];
 
 
-if (isset($_SESSION['username']) && $_SESSION['romain'] = true) {
+if (isset($_GET['id']) && !empty($_GET['id'])) { 
+  require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
+  
+  ?>
     
-     echo '<h1 style="color:purple;  text-align: center; margin-top: 30vh;">vous n\'avez pas l\'acces à cette page  :/</h1>';
+  <h4>show comments</h4>
+  
+<div class="show">
+
+  
+   <h5><?= $show->getPseudo() ?></h5>
+   <h5><?= $show->getMessage() ?></h5>
+   <form action="" method="post">
+
+   <input type="text" value="true" name="isValid">
+   <input type="submit" value="envoyer">
+   </form>
+   
 
 
+</div>
 
-} else {
+<?php } else {
 
 require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
 
-
-echo 'bienvenue   '.$username;
 ?>
 
 
@@ -48,8 +62,8 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_button.php';
           <td><?= $comment->getMessage();?></td>
           
           
-          <td><a href="?controller=race&action=delete&suprimer=<?= $comment->getId(); ?>" class="btn ">delete</a></td>
-          
+          <td><a href="?controller=comments&action=delete&suprimer=<?= $comment->getId(); ?>" class="btn ">delete</a></td>
+          <td><a href="?controller=comments&action=show&id=<?= $comment->getId(); ?>" class="btn ">delete</a></td>
           <td><form>
         <input type="checkbox" id="checkbox" name="scales"/>
         <label for="checkbox">Checkbox</label>
@@ -71,7 +85,10 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_button.php';
 require_once _ROOTPATH_.'/templates/Admin/Partial/_footer.php';
 
       }
+
+
 ?>
+
 
 
       

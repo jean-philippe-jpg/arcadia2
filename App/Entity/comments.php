@@ -11,7 +11,7 @@ class Comments
 protected int $id ;
 protected string $pseudo ;
 protected string $message;
-protected bool $isValid = true;
+protected ?bool $isValid = null;
 
 
 
@@ -59,9 +59,9 @@ return $this;
 }
 
 
-public function getIsValid(): bool
+public function getIsValid(): ?bool
 {
-return $this->isValid;
+return $this->isValid ;
 }
 
 

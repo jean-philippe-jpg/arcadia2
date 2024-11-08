@@ -32,21 +32,21 @@ require_once './templates/partial/_animalsliste.php';
 
   
 
-    <?php  foreach($avis as $commentaire) { ?>
+    <?php  foreach($avis as $commantaire) { ?>
     
-        <?php if( $_GET['isValid'] = true) { ?>
+        <?php if($commantaire->getIsValid() == false) { ?>
 
   <div style="margin-left: 10vw;">
+
+ <?php  for($i = 0; $i < 5; $i++) { ?>
   <i class="star">&#9733</i>
-  <i class="star">&#9733</i>
-  <i class="star">&#9733</i>
-  <i class="star">&#9733</i>
-  <i class="star">&#9733</i>
+  <?php } ?>
   <br>
-  <strong><?= $commentaire->getPseudo(); ?></strong>
-        <p><?=$commentaire->getMessage();?></p>
+  <strong><?= $commantaire->getPseudo(); ?></strong>
+        <p><?=$commantaire->getMessage();?></p>
     
   </div>
+
     
   <?php } ?>
 

@@ -165,34 +165,7 @@ class HabitatsController extends Controller{
                    
                 }
 
-                /*protected function showMore()
                 
-                {
-                        try {       
-                            
-
-                            if(isset($_GET['detailAnimal'])) {
-                                $id = $_GET['detailAnimal'];
-
-                                $animalsRrepository = new AnimalsRepository();
-                                $detail = $animalsRrepository->detail($id);
-                              
-                                 $this->render('showanimals', [
-                                     
-                                     'animal' => $detail
-                                         
-                                          ] );  
-                                 
-                            }
- 
-                        } catch(\Exception $e ) {
-                            $this->render('errors/errors', [
-                                'errors' => $e->getMessage()
-    
-                            ]);
-                        }
-                }*/
-
                 protected function readvisiteur()
                 
                 {

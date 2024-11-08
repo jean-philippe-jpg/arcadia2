@@ -22,11 +22,10 @@ class CommentsController extends Controller{
                                     $this->read();
                             
                                     break;
-                                    /*case 'create':
-                                        $this->create();
-                                        $this->read();
-                                
-                                        break;*/
+                                    case 'show':
+                                       // $this->update();
+                                        $this->show();
+                                        break;
     
                                    
                 default:
@@ -48,28 +47,6 @@ class CommentsController extends Controller{
                 }
 
                
-                /*protected function home(): void
-                
-                {
-
-                    $comments = new CommentsRepository();
-                    $comments->create();
-                    //$comments = $comments->readComments();
-
-                    $home = new HabitatsRepository();
-                     $home->readHabitat();
-
-                    $this->render('home', [
-                            'avis' => $comments,
-                            'habitat' => $home
-                            
-                    ] );
-                    //require_once 'templates/showanimals.php';//
-                  
-                }*/
-                
-
-    
                
                 protected function read()
                 
@@ -92,7 +69,26 @@ class CommentsController extends Controller{
             }
 
 
-           
+            protected function show()
+                
+            {
+                    $id = $_GET['id'];
+                    $comments = new CommentsRepository();
+                   $show = $comments->findOneById($id);
+
+                $this->render('Admin/comments', [
+
+                    'show' => $show
+                    
+                        
+                ] );
+                //require_once 'templates/showanimals.php';//
+              
+            
+        }
+
+
+       
                 protected function create(): void
                 
                 {    
@@ -108,6 +104,44 @@ class CommentsController extends Controller{
                     //require_once 'templates/showanimals.php';//
                   
                 }
+
+                protected function update()
+                
+                {
+                        try {       
+
+                            if(isset($_GET['id'])){
+                                $id = $_GET['id'];
+                               
+                                $habitatRrepository = new CommentsRepository();
+                                $habitatRrepository->update($id);
+
+                                $this->render('/Admin/comments', [
+
+                                    
+                          
+                           ] );
+                               
+                                } else {
+                                    throw new \Exception('modification impossible :/');
+    
+                                }
+                            
+                          
+         
+                             
+ 
+                        } catch(\Exception $e ) {
+                            $this->render('errors/errors', [
+                                'errors' => $e->getMessage()
+    
+                            ]);
+
+
+                        }   
+                   
+                }
+                
 
 
 
