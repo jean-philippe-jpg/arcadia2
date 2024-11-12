@@ -100,15 +100,13 @@ public function update(int $id){
             
             $update = $pdo->prepare('UPDATE avis set isValid = :isValid WHERE id = :id');
             $update->bindParam(':id', $id, $pdo::PARAM_INT);
-            $update->bindParam(':isValid', $isValid, $pdo::PARAM_BOOL);
-           
+            $update->bindParam(':isValid', $_POST['isValid'], $pdo::PARAM_BOOL);
             $update->fetch($pdo::FETCH_ASSOC);
-
-
+        
             if($update->execute()){
-                  
-                $update->fetch();
-              echo 'commentaire validé';
+
+                $update->setFetchMode($pdo::FETCH_CLASS, Comments::class);
+               
         } else {
             echo 'echèque de validation';
         }

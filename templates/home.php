@@ -34,7 +34,7 @@ require_once './templates/partial/_animalsliste.php';
 
     <?php  foreach($avis as $commantaire) { ?>
     
-        <?php if($commantaire->getIsValid() == false) { ?>
+        <?php if($commantaire->getIsValid() == true) { ?>
 
   <div style="margin-left: 10vw;">
 

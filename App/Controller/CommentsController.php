@@ -23,9 +23,13 @@ class CommentsController extends Controller{
                             
                                     break;
                                     case 'show':
-                                       // $this->update();
+                                        //$this->update();
                                         $this->show();
                                         break;
+                                        case 'isValid':
+                                            $this->update();
+                                            //$this->show();
+                                            break;
     
                                    
                 default:
@@ -57,7 +61,7 @@ class CommentsController extends Controller{
 
                        
                   
-                    $this->render('Admin/Comments', [
+                    $this->render('Admin/Comments/read', [
 
                         'comments' => $toto
                         
@@ -76,7 +80,7 @@ class CommentsController extends Controller{
                     $comments = new CommentsRepository();
                    $show = $comments->findOneById($id);
 
-                $this->render('Admin/comments', [
+                $this->render('Admin/Comments/show', [
 
                     'show' => $show
                     
@@ -110,13 +114,13 @@ class CommentsController extends Controller{
                 {
                         try {       
 
-                            if(isset($_GET['id'])){
-                                $id = $_GET['id'];
+                            if(isset($_GET['isValid'])){
+                                $id = $_GET['isValid'];
                                
-                                $habitatRrepository = new CommentsRepository();
-                                $habitatRrepository->update($id);
+                                $commentRrepository = new CommentsRepository();
+                                $commentRrepository->update($id);
 
-                                $this->render('/Admin/comments', [
+                                $this->render('/Admin/Comments/show', [
 
                                     
                           
