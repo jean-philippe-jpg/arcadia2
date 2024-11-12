@@ -75,14 +75,22 @@ use App\Tools\StringTools;
                 try{
                     $mysql = Mysql::getInstance();
                     $pdo = $mysql->getPDO();
-                      
+            
+                    $name = $_POST['name'];
+                    $sanitized_name = htmlspecialchars($name, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+                    $race = $_POST['race'];
+                    $sanitized_race = htmlspecialchars($race, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+                    $habitat = $_POST['habitat'];
+                    $sanitized_habitat = htmlspecialchars($habitat, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+                    $state = $_POST['state'];
+                    $sanitized_state = htmlspecialchars($state, ENT_QUOTES | ENT_HTML5, 'UTF-8');
                 
     
                 $stmt = $pdo->prepare('INSERT INTO animals (first_name, race, habitat, state) VALUES (:first_name, :race, :habitat, :state)');
-                $stmt->bindParam(':first_name', $_POST['name'], $pdo::PARAM_STR);
-                $stmt->bindParam(':race', $_POST['race'], $pdo::PARAM_INT);
-                $stmt->bindParam(':habitat', $_POST['home'], $pdo::PARAM_INT);
-                $stmt->bindParam(':state', $_POST['state'], $pdo::PARAM_INT);
+                $stmt->bindParam(':first_name', $sanitized_name , $pdo::PARAM_STR);
+                $stmt->bindParam(':race',  $sanitized_race , $pdo::PARAM_INT);
+                $stmt->bindParam(':habitat', $sanitized_habitat , $pdo::PARAM_INT);
+                $stmt->bindParam(':state',  $sanitized_state , $pdo::PARAM_INT);
              
                 if(!$stmt->execute()){
                     echo 'erreur d\'insertion';
@@ -99,13 +107,21 @@ use App\Tools\StringTools;
             $mysql = Mysql::getInstance();
             $pdo = $mysql->getPDO();
               
+            $name = $_POST['name'];
+            $sanitized_name = htmlspecialchars($name, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+            $race = $_POST['race'];
+            $sanitized_race = htmlspecialchars($race, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+            $habitat = $_POST['home'];
+            $sanitized_habitat = htmlspecialchars($habitat, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+            $state = $_POST['state'];
+            $sanitized_state = htmlspecialchars($state, ENT_QUOTES | ENT_HTML5, 'UTF-8');
         
 
         $stmt = $pdo->prepare('INSERT INTO rapport_soignant (nourriture, quantitee, date_heure) VALUES (:nourriture, :quantitee, :date) FROM animals WHERE id = :id');
-        $stmt->bindParam(':first_name', $_POST['name'], $pdo::PARAM_STR);
-        $stmt->bindParam(':race', $_POST['race'], $pdo::PARAM_INT);
-        $stmt->bindParam(':habitat', $_POST['home'], $pdo::PARAM_INT);
-        $stmt->bindParam(':state', $_POST['state'], $pdo::PARAM_INT);
+        $stmt->bindParam(':first_name',$sanitized_name, $pdo::PARAM_STR);
+        $stmt->bindParam(':race', $sanitized_race , $pdo::PARAM_INT);
+        $stmt->bindParam(':habitat', $sanitized_habitat , $pdo::PARAM_INT);
+        $stmt->bindParam(':state',  $sanitized_state , $pdo::PARAM_INT);
         $stmt->bindParam(':id', $id, $pdo::PARAM_INT);
      
         if(!$stmt->execute()){
@@ -230,12 +246,23 @@ use App\Tools\StringTools;
 
             $mysql = Mysql::getInstance();
             $pdo = $mysql->getPDO();
+
+
+            $name = $_POST['name'];
+            $sanitized_name = htmlspecialchars($name, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+            $race = $_POST['race'];
+            $sanitized_race = htmlspecialchars($race, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+            $home = $_POST['home'];
+            $sanitized_home = htmlspecialchars($home, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+            $state = $_POST['state'];
+            $sanitized_state = htmlspecialchars($state, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+
             $query = $pdo->prepare('UPDATE animals set first_name = :name, race = :race,  habitat = :home, state = :state WHERE id = :id');
             $query->bindParam(':id',$id, $pdo::PARAM_INT);
-            $query->bindParam(':name', $_POST['name'], $pdo::PARAM_STR);
-            $query->bindParam(':race', $_POST['race'], $pdo::PARAM_INT);
-            $query->bindParam(':home', $_POST['home'], $pdo::PARAM_STR);
-            $query->bindParam(':state', $_POST['state'], $pdo::PARAM_INT);
+            $query->bindParam(':name',  $sanitized_name, $pdo::PARAM_STR);
+            $query->bindParam(':race', $sanitized_race, $pdo::PARAM_INT);
+            $query->bindParam(':home',  $sanitized_home, $pdo::PARAM_STR);
+            $query->bindParam(':state',  $sanitized_state, $pdo::PARAM_INT);
             /*$query->bindParam(':nourriture', $_POST['nourriture'], $pdo::PARAM_INT);
             $query->bindParam(':quantitee', $_POST['quantitee'], $pdo::PARAM_INT);
             $query->bindParam(':date', $_POST['date'], $pdo::PARAM_STR);*/
@@ -273,11 +300,19 @@ use App\Tools\StringTools;
 
             $mysql = Mysql::getInstance();
             $pdo = $mysql->getPDO();
+
+            $nourriture = $_POST['nourriture'];
+            $sanitized_nourriture = htmlspecialchars($nourriture, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+            $quantitee = $_POST['quantitee'];
+            $sanitized_quantitee = htmlspecialchars($quantitee, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+            $date = $_POST['date'];
+            $sanitized_date = htmlspecialchars($date, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+            
             $query = $pdo->prepare('UPDATE animals set nourriture = :nourriture, quantitee = :quantitee, date_heure = :date WHERE id = :id');
             $query->bindParam(':id',$id, $pdo::PARAM_INT);
-            $query->bindParam(':nourriture', $_POST['nourriture'], $pdo::PARAM_STR);
-            $query->bindParam(':quantitee', $_POST['quantitee'], $pdo::PARAM_INT);
-            $query->bindParam(':date', $_POST['date'], $pdo::PARAM_STR);
+            $query->bindParam(':nourriture', $sanitized_nourriture, $pdo::PARAM_STR);
+            $query->bindParam(':quantitee', $sanitized_quantitee, $pdo::PARAM_INT);
+            $query->bindParam(':date', $sanitized_date, $pdo::PARAM_STR);
          
             if( $query->execute()){
 
