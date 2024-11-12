@@ -122,7 +122,7 @@ class HabitatsController extends Controller{
                         try {     
                         $habitatRrepository = new HabitatsRepository();
                         $habitatRrepository->createHabitat();
-                         $habitatRrepository->images();
+                         //$habitatRrepository->images();
  
                         $this->render('/Admin/Habitat/create', [
                                 

@@ -17,14 +17,8 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
     <label for="race"><strong>race:</strong> </label>
     <input name="race" id="race" type="text">
     </div>
-    <div class="create">
-    <label for="home"><strong>habitat:</strong> </label>
-    <input name="home" id="home" type="text">
-    </div>
-    <div class="create">
-    <label for="state"><strong>state:</strong> </label>
-    <input name="state" id="state" type="text">
-    </div>
+  
+   
 
    
 

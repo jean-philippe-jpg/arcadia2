@@ -2,15 +2,15 @@
 
 session_start();
 
- $_SESSION['username'];
+ //$_SESSION['username'];
 
 
-if (isset($_SESSION['username']) && $_SESSION['romain'] == false) {
+//if (!isset($_SESSION['username']) && $_SESSION['romain'] == false) {
 
-  echo '<h1 style="color:purple;  text-align: center; margin-top: 30vh;">vous n\'avez pas l\'acces à cette page  :/</h1>';
+ // echo '<h1 style="color:purple;  text-align: center; margin-top: 30vh;">vous n\'avez pas l\'acces à cette page  :/</h1>';
 
 
-} else {
+//} else {
 require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
 ?>
 <h1>Animaux</h1>
@@ -23,14 +23,14 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
 require_once _ROOTPATH_.'/templates/Admin/Partial/_btnadmin.php';
 ?>
 <a href="index.php" class="btn btn-danger">home</a>
-              <h3>salut</h3>
+            
     <thead>
     <tr>
     <th scope="col">#</th>
     <th scope="col">prenom</th>
     <th scope="col">race</th>
     <th scope="col">habitat</th>
-    <th scope="col">état</th>
+   
     
 
     <th scope="col">update</th>
@@ -46,11 +46,11 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_btnadmin.php';
       <?php foreach($animal as $reads) { ?>
         
       <tr>
-          <td><?= $reads->getId(); ?></td>
-          <td><?= $reads->getFirstName();?></td>
-          <td><?= $reads->getNameRace();?></td>
-          <td><?= $reads->getHabitat();?></td>
-          <td><?= $reads->getState();?></td>
+      <td><?= $reads->getId(); ?></td>
+      <td><?= $reads->getFirstname(); ?></td>
+      <td><?= $reads->getNameRace(); ?></td>
+      <td><?= $reads->getHabitat(); ?></td>
+         
           
           <td><a href="?controller=animals&action=update&modify=<?= $reads->getId(); ?>" class="btn btn-warning">update</a></td>
           <td><a href="?controller=animals&action=soins&id=<?= $reads->getId(); ?>" class="btn btn-warning">soins animal</a></td>
@@ -70,20 +70,11 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_btnadmin.php';
     <br>
     <div>
     <label for="race">Race</label>
-    <input type="number" id="race" name="race" >  
+    <input type="text" id="race" name="race" >  
     </div>
     <br>
     <div>
-    <label for="home">Habitat</label>
-    <input type="number" id="home" name="home" >  
-    </div>
-    <br>
-    <div>
-    <label for="state">Etat</label>
-    <input type="number" id="state" name="state" >  
-    </div>
-    <br>
-    <div>
+   
     
    <input type="submit"  class="btn btn-success"  value="Update">
     
@@ -99,7 +90,7 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_btnadmin.php';
 <?php
 require_once _ROOTPATH_.'/templates/Admin/Partial/_footer.php';
 
-     }
+     
 ?>
 
 

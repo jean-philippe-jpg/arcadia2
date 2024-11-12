@@ -176,7 +176,7 @@ class HabitatsRepository {
                 $mysql = Mysql::getInstance();
                 $pdo = $mysql->getPDO();
                 $stmt = $pdo->prepare("SELECT h.id as id, h.name as name_habitat, h.description as description, h.animals_list as animals, a.first_name as name FROM habitat h
-                INNER JOIN animals a ON h.id = a.habitat");
+                INNER JOIN animals a ON h.animals_list = a.id");
                    // $stmt->bindParam(':id', $id, $pdo::PARAM_INT);
                 /*$stmt = $pdo->prepare("SELECT * FROM habitat 
                 INNER JOIN animals  ON habitat.animals_list = animals.id");*/
