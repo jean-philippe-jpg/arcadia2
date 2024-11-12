@@ -256,10 +256,6 @@ public function profil( ){
                            
                         }
                        
-                       
-
-                   
-              
                 } else {
 
                     echo 'identifiant introuvable';

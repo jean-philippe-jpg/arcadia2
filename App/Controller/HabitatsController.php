@@ -73,7 +73,7 @@ class HabitatsController extends Controller{
                 
                 {
                     try {
-                        if(isset($_GET['id'])){
+                        if(isset($_GET['id'])) {
 
                             $id = $_GET['id'];
                             // charger l'id d'un element avec le repository//
@@ -119,16 +119,35 @@ class HabitatsController extends Controller{
                 protected function create()
                 
                 {
-                        try {     
+                        try {  
+                            
+                            if(!isset($_GET['photo'])) {
                         $habitatRrepository = new HabitatsRepository();
                         $habitatRrepository->createHabitat();
+                      
+                         $this->render('/Admin/Habitat/create', [
+
+                         ] );
+                                    
                          //$habitatRrepository->images();
  
-                        $this->render('/Admin/Habitat/create', [
-                                
+                        
+                            } else {
+
+                            $uploadsRrepository = new HabitatsRepository();
+                             $uploadsRrepository->images();
+
+                             $id = $_GET['id'];
+                             $uploadsRrepository = new HabitatsRepository();
+                             $hab_id = $uploadsRrepository->findOneById($id);
+
+                         $this->render('/Admin/Habitat/create', [
+                                    'hab_id' => $hab_id
+                                    
                                       
                             ] );
- 
+                         }
+                        
                         } catch(\Exception $e ) {
                             $this->render('errors/errors', [
                                 'errors' => $e->getMessage()
