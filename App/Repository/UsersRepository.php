@@ -59,15 +59,19 @@ class UsersRepository {
                 try{
                 $mysql = Mysql::getInstance();
                 $pdo = $mysql->getPDO();
-                $password = $_POST['password'];
-                $email = $_POST['email'];
+
                 
                 $statement = $pdo->prepare('INSERT INTO users(email, password) VALUES (:email, :password)');
 
-            $statement->bindParam(':email', $email, $pdo::PARAM_STR);
+            $statement->bindParam(':email',  $sanitized_email, $pdo::PARAM_STR);
+
+            $email = $_POST['email'];
+            $sanitized_email = htmlspecialchars($email, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+            $password = $_POST['password'];
+            $sanitized_password = htmlspecialchars($password, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+         
             // Hash du mot de passe en utilisant BCRYPT //
-            $statement->bindParam(':password', password_hash($password, PASSWORD_BCRYPT));
-            
+            $statement->bindParam(':password', password_hash( $sanitized_password, PASSWORD_BCRYPT));
 
             if ($statement->execute()) {
 
@@ -216,7 +220,8 @@ public function profil( ){
               
                 // On récupère un utilisateur ayant le même login (ici, e-mail)
                 $email = $_POST['email'];
-                $statement->bindValue(':email',$email, $pdo::PARAM_STR);
+            $sanitized_email = htmlspecialchars($email, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+                $statement->bindValue(':email',$sanitized_email, $pdo::PARAM_STR);
                 $statement->execute();
                 $user = $statement->fetchObject( Users::class);
 
@@ -228,13 +233,16 @@ public function profil( ){
                
 
             } else {
-                if(password_verify($_POST['password'], $user->getPassword())){
+
+                $password = $_POST['password'];
+                $sanitized_password = htmlspecialchars($password, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+
+                if(password_verify( $sanitized_password , $user->getPassword())){
                     
 
                         $rolesStatement = $pdo->prepare('SELECT * FROM roles_users 
                         JOIN roles ON role_id = id WHERE user_id = :id');
                         $rolesStatement->bindValue(':id', $user->getId(), $pdo::PARAM_INT);
-                        //$result = $rolesStatement->fetchAll();
                         
                         if( $rolesStatement->execute()){
                                 

@@ -19,23 +19,31 @@ class CommentsRepository {
         $mysql = Mysql::getInstance();
         $pdo = $mysql->getPDO();
        
-            if(isset($_POST['pseudo']) && isset($_POST['message']) && !empty($_POST['pseudo']) && !empty($_POST['message'])){
+            //if(isset($_POST['pseudo']) && isset($_POST['message']) && !empty($_POST['pseudo']) && !empty($_POST['message'])){
                
-                $pseudo=$_POST['pseudo'];
-                $message=$_POST['message'];
+               
 
                $comment= $pdo->prepare('INSERT INTO avis (pseudo, message) VALUES (:pseudo, :message)');
-                $comment->bindParam(':pseudo', $pseudo, $pdo::PARAM_STR);
-                $comment->bindParam(':message', $message, $pdo::PARAM_STR);
+                $comment->bindParam(':pseudo', $sanitized_pseudo, $pdo::PARAM_STR);
+                $comment->bindParam(':message', $sanitized_message, $pdo::PARAM_STR);
                
+                if(!isset($_POST['pseudo']) || !isset($_POST['message'])) {
+
+                } else {
+                $pseudo = $_POST['pseudo'];
+                $sanitized_pseudo = htmlspecialchars($pseudo, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+                $message = $_POST['message'];
+                $sanitized_message = htmlspecialchars($message, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+                
                $comment->execute();
            
 
-        } else {
+       /* } else {
 
             echo 'veuillez remplir tous les champs';
      
-        }
+        }*/
+            }
      } catch(\Exception $e){
          echo 'erreur d\'insertion'. $e->getMessage();
      }
@@ -100,9 +108,18 @@ public function update(int $id){
             
             $update = $pdo->prepare('UPDATE avis set isValid = :isValid WHERE id = :id');
             $update->bindParam(':id', $id, $pdo::PARAM_INT);
-            $update->bindParam(':isValid', $_POST['isValid'], $pdo::PARAM_BOOL);
+            $update->bindParam(':isValid', $sanitized_isvalid, $pdo::PARAM_BOOL);
             $update->fetch($pdo::FETCH_ASSOC);
         
+
+            if(!isset($_POST['isValid'])) {
+
+
+            } else {
+                $isvalid = $_POST['isValid'];
+                $sanitized_isvalid = htmlspecialchars($isvalid, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+
+            }
             if($update->execute()){
 
                 $update->setFetchMode($pdo::FETCH_CLASS, Comments::class);

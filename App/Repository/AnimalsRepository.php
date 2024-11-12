@@ -76,6 +76,16 @@ use App\Tools\StringTools;
                     $mysql = Mysql::getInstance();
                     $pdo = $mysql->getPDO();
             
+                $stmt = $pdo->prepare('INSERT INTO animals (first_name, race, habitat, state) VALUES (:first_name, :race, :habitat, :state)');
+                $stmt->bindParam(':first_name', $sanitized_name , $pdo::PARAM_STR);
+                $stmt->bindParam(':race',  $sanitized_race , $pdo::PARAM_INT);
+                $stmt->bindParam(':habitat', $sanitized_habitat , $pdo::PARAM_INT);
+                $stmt->bindParam(':state',  $sanitized_state , $pdo::PARAM_INT);
+
+
+                    if(!isset($_POST['name']) || !isset($_POST['race']) || !isset($_POST['habitat']) || !isset($_POST['state'])) {
+
+                    } else {
                     $name = $_POST['name'];
                     $sanitized_name = htmlspecialchars($name, ENT_QUOTES | ENT_HTML5, 'UTF-8');
                     $race = $_POST['race'];
@@ -84,18 +94,11 @@ use App\Tools\StringTools;
                     $sanitized_habitat = htmlspecialchars($habitat, ENT_QUOTES | ENT_HTML5, 'UTF-8');
                     $state = $_POST['state'];
                     $sanitized_state = htmlspecialchars($state, ENT_QUOTES | ENT_HTML5, 'UTF-8');
-                
-    
-                $stmt = $pdo->prepare('INSERT INTO animals (first_name, race, habitat, state) VALUES (:first_name, :race, :habitat, :state)');
-                $stmt->bindParam(':first_name', $sanitized_name , $pdo::PARAM_STR);
-                $stmt->bindParam(':race',  $sanitized_race , $pdo::PARAM_INT);
-                $stmt->bindParam(':habitat', $sanitized_habitat , $pdo::PARAM_INT);
-                $stmt->bindParam(':state',  $sanitized_state , $pdo::PARAM_INT);
              
                 if(!$stmt->execute()){
                     echo 'erreur d\'insertion';
                 } 
-    
+            }
             } catch(\Exception $e){
                 echo 'erreur d\'insertion'. $e->getMessage();
             }

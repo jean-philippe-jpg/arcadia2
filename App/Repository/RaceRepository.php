@@ -36,13 +36,22 @@ class RaceRepository {
                 
     
                 $stmt = $pdo->prepare('INSERT INTO race (name) VALUES (:name)');
-                $stmt->bindParam(':name', $_POST['name'], $pdo::PARAM_STR);
+                $stmt->bindParam(':name', $sanitized_name, $pdo::PARAM_STR);
 
+                    if(!isset($_POST['name'])) {
+
+
+                    } else {
+                $name = $_POST['name'];
+                $sanitized_name = htmlspecialchars($name, ENT_QUOTES | ENT_HTML5, 'UTF-8');
              
                 if(!$stmt->execute()){
                     echo 'erreur d\'insertion';
+                } else {
+
+                    echo 'race rcréée!';
                 } 
-    
+            }
             } catch(\Exception $e){
                 echo 'erreur d\'insertion'. $e->getMessage();
             }
