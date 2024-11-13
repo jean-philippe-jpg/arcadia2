@@ -55,6 +55,7 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_btnadmin.php';
           <td><a href="?controller=animals&action=update&modify=<?= $reads->getId(); ?>" class="btn btn-warning">update</a></td>
           <td><a href="?controller=animals&action=soins&id=<?= $reads->getId(); ?>" class="btn btn-warning">soins animal</a></td>
           <td><a href="?controller=animals&action=show&id=<?= $reads->getId(); ?>" class="btn btn-warning">voir</a></td>
+          <td><a href="?controller=animals&action=create&photo&id=<?= $reads->getId(); ?>" class="btn btn-warning">photo</a></td>
           <td><a href="?controller=animals&action=delete&suprimer=<?= $reads->getId(); ?>" class="btn btn-danger">delete</a></td>
       </tr>
      

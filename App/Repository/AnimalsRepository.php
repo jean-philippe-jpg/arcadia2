@@ -100,6 +100,46 @@ use App\Tools\StringTools;
             }
     }
 
+
+    public function images(){
+
+        try {
+            $mysql = Mysql::getInstance();
+            $pdo = $mysql->getPDO();
+        
+            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                if (empty($_FILES['images']['tmp_name'])) {
+                    echo 'Veuillez sélectionner un fichier.';
+                } else {
+                    $file_basename = pathinfo($_FILES['images']['name'], PATHINFO_FILENAME);
+                    $file_ext = pathinfo($_FILES['images']['name'], PATHINFO_EXTENSION);
+        
+                    $new_name = $file_basename . '_' . date("Ymd_His") . '.' . $file_ext;
+        
+                    $images = $pdo->prepare('INSERT INTO img_animals (libele, animals_id) VALUES (:libele, :animals_id)');
+                    $images->bindParam(':libele', $new_name, $pdo::PARAM_STR);
+                    $images->bindParam(':animals_id', $_POST['animals_id'], $pdo::PARAM_INT);
+        
+                    if ($images->execute()) {
+                        $target_dir = "uploads/";
+                        $target_path = $target_dir . $new_name;
+        
+                        if (move_uploaded_file($_FILES['images']['tmp_name'], $target_path)) {
+                            echo 'Téléchargement réussi : ' . htmlspecialchars($new_name);
+                        } else {
+                            echo 'Erreur lors du déplacement du fichier.';
+                        }
+                    } else {
+                        echo 'Erreur lors de l\'insertion dans la base de données.';
+                    }
+                }
+            }
+        } catch (\Exception $e) {
+            echo 'Erreur : ' . $e->getMessage();
+        }
+
+    }
+
     public function createEntrtient( ){
 
         try{
