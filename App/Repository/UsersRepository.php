@@ -65,6 +65,12 @@ class UsersRepository {
 
             $statement->bindParam(':email',  $sanitized_email, $pdo::PARAM_STR);
 
+            if(!isset($_POST['email'])) {
+
+
+            } else {
+
+            
             $email = $_POST['email'];
             $sanitized_email = htmlspecialchars($email, ENT_QUOTES | ENT_HTML5, 'UTF-8');
             $password = $_POST['password'];
@@ -82,7 +88,7 @@ class UsersRepository {
 
                throw new Exception('Impossible de créer l\'utilisateur') ;
             }
-    
+        }
             } catch(\Exception $e){
                 echo  $e->getMessage();
             }
