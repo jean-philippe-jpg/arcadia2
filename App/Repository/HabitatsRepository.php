@@ -18,8 +18,8 @@ class HabitatsRepository {
 
        /* $query = $pdo->prepare('SELECT h.id as id, h.name as name, h.description as description, h.animals_list as animals, a.first_name as first_name FROM habitat h
                 INNER JOIN animals a ON h.id = a.habitat where h.id = :id');*/
-                 $query = $pdo->prepare("SELECT h.id as id, h.name as name_habitat, h.description as description, h.animals_list as animals FROM habitat h
-                where h.id = :id ");
+                 $query = $pdo->prepare("SELECT * FROM habitat 
+                where id = :id ");
                 $query->bindParam(':id', $id, $pdo::PARAM_INT);
         
             if($query->execute()){
