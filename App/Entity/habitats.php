@@ -9,12 +9,14 @@ class Habitats
 {
 
 protected int $id ;
-protected string $name_habitat ;
 protected  string $description ;
 protected string $name ;
 protected int $animal_id ;
+protected int $animals_list ;
 protected string $race_name ;
+protected string $race ;
 protected string $state ;
+protected string $name_animals ;
 protected int $avis_id ;
 
 
@@ -31,12 +33,12 @@ public function setId(int $id)
 
 public function getName(): string
 {
-      return $this->name_habitat;
+      return $this->name;
 }
 
-public function setName(string $name_habitat)
+public function setName(string $name)
 {
-     $this->name_habitat = $name_habitat;
+     $this->name = $name;
 }
 
 public function getDescription(): string
@@ -52,12 +54,12 @@ public function setDescription(string $description)
 public function getAnimalsList(): string
 {
 
-      return $this->name;
+      return $this->animals_list;
 }
 
-public function setAnimalsList( $name)
+public function setAnimalsList( $animals_list)
 {
-     $this->name = $name;
+     $this->animals_list = $animals_list;
 }
 
 
@@ -79,13 +81,13 @@ return $this;
  
 public function getRace(): string
 {
-return $this->race_name;
+return $this->race;
 }
 
 
 public function setRace($race)
 {
-$this->race_name = $race;
+$this->race = $race;
 
 return $this;
 }
@@ -117,4 +119,20 @@ $this->avis_id = $avis_id;
 
 return $this;
 }
+
+
+public function getName_animals()
+{
+return $this->name_animals;
+}
+
+
+public function setName_animals($name_animals)
+{
+$this->name_animals = $name_animals;
+
+return $this;
+}
+
+ 
 }
