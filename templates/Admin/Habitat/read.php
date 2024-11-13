@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-var_dump($_SESSION);
+//var_dump($_SESSION);
 
 //$_SESSION['username'];
 //$_SESSION['roles'];
@@ -46,7 +46,7 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_btnadmin.php';
       <td><?= $habitats->getId(); ?></td>
          <td><?= $habitats->getName();?></td>
           <td><?= $habitats->getDescription(); ?></td>
-          <td><?= $habitats->getAnimalsList(); ?></td>
+          <td><?= $habitats->getName_animals(); ?></td>
            
         
           
@@ -61,10 +61,7 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_btnadmin.php';
 
            
             <form action="" method="post">
-                <div>
-                <label for="name">Name</label>
-                <input type="text" id="name" name="name" >  
-                </div>
+                
                 <br>
                 <div>
                 <label for="description">Description</label>

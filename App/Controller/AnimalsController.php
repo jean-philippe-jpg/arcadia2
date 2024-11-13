@@ -288,12 +288,10 @@ class AnimalsController extends Controller{
 
                               $this->render('/Admin/Animals/read', [
 
-                               
-                        
                          ] );
                              
                               } else {
-                                  throw new \Exception('modification impossible :/');
+                                  throw new \Exception('modification impossible :');
   
                               }
                           

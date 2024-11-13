@@ -75,7 +75,7 @@ class VetoRepository {
                 $mysql = Mysql::getInstance();
                 $pdo = $mysql->getPDO();
                 $stmt = $pdo->prepare('SELECT a.id as id, a.first_name,  a_s.animal as animal, a_s.nourriture as nourriture, a_s.quantitee as quantitee, a_s.state as state, a_s.detail as datail, a_s.date_de_passage as date FROM animals a
-                INNER JOIN animals_state a_s ON a.state = a_s.id');
+                INNER JOIN animals_state a_s ON a.id = a_s.animals');
                
                 if($stmt->execute()){
                     

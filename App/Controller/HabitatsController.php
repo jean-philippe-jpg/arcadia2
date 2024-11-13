@@ -124,6 +124,10 @@ class HabitatsController extends Controller{
                             if(!isset($_GET['photo'])) {
                         $habitatRrepository = new HabitatsRepository();
                         $habitatRrepository->createHabitat();
+                        
+                        $uploadsRrepository = new HabitatsRepository();
+                        $uploadsRrepository->images();
+
                       
                          $this->render('/Admin/Habitat/create', [
 

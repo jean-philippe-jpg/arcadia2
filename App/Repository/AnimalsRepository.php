@@ -241,7 +241,7 @@ use App\Tools\StringTools;
                 $pdo = $mysql->getPDO();
 
                 $query = $pdo->prepare('SELECT a.id as id,  a.first_name as first_name,  r.name as namerace, h.name as home FROM animals a
-                INNER JOIN race r ON a.race = r.id JOIN habitat h ON a.habitat = h.id where a.id = :id');   
+                INNER JOIN race r ON a.race = r.id JOIN habitat h ON h.animals_list = a.id where a.id = :id');   
                     $query->bindParam(':id', $id, $pdo::PARAM_INT);
         
                 if($query->execute()) {
@@ -376,7 +376,7 @@ use App\Tools\StringTools;
             return  $query;
 
         } catch(\Exception $e){
-            echo 'erreur d\'insertion'. $e->getMessage();
+            echo 'erreur de suppression'. $e->getMessage();
            
 
         }

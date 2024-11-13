@@ -1,6 +1,6 @@
 <?php 
 session_start();
-$username = $_SESSION['username'];
+//$username = $_SESSION['username'];
 
 require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php' ?>
 
@@ -18,7 +18,6 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php' ?>
 <p><strong>Prenom:  </strong><?= $soin->getFirstName()?></p>
 <p><strong>Race:  </strong><?= $soin->getNameRace()?></p>
 <p><strong>Habitat:  </strong><?= $soin->getHabitat()?></p>
-<p><strong>Id:  </strong><?= $soin->getId()?></p>
 
 
 </div>
@@ -41,8 +40,8 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php' ?>
    
 
     <div class="create">
-    <label for="animal"><strong>animal: </strong></label>
-    <input name="animal" value="<?= $soin->getId();?>"  id="animal" type="number">
+    
+    <input style="visibility: hidden;" name="animal" value="<?= $soin->getId();?>"  id="animal" type="number">
     </div>
 
     <input type="submit"  value="create">
@@ -57,7 +56,7 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php' ?>
 
 <?php 
 
- echo $username ;
+ /*echo $username ;
         if(isset($_SESSION['username']) && $_SESSION['romain'] == true) { ?>
 
                 <a class="btn" href="?controller=users&action=profil">mon compte</a>
@@ -73,4 +72,6 @@ echo 'fonction non autorisé';
 
 
 
-<?php } ?>
+<?php }*/
+}
+?>
