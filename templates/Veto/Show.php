@@ -7,7 +7,7 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php'
 <a href="?controller=veto&action=read" class="btn btn-success">retour</a>
 
 <div class="show">
-
+<p><strong>date:  </strong><?= $show->getAnimals_name();?></p>
 <p><strong>Nourriture:  </strong><?= $show->getNourriture();?></p>
 <p><strong>Quantitée:  </strong><?= $show->getQuantitee();?></p>
 <p><strong>Etat:  </strong><?= $show->getState()?></p>

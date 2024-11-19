@@ -6,6 +6,9 @@ class AnimalsState {
 
     
       protected int $id ;
+      protected int $id_state ;
+      protected string $animals_id ;
+      protected string $animals_name ;
       protected string $nourriture ;
       protected  int $quantitee ;
       protected string $state;
@@ -148,6 +151,48 @@ public function setId(int $id)
       public function setDate_de_passage($date_de_passage)
       {
             $this->date_de_passage = $date_de_passage;
+
+            return $this;
+      }
+
+       
+      public function getId_state()
+      {
+            return $this->id_state;
+      }
+
+      
+      public function setId_state($id_state)
+      {
+            $this->id_state = $id_state;
+
+            return $this;
+      }
+
+       
+      public function getAnimals_name()
+      {
+            return $this->animals_name;
+      }
+
+      
+      public function setAnimals_name($animals_name)
+      {
+            $this->animals_name = $animals_name;
+
+            return $this;
+      }
+
+      
+      public function getAnimals_id()
+      {
+            return $this->animals_id;
+      }
+
+      
+      public function setAnimals_id($animals_id)
+      {
+            $this->animals_id = $animals_id;
 
             return $this;
       }

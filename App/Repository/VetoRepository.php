@@ -19,7 +19,7 @@ class VetoRepository {
         $mysql = Mysql::getInstance();
         $pdo = $mysql->getPDO();
 
-        $query = $pdo->prepare('SELECT a_s.id as id, a_s.nourriture, a_s.quantitee as quantitee, a_s.state as state, a_s.detail as detail, a_s.date_de_passage as date, a.first_name as name FROM animals_state a_s
+        $query = $pdo->prepare('SELECT a_s.id as id, a_s.nourriture as nourriture, a_s.quantitee as quantitee, a_s.state as state, a_s.detail as detail, a_s.date_de_passage as date, a.id as animals_id, a.first_name as animals_name FROM animals_state a_s
                 INNER JOIN animals a ON a_s.animal = a.id where a_s.id = :id');   
         $query->bindParam(':id', $id, $pdo::PARAM_INT);
         //$animals_state = $query->Fetch($pdo::FETCH_ASSOC);
@@ -74,12 +74,12 @@ class VetoRepository {
 
                 $mysql = Mysql::getInstance();
                 $pdo = $mysql->getPDO();
-                $stmt = $pdo->prepare('SELECT a.id as id, a.first_name,  a_s.animal as animal, a_s.nourriture as nourriture, a_s.quantitee as quantitee, a_s.state as state, a_s.detail as datail, a_s.date_de_passage as date FROM animals a
-                INNER JOIN animals_state a_s ON a.id = a_s.animals');
+                $stmt = $pdo->prepare('SELECT a.id as id, a.first_name as animals_name, a_s.id as id_state,  a_s.animal as animal, a_s.nourriture as nourriture, a_s.quantitee as quantitee, a_s.state as state, a_s.detail as detail, a_s.date_de_passage as date FROM animals a
+                INNER JOIN animals_state a_s ON a.id = a_s.animal');
                
                 if($stmt->execute()){
                     
-                    $stmt->setFetchMode($pdo::FETCH_CLASS, Animals::class );
+                    $stmt->setFetchMode($pdo::FETCH_CLASS, AnimalsState::class );
                     
                    return $stmt->fetchAll();
                   
@@ -167,13 +167,19 @@ class VetoRepository {
             $mysql = Mysql::getInstance();
             $pdo = $mysql->getPDO();
             
+            if(empty($_POST['nourriture'])){
+
+            } else {
             $nourritures = $_POST['nourriture'];
             $quantitee = $_POST['quantitee'];
             $state = $_POST['state'];
             $detail = $_POST['detail'];
             $animal = $_POST['animal'];
+            if(empty($_POST['date'])){
+                 echo 'veuillez choisire une date';
+            }
             $date = $_POST['date'];  
-                               
+            }
 
                 $update = $pdo->prepare('UPDATE animals_state set nourriture = :nourriture, quantitee = :quantitee, state = :state, detail = :detail, animal = :animal, date_de_passage = :date  WHERE id = :id');
                 $update->bindParam(':id', $id, $pdo::PARAM_INT);
@@ -183,7 +189,10 @@ class VetoRepository {
                 $update->bindParam(':state', $state, $pdo::PARAM_STR);
                 $update->bindParam(':detail', $detail, $pdo::PARAM_STR);
                 $update->bindParam(':animal', $animal, $pdo::PARAM_INT);
-                $update->bindParam(':date', $date, $pdo::PARAM_STR);
+
+              
+                 $update->bindParam(':date', $date, $pdo::PARAM_STR);
+        
                 $update->fetch($pdo::FETCH_ASSOC);
 
 

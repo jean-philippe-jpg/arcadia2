@@ -1,11 +1,11 @@
 <?php
 session_start();
 
-var_dump($_SESSION);
+//var_dump($_SESSION);
 
-$_SESSION['email'] = $_POST['email'];
+//$_SESSION['email'] = $_POST['email'];
 
- $_SESSION['password'] = $_POST['password'];
+ //$_SESSION['password'] = $_POST['password'];
  /*$_SESSION['users'] = [
 	'id' => $user->getId(),
 	'roles' => $user->getRoles()

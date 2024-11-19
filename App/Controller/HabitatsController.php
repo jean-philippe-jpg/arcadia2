@@ -90,7 +90,7 @@ class HabitatsController extends Controller{
                             } elseif(isset($_GET['detailAnimal'])) {  
                                 $id = $_GET['detailAnimal'];
                             // afficher le detail de l'element//
-                            $habitatRrepository = new HabitatsRepository();
+                            $habitatRrepository = new AnimalsRepository();
                             $animals = $habitatRrepository->findOneById($id);
                             $this->render('showanimals', [
 

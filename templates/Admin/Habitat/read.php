@@ -43,10 +43,10 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_btnadmin.php';
       <?php foreach($habitat as $habitats) { ?>
       <tr>
         
-      <td><?= $habitats->getId(); ?></td>
+      <td><?= $habitats->getId_state(); ?></td>
          <td><?= $habitats->getName();?></td>
           <td><?= $habitats->getDescription(); ?></td>
-          <td><?= $habitats->getName_animals(); ?></td>
+         
            
         
           
