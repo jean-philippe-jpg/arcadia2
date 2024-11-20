@@ -47,14 +47,14 @@ class VetoRepository {
                 $mysql = Mysql::getInstance();
                 $pdo = $mysql->getPDO();
                   
+                   
                 $stmt = $pdo->prepare('INSERT INTO animals_state (nourriture, quantitee, state, date_de_passage, detail, animal) VALUES (:nourriture, :quantitee, :state, :date_de_passage, :detail, :animal)');
-                $stmt->bindParam(':nourriture', $_POST['nourriture'], $pdo::PARAM_STR);
+                $stmt->bindParam(':nourriture',$_POST['nourriture'] , $pdo::PARAM_STR);
                 $stmt->bindParam(':quantitee', $_POST['quantitee'], $pdo::PARAM_INT);
                 $stmt->bindParam(':state', $_POST['state'], $pdo::PARAM_STR);
                 $stmt->bindParam(':date_de_passage', $_POST['date_de_passage'], $pdo::PARAM_STR);
                 $stmt->bindParam(':detail', $_POST['detail'], $pdo::PARAM_STR);
                 $stmt->bindParam(':animal', $_POST['animal'], $pdo::PARAM_INT);
-                
                 
                 //$stmt->execute();
                 if($stmt->execute()){

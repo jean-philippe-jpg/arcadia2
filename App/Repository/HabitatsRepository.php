@@ -23,7 +23,7 @@ class HabitatsRepository {
                 $query->bindParam(':id', $id, $pdo::PARAM_INT);*/
 
                 $query = $pdo->prepare("SELECT h.name, h.description,  a.first_name as name_animals, a.id as animal_id FROM habitat h
-                INNER JOIN animals a ON h.animals_list = a.id  where h.id = :id ");
+                INNER JOIN animals a ON a.habitat_id = h.id  where h.id = :id ");
                 $query->bindParam(':id', $id, $pdo::PARAM_INT);
         
             if($query->execute()){
@@ -50,13 +50,12 @@ class HabitatsRepository {
                 } else {
                $name = $_POST['name'];
                 $description = $_POST['description'];
-                $animals = $_POST['animals_list'];
+                
     
-                $stmt = $pdo->prepare('INSERT INTO habitat (name, description, animals_list) VALUES (:name, :description, :animals_list)');
+                $stmt = $pdo->prepare('INSERT INTO habitat (name, description ) VALUES (:name, :description )');
                 $stmt->bindParam(':name',$name , $pdo::PARAM_STR);
                 $stmt->bindParam(':description', $description , $pdo::PARAM_STR);
-                $stmt->bindParam(':animals_list', $animals, $pdo::PARAM_INT);
-
+                
                     
                  
                 if($stmt->execute()){
@@ -149,11 +148,10 @@ class HabitatsRepository {
 
                 $mysql = Mysql::getInstance();
                 $pdo = $mysql->getPDO();
-                $stmt = $pdo->prepare("SELECT h.id as id, h.name as name, h.description as description, h.animals_list as animals, a.first_name as name_animals FROM habitat h
-                INNER JOIN animals a ON h.animals_list = a.id");
-                   // $stmt->bindParam(':id', $id, $pdo::PARAM_INT);
-                /*$stmt = $pdo->prepare("SELECT * FROM habitat 
-                INNER JOIN animals  ON habitat.animals_list = animals.id");*/
+                $stmt = $pdo->prepare("SELECT h.id as id, h.name as name, h.description as description, a.first_name as name_animals FROM habitat h
+                INNER JOIN animals a ON a.habitat_id = h.id");
+                  
+
                 
                 if($stmt->execute()){
                     
@@ -182,18 +180,21 @@ class HabitatsRepository {
           
         
 
-        $stmt = $pdo->prepare('INSERT INTO avis_habitat (avis, etat, habitat_id, images) VALUES (:avis, :etat, :habitat_id, :images)');
+        $stmt = $pdo->prepare('INSERT INTO avis_habitat (avis, etat, habitat_id ) VALUES (:avis, :etat, :habitat_id)');
         $stmt->bindParam(':avis', $_POST['avis'], $pdo::PARAM_STR);
         $stmt->bindParam(':etat', $_POST['etat'], $pdo::PARAM_STR);
         $stmt->bindParam(':habitat_id', $_POST['habitat_id'], $pdo::PARAM_INT);
-        $stmt->bindParam(':images', $_POST['images'], $pdo::PARAM_INT);
-
+       
      
         if(!$stmt->execute()){
             echo 'erreur d\'insertion';
         } 
+            if(empty($_POST['avis'])) {
+                
 
-        echo 'avis crée';
+                } else {
+             echo 'avis crée';
+            }
 
     } catch(\Exception $e){
         echo 'erreur d\'insertion'. $e->getMessage();
@@ -213,15 +214,15 @@ class HabitatsRepository {
 
                 } else {
                 $description = $_POST['description'];
-                $animals = $_POST['animals'];
+               
             
                 //$last_name = $_POST['last_name'];
 
 
-                $update = $pdo->prepare('UPDATE habitat set description = :description, animals_list = :animals  WHERE id = :id');
+                $update = $pdo->prepare('UPDATE habitat set description = :description  WHERE id = :id');
                 $update->bindParam(':id', $id, $pdo::PARAM_INT);
                 $update->bindParam(':description', $description, $pdo::PARAM_STR);
-                $update->bindParam(':animals', $animals, $pdo::PARAM_STR);
+              
                 $update->fetch($pdo::FETCH_ASSOC);
 
 

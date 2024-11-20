@@ -27,7 +27,7 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
       <tr>
           <td><?= $user->getId(); ?></td>
           <td><?= $user->getEmail();?></td>
-          <td><?= $user->getRoles();?></td>
+          <td><?= $user->getRolesName();?></td>
           
        
           

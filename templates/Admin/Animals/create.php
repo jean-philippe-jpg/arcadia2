@@ -18,6 +18,11 @@ if(!isset($_GET['photo'])) { ?>
     <label for="race"><strong>race:</strong> </label>
     <input name="race" id="race" type="text">
     </div>
+    
+    <div class="create">
+    <label for="habitat_id"><strong>habitat:</strong> </label>
+    <input name="habitat_id" id="habitat_id" type="text">
+    </div>
   
    
 

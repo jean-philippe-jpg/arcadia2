@@ -5,6 +5,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Horaires;
 use App\Repository\AvisHabitatsRepository;
 
 //use App\Repository\HabitatsRepository;
@@ -27,6 +28,11 @@ try {
             $pagecontroller = new VetoController();
             $pagecontroller->route();
             break;
+            case 'horaires':
+
+                $pagecontroller = new HorairesController();
+                $pagecontroller->route();
+                break;
 
             case 'profil':
 

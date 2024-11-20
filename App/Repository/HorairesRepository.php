@@ -2,12 +2,12 @@
 
 namespace App\Repository;
 
-use App\Entity\RapportSoignant;
+use App\Entity\Horaires;
 use App\Bdd\Mysql;
 use App\Tools\StringTools;
 
 
-class RapportSoignantRepository {
+class HorairesRepository {
 
     public function findOneById( int $id)
     {
@@ -21,53 +21,61 @@ class RapportSoignantRepository {
         
         if($query->execute()){
 
-            $query->setFetchMode($pdo::FETCH_CLASS, RapportSoignant::class);
+            $query->setFetchMode($pdo::FETCH_CLASS, Horaires::class);
 
             return $query->fetch(); 
     }
 }
 
-    public function createRapportSoignant( ){
+    public function create( ){
 
                 try{
                 $mysql = Mysql::getInstance();
                 $pdo = $mysql->getPDO();
                   
-                $stmt = $pdo->prepare('INSERT INTO rapport_soignant (nourriture, quantitee, date_heure,  animal) VALUES (:nourriture, :quantitee, :date_heure, :animal)');
-                $stmt->bindParam(':nourriture', $_POST['nourriture'], $pdo::PARAM_STR);
-                $stmt->bindParam(':quantitee', $_POST['quantitee'], $pdo::PARAM_INT);
-                $stmt->bindParam(':date_heure', $_POST['date_heure'], $pdo::PARAM_STR);
-                $stmt->bindParam(':animal', $_POST['animal'], $pdo::PARAM_INT);
+                
+    
+                $stmt = $pdo->prepare('INSERT INTO horaires (date, horaires, close) VALUES (:date, :horaires, :close)');
+                $stmt->bindParam(':date', $sanitized_date, $pdo::PARAM_STR);
+                $stmt->bindParam(':horaires', $sanitized_horaires, $pdo::PARAM_STR);
+                $stmt->bindParam(':close', $sanitized_close, $pdo::PARAM_STR);
 
+                    if(!isset($_POST['date'])) {
+
+
+                    } else {
+                $date = $_POST['date'];
+                $sanitized_date = htmlspecialchars($date, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+                $horaires = $_POST['horaires'];
+                $sanitized_horaires = htmlspecialchars($horaires, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+                $close = $_POST['close'];
+                $sanitized_close = htmlspecialchars($close, ENT_QUOTES | ENT_HTML5, 'UTF-8');
              
                 if(!$stmt->execute()){
-                    echo 'erreur de creation des soins';
+                    echo 'erreur d\'insertion';
                 } else {
 
-                    if(empty($_POST['nourriture']) || empty($_POST['quantitee']) || empty($_POST['date_heure']) || empty($_POST['animal'])){
-                       
-                    } else {
-                        echo 'soins crée';
-                    }
-                }
-    
+                    echo 'race rcréée!';
+                } 
+            }
             } catch(\Exception $e){
-                echo 'erreur de création de rapport'. $e->getMessage();
+                echo 'erreur d\'insertion'. $e->getMessage();
             }
     }
 
-    public function readRace(){
+    public function read(){
 
         try{
 
                 $mysql = Mysql::getInstance();
                 $pdo = $mysql->getPDO();
-                $stmt = $pdo->prepare("SELECT * FROM race ");
+                $stmt = $pdo->prepare("SELECT * FROM horaires ");
                 
                 if($stmt->execute()){
                     
-                    $stmt->setFetchMode($pdo::FETCH_CLASS, RapportSoignant::class);
+                    $stmt->setFetchMode($pdo::FETCH_CLASS, Horaires::class);
                     
+
                    return $stmt->fetchAll();
                   
                 } else {
@@ -114,14 +122,14 @@ class RapportSoignantRepository {
     }
 
 
-    public function deleteRace(int $id){
+    public function delete(int $id){
 
         try{
 
             $mysql = Mysql::getInstance();
             $pdo = $mysql->getPDO();
 
-            $query = $pdo->prepare('DELETE FROM race WHERE id = :id');
+            $query = $pdo->prepare('DELETE FROM horaires WHERE id = :id');
             $query->bindValue(':id', $id, $pdo::PARAM_INT);
             $query->execute();
             

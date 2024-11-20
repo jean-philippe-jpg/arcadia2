@@ -12,7 +12,7 @@ protected int $id ;
 protected  string $description ;
 protected string $name ;
 protected int $animal_id ;
-protected int $animals_list ;
+protected array $animals_list = [] ;
 protected string $race_name ;
 protected string $race ;
 protected string $state ;
@@ -51,10 +51,10 @@ public function setDescription(string $description)
      $this->description = $description;
 }
 
-public function getAnimalsList(): string
+public function getAnimalsList(): array
 {
 
-      return $this->animals_list;
+      return $this->animals_list = [];
 }
 
 public function setAnimalsList( $animals_list)

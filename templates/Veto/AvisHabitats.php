@@ -11,7 +11,7 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
   } else  { ?>
         <h3>create avis home</h3>
 
-        <p>habitat: <?= $habitat->getId(); ?></p>
+       
       <form action="" method="post">
         <div>
         <label for="avis">Avis</label>
@@ -23,7 +23,7 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
         </div>
         <div>
         <label for="habitat_id">Habitat</label>
-        <input type="number" value="<?= $habitat->getId(); ?>" name="habitat_id" id="habitat_id">
+        <input type="number"  name="habitat_id" id="habitat_id">
         </div>
         
         <button type="submit">envoyer</button>

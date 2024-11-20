@@ -43,9 +43,11 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_btnadmin.php';
       <?php foreach($habitat as $habitats) { ?>
       <tr>
         
-      <td><?= $habitats->getId_state(); ?></td>
+      <td><?= $habitats->getId(); ?></td>
          <td><?= $habitats->getName();?></td>
           <td><?= $habitats->getDescription(); ?></td>
+          <td><?= $habitats->getName_animals(); ?></td>
+         
          
            
         
@@ -68,11 +70,7 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_btnadmin.php';
                 <input type="text" id="description" name="description" >  
                 </div>
                 <br>
-                <div>
-                <label for="animals">Animals</label>
-                <input type="text" id="animals" name="animals" >  
-                </div>
-    
+             
                <input type="submit"  class="btn btn-success" name="update" value="Update">
                 
             </form>

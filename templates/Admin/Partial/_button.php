@@ -5,4 +5,6 @@
 <a href="?controller=services&action=read" class="btn ">services</a>
 <a href="?controller=veto&action=read" class="btn ">bilan de l'animal</a>
 <a href="?controller=rapportsoignant&action=soins&soignant" class="btn ">soins</a>
-<a href="?controller=rapportsoignant&action=soins&soignant" class="btn ">recap rapport veto</a>
+<a href="?controller=rapportsoignant&action=soins&soignant" class="btn ">recap rapport soins </a>
+<a href="?controller=users&action=register" class="btn ">inscription</a>
+

@@ -3,10 +3,11 @@
 
 namespace App\Repository;
 
-use App\Entity\Users;
-use App\Bdd\Mysql;
-use App\Tools\StringTools;
 use Exception;
+use App\Bdd\Mysql;
+use App\Entity\Roles;
+use App\Entity\Users;
+use App\Tools\StringTools;
 
 require_once './App/Entity/Users.php';
 class UsersRepository {
@@ -226,11 +227,12 @@ public function profil( ){
               
                 // On récupère un utilisateur ayant le même login (ici, e-mail)
                 $email = $_POST['email'];
-            $sanitized_email = htmlspecialchars($email, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+                $sanitized_email = htmlspecialchars($email, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+
                 $statement->bindValue(':email',$sanitized_email, $pdo::PARAM_STR);
                 $statement->execute();
                 $user = $statement->fetchObject( Users::class);
-
+                
 
                if ($user === false) {
                         
@@ -246,90 +248,31 @@ public function profil( ){
                 if(password_verify( $sanitized_password , $user->getPassword())){
                     
 
-                        $rolesStatement = $pdo->prepare('SELECT * FROM roles_users 
-                        JOIN roles ON role_id = id WHERE user_id = :id');
-                        $rolesStatement->bindValue(':id', $user->getId(), $pdo::PARAM_INT);
+                        $rolesStatement = $pdo->prepare('SELECT r.name as name  FROM roles_users r_u
+                        JOIN roles r ON r_u.role_id = r.id WHERE user_id = :id');
+                        //$rolesStatement->bindValue(':id', $_SESSION['user_id']);
+                        $rolesStatement->bindValue(':id',$user->getId(), $pdo::PARAM_INT);
+                       $rolesStatement->fetchAll();
+                       
+                        
                         
                         if( $rolesStatement->execute()){
                                 
                             while($roles = $rolesStatement->fetch($pdo::FETCH_ASSOC)){
-                                $user->addRoles( $roles['name']);
-                               
+                           
+                                $user->addRoles($roles['name']);
+                                
                             }
 
-                            
-                            var_dump($user);
-                           
                         }
+                           echo var_dump($user);
+                            
                        
                 } else {
 
                     echo 'identifiant introuvable';
                 }
                 
-            
-        /*} else {
-
-            echo 'imposible de récuperer l\'utilisateur';
-        }*/
-                // sinon on vérifie le mot de passe
-                //$pass = $_POST['password'];
-                //$username = $_GET['username'];
-                //if(password_verify($pass, $user->getPassword())){
-
-                    //echo 'bienvenue';
-                    /* $rolesStatement = $pdo->prepare(
-                        // Requête pour récupérer les rôles de l'utilisateur
-                        'SELECT COUNT(*) as count FROM roles WHERE user_id = :id');
-
-                                $rolesStatement->bindValue(':id', $user->getId(), $pdo::PARAM_INT);
-                                if($rolesStatement->execute()){
-                                       
-                                    $count  = $rolesStatement->fetch($pdo::FETCH_ASSOC);
-                                    //var_dump($count);
-                                   if($count['count'] > 0 && isset($_GET['admin']) && !isset($_GET['veto']) && !isset($_GET['soignant'])){ 
-                                        //echo 'bonjour ADMIN  <br style="margin-top:50px;">';
-                                       
-                                        $user->addRole('ROLE_SOIGNANT');
-                                        $user->addRole('ROLE_ADMIN');
-                                        //$_SESSION['user'] = ['pseudo' => $user['username'], 'email' => $user['email'], 'roles' => ['ROLE_ADMIN']];
-                                        var_dump($user);
-                                        
-                                    } elseif  (isset($_GET['veto']) && !isset($_GET['admin']) && !isset($_GET['soignant'])) {
-
-                                        //echo 'bonjour'.'  '.$user->getUsername().'  '. 'vous avez le role VETO  <br style="margin-top:50px;">';
-                                        $user->addRole('ROLE_VETO');
-                                        var_dump($user);
-                                       
-
-
-                                    } else {
-
-                                        //echo 'bonjour'.'  '.$user->getUsername().'  '. 'vous ètes un soignant  <br style="margin-top:50px;">';
-                                        $user->addRole('ROLE_SOIGNANT');
-
-                                       
-                                    //var_dump($count);
-                                       
-                                    }
-                                   
-                            
-                                    /*while($roles = $rolesStatement->fetch($pdo::FETCH_ASSOC)){
-                                        $user->addRole($roles['name']);
-
-                                        $_SESSION['id'] = $user->getId();
-                                        $_SESSION['email'] = $user->getEmail();
-                                        $_SESSION['username'] = $user->getUsername();
-                                        $_SESSION['roles'] = $user->getRoles();
-                                        header('Location: index.php?controller=profil&action=user&id='.$_SESSION['id']);
-                                        //var_dump($user);    
-                                        //echo '<div>'.$user->getUsername().'<br>'. $user->getEmail().'<br>';
-                                    }*/
-                                   
-                                
-                //} else {
-                   // echo 'Mot de passe incorrect';
-                //}
                
                                 
             }    

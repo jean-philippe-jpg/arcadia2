@@ -23,10 +23,6 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
     <input name="description" id="description" type="text">
     </div>
 
-    <div class="create">
-    <label for="animaux"><strong>animaux:</strong> </label>
-    <input name="animals_list" id="animaux" type="text">
-    </div>
    
     <input type="submit" name="insert" value="create">
 

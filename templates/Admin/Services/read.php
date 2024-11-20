@@ -2,7 +2,7 @@
 
 session_start();
 
-$_SESSION['username'];
+//$_SESSION['username'];
 if (isset($_SESSION['username']) && $_SESSION['romain'] == false) {
 
     echo '<h1 style="color:purple;  text-align: center; margin-top: 30vh;">vous n\'avez pas l\'acces à cette page  :/</h1>';
