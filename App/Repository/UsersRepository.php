@@ -1,6 +1,7 @@
 <?php
 
 
+
 namespace App\Repository;
 
 use Exception;
@@ -10,11 +11,11 @@ use App\Entity\Users;
 use App\Tools\StringTools;
 
 require_once './App/Entity/Users.php';
+
 class UsersRepository {
-    
+   
     
    
-
     public function findOneById( int $id)
     {
         $mysql = Mysql::getInstance();
@@ -194,13 +195,7 @@ public function profil( ){
         echo $takinfo['email'];
         
        
-        //$stmt->execute();
-        /*if($stmt->execute()){
-            $user = $stmt->fetch($pdo::FETCH_ASSOC);
-            echo $user['username'];
-        } else {
-            echo 'role non attribué';
-        }*/
+        
     }
     
   
@@ -213,10 +208,12 @@ public function profil( ){
 
 
     public function connect(){
+        
+
 
         try{
               
-
+            //session_start();
                 $mysql = Mysql::getInstance();
                 $pdo = $mysql->getPDO();
 
@@ -226,6 +223,10 @@ public function profil( ){
                 $statement = $pdo->prepare('SELECT * FROM users WHERE email = :email');
               
                 // On récupère un utilisateur ayant le même login (ici, e-mail)
+                if(empty($_POST['email'])) {
+
+
+                } else {
                 $email = $_POST['email'];
                 $sanitized_email = htmlspecialchars($email, ENT_QUOTES | ENT_HTML5, 'UTF-8');
 
@@ -250,21 +251,24 @@ public function profil( ){
 
                         $rolesStatement = $pdo->prepare('SELECT r.name as name  FROM roles_users r_u
                         JOIN roles r ON r_u.role_id = r.id WHERE user_id = :id');
-                        //$rolesStatement->bindValue(':id', $_SESSION['user_id']);
+                       
                         $rolesStatement->bindValue(':id',$user->getId(), $pdo::PARAM_INT);
                        $rolesStatement->fetchAll();
                        
-                        
-                        
+                       $roles = $_SESSION['roles_user'] = $user;
+                      
                         if( $rolesStatement->execute()){
-                                
+                           
                             while($roles = $rolesStatement->fetch($pdo::FETCH_ASSOC)){
                            
                                 $user->addRoles($roles['name']);
-                                
                             }
-
+                            
+                            
                         }
+                        //var_dump($_SESSION);
+                      
+                        
                            echo var_dump($user);
                             
                        
@@ -273,7 +277,7 @@ public function profil( ){
                     echo 'identifiant introuvable';
                 }
                 
-               
+            }
                                 
             }    
                  } catch(\Exception $e){

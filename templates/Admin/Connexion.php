@@ -1,26 +1,31 @@
 <?php
-session_start();
+//session_start();
+ 
+ //var_dump($_SESSION);
+ $email = $_SESSION['email'] = $_POST['email'];
+  $_SESSION['roles_user'] = $user;
+  
+ 
+ 
 
-var_dump($_SESSION);
-
-$_SESSION['email'] = $_POST['email'];
-$_SESSION['user_roles'] = $users;
- //$_SESSION['roles'] = [$_POST['name'] ] ;rolesStatement
- /*$_SESSION['users'] = [
-	'id' => $user->getId(),
-	'roles' => $user->getRoles()
-
-];*/
-
-//echo $user->getUsername();
 
 require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
-
-//require_once './App/Entity/Users.php';
 
 ?>
   
 <h1>Connexion</h1>
+<h5><?= $email ?></h5>
+
+				// condition test pour récupérer les roles //
+       				<?php if(isset($_SESSION['roles_user']) && $_SESSION['ROLE_ADMIN'] == true ) { 
+
+                           echo 'vous etes admin';
+
+                       } else {
+                           echo 'erreur de session';
+                        } ?>
+                      
+
 
 
 
@@ -47,7 +52,7 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
 <a href="?controller=veto&action=read">rapport veto</a>
 
 <?php
-//var_dump($user);
+
 require_once _ROOTPATH_.'/templates/Admin/Partial/_footer.php';
 
 /*if($_SERVER['REQUEST_METHOD'] === 'POST') {

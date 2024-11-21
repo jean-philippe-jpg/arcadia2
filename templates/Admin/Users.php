@@ -1,6 +1,10 @@
 <?php
 
 session_start();
+var_dump($_SESSION);
+
+
+
 //$name = $_SESSION['name'];
 require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
 ?>
@@ -8,6 +12,7 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
 
 <?php if(!isset($_GET['id'])){?>
     <h1>Users list</h1>
+    
 <table class="table">
 <a href="?controller=habitats&action=read" class="btn ">habitats</a>
 <a href="?controller=animals&action=read" class="btn ">animaux</a>
@@ -17,6 +22,7 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
     
     <th scope="col">email</th>
     <th scope="col">roles</th>
+    
     
     </tr>
     </thead>
