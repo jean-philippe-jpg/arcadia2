@@ -5,13 +5,12 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
 <?php
 if(isset($_GET['filtres']) && !isset($_GET['vue'])){
 
-  echo 'flitre';
+ 
   ?>
   <div style="margin-left: 60vw;">
   <?php require_once _ROOTPATH_.'/templates/Partial/_filtername.php'; ?>
   </div>
   <?php
- echo 'date';
 
   require_once _ROOTPATH_.'/templates/Partial/_filterdate.php';
   

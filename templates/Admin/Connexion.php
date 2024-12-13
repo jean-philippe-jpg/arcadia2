@@ -1,32 +1,20 @@
 <?php
-//session_start();
- 
- //var_dump($_SESSION);
- $email = $_SESSION['email'] = $_POST['email'];
-  $_SESSION['roles_user'] = $user;
-  
- 
- 
 
+//if (empty($_SESSION['email'])) {
+
+
+
+//} else {
+	//$email = $_SESSION['email'] = $_POST['email'];
+//}
+
+ //$password = $_SESSION['password'] = $_POST['password'];
 
 require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
 
 ?>
   
 <h1>Connexion</h1>
-<h5><?= $email ?></h5>
-
-				// condition test pour récupérer les roles //
-       				<?php if(isset($_SESSION['roles_user']) && $_SESSION['ROLE_ADMIN'] == true ) { 
-
-                           echo 'vous etes admin';
-
-                       } else {
-                           echo 'erreur de session';
-                        } ?>
-                      
-
-
 
 
 <a href="https://front.codes/" class="logo" target="_blank">
@@ -52,39 +40,42 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
 <a href="?controller=veto&action=read">rapport veto</a>
 
 <?php
+require_once _ROOTPATH_.'/templates/Admin/Partial/_acces.php';
 
-require_once _ROOTPATH_.'/templates/Admin/Partial/_footer.php';
+
 
 /*if($_SERVER['REQUEST_METHOD'] === 'POST') {
 	
-	$email =  $_POST['email'];
-	 $password =  $_POST['password'];
-	//$_SESSION['password'] = $_POST['password'];
-
 	
+		$email =  $_POST['email'];
+		$password =  $_POST['password'];
 
-	if($email === 'jphilippe.champion@gmail.com' && $password === 'root') {
-
+	if($email === 'gege@hotmail.com' && $password = 'gege') {
+	
 		//initiation de notre session
+		$_SESSION['gege@hotmail.com'] = true;
+		 //definition du cooki
 
-		$_SESSION['root'] = true;
-
-		// definition du cooki
-
-		setcookie('role', 'admin', time() + 3600, '/');
+		setcookie('gege@hotmail.com', 'admin', time() + 3600, '/');
 
 		//redirection
 
-		header('location:?controller=users&action=connect');
+		header('location:?controller=users&action=profil');
 
 
 
 	}
-	/*if($username === 'gégé') {
+
+	
+
+require_once _ROOTPATH_.'/templates/Admin/Partial/_footer.php';
+
+
+	//if($email === true) {
 
 		//initiation de notre session
 	
-		$_SESSION['gégé'] = true;
+		$_SESSION['email'] = true;
 	
 		// definition du cooki
 	
@@ -95,8 +86,8 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_footer.php';
 		header('location:?controller=users&action=profil');
 	
 	
-	
 	}*/
+	//}
 
 
 

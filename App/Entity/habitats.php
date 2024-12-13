@@ -32,8 +32,9 @@ public function setId(int $id)
 }
 
 public function getName(): string
-{
-      return $this->name;
+{     $hab = ucwords($this->name);
+      return $hab;
+      //return $this->name;
 }
 
 public function setName(string $name)

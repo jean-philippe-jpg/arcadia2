@@ -33,23 +33,26 @@ if(!isset($_GET['photo'])) { ?>
     
 </form>
 </div>
-<?php } else { ?>
+<?php } elseif (isset($_GET['photo'])) { ?>
 
     <h1>photo animals</h1>
 
-    <?= $animals_id->getFirstName(); ?>
+   
     <a href="?controller=animals&action=read" class="btn btn-success">retour</a>
+
+    
     <div class="show">
-        <form action="" method="post" enctype="multipart/form-data">
+        <h4>photo formulaire</h4>
 
         
+        <form action="" method="post" enctype="multipart/form-data">
+
         <input style="visibility: hidden;" type="text" name="animals_id" id="animals_id" value="<?= $animals_id->getId(); ?>">
         <input type="file" name="images" id="images">
         <input type="submit" name="insert" value="create">
+
         </form>
-        
-
-
+    
     </div>
 <?php
 }

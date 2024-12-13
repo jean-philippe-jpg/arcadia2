@@ -38,6 +38,10 @@ class PagesController extends Controller{
                         $this->connected();
                         break;
 
+                        case 'deconnexion':
+                            $this->disconnected();
+                            break;
+
                         case 'profil':
                             $this->disconnected();
                             break;
@@ -152,13 +156,9 @@ class PagesController extends Controller{
                      $this->render('Admin/Users', [
                             'roles' => $role
                      ] );
-                     //require_once 'templates/showanimals.php';//
-                   
                     
-                      
+                     
                     }
-
-            
 
                 protected function connected(): void
                 
@@ -182,12 +182,11 @@ class PagesController extends Controller{
                 protected function disconnected(): void
                 
                 {    
-                    /*$connected = new UsersRepository();
-                    $connect = $connected->connect();*/
+                    /*$disconnected = new UsersRepository();
+                    $deconnexion = $disconnected->connect();*/
                        
-                    $this->render('Admin/Profil', [
+                    $this->render('Admin/Deconnexion', [
 
-                        
                             
                     ] );
                     //require_once 'templates/showanimals.php';//

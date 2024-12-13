@@ -17,8 +17,8 @@ use App\Tools\StringTools;
         $mysql = Mysql::getInstance();
         $pdo = $mysql->getPDO();
 
-        $query = $pdo->prepare('SELECT a.id as id, a.first_name as first_name, r.name as namerace FROM animals a
-                INNER JOIN race r ON a.race = r.id where a.id = :id');   
+        $query = $pdo->prepare('SELECT a.id as id, a.first_name as first_name, r.name as namerace, a_s.state as state, a_s.detail as detail, img.libele as images FROM animals a
+                INNER JOIN race r ON a.race = r.id  JOIN animals_state a_s ON a.id = a_s.animal JOIN img_animals img ON img.animals_id = a.id where a.id = :id ');   
         $query->bindParam(':id', $id, $pdo::PARAM_INT);
         
                 if($query->execute()) {
@@ -76,7 +76,7 @@ use App\Tools\StringTools;
                     $mysql = Mysql::getInstance();
                     $pdo = $mysql->getPDO();
             
-                $stmt = $pdo->prepare('INSERT INTO animals (first_name, race, habitat_id ) VALUES (:first_name, :race, :habitat_id )');
+                $stmt = $pdo->prepare('INSERT INTO animals (first_name, race, habitat_id ) VALUES (:first_name, :race, :habitat_id ))');
                 $stmt->bindParam(':first_name', $sanitized_name , $pdo::PARAM_STR);
                 $stmt->bindParam(':race',  $sanitized_race , $pdo::PARAM_INT);
                 $stmt->bindParam(':habitat_id',  $sanitized_habitat , $pdo::PARAM_INT);
@@ -184,8 +184,8 @@ use App\Tools\StringTools;
 
                 $mysql = Mysql::getInstance();
                 $pdo = $mysql->getPDO();
-                $stmt = $pdo->prepare('SELECT  a.id, a.first_name, r.name as namerace, h.name as home FROM animals a
-                INNER JOIN race r ON a.race = r.id JOIN habitat h ON h.id = a.habitat_id');
+                $stmt = $pdo->prepare("SELECT  group_concat(r.name, '<br>') as namerace, group_concat(h.name, '<br>') as home,  a.id, a.first_name FROM animals a
+                INNER JOIN race r ON a.race = r.id JOIN habitat h ON h.id = a.habitat_id group by a.id ");   
                
                 if($stmt->execute()){
 

@@ -3,20 +3,12 @@
 <?php
 
 require_once './templates/partial/_header.php';
-require_once './templates/partial/_animals.php';
 require_once './templates/partial/_habitatslist.php';
-require_once './templates/partial/_services.php';
 require_once './templates/partial/_animalsliste.php';
-
-//$images = $this->readImages();
-
+require_once './templates/partial/_presentation.php';
+require_once './templates/partial/_services.php'; 
 ?>
-<h1>Home</h1>
-
-
-
-<h3>laisser un avis</h3>
-
+<div class="form_comments">
 <form action="" method="post">
     <label for="pseudo">pseudo</label>
     <input type="text" id="pseudo" name="pseudo" placeholder="indiquer votre pseudo">
@@ -27,11 +19,11 @@ require_once './templates/partial/_animalsliste.php';
     <input type="submit" value="Envoyer">
 
 </form>
+</div>
 
-  <h3>list des commantaires</h3>
 
-  
 
+<div class="comments_liste">
     <?php  foreach($avis as $commantaire) { ?>
     
         <?php if($commantaire->getIsValid() == true) { ?>
@@ -43,17 +35,17 @@ require_once './templates/partial/_animalsliste.php';
   <?php } ?>
   <br>
   <strong><?= $commantaire->getPseudo(); ?></strong>
-        <p><?=$commantaire->getMessage();?></p>
+        <p><?= $commantaire->getMessage();?></p>
     
   </div>
 
     
   <?php } ?>
-
+    
 <?php } ?>
 
+</div>
 
 <?php
-require_once './templates/partial/_presentation.php';
 require_once './templates/partial/_footer.php';
 ?>

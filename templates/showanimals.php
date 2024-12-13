@@ -13,22 +13,31 @@ require_once _ROOTPATH_.'\templates\partial\_header.php';
 <p><strong>habitat:  </strong><?= $logement->getName();?></p>
 <p><strong>description:  </strong><?= $logement->getDescription();?></p>
 
-<a href="?controller=habitats&action=show&detailAnimal=<?= $logement->getAnimal_id(); ?>"><?= $logement->getName_animals();?></a>
+
+<?php foreach($animals as $animal) { ?>
+<a href="?controller=habitats&action=show&detailAnimal=<?= $animal->getId(); ?>"><?= $animal->getFirstName();?></a>
+<?php } ?>
 </div>  
+     
 
 <?php } 
  elseif(isset($_GET['detailAnimal'])) { ?>
 
 
 <div class="show">
-<p><strong>Prenom:  </strong><?= $logement->getFirstName(); ?></p>
+    
+
+
+      <img src="/templates/uploads/<?= $logement->getImg()?>" alt="img" >
+        <?php  var_dump($logement->getImg())?>
+    <p><strong>Prenom:  </strong><?= $logement->getFirstName(); ?></p>
 <p><strong>Race:  </strong><?= $logement->getNameRace(); ?></p>
+<p><strong>etat:  </strong><?= $logement->getState(); ?></p>
+<p><strong>detail:  </strong><?= $logement->getDetail(); ?></p>
 
-
-
+<?php } ?>
 
 </div>
-<?php } ?>
 
 <?php
 

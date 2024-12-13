@@ -1,10 +1,10 @@
 
-
-
+<div class="services">
 <?php foreach($service as $services){ ?>
 
-<div class="card card_home" style="height: 50px; width:200px; background:blue;">
+<div class="services_liste">
     <h2><?= $services->getName();?></h2>
 </div>
 
 <?php } ?>
+</div>

@@ -115,8 +115,8 @@ class AnimalsController extends Controller{
                       $animalsRrepository = new AnimalsRepository();
                       $animalsRrepository->createAnimals();
 
-                      $animalsRrepository = new AnimalsRepository();
-                      $animalsRrepository->images();
+                      /*$animalsRrepository = new AnimalsRepository();
+                      $animalsRrepository->images();*/
 
                       $this->render('/Admin/Animals/create', [
                               

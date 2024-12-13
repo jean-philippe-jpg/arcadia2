@@ -9,12 +9,14 @@ protected string $first_name ;
 protected string $animal ;
 protected string $namerace ;
 protected string $home ;
-protected string $state;
+protected string $state = 'null';
 protected string $nourriture;
 protected float $quantitee;
-protected string $detail;
+protected string $detail = 'null';
 protected string $date;
 protected string $date_de_passage;
+protected string $images;
+
 
 
 
@@ -167,6 +169,19 @@ return $this->animal;
 public function setAnimal($animal)
 {
 $this->animal = $animal;
+
+return $this;
+}
+
+public function getImg()
+{
+return $this->images;
+}
+
+
+public function setImg($images)
+{
+$this->images = $images;
 
 return $this;
 }

@@ -80,10 +80,16 @@ class HabitatsController extends Controller{
 
                             $habitatRrepository = new HabitatsRepository();
                             $habitation = $habitatRrepository->findOneById($id);
+                            $animals = $habitatRrepository->findOneByAnimals($id);
+
+                           
+                            
                            
                             $this->render('showanimals', [
 
-                                'logement' => $habitation
+                                'logement' => $habitation,
+                                'animals' => $animals
+                              
                                      
                                 ] );
 
@@ -132,8 +138,6 @@ class HabitatsController extends Controller{
                          $this->render('/Admin/Habitat/create', [
 
                          ] );
-                                    
-                         //$habitatRrepository->images();
  
                         
                             } else {

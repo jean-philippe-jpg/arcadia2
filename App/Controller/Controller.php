@@ -81,12 +81,12 @@ try {
                                 
                                 break;
 
-                                /*case 'deconnection':
+                                case 'deconnexion':
 
                                    $pagecontroller = new PagesController();
                                     $pagecontroller->route();
                                     
-                                    break;*/
+                                    break;
                                 case 'services':
 
                                     $pagecontroller = new ServicesController();

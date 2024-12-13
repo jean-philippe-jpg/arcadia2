@@ -212,7 +212,7 @@ class VetoController extends Controller{
                 {
                         try {       
 
-                            if( /*!isset($_GET['soignant']) &&*/ !isset($_GET['animalslist']) && !isset($_GET['readsoins'])){
+                            if(  !isset($_GET['animalslist']) && !isset($_GET['readsoins'])){
                                
                             /*$habitatRrepository = new HabitatsRepository();
                             $habitat = $habitatRrepository->read();

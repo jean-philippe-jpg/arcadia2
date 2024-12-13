@@ -156,7 +156,7 @@ carroussel
   /*  dropdpwn */
 
   body {
-    background: #ece5da;
+    background: #DF5D0C;
     font-family: "Raleway", sans-serif;
     color: ivory;
     font-size: 20px;
@@ -244,14 +244,13 @@ carroussel
     padding-left: 0;
     padding-top: 1rem;
     margin-top: 0;
-    background: #ece5da;
+  
     list-style: none;
     overflow: hidden;
     text-align: right;
     text-align: center;
     transition: all 0.4s ease-out;
     width: 100%;
-    position: absolute;
   }
   nav ul li {
     border-radius: 2px;
@@ -259,8 +258,8 @@ carroussel
     display: inline-block;
     line-height: 1.5;
     width: 100%;
+    color: #D9E327;
     margin: 0 0 0.25rem 0;
-    background: tomato;
     transition: background 3s;
     box-shadow: 2px 2px 10px -2px rgba(0, 0, 0, 0.35);
   }
@@ -269,11 +268,12 @@ carroussel
   nav ul li a:focus {
     background: mediumorchid;
     transition: background 0.45s;
+    
   }
   
   nav ul a {
     display: block;
-    color: inherit;
+    color: black;
     text-transform: lowercase;
     font-weight: 200;
     text-decoration: none;
@@ -286,5 +286,8 @@ carroussel
     color: #36454F;
   }
 
-  /*navbar */
-  
+  .title-zoo{
+    margin-left: 20px;
+  }
+
+ 

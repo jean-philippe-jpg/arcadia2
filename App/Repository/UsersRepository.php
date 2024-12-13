@@ -209,22 +209,15 @@ public function profil( ){
 
     public function connect(){
         
-
-
         try{
-              
-            //session_start();
+                 
                 $mysql = Mysql::getInstance();
                 $pdo = $mysql->getPDO();
-
-                
-                
-                //$statement = $pdo->prepare('SELECT * FROM users WHERE email = :email');
+                session_start();
                 $statement = $pdo->prepare('SELECT * FROM users WHERE email = :email');
               
                 // On récupère un utilisateur ayant le même login (ici, e-mail)
                 if(empty($_POST['email'])) {
-
 
                 } else {
                 $email = $_POST['email'];
@@ -233,8 +226,8 @@ public function profil( ){
                 $statement->bindValue(':email',$sanitized_email, $pdo::PARAM_STR);
                 $statement->execute();
                 $user = $statement->fetchObject( Users::class);
-                
-
+                //var_dump($user);
+                //var_dump($user); echo '<br><br>';
                if ($user === false) {
                         
                 // Si aucun utilisateur ne correspond au login entré, on affiche une erreur
@@ -249,28 +242,34 @@ public function profil( ){
                 if(password_verify( $sanitized_password , $user->getPassword())){
                     
 
-                        $rolesStatement = $pdo->prepare('SELECT r.name as name  FROM roles_users r_u
-                        JOIN roles r ON r_u.role_id = r.id WHERE user_id = :id');
+                        $rolesStatement = $pdo->prepare('SELECT roles.name  FROM roles_users 
+                        JOIN roles  ON roles.id = roles_users.role_id WHERE user_id = :id');
                        
                         $rolesStatement->bindValue(':id',$user->getId(), $pdo::PARAM_INT);
-                       $rolesStatement->fetchAll();
                        
-                       $roles = $_SESSION['roles_user'] = $user;
+                       
+                         $_SESSION['roles_user'] = $user;
                       
-                        if( $rolesStatement->execute()){
-                           
-                            while($roles = $rolesStatement->fetch($pdo::FETCH_ASSOC)){
+                                if($rolesStatement->execute()){
+
+                            //$rolesStatement->fetchObject( Users::class );
+                            //var_dump( $user->getRoles()); echo '<br><br>'; 
+                            while($roles =  $rolesStatement->fetch($pdo::FETCH_ASSOC) ){
                            
                                 $user->addRoles($roles['name']);
-                            }
-                            
-                            
+                                
+                            }  
+                            //var_dump($user->getRoles()); echo '<br><br>';
                         }
-                        //var_dump($_SESSION);
-                      
-                        
-                           echo var_dump($user);
-                            
+                        //var_dump($user->getRoles()); echo '<br><br>';
+
+                          $_SESSION['roles'] = $user->getRoles();
+                            //var_dump($rls); echo '<br><br>';
+                        /*if(in_array('ROLE_ADMIN', $rls)){
+                            echo 'vous etes connecté en tant qu\'administrateur';
+                        } else {
+                            echo 'vous etes connecté en tant qu\'utilisateur';
+                        }*/
                        
                 } else {
 
@@ -300,8 +299,8 @@ public function profil( ){
                     //$statement = $pdo->prepare('SELECT u.id as id, u.email as email, r.role_id as name FROM users u
                     //INNER JOIN roles_users r ON r. = u.id');
                     
-                    $statement = $pdo->prepare('SELECT u.id as id, u.email as email, r.name as rolesname FROM roles_users 
-                    INNER JOIN roles r ON role_id = r.id JOIN users u ON user_id = u.id');
+                    $statement = $pdo->prepare("SELECT u.id as id, u.email as email, group_concat(r.name, '<br>') as rolesname FROM roles_users 
+                    INNER JOIN roles r ON role_id = r.id JOIN users u ON user_id = u.id group by u.id");    
                     /*$statement = $pdo->prepare('SELECT u.id,u.username, u.email FROM users u
                     ');*/
                     // On récupère un utilisateur ayant le même login (ici, e-mail)

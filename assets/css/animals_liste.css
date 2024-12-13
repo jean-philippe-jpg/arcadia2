@@ -1,0 +1,53 @@
+
+
+.toto {
+    display: flex;
+background: rgb(40, 37, 37);
+    height: 100vh;
+}
+
+.cards_animals > ul {
+   
+   list-style-type: none;
+   color: rgb(78, 29, 5);
+    font-size: large;
+    margin-left: 43vw;
+    font-size: 1.5em;
+ 
+}
+
+.text-animals, .fin-text {
+  
+
+   margin-left: 20vw;
+   font-size: 1.5em;
+   margin-top: 5%;
+}
+
+.msg-animaux {
+    
+    font-size: large;
+    color:rgb(78, 29, 5);
+}
+
+
+.img_animals {
+  display: flex;
+   background-image: url('/templates/uploads/animaux.webp');
+   object-fit: cover;
+   background-size: calc(100%) calc(100% );
+    height: 100%;
+    width: 100%;
+    opacity: 0.9;
+    
+}
+
+
+.services 
+ {
+
+    position: relative;
+    color: rgb(18, 241, 10);
+    font-size: large;
+}
+

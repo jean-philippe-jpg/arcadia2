@@ -1,0 +1,49 @@
+header{
+    display: flex;
+      background-image: url('/templates/uploads/vue\ generale.jpg');
+      background-size: calc(100%) calc(100% );
+      object-fit: cover;
+      background-position: center;
+      height: 55vh;
+     
+    }
+  
+    .img_header {
+      background-image: url('/templates/uploads/hipopotame.webp');
+      background-size: calc(100%) calc(100% );
+      object-fit: cover;
+      background-position: center;
+      
+    }
+  
+    .title_zoo {
+      font-size: 2em;
+      text-decoration: none;
+      color: #D9E327;
+      margin-left: 50px;
+      margin-top: 2vh;
+      height: 25px;
+    
+    }
+  
+    nav {
+    margin: auto;
+      margin-top: 2vh;
+      color: white;
+      
+    }
+   
+  
+    
+    nav ul  {
+      display: flex;
+      font-size: 1.5em;
+     
+      list-style-type: none;
+      
+    }
+  
+      
+  
+    
+     

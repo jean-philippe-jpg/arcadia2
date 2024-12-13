@@ -16,14 +16,10 @@ class HabitatsRepository {
         $mysql = Mysql::getInstance();
         $pdo = $mysql->getPDO();
 
-       /* $query = $pdo->prepare('SELECT h.id as id, h.name as name, h.description as description, h.animals_list as animals, a.first_name as first_name FROM habitat h
-                INNER JOIN animals a ON h.id = a.habitat where h.id = :id');*/
-                 /*$query = $pdo->prepare("SELECT h.id as id, h.name as name, h.description as description, h.animals_list as animals, a.first_name as name_animals, r.name as race_name, a_s.state as state FROM habitat h
-                INNER JOIN animals a ON h.animals_list = a.id JOIN race r ON r.id = a.race JOIN animals_state a_s ON a_s.animal = a.id  where h.id = :id ");
-                $query->bindParam(':id', $id, $pdo::PARAM_INT);*/
+       
+                $query = $pdo->prepare("SELECT a.id as animal_id, a.first_name as name_animals, h.name, h.description FROM habitat h
+               INNER JOIN animals a on a.habitat_id = h.id where h.id = :id    ");
 
-                $query = $pdo->prepare("SELECT h.name, h.description,  a.first_name as name_animals, a.id as animal_id FROM habitat h
-                INNER JOIN animals a ON a.habitat_id = h.id  where h.id = :id ");
                 $query->bindParam(':id', $id, $pdo::PARAM_INT);
         
             if($query->execute()){
@@ -32,10 +28,29 @@ class HabitatsRepository {
 
                 return $query->fetch();
 
-            } 
-
-
+            }
         }
+        public function findOneByAnimals( int $id)
+        {
+            $mysql = Mysql::getInstance();
+            $pdo = $mysql->getPDO();
+    
+           
+                    $animals = $pdo->prepare("SELECT * FROM animals 
+                   where habitat_id = :id    ");
+    
+                    $animals->bindParam(':id', $id, $pdo::PARAM_INT);
+            
+                if($animals->execute()){
+    
+                   $animals->setFetchMode($pdo::FETCH_CLASS, Animals::class);
+    
+                    return $animals->fetchAll();
+    
+                }
+            }
+        
+    
 
     public function createHabitat( ){
 
@@ -148,9 +163,10 @@ class HabitatsRepository {
 
                 $mysql = Mysql::getInstance();
                 $pdo = $mysql->getPDO();
-                $stmt = $pdo->prepare("SELECT h.id as id, h.name as name, h.description as description, a.first_name as name_animals FROM habitat h
-                INNER JOIN animals a ON a.habitat_id = h.id");
-                  
+                $stmt = $pdo->prepare("SELECT  group_concat(a.first_name, '<br>' )as name_animals, h.id as id, h.name as name, h.description as description FROM habitat h
+                INNER JOIN animals a ON a.habitat_id = h.id group by h.id"); 
+                /*$stmt = $pdo->prepare("SELECT group_concat(animals.first_name as name_animals, '') , habitat.name, habitat.id from habitat left join animals on animals.habitat_id = habitat.id
+                group by habitat.id");*/
 
                 
                 if($stmt->execute()){
