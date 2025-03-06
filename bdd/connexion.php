@@ -1,6 +1,6 @@
 <?php
-$name = 'root';
-$pass = '#J25061984c#';
+$name = 'jeAn-phI';
+$pass = 'J25061984c%#';
 $host = 'localhost';
 $dbname = 'arcadia';
 
