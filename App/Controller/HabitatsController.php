@@ -131,21 +131,23 @@ class HabitatsController extends Controller{
                         $habitatRrepository = new HabitatsRepository();
                         $habitatRrepository->createHabitat();
                         
-                        $uploadsRrepository = new HabitatsRepository();
-                        $uploadsRrepository->images();
+                        //$uploadsRrepository = new HabitatsRepository();
+                        //$uploadsRrepository->images();
 
-                      
                          $this->render('/Admin/Habitat/create', [
 
                          ] );
  
                         
-                            } else {
+                            } elseif(isset($_GET['photo'])) {
 
-                            $uploadsRrepository = new HabitatsRepository();
-                             $uploadsRrepository->images();
+                            
 
                              $id = $_GET['id'];
+                             
+                             $uploadsRrepository = new HabitatsRepository();
+                             $uploadsRrepository->images();
+
                              $uploadsRrepository = new HabitatsRepository();
                              $hab_id = $uploadsRrepository->findOneById($id);
 

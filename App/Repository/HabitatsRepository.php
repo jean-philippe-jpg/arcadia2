@@ -17,7 +17,7 @@ class HabitatsRepository {
         $pdo = $mysql->getPDO();
 
        
-                $query = $pdo->prepare("SELECT a.id as animal_id, a.first_name as name_animals, h.name, h.description FROM habitat h
+                $query = $pdo->prepare("SELECT a.id as animal_id, a.first_name as name_animals, h.id, h.name, h.description FROM habitat h
                INNER JOIN animals a on a.habitat_id = h.id where h.id = :id    ");
 
                 $query->bindParam(':id', $id, $pdo::PARAM_INT);
@@ -107,7 +107,7 @@ class HabitatsRepository {
                     $images->bindParam(':habitat_id', $_POST['habitat_id'], $pdo::PARAM_INT);
         
                     if ($images->execute()) {
-                        $target_dir = "uploads/";
+                        $target_dir = "../uploads/";
                         $target_path = $target_dir . $new_name;
         
                         if (move_uploaded_file($_FILES['images']['tmp_name'], $target_path)) {

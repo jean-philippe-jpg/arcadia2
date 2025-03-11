@@ -33,17 +33,19 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
     <h1>photo habitat</h1>
   
 
-    <?= $hab_id->getName_animals(); ?>
+    <?= $hab_id->getName(); ?>
 
 <a href="?controller=animals&action=read" class="btn btn-success">retour</a>
 
 <div class="show">
+    
     <form action="" method="post" enctype="multipart/form-data">
 
     
-    <input style="visibility: hidden;" type="text" name="habitat_id" id="habitat_id" value="<?= $animals_id->getId(); ?>">
+    <input type="text" name="habitat_id" id="habitat_id" value="<?= $hab_id->getId(); ?>">
     <input type="file" name="images" id="images">
     <input type="submit" name="insert" value="create">
+
     </form>
     
 

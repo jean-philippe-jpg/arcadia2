@@ -47,7 +47,7 @@ if(!isset($_GET['photo'])) { ?>
         
         <form action="" method="post" enctype="multipart/form-data">
 
-        <input style="visibility: hidden;" type="text" name="animals_id" id="animals_id" value="<?= $animals_id->getId(); ?>">
+        <input  type="text" name="animals_id" id="animals_id" value="<?= $animals_id->getId(); ?>">
         <input type="file" name="images" id="images">
         <input type="submit" name="insert" value="create">
 

@@ -125,7 +125,7 @@ use App\Tools\StringTools;
                     $images->bindParam(':animals_id', $_POST['animals_id'], $pdo::PARAM_INT);
         
                     if ($images->execute()) {
-                        $target_dir = "uploads/";
+                        $target_dir = "../uploads/";
                         $target_path = $target_dir . $new_name;
         
                         if (move_uploaded_file($_FILES['images']['tmp_name'], $target_path)) {

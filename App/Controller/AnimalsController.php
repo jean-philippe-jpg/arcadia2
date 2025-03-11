@@ -126,10 +126,11 @@ class AnimalsController extends Controller{
                       } else {
                             
   
-                        $animalsRrepository = new AnimalsRepository();
-                        $animalsRrepository->images();
+                        
 
                             $id = $_GET['id'];
+                            $animalsRrepository = new AnimalsRepository();
+                        $animalsRrepository->images();
                         $animalsRrepository = new AnimalsRepository();
                         $animals = $animalsRrepository->findOneById($id);
   
