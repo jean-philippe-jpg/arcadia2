@@ -9,5 +9,5 @@
 Dossiers et fichiers concernés:<strong>Controller/HabitatsController.php <br>
 Entity/habitats.php <br>
 Repository/HabitatsRepository.php <br>
-</strong></p>
+Templates/Admin/Habitat/read.php</strong></p>
 
