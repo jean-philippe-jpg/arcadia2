@@ -18,6 +18,7 @@ protected string $race ;
 protected string $state ;
 protected string $name_animals ;
 protected int $avis_id ;
+protected int $img_hab ;
 
 
 
@@ -136,4 +137,18 @@ return $this;
 }
 
  
+
+
+public function getImg_hab()
+{
+return $this->img_hab;
+}
+
+
+public function setImg_hab($img_hab)
+{
+$this->img_hab = $img_hab;
+
+return $this;
+}
 }

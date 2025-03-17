@@ -47,16 +47,17 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_btnadmin.php';
          <td><?= $habitats->getName();?></td>
           <td><?= $habitats->getDescription(); ?></td>
           <td><?= $habitats->getName_animals(); ?></td>
-         
-         
-           
-        
+          <td><?= $habitats->getImg_hab(); ?></td>
           
+         
           <td><a href="?controller=habitats&action=update&modify=<?= $habitats->getId(); ?>" class="btn btn-warning">update</a></td>
           <td><a href="?controller=habitats&action=show&id=<?= $habitats->getId(); ?>" class="btn btn-warning">voir</a></td>
           <td><a href="?controller=habitats&action=create&photo&id=<?= $habitats->getId(); ?>" class="btn btn-danger">photo</a></td>
           <td><a href="?controller=habitats&action=delete&suprimer=<?= $habitats->getId(); ?>" class="btn btn-danger">delete</a></td>
+          
       </tr>
+
+   
         <?php } ?>
         <a href="index.php" class="btn btn-danger">home</a>
         <?php } else { ?>

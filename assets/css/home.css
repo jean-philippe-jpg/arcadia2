@@ -24,7 +24,7 @@ body {
 
 .img_presentation{
 
-    background-image: url('/templates/uploads/lion.jpg');
+    background-image: url('/uploads/elephant_20250311_204017.jpg');
     object-fit: cover;
     background-size: calc(100%) calc(100% );
     height: 80vh;

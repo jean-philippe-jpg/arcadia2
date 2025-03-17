@@ -1,21 +1,23 @@
  /*navbar */
  header{
   display: flex;
-    background-image: url('/templates/uploads/vue\ generale.jpg');
+   
     background-size: calc(100%) calc(100% );
     object-fit: cover;
     background-position: center;
     height: 55vh;
+    background-image: url('/uploads/annimal\ 1_20250311_204253.jpg');
     
    
    
   }
 
   .img_header {
-    background-image: url('/templates/uploads/pandas_20241102_130200.jpeg');
+    background-image: url('/templates/uploads/hipopotame.webp');
     background-size: calc(100%) calc(100% );
     object-fit: cover;
     background-position: center;
+   
     
   }
 

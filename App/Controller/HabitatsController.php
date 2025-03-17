@@ -176,10 +176,13 @@ class HabitatsController extends Controller{
                             
                                 $habitatRrepository = new HabitatsRepository();
                                 $read = $habitatRrepository->read();
+                                $img = $habitatRrepository->readImages();
+                               
                               
                                  $this->render('/Admin/Habitat/read', [
                                      
-                                     'habitat' => $read
+                                     'habitat' => $read,
+                                     'images' => $img
                                          
                                           ] );     
  
@@ -199,12 +202,15 @@ class HabitatsController extends Controller{
                 
                 {
                         try {       
+
+                            $id = $_GET['id'];
                             
                                 $habitatRrepository = new HabitatsRepository();
                                 $habitat = $habitatRrepository->read();
+                               
                               
                                  $this->render('habitats', [
-                                     
+                                    
                                      'habitat' => $habitat
                                          
                                           ] );     
