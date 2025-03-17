@@ -6,7 +6,7 @@
 <h5 style="color: blue;">afficher les images des habitations</h5>
 
 <p>branch:<strong> "master"</strong>, commit:<strong>affichage des images habitats </strong> <br>
-Dossiers et fichiers concernés: <br><strong>Controller/HabitatsController.php <p >methode utilisé de habitatcontroler: read, puis la methode read du repository </p> <br>
+Dossiers et fichiers concernés: <br><strong>Controller/HabitatsController.php <p >methode utilisé de habitatcontroller: read, puis la methode read du repository </p> <br>
 Entity/habitats.php <br>
   attrubut "img_hab" <br>
 Repository/HabitatsRepository.php <br>
