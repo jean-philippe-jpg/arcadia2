@@ -1,6 +1,21 @@
+
 <?php
-require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
+session_start();
+
+
+
+
+if(!in_array('ROLE_ADMIN', $_SESSION['roles']) ) {
+
+  echo '<h1 style="color:purple;  text-align: center; margin-top: 30vh;">vous n\'avez pas l\'acces à cette page  :/</h1>';
+  
+
+} else {
+
+  require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
 ?>
+<a href="?controller=users&action=connect" class="btn btn-danger">profil</a>
+<a href="index.php" class="btn btn-danger">home</a>
 <h1>Inscription</h1>
 
 
@@ -24,7 +39,6 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
 
 <?php
 require_once _ROOTPATH_.'/templates/Admin/Partial/_footer.php';
+}
 ?>
-
-
 

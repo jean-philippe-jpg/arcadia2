@@ -106,7 +106,11 @@ try {
                                             $pagecontroller->route();
                                             break;
                                            
-        
+                                        /*case 'horaires':
+
+                                            $pagecontroller = new HorairesController();
+                                            $pagecontroller->route();
+                                            */
 
                            
         default:

@@ -2,10 +2,10 @@
 
 namespace App\Entity;
 
-class AnimalsState {
+class AnimalsState extends Attributs {
 
     
-      protected int $id ;
+      /*protected int $id ;
       protected int $id_state ;
       protected string $animals_id ;
       protected string $animals_name ;
@@ -17,7 +17,7 @@ class AnimalsState {
       protected string $first_name;
       protected string $date;
       protected string $date_de_passage;
-      protected string $race;
+      protected string $race;*/
      
 
 public function getId(): int
@@ -66,12 +66,6 @@ public function setId(int $id)
       }
 
      
-      public function setState($state)
-      {
-            $this->state = $state;
-
-            return $this;
-      }
 
      
       public function getDetail():string
@@ -80,12 +74,7 @@ public function setId(int $id)
       }
 
       
-      public function setDetail($detail)
-      {
-            $this->detail = $detail;
-
-            return $this;
-      }
+      
 
      
       public function getAnimal():int
@@ -94,12 +83,7 @@ public function setId(int $id)
       }
 
      
-      public function setAnimal($animal)
-      {
-            $this->animal = $animal;
-
-            return $this;
-      }
+      
 
      
       public function getDate():string
@@ -107,23 +91,18 @@ public function setId(int $id)
             return $this->date;
       }
 
-      public function setDate($date)
-      {
-            $this->date = $date;
-
-            return $this;
-      }
+     
 
       
       public function getFirst_name(): string
       {
-            return $this->first_name;
+            return $this->name;
       }
 
       
       public function setFirst_name($first_name)
       {
-            $this->first_name = $first_name;
+            $this->name = $first_name;
 
             return $this;
       }
@@ -134,23 +113,18 @@ public function setId(int $id)
             return $this->race;
       }
 
-      public function setRace($race)
-      {
-            $this->race = $race;
-
-            return $this;
-      }
+     
 
       
       public function getDate_de_passage()
       {
-            return $this->date_de_passage;
+            return $this->date;
       }
 
       
       public function setDate_de_passage($date_de_passage)
       {
-            $this->date_de_passage = $date_de_passage;
+            $this->date = $date_de_passage;
 
             return $this;
       }
@@ -158,27 +132,19 @@ public function setId(int $id)
        
       public function getId_state()
       {
-            return $this->id_state;
+            return $this->id;
       }
 
       
-      public function setId_state($id_state)
-      {
-            $this->id_state = $id_state;
-
-            return $this;
-      }
-
-       
       public function getAnimals_name()
       {
-            return $this->animals_name;
+            return $this->name;
       }
 
       
       public function setAnimals_name($animals_name)
       {
-            $this->animals_name = $animals_name;
+            $this->name = $animals_name;
 
             return $this;
       }
@@ -186,13 +152,13 @@ public function setId(int $id)
       
       public function getAnimals_id()
       {
-            return $this->animals_id;
+            return $this->id;
       }
 
       
       public function setAnimals_id($animals_id)
       {
-            $this->animals_id = $animals_id;
+            $this->id = $animals_id;
 
             return $this;
       }

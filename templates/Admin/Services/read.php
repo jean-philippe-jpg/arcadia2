@@ -3,12 +3,12 @@
 session_start();
 
 //$_SESSION['username'];
-if (isset($_SESSION['username']) && $_SESSION['romain'] == false) {
+if(!in_array('ROLE_ADMIN', $_SESSION['roles']) && !in_array('ROLE_SOIGNANT', $_SESSION['roles']) ) {
 
-    echo '<h1 style="color:purple;  text-align: center; margin-top: 30vh;">vous n\'avez pas l\'acces à cette page  :/</h1>';
+  echo '<h1 style="color:purple;  text-align: center; margin-top: 30vh;">vous n\'avez pas l\'acces à cette page  :/</h1>';
   
-  
-  } else {
+
+} else {
 require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
 ?>
 <h1>Liste des Services</h1>
@@ -17,8 +17,10 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
 
 <table class="table">
 <a href="?controller=services&action=create" class="btn ">ajouter</a>
+<a href="?controller=users&action=connect" class="btn btn-danger">profil</a>
+<a href="index.php" class="btn btn-danger">home</a>
 <?php
-require_once _ROOTPATH_.'/templates/Admin/Partial/_btnadmin.php';
+
 ?>
     <thead>
     <tr>
@@ -44,9 +46,8 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_btnadmin.php';
           <td><a href="?controller=services&action=show&id=<?= $reads->getId(); ?>" class="btn ">voir</a></td>
           <td><a href="?controller=services&action=delete&suprimer=<?= $reads->getId(); ?>" class="btn ">delete</a></td>
       </tr>
-        <?php } ?>
-        <a href="index.php" class="btn btn-danger">home</a>
-        <?php } else { ?>
+        <?php } 
+         } else { ?>
 
         <form action="" method="post">
             

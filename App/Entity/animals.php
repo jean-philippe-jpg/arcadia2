@@ -1,22 +1,8 @@
 <?php
 
 namespace App\Entity;
-class Animals
+class Animals extends Attributs
 {
-
-protected int $id ;
-protected string $first_name ;
-protected string $animal ;
-protected string $namerace ;
-protected string $home ;
-protected string $state = 'null';
-protected string $nourriture;
-protected float $quantitee;
-protected string $detail = 'null';
-protected string $date;
-protected string $date_de_passage;
-protected string $images;
-
 
 
 
@@ -25,42 +11,23 @@ public function getId(): int
       return $this->id;
 }
 
-public function setId(int $id)
+
+public function getName():string
 {
-     $this->id = $id;
+      return $this->name;
 }
 
-public function getFirstName():string
-{
-      return $this->first_name;
-}
-
-public function setFirstName(string $first_name)
-{
-     $this->first_name = $first_name;
-}
-
-/*public function getRace(): string
+public function getRace(): string
 {
       return $this->race;
 }
 
-public function setRace(string $race)
+public function getHabitat(): string
 {
-     $this->race = $race;
-}*/
-
-public function getHabitat() : string
-{
-return $this->home;
+      return $this->hab;
 }
 
-public function setHabitat($habitat)
-{
-$this->home = $habitat;
 
-return $this;
-}
 
 
 public function getState() : string
@@ -68,7 +35,7 @@ public function getState() : string
 return $this->state;
 }
 
-public function setState($state)
+/*public function setState($state)
 {
 $this->state = $state;
 
@@ -143,7 +110,7 @@ public function setDate_de_passage($date_de_passage)
 $this->date_de_passage = $date_de_passage;
 
 return $this;
-}
+}*/
 
 
 public function getDetail(): string
@@ -160,7 +127,7 @@ return $this;
 }
 
  
-public function getAnimal()
+/*public function getAnimal()
 {
 return $this->animal;
 }
@@ -184,5 +151,5 @@ public function setImg($images)
 $this->images = $images;
 
 return $this;
-}
+}*/
 }

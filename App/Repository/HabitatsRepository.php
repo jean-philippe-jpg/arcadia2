@@ -17,7 +17,7 @@ class HabitatsRepository {
         $pdo = $mysql->getPDO();
 
        
-                $query = $pdo->prepare("SELECT a.id as animal_id, a.first_name as name_animals, h.id, h.name, h.description FROM habitat h
+                $query = $pdo->prepare("SELECT a.id as id, a.first_name as name, h.id as id, h.name as name, h.description as description FROM habitat h
                INNER JOIN animals a on a.habitat_id = h.id  where h.id = :id    ");
 
                 $query->bindParam(':id', $id, $pdo::PARAM_INT);
@@ -59,10 +59,7 @@ class HabitatsRepository {
                 $pdo = $mysql->getPDO();
                   
 
-                if(!isset($_POST['name'])) {
-
-
-                } else {
+                
                $name = $_POST['name'];
                 $description = $_POST['description'];
                 
@@ -78,7 +75,7 @@ class HabitatsRepository {
                 } else {
                     echo 'veuillez remplir tous les champs';
                 }
-                }
+                
             } catch(\Exception $e){
                 echo 'erreur d\'insertion'. $e->getMessage();
             }
@@ -165,8 +162,9 @@ class HabitatsRepository {
 
                 $mysql = Mysql::getInstance();
                 $pdo = $mysql->getPDO();
-                $stmt = $pdo->prepare("SELECT  group_concat(a.first_name, '<br>' )as name_animals, group_contact(up.libele, ' ')as img_hab, h.id as id, h.name as name, h.description as description FROM habitat h
-                INNER JOIN uploads up ON up.habitat_id = h.id INNER JOIN animals a ON a.habitat_id = h.id  group by h.id"); 
+               
+                $stmt = $pdo->prepare("SELECT  group_concat(a.first_name )as animal,  h.id as id, h.name as name, h.description as description FROM habitat h
+                INNER JOIN animals a ON a.habitat_id = h.id   group by h.id"); 
                 /*$stmt = $pdo->prepare("SELECT group_concat(animals.first_name as name_animals, '') , habitat.name, habitat.id from habitat left join animals on animals.habitat_id = habitat.id
                 group by habitat.id");*/
 
@@ -229,13 +227,9 @@ class HabitatsRepository {
                
                 if(!isset($_POST['description'])) {
 
-
                 } else {
                 $description = $_POST['description'];
-               
-            
                 //$last_name = $_POST['last_name'];
-
 
                 $update = $pdo->prepare('UPDATE habitat set description = :description  WHERE id = :id');
                 $update->bindParam(':id', $id, $pdo::PARAM_INT);

@@ -10,12 +10,11 @@ require_once _ROOTPATH_.'\templates\partial\_header.php';
 <a href="?controller=habitats&action=read" class="btn btn-success">retour</a>
 <div class="show">
 
-<p><strong>habitat:  </strong><?= $logement->getName();?></p>
-<p><strong>description:  </strong><?= $logement->getDescription();?></p>
-
+<p><strong>habitat:  </strong><?= $habitat->getName();?></p>
+<p><strong>description:  </strong><?= $habitat->getDescription();?></p>
 
 <?php foreach($animals as $animal) { ?>
-<a href="?controller=habitats&action=show&detailAnimal=<?= $animal->getId(); ?>"><?= $animal->getFirstName();?></a>
+<a href="?controller=habitats&action=show&detailAnimal=<?= $animal->getId(); ?>"><?= $animal->getName();?></a>
 <?php } ?>
 </div>  
      
@@ -26,14 +25,11 @@ require_once _ROOTPATH_.'\templates\partial\_header.php';
 
 <div class="show">
     
-
-
-      <img src="/templates/uploads/<?= $logement->getImg()?>" alt="img" >
-        <?php  var_dump($logement->getImg())?>
-    <p><strong>Prenom:  </strong><?= $logement->getFirstName(); ?></p>
-<p><strong>Race:  </strong><?= $logement->getNameRace(); ?></p>
-<p><strong>etat:  </strong><?= $logement->getState(); ?></p>
-<p><strong>detail:  </strong><?= $logement->getDetail(); ?></p>
+      
+    <p><strong>Prenom:  </strong><?= $animal->getName(); ?></p>
+<p><strong>Race:  </strong><?= $animal->getRace(); ?></p>
+<p><strong>etat:  </strong><?= $animal->getState(); ?></p>
+<p><strong>detail:  </strong><?= $animal->getDetail(); ?></p>
 
 <?php } ?>
 

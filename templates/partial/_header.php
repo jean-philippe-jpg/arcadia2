@@ -32,7 +32,7 @@
       <li><a href="?controller=habitats&action=readvisiteur" class="link-item">Habitats</a></li>
       <li><a href="?controller=users&action=connect" class="link-item">Connexion</a></li>
         <li><a href="?controller=contact&action=formcontact" class="link-item">Contact</a></li>
-        <li><a  href="?controller=habitats&action=read" class="link-item">Admin</a></li>
+        
        
       </ul>
 

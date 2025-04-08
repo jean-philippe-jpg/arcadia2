@@ -42,7 +42,7 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
     <form action="" method="post" enctype="multipart/form-data">
 
     
-    <input type="text" name="habitat_id" id="habitat_id" value="<?= $hab_id->getId(); ?>">
+        <h3><?= $hab_id->getName(); ?> </h3>
     <input type="file" name="images" id="images">
     <input type="submit" name="insert" value="create">
 

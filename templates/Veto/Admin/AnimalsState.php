@@ -1,4 +1,14 @@
 <?php
+session_start();
+
+
+
+if (!in_array('ROLE_ADMIN', $_SESSION['roles'])) {
+
+  echo '<h1 style="color:purple;  text-align: center; margin-top: 30vh;">vous n\'avez pas l\'acces à cette page  :/</h1>';
+
+
+} else {
 require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
 ?>
 <h3 style="color: red; margin-top:200px;">vue globals des state</h3>
@@ -39,6 +49,7 @@ if(isset($_GET['filtres']) && !isset($_GET['vue'])){
 
 
 require_once _ROOTPATH_.'/templates/Admin/Partial/_footer.php';
+   }
 ?>
 
 

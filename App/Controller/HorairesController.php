@@ -7,6 +7,7 @@ use App\Repository\HorairesRepository;
 
 
 
+
 class HorairesController extends Controller{
 
   public function route(): void {
@@ -16,11 +17,8 @@ class HorairesController extends Controller{
 
           switch($_GET['action']){
 
-              case 'show':
-
-                  $this->show();
-                  
-                  break;
+              
+                 
               case 'create':
 
                   $this->create();
@@ -73,6 +71,7 @@ class HorairesController extends Controller{
 
                           $raceRrepository = new HorairesRepository();
                           $race = $raceRrepository->findOneById($id);
+                          
 
                           $this->render('/Admin/Race/show', [
 
@@ -193,9 +192,9 @@ class HorairesController extends Controller{
                           if(isset($_GET['modify'])){
                               $id = $_GET['modify'];
                               $habitatRrepository = new HorairesRepository();
-                              $read = $habitatRrepository->updateRace($id);
+                              $read = $habitatRrepository->update($id);
 
-                              $this->render('/Admin/Race/read', [
+                              $this->render('/Admin/Horaires/read', [
 
                                   //'read' => $read
                         

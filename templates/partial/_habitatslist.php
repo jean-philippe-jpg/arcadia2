@@ -11,7 +11,7 @@
         
         </div>
        <div >
-       <a style="text-decoration-line: none;" href="?controller=habitats&action=show&id=<?= $habitats->getId();?>"><h2 class="irish-grover-regular title-habitats"><?=$habitats->getName();?></h2></a>
+       <a style="text-decoration-line: none;" href="?controller=habitats&action=show&detailAnimal=<?= $habitats->getId();?>"><h2 class="irish-grover-regular title-habitats"><?=$habitats->getName();?></h2></a>
        </div>
        </div>
         

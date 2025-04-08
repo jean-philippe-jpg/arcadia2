@@ -42,7 +42,7 @@ class AnimalsController extends Controller{
                   break;
                   case 'update':
                       $this->update();
-                     $this->updateSoignant();
+                     //$this->updateSoignant();
                   break;
                   case 'delete':
                       var_dump('chargement de pagescontroller');
@@ -287,19 +287,13 @@ class AnimalsController extends Controller{
                               $animalsRrepository = new AnimalsRepository();
                               $animalsRrepository->updateAnimals($id);
 
-                              $this->render('/Admin/Animals/read', [
-
-                         ] );
+                              $this->render('/Admin/Animals/read' );
                              
                               } else {
                                   throw new \Exception('modification impossible :');
   
                               }
                           
-                        
-       
-                           
-
                       } catch(\Exception $e ) {
                           $this->render('errors/errors', [
                               'errors' => $e->getMessage()

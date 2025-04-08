@@ -4,12 +4,7 @@ session_start();
 
 
 
-if (isset($_SESSION['username']) && $_SESSION['gégé'] == false) {
 
-    echo '<h1 style="color:purple;  text-align:center; margin-top: 30vh;">vous n\'avez pas le ou les roles d\'acces à cette page</h1>';
-
-
-} else {
 require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
 ?>
 <h3 style="color: red; margin-top:200px;">tableau etat animals</h3>
@@ -18,12 +13,8 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
 <?php if( !isset($_GET['modify']) && !isset($_GET['animalslist'])  && !isset($_GET['readsoins'])) {  ?>
 <table class="table">
 <a href="?controller=veto&action=create" class="btn btn-success">ajouter</a>
-<?php
-require_once _ROOTPATH_.'/templates/Admin/Partial/_buttonVeto.php';
-?>
-<a href="index.php" class="btn btn-danger">home</a>
-
-
+<a href="?controller=users&action=connect" class="btn btn-danger">profil</a>
+ <a href="index.php" class="btn btn-danger">home</a>
     <thead>
     <tr>
     <th scope="col">#</th>
@@ -58,13 +49,14 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_buttonVeto.php';
           <td><a href="?controller=veto&action=delete&suprimer=<?= $reads->getId(); ?>" class="btn btn-danger">delete</a></td>
       </tr>
       
-        <?php } ?>  
+        <?php } 
 
-        <?php } elseif (isset($_GET['animalslist'])){
+            } elseif (isset($_GET['animalslist'])){ ?>
            
-           echo '<h4>vue globals des soins</h4>';
+           <a href="?controller=users&action=connect" class="btn btn-danger">profil</a>
+           <a href="index.php" class="btn btn-danger">home</a>
           
-                require_once _ROOTPATH_.'/templates/Admin/Partial/Veto/_showSoins.php';
+               <?php require_once _ROOTPATH_.'/templates/Admin/Partial/Veto/_showSoins.php';
 
 
         } elseif (isset($_GET['readsoins'])) {
@@ -118,7 +110,7 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_buttonVeto.php';
 <?php
 require_once _ROOTPATH_.'/templates/Admin/Partial/_footer.php';
 
-        }
+        
 ?>
 
 

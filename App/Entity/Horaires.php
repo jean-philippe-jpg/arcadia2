@@ -9,9 +9,10 @@ class Horaires
 {
 
 protected int $id ;
-protected string $date ;
-protected string $horaires ;
-protected string $close ;
+
+protected string $ouverture  ;
+protected string $fermeture  ;
+protected string $jour ;
 
 
 public function getId(): int
@@ -25,41 +26,37 @@ public function setId(int $id)
 }
 
 
-public function getHoraires()
+
+public function getJour()
 {
-return $this->horaires;
+return $this->jour;
 }
 
 
-public function setHoraires($horaires)
+public function setJour($jour)
 {
-$this->horaires = $horaires;
+$this->jour = $jour;
 
 return $this;
 }
 
-public function getDate()
+public function getOuverture(): string
 {
-return $this->date;
+       return  $this->ouverture;
 }
 
 
-public function setDate($date)
-{
-$this->date = $date;
 
-return $this;
-}
-
-public function getClose()
+public function getFermeture()
 {
-return $this->close;
+      
+            return $this->fermeture ;
 }
 
 
-public function setClose($close)
+public function setFermeture($fermeture)
 {
-$this->close = $close;
+$this->fermeture = $fermeture;
 
 return $this;
 }

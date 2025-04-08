@@ -19,10 +19,12 @@ class HabitatsController extends Controller{
             switch($_GET['action']){
 
                 case 'show':
-
                     $this->show();
-                    //$this->showMore();
-                    
+                    break;
+
+                    case 'detailAnimal':
+                        $this->readvisiteur();
+
                     break;
                 case 'create':
 
@@ -48,7 +50,6 @@ class HabitatsController extends Controller{
                     case 'delete':
                         var_dump('chargement de pagescontroller');
                        
-
                 default:
                 throw new \Exception('page introuvable :/');
                   break;
@@ -80,29 +81,25 @@ class HabitatsController extends Controller{
 
                             $habitatRrepository = new HabitatsRepository();
                             $habitation = $habitatRrepository->findOneById($id);
-                            $animals = $habitatRrepository->findOneByAnimals($id);
+                            //$animals = $habitatRrepository->findOneByAnimals($id);
 
-                           
-                            
-                           
-                            $this->render('showanimals', [
+                            $this->render('/Admin/Habitat/show', [
 
-                                'logement' => $habitation,
-                                'animals' => $animals
-                              
-                                     
+                                'habitat' => $habitation,
+                                //'animals' => $animals      
                                 ] );
 
                             } elseif(isset($_GET['detailAnimal'])) {  
                                 $id = $_GET['detailAnimal'];
                             // afficher le detail de l'element//
                             $habitatRrepository = new AnimalsRepository();
-                            $animals = $habitatRrepository->findOneById($id);
+                            $animal = $habitatRrepository->findOneById($id);
+                            
+                           
                             $this->render('showanimals', [
+                                'animal' => $animal,
+                                 
 
-                                'logement' => $animals,
-                                
-                                         
                                 ] );
                            
                         } else {
@@ -203,12 +200,11 @@ class HabitatsController extends Controller{
                 {
                         try {       
 
-                            $id = $_GET['id'];
+                            //$id = $_GET['id'];
                             
                                 $habitatRrepository = new HabitatsRepository();
                                 $habitat = $habitatRrepository->read();
-                               
-                              
+    
                                  $this->render('habitats', [
                                     
                                      'habitat' => $habitat
@@ -268,11 +264,7 @@ class HabitatsController extends Controller{
                                 $habitatRrepository = new HabitatsRepository();
                                 $read = $habitatRrepository->updateHabitat($id);
 
-                                $this->render('/Admin/Habitat/read', [
-
-                                    //'read' => $read
-                          
-                           ] );
+                                $this->render('/Admin/Habitat/read' );
                                
                                 } else {
                                     throw new \Exception('modification impossible :/');

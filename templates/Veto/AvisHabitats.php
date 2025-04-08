@@ -5,8 +5,10 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
 <h1>show avis habitat</h1>
 
 
-<?php if(!isset($_GET['create'])) { 
- require_once _ROOTPATH_.'/templates/Admin/Partial/_dropdownHabitats.php';
+<?php if(!isset($_GET['create'])) { ?>
+  <a href="?controller=users&action=connect" class="btn btn-danger">profil</a>
+  <a href="index.php" class="btn btn-danger">home</a>
+<?php  require_once _ROOTPATH_.'/templates/Admin/Partial/_dropdownHabitats.php';
 
   } else  { ?>
         <h3>create avis home</h3>

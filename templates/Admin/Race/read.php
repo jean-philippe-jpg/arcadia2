@@ -7,9 +7,8 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
 
 <table class="table">
 <a href="?controller=race&action=create" class="btn ">ajouter</a>
-<?php
-require_once _ROOTPATH_.'/templates/Admin/Partial/_btnadmin.php';
-?>
+<a href="?controller=users&action=connect" class="btn btn-danger">profil</a>
+<a href="index.php" class="btn btn-danger">home</a>
 
     <thead>
     <tr>
@@ -37,7 +36,7 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_btnadmin.php';
           <td><a href="?controller=race&action=delete&suprimer=<?= $reads->getId(); ?>" class="btn ">delete</a></td>
       </tr>
         <?php } ?>
-        <a href="index.php" class="btn btn-danger">home</a>
+        
         <?php } else { ?>
 
         <form action="" method="post">

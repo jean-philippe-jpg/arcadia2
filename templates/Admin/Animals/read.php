@@ -2,66 +2,61 @@
 
 session_start();
 
- //$_SESSION['username'];
+if (!in_array('ROLE_ADMIN', $_SESSION['roles'])) {
+
+  echo '<h1 style="color:purple;  text-align: center; margin-top: 30vh;">vous n\'avez pas l\'acces à cette page  :/</h1>';
 
 
-//if (!isset($_SESSION['username']) && $_SESSION['romain'] == false) {
-
- // echo '<h1 style="color:purple;  text-align: center; margin-top: 30vh;">vous n\'avez pas l\'acces à cette page  :/</h1>';
-
-
-//} else {
+} else {
 require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
-?>
-<h1>Animaux</h1>
 
-<?php if(!isset($_GET['modify'])) {  ?>
+
+
+
+
+ if(!isset($_GET['modify'])) {  ?>
 
 <table class="table">
-<a href="?controller=animals&action=create" class="btn btn-success">ajouter</a>
-<?php
-require_once _ROOTPATH_.'/templates/Admin/Partial/_btnadmin.php';
-?>
-<a href="index.php" class="btn btn-danger">home</a>
-            
+<a href="?controller=animals&action=create" class="btn">ajouter</a>
+<a href="?controller=users&action=connect" class="btn">profil</a>
+        <a href="index.php" class="btn">home</a>
+        
     <thead>
     <tr>
     <th scope="col">#</th>
     <th scope="col">prenom</th>
     <th scope="col">race</th>
     <th scope="col">habitat</th>
-   
-    
-
     <th scope="col">update</th>
+    <th scope="col">soins</th>
     <th scope="col">show</th>
+    <th scope="col">photo</th>
     <th scope="col">delete</th>
     
     </tr>
     </thead>
     <tbody>
       <tr>
-
-      
-      <?php foreach($animal as $reads) { ?>
+      <?php foreach($animal as $animals) { ?>
         
       <tr>
-      <td><?= $reads->getId(); ?></td>
-      <td><?= $reads->getFirstname(); ?></td>
-      <td><?= $reads->getNameRace(); ?></td>
-      <td><?= $reads->getHabitat(); ?></td>
+      <td><?= $animals->getId(); ?></td>
+      <td><?= $animals->getName(); ?></td>
+      <td><?= $animals->getRace(); ?></td>
+      <td><?= $animals->getHabitat(); ?></td>
          
           
-          <td><a href="?controller=animals&action=update&modify=<?= $reads->getId(); ?>" class="btn btn-warning">update</a></td>
-          <td><a href="?controller=animals&action=soins&id=<?= $reads->getId(); ?>" class="btn btn-warning">soins animal</a></td>
-          <td><a href="?controller=animals&action=show&id=<?= $reads->getId(); ?>" class="btn btn-warning">voir</a></td>
-          <td><a href="?controller=animals&action=create&photo&id=<?= $reads->getId(); ?>" class="btn btn-warning">photo</a></td>
-          <td><a href="?controller=animals&action=delete&suprimer=<?= $reads->getId(); ?>" class="btn btn-danger">delete</a></td>
+          <td><a href="?controller=animals&action=update&modify=<?= $animals->getId(); ?>" class="btn">update</a></td>
+          <td><a href="?controller=animals&action=soins&id=<?= $animals->getId(); ?>" class="btn">soins animal</a></td>
+          <td><a href="?controller=animals&action=show&id=<?= $animals->getId(); ?>" class="btn">voir</a></td>
+          <td><a href="?controller=animals&action=create&photo&id=<?= $animals->getId(); ?>" class="btn">photo</a></td>
+          <td><a href="?controller=animals&action=delete&suprimer=<?= $animals->getId(); ?>" class="btn">delete</a></td>
       </tr>
      
 
-        <?php } ?>
-     <?php } else { ?>
+        <?php } 
+
+       } else { ?>
 
 <form action="" method="post">
     <div>
@@ -75,25 +70,15 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_btnadmin.php';
     </div>
     <br>
     <div>
-   
-    
-   <input type="submit"  class="btn btn-success"  value="Update">
+   <input type="submit"  class="btn "  value="Update">
     
 </form>
-
-
-
 </tbody>
-
 </table>
-<?php } ?>
 
-<?php
+      <?php }
 require_once _ROOTPATH_.'/templates/Admin/Partial/_footer.php';
-
-     
-?>
-
+     }
 
 
 

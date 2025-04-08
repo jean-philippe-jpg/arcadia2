@@ -1,31 +1,24 @@
 <?php
 session_start();
 
-//var_dump($_SESSION);
 
-//$_SESSION['username'];
-//$_SESSION['roles'];
+if (!in_array('ROLE_ADMIN', $_SESSION['roles'])) {
 
+  echo '<h1 style="color:purple;  text-align: center; margin-top: 30vh;">vous n\'avez pas l\'acces à cette page  :/</h1>';
+} else {
 
-if (isset($_SESSION['username']) && $_SESSION['romain'] == false) {
-
-    echo '<h1 style="color:purple;  text-align: center; margin-top: 30vh;">vous n\'avez pas l\'acces à cette page  :/</h1>';
-  
-  
-  } else {
 require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
 ?>
 <h1>Habitats</h1>
 
 <?php try { ?>
 
-
 <?php if(!isset($_GET['modify'])) {  ?>
 <table class="table">
 <a href="?controller=habitats&action=create" class="btn btn-success">ajouter</a>
-<?php
-require_once _ROOTPATH_.'/templates/Admin/Partial/_btnadmin.php';
-?>
+<a href="?controller=users&action=connect" class="btn btn-danger">profil</a>
+        <a href="index.php" class="btn btn-danger">home</a>
+       
     <thead>
     <tr>
     <th scope="col">#</th>
@@ -47,9 +40,7 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_btnadmin.php';
          <td><?= $habitats->getName();?></td>
           <td><?= $habitats->getDescription(); ?></td>
           <td><?= $habitats->getName_animals(); ?></td>
-          <td><?= $habitats->getImg_hab(); ?></td>
           
-         
           <td><a href="?controller=habitats&action=update&modify=<?= $habitats->getId(); ?>" class="btn btn-warning">update</a></td>
           <td><a href="?controller=habitats&action=show&id=<?= $habitats->getId(); ?>" class="btn btn-warning">voir</a></td>
           <td><a href="?controller=habitats&action=create&photo&id=<?= $habitats->getId(); ?>" class="btn btn-danger">photo</a></td>
@@ -59,7 +50,7 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_btnadmin.php';
 
    
         <?php } ?>
-        <a href="index.php" class="btn btn-danger">home</a>
+       
         <?php } else { ?>
 
            
@@ -90,7 +81,7 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_btnadmin.php';
     
 } 
 require_once _ROOTPATH_.'/templates/Admin/Partial/_footer.php';
-  }
+}
 ?>
 
 

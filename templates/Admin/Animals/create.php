@@ -23,14 +23,7 @@ if(!isset($_GET['photo'])) { ?>
     <label for="habitat_id"><strong>habitat:</strong> </label>
     <input name="habitat_id" id="habitat_id" type="text">
     </div>
-  
-   
-
-   
-
-    <input type="submit" name="insert" value="create">
-
-    
+    <input type="submit" name="insert" value="create"> 
 </form>
 </div>
 <?php } elseif (isset($_GET['photo'])) { ?>
@@ -39,15 +32,9 @@ if(!isset($_GET['photo'])) { ?>
 
    
     <a href="?controller=animals&action=read" class="btn btn-success">retour</a>
-
-    
     <div class="show">
-        <h4>photo formulaire</h4>
-
         
         <form action="" method="post" enctype="multipart/form-data">
-
-        <input  type="text" name="animals_id" id="animals_id" value="<?= $animals_id->getId(); ?>">
         <input type="file" name="images" id="images">
         <input type="submit" name="insert" value="create">
 

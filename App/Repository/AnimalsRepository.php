@@ -17,8 +17,10 @@ use App\Tools\StringTools;
         $mysql = Mysql::getInstance();
         $pdo = $mysql->getPDO();
 
-        $query = $pdo->prepare('SELECT a.id as id, a.first_name as first_name, r.name as namerace, a_s.state as state, a_s.detail as detail, img.libele as images FROM animals a
-                INNER JOIN race r ON a.race = r.id  JOIN animals_state a_s ON a.id = a_s.animal JOIN img_animals img ON img.animals_id = a.id where a.id = :id ');   
+
+
+        $query = $pdo->prepare('SELECT a.id as id, a.first_name as name, r.name as race, a_s.state as state, a_s.detail as detail /*, img.libele as images*/ FROM animals a
+                INNER JOIN race r ON a.race = r.id  JOIN animals_state a_s ON a.id = a_s.animal /*JOIN img_animals img ON img.animals_id = a.id*/ where a.id = :id');   
         $query->bindParam(':id', $id, $pdo::PARAM_INT);
         
                 if($query->execute()) {
@@ -76,16 +78,11 @@ use App\Tools\StringTools;
                     $mysql = Mysql::getInstance();
                     $pdo = $mysql->getPDO();
             
-                $stmt = $pdo->prepare('INSERT INTO animals (first_name, race, habitat_id ) VALUES (:first_name, :race, :habitat_id ))');
+                $stmt = $pdo->prepare('INSERT INTO animals (first_name, race, habitat_id ) VALUES (:first_name, :race, :habitat_id )');
                 $stmt->bindParam(':first_name', $sanitized_name , $pdo::PARAM_STR);
                 $stmt->bindParam(':race',  $sanitized_race , $pdo::PARAM_INT);
                 $stmt->bindParam(':habitat_id',  $sanitized_habitat , $pdo::PARAM_INT);
               
-
-
-                    if(!isset($_POST['name']) || !isset($_POST['race']) ) {
-
-                    } else {
                     $name = $_POST['name'];
                     $sanitized_name = htmlspecialchars($name, ENT_QUOTES | ENT_HTML5, 'UTF-8');
                     $race = $_POST['race'];
@@ -98,7 +95,7 @@ use App\Tools\StringTools;
                 if(!$stmt->execute()){
                     echo 'erreur d\'insertion';
                 } 
-            }
+            
             } catch(\Exception $e){
                 echo 'erreur d\'insertion'. $e->getMessage();
             }
@@ -184,7 +181,7 @@ use App\Tools\StringTools;
 
                 $mysql = Mysql::getInstance();
                 $pdo = $mysql->getPDO();
-                $stmt = $pdo->prepare("SELECT  group_concat(r.name, '<br>') as namerace, group_concat(h.name, '<br>') as home,  a.id, a.first_name FROM animals a
+                $stmt = $pdo->prepare("SELECT  group_concat(r.name, '<br>') as race, group_concat(h.name, '<br>') as hab,  a.id as id, a.first_name as name FROM animals a
                 INNER JOIN race r ON a.race = r.id JOIN habitat h ON h.id = a.habitat_id group by a.id ");   
                
                 if($stmt->execute()){
@@ -215,7 +212,7 @@ use App\Tools\StringTools;
                     $pdo = $mysql->getPDO();
 
                     $stmt = $pdo->prepare("SELECT a.id as id, a.first_name as first_name , h.name as home /*, r.name = namerace*/ , r_s.nourriture as nourriture, r_s.quantitee as quantitee , r_s.date_heure as date FROM animals a
-                    INNER  JOIN rapport_soignant r_s ON r_s.animal = a.id JOIN race r ON a.race = r.id  JOIN habitat h ON h.animals_list = a.id WHERE a.id = :id ");
+                    INNER  JOIN rapport_soignant r_s ON r_s.animal = a.id JOIN race r ON a.race = r.id  JOIN habitat h ON h.id = a.habitat_id WHERE a.id = :id ");
                     $stmt->bindParam(':id', $id, $pdo::PARAM_INT);
                    
                     if($stmt->execute()){
@@ -244,7 +241,7 @@ use App\Tools\StringTools;
                 $mysql = Mysql::getInstance();
                 $pdo = $mysql->getPDO();
 
-                $query = $pdo->prepare('SELECT a.id as id,  a.first_name as first_name,  r.name as namerace, h.name as home FROM animals a
+                $query = $pdo->prepare('SELECT a.id as id,  a.first_name as name,  r.name as race, h.name as hab FROM animals a
                 INNER JOIN race r ON a.race = r.id JOIN habitat h ON a.habitat_id = h.id where a.id = :id');   
                     $query->bindParam(':id', $id, $pdo::PARAM_INT);
         
@@ -274,18 +271,10 @@ use App\Tools\StringTools;
             $mysql = Mysql::getInstance();
             $pdo = $mysql->getPDO();
 
-
-           
-           
             $query = $pdo->prepare('UPDATE animals set first_name = :name, race = :race WHERE id = :id');
             $query->bindParam(':id',$id, $pdo::PARAM_INT);
             $query->bindParam(':name',  $sanitized_name, $pdo::PARAM_STR);
             $query->bindParam(':race', $sanitized_race, $pdo::PARAM_INT);
-            
-                if(!isset($_POST['name']) || !isset($_POST['race'])){
-
-
-                } else {
 
             $name = $_POST['name'];
             $sanitized_name = htmlspecialchars($name, ENT_QUOTES | ENT_HTML5, 'UTF-8');
@@ -307,7 +296,7 @@ use App\Tools\StringTools;
             return  $query;
          
         
-        }
+        
 
         } catch(\Exception $e){
             echo 'modification impossible'. $e->getMessage();
