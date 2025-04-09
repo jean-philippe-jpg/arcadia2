@@ -17,7 +17,7 @@ class HabitatsRepository {
         $pdo = $mysql->getPDO();
 
        
-                $query = $pdo->prepare("SELECT a.id as id, a.first_name as name, h.id as id, h.name as name, h.description as description FROM habitat h
+                $query = $pdo->prepare("SELECT  a.first_name as name, h.id as id, h.name as name, h.description as description FROM habitat h
                INNER JOIN animals a on a.habitat_id = h.id  where h.id = :id    ");
 
                 $query->bindParam(':id', $id, $pdo::PARAM_INT);
@@ -36,7 +36,9 @@ class HabitatsRepository {
             $pdo = $mysql->getPDO();
     
            
-                    $animals = $pdo->prepare("SELECT * FROM animals 
+                    /*$animals = $pdo->prepare("SELECT * FROM animals 
+                   where habitat_id = :id    ");*/
+                   $animals = $pdo->prepare("SELECT a.id as id, a.first_name as name FROM animals a
                    where habitat_id = :id    ");
     
                     $animals->bindParam(':id', $id, $pdo::PARAM_INT);
@@ -163,7 +165,7 @@ class HabitatsRepository {
                 $mysql = Mysql::getInstance();
                 $pdo = $mysql->getPDO();
                
-                $stmt = $pdo->prepare("SELECT  group_concat(a.first_name )as animal,  h.id as id, h.name as name, h.description as description FROM habitat h
+                $stmt = $pdo->prepare("SELECT  group_concat(a.first_name,' ' )as animal,  h.id as id, h.name as name, h.description as description FROM habitat h
                 INNER JOIN animals a ON a.habitat_id = h.id   group by h.id"); 
                 /*$stmt = $pdo->prepare("SELECT group_concat(animals.first_name as name_animals, '') , habitat.name, habitat.id from habitat left join animals on animals.habitat_id = habitat.id
                 group by habitat.id");*/

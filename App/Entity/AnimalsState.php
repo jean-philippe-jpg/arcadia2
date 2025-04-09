@@ -5,19 +5,7 @@ namespace App\Entity;
 class AnimalsState extends Attributs {
 
     
-      /*protected int $id ;
-      protected int $id_state ;
-      protected string $animals_id ;
-      protected string $animals_name ;
-      protected string $nourriture ;
-      protected  int $quantitee ;
-      protected string $state;
-      protected string $detail;
-      protected int $animal;
-      protected string $first_name;
-      protected string $date;
-      protected string $date_de_passage;
-      protected string $race;*/
+      
      
 
 public function getId(): int
@@ -25,10 +13,7 @@ public function getId(): int
       return $this->id;
 }
 
-public function setId(int $id)
-{
-     $this->id = $id;
-}
+
 
 
      
@@ -38,12 +23,7 @@ public function setId(int $id)
       }
 
      
-      public function setNourriture($nourriture)
-      {
-            $this->nourriture = $nourriture;
-
-            return $this;
-      }
+     
 
      
       public function getQuantitee():int
@@ -77,9 +57,9 @@ public function setId(int $id)
       
 
      
-      public function getAnimal():int
+      public function getAnimals():string
       {
-            return $this->animal;
+            return $this->name;
       }
 
      
@@ -100,12 +80,7 @@ public function setId(int $id)
       }
 
       
-      public function setFirst_name($first_name)
-      {
-            $this->name = $first_name;
-
-            return $this;
-      }
+     
 
        
       public function getRace()

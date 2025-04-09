@@ -1,12 +1,12 @@
 <?php
-
 namespace App\Entity;
 
-
-
-
+  
 class Habitats extends Attributs
 {
+
+//public array $animals_list = [];
+
 
 public function getId(): int
 {
@@ -35,8 +35,12 @@ public function getDescription(): string
       return $this->animals_list = [];
 }*/
 
+public function getAnimals()
+{
 
+return $this->animal;
 
+}
 
 
 public function getAnimal_id()
@@ -67,20 +71,5 @@ return $this->state;
 {
 return $this->avis_id;
 }*/
-
-
-
-
-public function getName_animals()
-{
-return $this->animal;
-}
-
-
-/*public function getImg_hab()
-{
-return $this->img_hab;
-}*/
-
 
 }

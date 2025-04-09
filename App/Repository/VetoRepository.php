@@ -19,7 +19,7 @@ class VetoRepository {
         $mysql = Mysql::getInstance();
         $pdo = $mysql->getPDO();
 
-        $query = $pdo->prepare('SELECT a_s.id as id, a_s.nourriture as nourriture, a_s.quantitee as quantitee, a_s.state as state, a_s.detail as detail, a_s.date_de_passage as date, a.id as animals_id, a.first_name as animals_name FROM animals_state a_s
+        $query = $pdo->prepare('SELECT a_s.id as id, a_s.nourriture as nourriture, a_s.quantitee as quantitee, a_s.state as state, a_s.detail as detail, a_s.date_de_passage as date /*a_s.animal as animal,*/, a.first_name as name FROM animals_state a_s
                 INNER JOIN animals a ON a_s.animal = a.id where a_s.id = :id');   
         $query->bindParam(':id', $id, $pdo::PARAM_INT);
         //$animals_state = $query->Fetch($pdo::FETCH_ASSOC);
@@ -74,7 +74,7 @@ class VetoRepository {
 
                 $mysql = Mysql::getInstance();
                 $pdo = $mysql->getPDO();
-                $stmt = $pdo->prepare('SELECT a.id as id, a.first_name as name, a_s.id as state,  a_s.animal as animal, a_s.nourriture as nourriture, a_s.quantitee as quantitee, a_s.state as state, a_s.detail as detail, a_s.date_de_passage as date FROM animals a
+                $stmt = $pdo->prepare('SELECT a.id as id, a.first_name as name, a_s.id as id,  a_s.animal as animal, a_s.nourriture as nourriture, a_s.quantitee as quantitee, a_s.state as state, a_s.detail as detail, a_s.date_de_passage as date FROM animals a
                 INNER JOIN animals_state a_s ON a.id = a_s.animal');
                
                 if($stmt->execute()){

@@ -30,8 +30,8 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php' ?>
     <input name="quantitee" id="quantitee" type="number">
     </div>
     <div class="create">
-    <label for="date_heure"><strong>Date et Heure:</strong> </label>
-    <input name="date_heure"  id="date_heure" type="date">
+    <label for="date_heure"><strong>Date :</strong> </label>
+    <input name="date_heure"  id="date_heure" type="datetime" value="<?= date("d-m-Y ")?>">
     </div>
 
 

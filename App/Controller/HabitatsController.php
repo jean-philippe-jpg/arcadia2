@@ -81,12 +81,12 @@ class HabitatsController extends Controller{
 
                             $habitatRrepository = new HabitatsRepository();
                             $habitation = $habitatRrepository->findOneById($id);
-                            //$animals = $habitatRrepository->findOneByAnimals($id);
+                            $animals = $habitatRrepository->findOneByAnimals($id);
 
-                            $this->render('/Admin/Habitat/show', [
+                            $this->render('showanimals', [
 
                                 'habitat' => $habitation,
-                                //'animals' => $animals      
+                                'animals' => $animals      
                                 ] );
 
                             } elseif(isset($_GET['detailAnimal'])) {  
@@ -94,10 +94,14 @@ class HabitatsController extends Controller{
                             // afficher le detail de l'element//
                             $habitatRrepository = new AnimalsRepository();
                             $animal = $habitatRrepository->findOneById($id);
-                            
+                           // $habitatRrepository = new HabitatsRepository();
+                            //$habitation = $habitatRrepository->findOneById($id);
+                            //$animals = $habitatRrepository->findOneByAnimals($id);
+
                            
                             $this->render('showanimals', [
                                 'animal' => $animal,
+                                //'habitat' => $habitation,
                                  
 
                                 ] );

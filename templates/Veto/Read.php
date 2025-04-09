@@ -37,7 +37,7 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
           <td><?= $reads->getQuantitee(); ?></td>
           <td><?= $reads->getState();?></td>
           <td><?= $reads->getDetail();?></td>
-          <td><?= $reads->getAnimals_name();?></td>
+          <td><?= $reads->getAnimals();?></td>
           <td><?= $reads->getDate();?></td>
           
       

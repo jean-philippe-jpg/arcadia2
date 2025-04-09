@@ -211,7 +211,7 @@ use App\Tools\StringTools;
                     $mysql = Mysql::getInstance();
                     $pdo = $mysql->getPDO();
 
-                    $stmt = $pdo->prepare("SELECT a.id as id, a.first_name as first_name , h.name as home /*, r.name = namerace*/ , r_s.nourriture as nourriture, r_s.quantitee as quantitee , r_s.date_heure as date FROM animals a
+                    $stmt = $pdo->prepare("SELECT a.id as id, a.first_name as name , h.name as hab /*, r.name = namerace*/ , r_s.nourriture as nourriture, r_s.quantitee as quantitee , r_s.date_heure as date FROM animals a
                     INNER  JOIN rapport_soignant r_s ON r_s.animal = a.id JOIN race r ON a.race = r.id  JOIN habitat h ON h.id = a.habitat_id WHERE a.id = :id ");
                     $stmt->bindParam(':id', $id, $pdo::PARAM_INT);
                    

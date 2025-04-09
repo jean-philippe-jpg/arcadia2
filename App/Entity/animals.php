@@ -1,11 +1,12 @@
 <?php
 
 namespace App\Entity;
-class Animals extends Attributs
+
+class Animals extends RapportSoignant
 {
+      
 
-
-
+     
 public function getId(): int
 {
       return $this->id;
@@ -152,4 +153,8 @@ $this->images = $images;
 
 return $this;
 }*/
+
+ 
+
+
 }

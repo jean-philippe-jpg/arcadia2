@@ -3,6 +3,7 @@
 //use App\Repository\VetoRepository;
 namespace App\Controller;
 
+use App\Entity\AnimalsState;
 use App\Entity\Habitats;
 use App\Repository\VetoRepository;
 use App\Repository\AnimalsRepository;
@@ -245,7 +246,9 @@ class VetoController extends Controller{
 
                                     $show = $_GET['readsoins'];
                                 $habitatRrepository = new AnimalsRepository();
+                                $animalsStateRepository = new AnimalsState();
                             $habitat = $habitatRrepository->readSoins($show);
+                           // $state = $animalsStateRepository->readSoins($show);
      
                             $this->render('/Veto/Read', [
                                     'soins' => $habitat

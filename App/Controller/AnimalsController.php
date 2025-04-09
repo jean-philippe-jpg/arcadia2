@@ -227,11 +227,7 @@ class AnimalsController extends Controller{
                                     $rapportSoignantRrepository = new RapportSoignantRepository();
                                    $rapportSoignantRrepository->createRapportSoignant();
                                      
-                                     $this->render('/Admin/Animals/soins', [
-                                        
-                                              
-
-                                          ] );
+                                     $this->render('/Admin/Animals/soins' );
               
 
 

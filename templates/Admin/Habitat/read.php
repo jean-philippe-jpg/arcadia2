@@ -39,7 +39,7 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
       <td><?= $habitats->getId(); ?></td>
          <td><?= $habitats->getName();?></td>
           <td><?= $habitats->getDescription(); ?></td>
-          <td><?= $habitats->getName_animals(); ?></td>
+          <td><?= $habitats->getAnimals(); ?></td>
           
           <td><a href="?controller=habitats&action=update&modify=<?= $habitats->getId(); ?>" class="btn btn-warning">update</a></td>
           <td><a href="?controller=habitats&action=show&id=<?= $habitats->getId(); ?>" class="btn btn-warning">voir</a></td>
