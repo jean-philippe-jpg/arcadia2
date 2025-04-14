@@ -35,6 +35,7 @@ if(!isset($_GET['photo'])) { ?>
     <div class="show">
         
         <form action="" method="post" enctype="multipart/form-data">
+        <input type="text" name="animals_id" id="images" value="<?= $animals_id->getId(); ?>">
         <input type="file" name="images" id="images">
         <input type="submit" name="insert" value="create">
 

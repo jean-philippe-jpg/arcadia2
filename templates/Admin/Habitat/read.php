@@ -11,8 +11,6 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
 ?>
 <h1>Habitats</h1>
 
-<?php try { ?>
-
 <?php if(!isset($_GET['modify'])) {  ?>
 <table class="table">
 <a href="?controller=habitats&action=create" class="btn btn-success">ajouter</a>
@@ -32,14 +30,15 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
     </tr>
     </thead>
     <tbody>
-
+   
       <?php foreach($habitat as $habitats) { ?>
       <tr>
-        
+       
       <td><?= $habitats->getId(); ?></td>
          <td><?= $habitats->getName();?></td>
           <td><?= $habitats->getDescription(); ?></td>
           <td><?= $habitats->getAnimals(); ?></td>
+          <td><img src="/uploads/<?= $habitats->getPhoto(); ?>" alt="" srcset=""></td>
           
           <td><a href="?controller=habitats&action=update&modify=<?= $habitats->getId(); ?>" class="btn btn-warning">update</a></td>
           <td><a href="?controller=habitats&action=show&id=<?= $habitats->getId(); ?>" class="btn btn-warning">voir</a></td>
@@ -47,13 +46,11 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
           <td><a href="?controller=habitats&action=delete&suprimer=<?= $habitats->getId(); ?>" class="btn btn-danger">delete</a></td>
           
       </tr>
+       <?php 
+       } ?>
 
-   
-        <?php } ?>
-       
-        <?php } else { ?>
+   <?php } else {?>
 
-           
             <form action="" method="post">
                 
                 <br>
@@ -74,16 +71,6 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
     
 </table>
 
-<?php } catch (Exception $e) { 
-    
-
-    echo $e->getMessage();
-    
-} 
+<?php
 require_once _ROOTPATH_.'/templates/Admin/Partial/_footer.php';
-}
-?>
-
-
-
-
+    }

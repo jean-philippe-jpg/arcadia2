@@ -43,6 +43,7 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
 
     
         <h3><?= $hab_id->getName(); ?> </h3>
+        <input type="text" name="habitat_id" id="images" value="<?= $hab_id->getId(); ?>">
     <input type="file" name="images" id="images">
     <input type="submit" name="insert" value="create">
 

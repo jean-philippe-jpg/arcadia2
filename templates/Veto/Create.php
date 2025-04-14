@@ -12,7 +12,7 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
 
 <div class="create">
 
-            <p style="color: red;"><strong><?= $animals->getName() ?></strong></p>
+<p style="color: red;"><strong><?= $animals->getName() ?></strong></p>
     <label for="animal"><strong>Aniaml: </strong></label>
     <input name="animal" id="animal" value="<?= $animals->getId() ?>" type="text">
     </div>

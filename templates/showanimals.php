@@ -22,21 +22,30 @@ require_once _ROOTPATH_.'\templates\partial\_header.php';
 <?php } 
  elseif(isset($_GET['detailAnimal'])) { ?>
 
-
 <div class="show">
+<?php try{ ?>
+
     
-      
-    <p><strong>Prenom:  </strong><?= $animal->getName(); ?></p>
+    
+        <p><strong>Prenom:  </strong><?= $animal->getName(); ?></p>
 <p><strong>Race:  </strong><?= $animal->getRace(); ?></p>
 <p><strong>etat:  </strong><?= $animal->getState(); ?></p>
 <p><strong>detail:  </strong><?= $animal->getDetail(); ?></p>
+   
+        
+       
+   
+ <?php }catch(\Exception $e){
+    echo 'erreur de lecture'. $e->getMessage();
+  }
+ } ?>
 
-<?php } ?>
+
 
 </div>
+ 
 
 <?php
 
 require_once _ROOTPATH_.'\templates\partial\_footer.php';
 
-?>

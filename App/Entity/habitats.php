@@ -57,6 +57,11 @@ public function getRace(): string
 return $this->name;
 }
 
+public function getPhoto(): string
+{
+return $this->photo;
+}
+
 
 
 /*public function getState()

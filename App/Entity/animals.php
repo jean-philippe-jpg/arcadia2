@@ -30,11 +30,15 @@ public function getHabitat(): string
 
 
 
-
-public function getState() : string
-{
-return $this->state;
+     
+      public function getState( ) {
+      
+            return $this->state;
+     
 }
+
+
+
 
 /*public function setState($state)
 {
@@ -114,9 +118,13 @@ return $this;
 }*/
 
 
-public function getDetail(): string
+public function getDetail( ) 
 {
+if($this->detail !== NULL){
 return $this->detail;
+} else{
+return $this->detail = 'aucun detail';
+}
 }
 
 

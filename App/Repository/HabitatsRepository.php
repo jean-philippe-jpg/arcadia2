@@ -17,8 +17,8 @@ class HabitatsRepository {
         $pdo = $mysql->getPDO();
 
        
-                $query = $pdo->prepare("SELECT  a.first_name as name, h.id as id, h.name as name, h.description as description FROM habitat h
-               INNER JOIN animals a on a.habitat_id = h.id  where h.id = :id    ");
+                $query = $pdo->prepare("SELECT  a.first_name as name, h.id as id, h.name as name, h.description as description/*, up.libele as photo*/ FROM habitat h
+               INNER JOIN animals a on a.habitat_id = h.id JOIN uploads up on up.habitat_id = h.id  where h.id = :id    ");
 
                 $query->bindParam(':id', $id, $pdo::PARAM_INT);
         
@@ -133,13 +133,13 @@ class HabitatsRepository {
             $pdo = $mysql->getPDO();
 
             //$image = $pdo->prepare("SELECT * FROM images ");
-            $image = $pdo->prepare("SELECT up.libele as img_hab/*, h.name as name as img_hab*/ FROM uploads up
+            $image = $pdo->prepare("SELECT up.libele as img_hab, h.name as name  FROM uploads up
             INNER JOIN habitat h ON h.id = up.habitat_id where h.id ");    
             
                 
             if($image->execute()){
                 $image->fetch($pdo::FETCH_ASSOC);
-                return $image->fetchAll();
+                return $image->fetch();
                 
             } else {
                 echo 'veuillez remplir tous les champs';
@@ -164,16 +164,19 @@ class HabitatsRepository {
 
                 $mysql = Mysql::getInstance();
                 $pdo = $mysql->getPDO();
-               
-                $stmt = $pdo->prepare("SELECT  group_concat(a.first_name,' ' )as animal,  h.id as id, h.name as name, h.description as description FROM habitat h
-                INNER JOIN animals a ON a.habitat_id = h.id   group by h.id"); 
+                $stmt = $pdo->prepare("SELECT h.id, h.name, h.description, up.libele as photo FROM habitat h
+                                        INNER JOIN uploads up ON up.habitat_id = h.id");
+                //$stmt = $pdo->prepare("SELECT    h.id as id, h.name as name, group_concat(a.first_name,' ') as animal, h.description as description/*, group_concat(up.libele,' ' ) as photo*/ FROM habitat h
+                //left JOIN animals a ON a.habitat_id = h.id /*INNER JOIN uploads up ON up.habitat_id = h.id*/  group by h.id"); 
                 /*$stmt = $pdo->prepare("SELECT group_concat(animals.first_name as name_animals, '') , habitat.name, habitat.id from habitat left join animals on animals.habitat_id = habitat.id
                 group by habitat.id");*/
 
                 
                 if($stmt->execute()){
-                    
+                   
+                    echo 'toto';
                     $stmt->setFetchMode($pdo::FETCH_CLASS, Habitats::class);
+                    
 
                     return $stmt->fetchAll();
         

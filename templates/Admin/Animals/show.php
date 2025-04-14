@@ -4,7 +4,7 @@
 
 <a href="index.php?controller=animals&action=read" class="btn btn-success">retour</a>
 <div class="show">
-
+<h3>toto</h3>
 <h3><?= $animals->getName();?></h3>
 <p><?= $animals->getRace();?></p>
 

@@ -39,7 +39,7 @@ class RaceRepository {
                 $stmt->bindParam(':name', $sanitized_name, $pdo::PARAM_STR);
 
                     if(!isset($_POST['name'])) {
-
+                            throw new \Exception('bonjour');
 
                     } else {
                 $name = $_POST['name'];

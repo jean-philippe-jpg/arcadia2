@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use DateMalformedIntervalStringException;
+
 class AnimalsState extends Attributs {
 
     
@@ -40,17 +42,22 @@ public function getId(): int
       }
 
      
-      public function getState():string
+      public function getState($state = null)
       {
-            return $this->state;
+           if($state == null){
+                  return $this->state;
+            }
       }
 
      
 
      
-      public function getDetail():string
+      public function getDetail($detail = null)
       {
-            return $this->detail;
+            if($detail == null){
+                  return $this->detail;
+            }
+            
       }
 
       

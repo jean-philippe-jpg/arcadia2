@@ -2,7 +2,7 @@
 
 session_start();
 
-if (!in_array('ROLE_ADMIN', $_SESSION['roles'])) {
+if (!in_array('ROLE_ADMIN', $_SESSION['roles'])&& !in_array('ROLE_SOIGNANT', $_SESSION['roles'])) {
 
   echo '<h1 style="color:purple;  text-align: center; margin-top: 30vh;">vous n\'avez pas l\'acces à cette page  :/</h1>';
 
@@ -28,7 +28,9 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
     <th scope="col">race</th>
     <th scope="col">habitat</th>
     <th scope="col">update</th>
+    <?php if(in_array('ROLE_SOIGNANT', $_SESSION['roles']) && !in_array('ROLE_ADMIN', $_SESSION['roles']) && !in_array('ROLE_VETO', $_SESSION['roles'])) { ?>
     <th scope="col">soins</th>
+    <?php } ?>
     <th scope="col">show</th>
     <th scope="col">photo</th>
     <th scope="col">delete</th>
@@ -44,10 +46,20 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
       <td><?= $animals->getName(); ?></td>
       <td><?= $animals->getRace(); ?></td>
       <td><?= $animals->getHabitat(); ?></td>
+      
+      
+      
+      
+      
+      
          
           
           <td><a href="?controller=animals&action=update&modify=<?= $animals->getId(); ?>" class="btn">update</a></td>
-          <td><a href="?controller=animals&action=soins&id=<?= $animals->getId(); ?>" class="btn">soins animal</a></td>
+          <?php if(in_array('ROLE_SOIGNANT', $_SESSION['roles']) && !in_array('ROLE_ADMIN', $_SESSION['roles']) && !in_array('ROLE_VETO', $_SESSION['roles'])) { ?>
+            <td><a href="?controller=animals&action=soins&id=<?= $animals->getId(); ?>" class="btn">soins animal</a></td>
+          <?php }  ?>
+            
+
           <td><a href="?controller=animals&action=show&id=<?= $animals->getId(); ?>" class="btn">voir</a></td>
           <td><a href="?controller=animals&action=create&photo&id=<?= $animals->getId(); ?>" class="btn">photo</a></td>
           <td><a href="?controller=animals&action=delete&suprimer=<?= $animals->getId(); ?>" class="btn">delete</a></td>

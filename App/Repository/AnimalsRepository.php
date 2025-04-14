@@ -14,21 +14,26 @@ use App\Tools\StringTools;
 
     public function findOneById( int $id)
     {
+       try{
         $mysql = Mysql::getInstance();
         $pdo = $mysql->getPDO();
 
-
-
-        $query = $pdo->prepare('SELECT a.id as id, a.first_name as name, r.name as race, a_s.state as state, a_s.detail as detail /*, img.libele as images*/ FROM animals a
-                INNER JOIN race r ON a.race = r.id  JOIN animals_state a_s ON a.id = a_s.animal /*JOIN img_animals img ON img.animals_id = a.id*/ where a.id = :id');   
+        $query = $pdo->prepare('SELECT a.id as id, a.first_name as name, r.name as race, s.state as state, s.detail as detail /*, img.libele as images*/ FROM animals a
+                INNER JOIN race r ON a.race = r.id INNER JOIN animals_state s ON a.id = s.animal /*JOIN img_animals img ON img.animals_id = a.id*/ where a.id = :id');   
         $query->bindParam(':id', $id, $pdo::PARAM_INT);
         
-                if($query->execute()) {
+        
 
+
+                if($query->execute() ) { 
+                    
                     $query->setFetchMode($pdo::FETCH_CLASS, Animals::class);
                     return $query->fetch();
-
+                    
                 }
+            } catch (\Exception $e){
+                echo 'erreur d\'insertion'. $e->getMessage();
+            }
         
     }
 
@@ -181,8 +186,10 @@ use App\Tools\StringTools;
 
                 $mysql = Mysql::getInstance();
                 $pdo = $mysql->getPDO();
-                $stmt = $pdo->prepare("SELECT  group_concat(r.name, '<br>') as race, group_concat(h.name, '<br>') as hab,  a.id as id, a.first_name as name FROM animals a
-                INNER JOIN race r ON a.race = r.id JOIN habitat h ON h.id = a.habitat_id group by a.id ");   
+                $stmt = $pdo->prepare("SELECT a.id as id, a.first_name as name, group_concat(r.name,'') as race, h.name as hab FROM animals a
+                 INNER JOIN race r ON r.id = a.race  JOIN habitat h ON a.habitat_id = h.id group by a.id");   
+                //$stmt = $pdo->prepare("SELECT group_concat(a.first_name, ' ') as name, a.id as id,  r.name as race, /*group_concat(h.name, '<br>') as hab,*/  FROM animals a
+                //INNER JOIN race r ON a.race = r.id LEFT JOIN habitat h ON h.id = a.habitat_id group by r.id");
                
                 if($stmt->execute()){
 
