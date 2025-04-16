@@ -32,6 +32,9 @@ class Users
 
     public function getRoles(): array
     {
+        
+       
+
         return $this->roles;
     }
 

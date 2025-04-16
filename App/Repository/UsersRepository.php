@@ -299,8 +299,8 @@ public function profil( ){
                     //$statement = $pdo->prepare('SELECT u.id as id, u.email as email, r.role_id as name FROM users u
                     //INNER JOIN roles_users r ON r. = u.id');
                     
-                    $statement = $pdo->prepare("SELECT u.id as id, u.email as email, group_concat(r.name, '<br>') as rolesname FROM roles_users 
-                    INNER JOIN roles r ON role_id = r.id JOIN users u ON user_id = u.id group by u.id");    
+                    $statement = $pdo->prepare("SELECT u.id as id, u.email as email/*, r.name */ FROM roles_users 
+                    INNER JOIN roles r ON role_id = r.id RIGHT JOIN users u ON user_id = u.id ");    
                     /*$statement = $pdo->prepare('SELECT u.id,u.username, u.email FROM users u
                     ');*/
                     // On récupère un utilisateur ayant le même login (ici, e-mail)

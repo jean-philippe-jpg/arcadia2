@@ -6,6 +6,9 @@ class Animals extends RapportSoignant
 {
       
 
+
+      
+
      
 public function getId(): int
 {

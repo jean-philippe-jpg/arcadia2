@@ -56,13 +56,13 @@ class RapportSoignantRepository {
             }
     }
 
-    public function readRace(){
+    public function read(){
 
         try{
 
                 $mysql = Mysql::getInstance();
                 $pdo = $mysql->getPDO();
-                $stmt = $pdo->prepare("SELECT * FROM race ");
+                $stmt = $pdo->prepare("SELECT * FROM rapport_soignant ");
                 
                 if($stmt->execute()){
                     

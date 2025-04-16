@@ -31,7 +31,7 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php' ?>
     </div>
     <div class="create">
     <label for="date_heure"><strong>Date :</strong> </label>
-    <input name="date_heure"  id="date_heure" type="date" value="<?= date("d-m-Y ")?>">
+    <input name="date_heure"  id="date_heure" type="<?= date("Y-m-d ")?>" value="<?= date("Y-m-d ")?>">
     </div>
 
 

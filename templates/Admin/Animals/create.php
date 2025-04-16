@@ -11,19 +11,29 @@ if(!isset($_GET['photo'])) { ?>
 
     <div class="create">
     <label for="name"><strong>prenom: </strong></label>
-    <input name="name" id="name" type="text">
+    <input name="name" id="name" type="text" >
+
     </div>
     
     <div class="create">
+   
     <label for="race"><strong>race:</strong> </label>
-    <input name="race" id="race" type="text">
+    <select name="race" id="race">
+        <?php foreach($races as $race) { ?>
+            <option value="<?= $race->getId(); ?>"><?= $race->getName(); ?></option>
+        <?php } ?>
+    </select>
     </div>
     
     <div class="create">
     <label for="habitat_id"><strong>habitat:</strong> </label>
-    <input name="habitat_id" id="habitat_id" type="text">
+    <select  id="habitat_id" name="habitat_id">
+        <?php foreach($habitats as $habitat) { ?>
+            <option name="habitat_id" value="<?= $habitat['id']; ?>"><?= $habitat['name']; ?></option>
+        <?php } ?>
+    </select>
     </div>
-    <input type="submit" name="insert" value="create"> 
+    <input type="submit" name="insert"> 
 </form>
 </div>
 <?php } elseif (isset($_GET['photo'])) { ?>
@@ -35,7 +45,7 @@ if(!isset($_GET['photo'])) { ?>
     <div class="show">
         
         <form action="" method="post" enctype="multipart/form-data">
-        <input type="text" name="animals_id" id="images" value="<?= $animals_id->getId(); ?>">
+        <input type="text" name="animals_id" id="images" value="<?= $animals_id['name']; ?>">
         <input type="file" name="images" id="images">
         <input type="submit" name="insert" value="create">
 

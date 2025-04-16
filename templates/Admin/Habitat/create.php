@@ -33,7 +33,7 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
     <h1>photo habitat</h1>
   
 
-    <?= $hab_id->getName(); ?>
+   
 
 <a href="?controller=animals&action=read" class="btn btn-success">retour</a>
 

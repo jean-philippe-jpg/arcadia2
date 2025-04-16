@@ -6,7 +6,8 @@
 <ul>
 
 <?php foreach($habitat as $habitats){?>
-<li><a href="?controller=veto&action=habitats&create=<?= $habitats->getId() ?>"><?= $habitats->getName();?></a></li>
+   
+<li><a href="?controller=veto&action=habitats&create=<?= $habitats['id'] ?>"><?= $habitats['name']?></a></li>
 <?php } ?>
 
    

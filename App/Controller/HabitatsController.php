@@ -22,6 +22,10 @@ class HabitatsController extends Controller{
                     $this->show();
                     break;
 
+                    case 'view':
+                        $this->view();
+                        break;
+    
                     case 'detailAnimal':
                         $this->readvisiteur();
 
@@ -68,7 +72,28 @@ class HabitatsController extends Controller{
 
                 }
 
+                    protected function view() {
 
+                        try{
+
+                            if(isset($_GET['id'])) {
+                                $id = $_GET['id'];
+                                $habitatRrepository = new HabitatsRepository();
+                                $habitats = $habitatRrepository->findOneById($id);
+
+                                $this->render('/Admin/Habitat/show', [
+                                    'habitat' => $habitats
+                                ] );
+
+                            }
+
+
+                        } catch(\Exception $e){
+                            echo 'erreur de lecture'. $e->getMessage();
+                        }
+
+
+                    }
                 
                 protected function show()
                 
@@ -106,7 +131,7 @@ class HabitatsController extends Controller{
 
                                 ] );
                            
-                        } else {
+                            } else {
                             throw new \Exception('id introuvable');
 
                         }

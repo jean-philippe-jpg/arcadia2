@@ -22,7 +22,7 @@ class VetoController extends Controller{
             switch($_GET['action']){
 
                 case 'show':
-
+                    
                     $this->show();
                     
                     break;
@@ -234,7 +234,7 @@ class VetoController extends Controller{
                             } elseif (isset($_GET['animalslist'])){
 
                                 $habitatRrepository = new AnimalsRepository();
-                            $habitat = $habitatRrepository->read(/*$habitat*/);
+                            $habitat = $habitatRrepository->read();
      
                             $this->render('/Veto/Read', [
                                     'animal' => $habitat
@@ -246,7 +246,7 @@ class VetoController extends Controller{
 
                                     $show = $_GET['readsoins'];
                                 $habitatRrepository = new AnimalsRepository();
-                                $animalsStateRepository = new AnimalsState();
+                                //$animalsStateRepository = new AnimalsState();
                             $habitat = $habitatRrepository->readSoins($show);
                            // $state = $animalsStateRepository->readSoins($show);
      
@@ -353,8 +353,10 @@ class VetoController extends Controller{
                                     //$create = $_GET['create'];
                                 $habitatRrepository = new HabitatsRepository();
                                 $habitatRrepository->createAvis();
+                                $habitat = $habitatRrepository->read();
                                 $this->render('/Veto/AvisHabitats', [
                                  
+                                    'habitat' => $habitat
                                     
                                      ] );
     

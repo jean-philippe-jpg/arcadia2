@@ -15,7 +15,7 @@
     <div class="cards_animals">
 
         <ul>
-        <li class="irish-grover-regular"><strong><?= $animals->getRace(); ?></strong></li>
+        <li class="irish-grover-regular"><strong><?= $animals['race']; ?></strong></li>
         </ul>
     
     </div>

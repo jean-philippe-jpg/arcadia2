@@ -3,19 +3,17 @@
 
 <?php
 
+
 foreach ( $soins as $soin) { ?>
- 
 
 <div class="show"> 
-<p><?= $soin->getName() ?></p>
+
+<h2><?= $soin->getName() ?></h2>
 <p><?= $soin->getHabitat() ?></p>
 <p><?= $soin->getNourriture() ?></p>
-<p><?= $soin->getQuantitee() ?></p>
-<p><?= $soin->getDate_heure() ?></p>
+<p><?= $soin->getQuantitee() ?> Kg</p>
+<p><?= $soin->getDate() ?></p>
 
-     
-    
-     
 </div>
     
     

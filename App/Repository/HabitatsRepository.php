@@ -36,8 +36,6 @@ class HabitatsRepository {
             $pdo = $mysql->getPDO();
     
            
-                    /*$animals = $pdo->prepare("SELECT * FROM animals 
-                   where habitat_id = :id    ");*/
                    $animals = $pdo->prepare("SELECT a.id as id, a.first_name as name FROM animals a
                    where habitat_id = :id    ");
     
@@ -60,26 +58,31 @@ class HabitatsRepository {
                 $mysql = Mysql::getInstance();
                 $pdo = $mysql->getPDO();
                   
+                    if(isset($_POST['name'])){
+
+                        $name = $_POST['name'];
+                        $description = $_POST['description'];
+                        
+            
+                        $stmt = $pdo->prepare('INSERT INTO habitat (name, description ) VALUES (:name, :description )');
+                        $stmt->bindParam(':name',$name , $pdo::PARAM_STR);
+                        $stmt->bindParam(':description', $description , $pdo::PARAM_STR);
+                        
+                            
+                         
+                        if(!$stmt->execute()){
+                            echo 'erreur de création crée';
+                        } 
+                        
+                    } else {
+                        throw new \Exception('création d\'un habitat');
+                    }
+                
+              
+            } catch(\Exception $e){
+                echo "erreur \n <br>". $e->getMessage();
 
                 
-               $name = $_POST['name'];
-                $description = $_POST['description'];
-                
-    
-                $stmt = $pdo->prepare('INSERT INTO habitat (name, description ) VALUES (:name, :description )');
-                $stmt->bindParam(':name',$name , $pdo::PARAM_STR);
-                $stmt->bindParam(':description', $description , $pdo::PARAM_STR);
-                
-                    
-                 
-                if($stmt->execute()){
-                    echo 'insertion reussie';
-                } else {
-                    echo 'veuillez remplir tous les champs';
-                }
-                
-            } catch(\Exception $e){
-                echo 'erreur d\'insertion'. $e->getMessage();
             }
 
             }
@@ -159,6 +162,35 @@ class HabitatsRepository {
 
            
     public function read(){
+
+        try{
+
+                $mysql = Mysql::getInstance();
+                $pdo = $mysql->getPDO();
+                $stmt = $pdo->prepare("SELECT group_concat(a.first_name, ' ') as animals, h.id, h.name as name, h.description, up.libele as photo FROM habitat h
+                                        LEFT JOIN uploads up ON up.habitat_id = h.id LEFT JOIN animals a ON a.habitat_id = h.id group by name, id, libele ");
+                                      
+                
+                if($stmt->execute()){
+                   
+                    $stmt->setFetchMode($pdo::FETCH_ASSOC);
+                    
+
+                    return $stmt->fetchAll();
+        
+                } else {
+                    echo 'erreur';
+                }
+              
+               
+        } catch(\Exception $e){
+            echo 'erreur d\'insertion'. $e->getMessage();
+           
+
+        }
+       
+    }
+    public function readVisiteurs(){
 
         try{
 

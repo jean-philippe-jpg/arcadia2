@@ -91,11 +91,11 @@ class PagesController extends Controller{
                     $service = new ServicesRepository();
                     $prestation =  $service->read();
 
-                    $animals = new AnimalsRepository();
+                   $animals = new AnimalsRepository();
                     $animal =  $animals->read();
 
-                    $horaires = new HorairesRepository();
-                    $horaires =  $horaires->read();
+                    //$horaires = new HorairesRepository();
+                    //$horaires =  $horaires->read();
 
                     $this->render('home', [
                             'avis' => $cmt,
@@ -103,7 +103,7 @@ class PagesController extends Controller{
                             'service' => $prestation,
                             'animal' => $animal,
                             'images' => $images,
-                            'horaires' => $horaires
+                            //'horaires' => $horaires
                             
                     ] );
                     //require_once 'templates/showanimals.php';//

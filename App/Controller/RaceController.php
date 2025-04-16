@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Repository\RaceRepository;
+use App\Entity\Races;
 
 
 
@@ -105,8 +106,10 @@ class RaceController extends Controller{
                       $habitatRrepository = new RaceRepository();
                       $habitatRrepository->createRace();
 
+                            $race = new Races();
+
                       $this->render('/Admin/Race/create', [
-                              
+                              'race' => $race
                                     
                           ] );
 
@@ -192,11 +195,11 @@ class RaceController extends Controller{
                           if(isset($_GET['modify'])){
                               $id = $_GET['modify'];
                               $habitatRrepository = new RaceRepository();
-                              $read = $habitatRrepository->updateRace($id);
+                              $update = $habitatRrepository->updateRace($id);
 
                               $this->render('/Admin/Race/read', [
 
-                                  //'read' => $read
+                                  'update' => $update
                         
                          ] );
                              

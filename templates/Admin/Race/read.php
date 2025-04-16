@@ -44,7 +44,7 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
             <input type="text" name="name"  />
             
             <input type="submit" class="btn btn-success"  />
-            <a href="?controller=Race&action=read<?= $reads['id']; ?>" class="btn btn-danger">annuler</a>
+           
         </form>
         
         <?php } ?>

@@ -36,32 +36,38 @@ class AvisHabitatsRepository {
                   
                 
     
-                $stmt = $pdo->prepare('INSERT INTO avis_habitat (avis, etat, habitat_id) VALUES (:avis, :etat, :habitat_id)');
-                $stmt->bindParam(':avis', $sanitized_avis , $pdo::PARAM_STR);
-                $stmt->bindParam(':etat',  $sanitized_etat, $pdo::PARAM_STR);
-                $stmt->bindParam(':habitat_id', $sanitized_habitat_id, $pdo::PARAM_INT);
-
+               
              
                 if(!isset($_POST['avis']) || !isset($_POST['etat']) || !isset($_POST['habitat_id'])) {
+                    $avis = $_POST['avis'];
+                    $sanitized_avis = htmlspecialchars($avis, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+                    $etat = $_POST['etat'];
+                    $sanitized_etat = htmlspecialchars($etat, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+                    $habitat_id = $_POST['habitat_id'];
+                    $sanitized_habitat_id = htmlspecialchars($habitat_id, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+                   
 
-                    } else {  
-                $avis = $_POST['avis'];
-                $sanitized_avis = htmlspecialchars($avis, ENT_QUOTES | ENT_HTML5, 'UTF-8');
-                $etat = $_POST['etat'];
-                $sanitized_etat = htmlspecialchars($etat, ENT_QUOTES | ENT_HTML5, 'UTF-8');
-                $habitat_id = $_POST['habitat_id'];
-                $sanitized_habitat_id = htmlspecialchars($habitat_id, ENT_QUOTES | ENT_HTML5, 'UTF-8');
-               
-                if(!$stmt->execute()){
-                    echo 'erreur d\'insertion';
-                } else {
-                    echo 'avis crée';
-                }
+                    $stmt = $pdo->prepare('INSERT INTO avis_habitat (avis, etat, habitat_id) VALUES (:avis, :etat, :habitat_id)');
+                    $stmt->bindParam(':avis', $sanitized_avis , $pdo::PARAM_STR);
+                    $stmt->bindParam(':etat',  $sanitized_etat, $pdo::PARAM_STR);
+                    $stmt->bindParam(':habitat_id', $sanitized_habitat_id, $pdo::PARAM_INT);
+    
 
+                    if(!$stmt->execute()){
+                        echo 'erreur d\'insertion';
+                    } else {
+                        echo 'avis crée';
+                    }
+    
+                    } else {
+                        throw new \Exception('créer un avis sur un habitat');
+                    }
                
-            }
+               
+               
+            
             } catch(\Exception $e){
-                echo 'erreur d\'insertion'. $e->getMessage();
+                echo 'erreur '. $e->getMessage();
             }
         
         }

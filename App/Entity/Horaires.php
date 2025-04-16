@@ -12,7 +12,7 @@ protected int $id ;
 
 protected string $ouverture  ;
 protected string $fermeture  ;
-protected string $jour ;
+protected string $jour  ;
 
 
 public function getId(): int

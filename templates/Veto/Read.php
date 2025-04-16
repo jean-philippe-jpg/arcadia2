@@ -61,7 +61,7 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
 
         } elseif (isset($_GET['readsoins'])) {
 
-                echo 'coucou';
+            
                 require_once _ROOTPATH_.'/templates/Admin/Partial/Veto/_allSoins.php';
 
         } else { ?>

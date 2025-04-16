@@ -27,13 +27,16 @@ require_once _ROOTPATH_.'\templates\partial\_header.php';
 
     
     
-        <p><strong>Prenom:  </strong><?= $animal->getName(); ?></p>
-<p><strong>Race:  </strong><?= $animal->getRace(); ?></p>
-<p><strong>etat:  </strong><?= $animal->getState(); ?></p>
-<p><strong>detail:  </strong><?= $animal->getDetail(); ?></p>
-   
+        <p><strong>Prenom:  </strong><?= $animal['name']; ?></p>
+<p><strong>Race:  </strong><?= $animal['race']; ?></p>
+<?php if($animal['state'] == null){ ?>
+<p><strong>etat:  </strong><?= $animal['state'] = 'n/c'; ?></p>
+<p><strong>detail:  </strong><?= $animal['detail'] = 'n/c'; ?></p>
+<?php } else { ?>
+        <p><strong>etat:  </strong><?= $animal['state'] ; ?></p>
+<p><strong>detail:  </strong><?= $animal['detail']; ?></p>
+<?php } ?>
         
-       
    
  <?php }catch(\Exception $e){
     echo 'erreur de lecture'. $e->getMessage();

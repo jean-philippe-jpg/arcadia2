@@ -23,29 +23,28 @@ class CommentsRepository {
                
                
 
-               $comment= $pdo->prepare('INSERT INTO avis (pseudo, message) VALUES (:pseudo, :message)');
-                $comment->bindParam(':pseudo', $sanitized_pseudo, $pdo::PARAM_STR);
-                $comment->bindParam(':message', $sanitized_message, $pdo::PARAM_STR);
-               
-                if(!isset($_POST['pseudo']) || !isset($_POST['message'])) {
+              
+                if(isset($_POST['pseudo']) || isset($_POST['message'])) {
 
-                } else {
-                $pseudo = $_POST['pseudo'];
-                $sanitized_pseudo = htmlspecialchars($pseudo, ENT_QUOTES | ENT_HTML5, 'UTF-8');
-                $message = $_POST['message'];
-                $sanitized_message = htmlspecialchars($message, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+                    $pseudo = $_POST['pseudo'];
+                    $sanitized_pseudo = htmlspecialchars($pseudo, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+                    $message = $_POST['message'];
+                    $sanitized_message = htmlspecialchars($message, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+
+                    $comment= $pdo->prepare('INSERT INTO avis (pseudo, message) VALUES (:pseudo, :message)');
+                    $comment->bindParam(':pseudo', $sanitized_pseudo, $pdo::PARAM_STR);
+                    $comment->bindParam(':message', $sanitized_message, $pdo::PARAM_STR);
+                    $comment->execute();
+                } else { ?>
+                   
+                        <p style="position: absolute; margin-top:50vh;"><?php throw new \Exception('déposez un avis'); ?></p>
                 
-               $comment->execute();
-           
-
-       /* } else {
-
-            echo 'veuillez remplir tous les champs';
-     
-        }*/
-            }
+                    
+                <?php } 
+              
+            
      } catch(\Exception $e){
-         echo 'erreur d\'insertion'. $e->getMessage();
+         echo 'erreur '. $e->getMessage();
      }
                
 }

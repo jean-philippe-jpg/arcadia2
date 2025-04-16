@@ -12,9 +12,9 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
 
 <div class="create">
 
-<p style="color: red;"><strong><?= $animals->getName() ?></strong></p>
-    <label for="animal"><strong>Aniaml: </strong></label>
-    <input name="animal" id="animal" value="<?= $animals->getId() ?>" type="text">
+<p style="color: red; "><strong><?= $animals['name'] ?></strong></p>
+    
+    <input style="visibility: hidden;" name="animal" id="animal" value="<?= $animals['id'] ?>" type="text">
     </div>
     
     <div class="create">
@@ -33,11 +33,6 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
     </div>
 
     <div class="create">
-    <label for="date_de_passage"><strong>Date de passage:</strong> </label>
-    <input name="date_de_passage" id="date_de_passage" type="date">
-    </div>
-
-    <div class="create">
     <label for="detail"><strong>Detail:</strong> </label>
     <textarea name="detail" id="detail" cols="30" rows="10"></textarea>
     </div>
@@ -45,6 +40,11 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
     <div class="create">
     <label for="observation"><strong>Observation:</strong> </label>
     <input name="observation" id="observation" type="text">
+    </div>
+
+    <div class="create">
+    <label for="date_de_passage"><strong>Date de passage:</strong> </label>
+    <input name="date_de_passage" id="date_de_passage"  value="<?= date("Y-m-d ")?>">
     </div>
 
     <input type="submit" name="insert" value="create">

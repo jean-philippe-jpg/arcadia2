@@ -33,16 +33,22 @@ class ServicesRepository {
                 $mysql = Mysql::getInstance();
                 $pdo = $mysql->getPDO();
                   
-                
-    
-                $stmt = $pdo->prepare('INSERT INTO services (name, description) VALUES (:name, :description)');
-                $stmt->bindParam(':name', $_POST['name'], $pdo::PARAM_STR);
-                $stmt->bindParam(':description', $_POST['description'], $pdo::PARAM_STR);
+                if(isset($_POST['name'])){
 
-             
-                if(!$stmt->execute()){
-                    echo 'erreur d\'insertion';
-                } 
+                    $stmt = $pdo->prepare('INSERT INTO services (name, description) VALUES (:name, :description)');
+                    $stmt->bindParam(':name', $_POST['name'], $pdo::PARAM_STR);
+                    $stmt->bindParam(':description', $_POST['description'], $pdo::PARAM_STR);
+    
+                 
+                    if(!$stmt->execute()){
+                        echo 'erreur d\'insertion';
+                    } 
+                } else {
+
+                    echo 'ajouter d\' un service';
+                }
+    
+               
     
             } catch(\Exception $e){
                 echo 'erreur d\'insertion'. $e->getMessage();

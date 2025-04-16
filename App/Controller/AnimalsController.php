@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\RapportSoignant;
+use App\Repository\RaceRepository;
 use App\Repository\AnimalsRepository;
+use App\Repository\HabitatsRepository;
 use App\Repository\RapportSoignantRepository;
 
 
@@ -114,12 +116,18 @@ class AnimalsController extends Controller{
                         if(!isset($_GET['photo'])) {
                       $animalsRrepository = new AnimalsRepository();
                       $animalsRrepository->createAnimals();
+                      $animalsRrepository = new RaceRepository();
+                      $race = $animalsRrepository->readRace();
+                      $animalsRrepository = new HabitatsRepository();
+                      $habitats = $animalsRrepository->read();
 
                       /*$animalsRrepository = new AnimalsRepository();
                       $animalsRrepository->images();*/
 
                       $this->render('/Admin/Animals/create', [
                               
+                        'races' => $race,
+                        'habitats' => $habitats,
                                     
                           ] );
 

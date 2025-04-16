@@ -18,8 +18,8 @@ use App\Tools\StringTools;
         $mysql = Mysql::getInstance();
         $pdo = $mysql->getPDO();
 
-        $query = $pdo->prepare('SELECT a.id as id, a.first_name as name, r.name as race, s.state as state, s.detail as detail /*, img.libele as images*/ FROM animals a
-                INNER JOIN race r ON a.race = r.id INNER JOIN animals_state s ON a.id = s.animal /*JOIN img_animals img ON img.animals_id = a.id*/ where a.id = :id');   
+        $query = $pdo->prepare('SELECT h.name as habitats, a.id as id, a.first_name as name, r.name as race, s.state as state, s.detail as detail /*, img.libele as images*/ FROM animals a
+                INNER JOIN race r ON a.race = r.id LEFT JOIN animals_state s ON a.id = s.animal RIGHT JOIN habitat h ON a.habitat_id = h.id/*JOIN img_animals img ON img.animals_id = a.id*/ where a.id = :id');   
         $query->bindParam(':id', $id, $pdo::PARAM_INT);
         
         
@@ -27,7 +27,7 @@ use App\Tools\StringTools;
 
                 if($query->execute() ) { 
                     
-                    $query->setFetchMode($pdo::FETCH_CLASS, Animals::class);
+                    $query->setFetchMode($pdo::FETCH_ASSOC);
                     return $query->fetch();
                     
                 }
@@ -82,27 +82,32 @@ use App\Tools\StringTools;
                 try{
                     $mysql = Mysql::getInstance();
                     $pdo = $mysql->getPDO();
-            
-                $stmt = $pdo->prepare('INSERT INTO animals (first_name, race, habitat_id ) VALUES (:first_name, :race, :habitat_id )');
-                $stmt->bindParam(':first_name', $sanitized_name , $pdo::PARAM_STR);
-                $stmt->bindParam(':race',  $sanitized_race , $pdo::PARAM_INT);
-                $stmt->bindParam(':habitat_id',  $sanitized_habitat , $pdo::PARAM_INT);
-              
-                    $name = $_POST['name'];
-                    $sanitized_name = htmlspecialchars($name, ENT_QUOTES | ENT_HTML5, 'UTF-8');
-                    $race = $_POST['race'];
-                    $sanitized_race = htmlspecialchars($race, ENT_QUOTES | ENT_HTML5, 'UTF-8');
-                    $habitat = $_POST['habitat_id'];
-                    $sanitized_habitat = htmlspecialchars($habitat, ENT_QUOTES | ENT_HTML5, 'UTF-8');
 
-                    
-             
-                if(!$stmt->execute()){
+                   if(isset($_POST['name'])){
+
+                    $name = $_POST['name']  ;
+                    $sanitized_name = htmlspecialchars($name, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+                        $race = $_POST['race'];
+                   $sanitized_race = htmlspecialchars($race, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+                         $habitat = $_POST['habitat_id'];
+                    $sanitized_habitat = htmlspecialchars($habitat, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+                        
+                     $stmt = $pdo->prepare('INSERT INTO animals (first_name, race, habitat_id ) VALUES (:first_name, :race, :habitat_id )');
+                $stmt->bindParam(':first_name',  $sanitized_name , $pdo::PARAM_STR);
+                $stmt->bindParam(':race', $sanitized_race , $pdo::PARAM_INT);
+                $stmt->bindParam(':habitat_id', $sanitized_habitat , $pdo::PARAM_INT);
+        
+                if(!$stmt->execute() ){
                     echo 'erreur d\'insertion';
                 } 
             
+                   } else {
+                    throw new  \Exception('Veuillez remplir tous les champs.');
+                   
+                   }
+
             } catch(\Exception $e){
-                echo 'erreur d\'insertion'. $e->getMessage();
+                echo "erreur \n <br>".  $e->getMessage();
             }
     }
 
@@ -183,17 +188,18 @@ use App\Tools\StringTools;
     public function read(){
 
         try{
+           
 
                 $mysql = Mysql::getInstance();
                 $pdo = $mysql->getPDO();
-                $stmt = $pdo->prepare("SELECT a.id as id, a.first_name as name, group_concat(r.name,'') as race, h.name as hab FROM animals a
-                 INNER JOIN race r ON r.id = a.race  JOIN habitat h ON a.habitat_id = h.id group by a.id");   
+                $stmt = $pdo->prepare("SELECT group_concat(a.id, ' ') as id, group_concat(a.first_name, ' ') as name, r.name as race, s.state as state, s.detail as detail, h.name as habitats  FROM animals a
+                INNER JOIN race r ON a.race = r.id LEFT JOIN animals_state s ON a.id = s.animal INNER JOIN habitat h ON a.habitat_id = h.id group by   race,  state, detail,  habitats ");   
                 //$stmt = $pdo->prepare("SELECT group_concat(a.first_name, ' ') as name, a.id as id,  r.name as race, /*group_concat(h.name, '<br>') as hab,*/  FROM animals a
                 //INNER JOIN race r ON a.race = r.id LEFT JOIN habitat h ON h.id = a.habitat_id group by r.id");
                
                 if($stmt->execute()){
 
-                    $stmt->setFetchMode($pdo::FETCH_CLASS, Animals::class);
+                    $stmt->setFetchMode($pdo::FETCH_ASSOC);
                     
                    return $stmt->fetchAll();
                   

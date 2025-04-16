@@ -16,11 +16,11 @@ protected int $animal_id ;
 protected string $name ;
 protected string $animal = ' ' ;
 protected array $animal_list =[];
-protected string $nourriture ;
-protected int $quantitee ;
+protected string $nourriture   ;
+protected int $quantitee  ;
 protected string $state  ;
 protected string $detail  ; 
-protected string $date ;
+protected string $date  ;
 protected string $observation ;
 protected string $description ;
 

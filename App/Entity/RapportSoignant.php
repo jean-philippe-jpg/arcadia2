@@ -31,7 +31,7 @@ return $this->quantitee;
 
 
 
-public function getDate_heure()
+public function getDate()
 {
 return $this->date;
 }

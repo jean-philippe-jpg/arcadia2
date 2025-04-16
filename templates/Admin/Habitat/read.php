@@ -21,10 +21,11 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
     <tr>
     <th scope="col">#</th>
     <th scope="col">name</th>
-    <th scope="col">description</th>
     <th scope="col">animals_list</th>
+    <th scope="col">images</th>
     <th scope="col">update</th>
     <th scope="col">show</th>
+    <th scope="col">photo</th>
     <th scope="col">delete</th>
     
     </tr>
@@ -34,16 +35,16 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
       <?php foreach($habitat as $habitats) { ?>
       <tr>
        
-      <td><?= $habitats->getId(); ?></td>
-         <td><?= $habitats->getName();?></td>
-          <td><?= $habitats->getDescription(); ?></td>
-          <td><?= $habitats->getAnimals(); ?></td>
-          <td><img src="/uploads/<?= $habitats->getPhoto(); ?>" alt="" srcset=""></td>
+    
+         <td><?= $habitats['name'];?></td>
+          <td><?= $habitats['animals']; ?></td>
           
-          <td><a href="?controller=habitats&action=update&modify=<?= $habitats->getId(); ?>" class="btn btn-warning">update</a></td>
-          <td><a href="?controller=habitats&action=show&id=<?= $habitats->getId(); ?>" class="btn btn-warning">voir</a></td>
-          <td><a href="?controller=habitats&action=create&photo&id=<?= $habitats->getId(); ?>" class="btn btn-danger">photo</a></td>
-          <td><a href="?controller=habitats&action=delete&suprimer=<?= $habitats->getId(); ?>" class="btn btn-danger">delete</a></td>
+          <td><img src="/uploads/<?= $habitats['photo']; ?>" width="150" height="150"></td>
+          
+          <td><a href="?controller=habitats&action=update&modify=<?= $habitats['id']; ?>" class="btn btn-warning">update</a></td>
+          <td><a href="?controller=habitats&action=view&id=<?=  $habitats['id'];  ?>" class="btn btn-warning">voir</a></td>
+          <td><a href="?controller=habitats&action=create&photo&id=<?=  $habitats['id'];  ?>" class="btn btn-danger">photo</a></td>
+          <td><a href="?controller=habitats&action=delete&suprimer=<?=  $habitats['id'];  ?>" class="btn btn-danger">delete</a></td>
           
       </tr>
        <?php 

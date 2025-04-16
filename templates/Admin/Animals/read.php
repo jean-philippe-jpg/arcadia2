@@ -26,11 +26,12 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
     <th scope="col">#</th>
     <th scope="col">prenom</th>
     <th scope="col">race</th>
-    <th scope="col">habitat</th>
-    <th scope="col">update</th>
+    <th scope="col">state</th>
+    <th scope="col">detail</th>
     <?php if(in_array('ROLE_SOIGNANT', $_SESSION['roles']) && !in_array('ROLE_ADMIN', $_SESSION['roles']) && !in_array('ROLE_VETO', $_SESSION['roles'])) { ?>
     <th scope="col">soins</th>
     <?php } ?>
+    <th scope="col">update</th>
     <th scope="col">show</th>
     <th scope="col">photo</th>
     <th scope="col">delete</th>
@@ -42,10 +43,12 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
       <?php foreach($animal as $animals) { ?>
         
       <tr>
-      <td><?= $animals->getId(); ?></td>
-      <td><?= $animals->getName(); ?></td>
-      <td><?= $animals->getRace(); ?></td>
-      <td><?= $animals->getHabitat(); ?></td>
+      <td><?= $animals['id']; ?></td>
+      <td><?= $animals['name']; ?></td>
+      <td><?= $animals['race']; ?></td>
+      <td><?= $animals['state']; ?></td>
+      <td><?= $animals['detail']; ?></td>
+      
       
       
       
@@ -54,15 +57,15 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
       
          
           
-          <td><a href="?controller=animals&action=update&modify=<?= $animals->getId(); ?>" class="btn">update</a></td>
+          <td><a href="?controller=animals&action=update&modify=<?= $animals['id']; ?>" class="btn">update</a></td>
           <?php if(in_array('ROLE_SOIGNANT', $_SESSION['roles']) && !in_array('ROLE_ADMIN', $_SESSION['roles']) && !in_array('ROLE_VETO', $_SESSION['roles'])) { ?>
-            <td><a href="?controller=animals&action=soins&id=<?= $animals->getId(); ?>" class="btn">soins animal</a></td>
+            <td><a href="?controller=animals&action=soins&id=<?= $animals['id']; ?>" class="btn">soins animal</a></td>
           <?php }  ?>
             
 
-          <td><a href="?controller=animals&action=show&id=<?= $animals->getId(); ?>" class="btn">voir</a></td>
-          <td><a href="?controller=animals&action=create&photo&id=<?= $animals->getId(); ?>" class="btn">photo</a></td>
-          <td><a href="?controller=animals&action=delete&suprimer=<?= $animals->getId(); ?>" class="btn">delete</a></td>
+          <td><a href="?controller=animals&action=show&id=<?= $animals['id']; ?>" class="btn">voir</a></td>
+          <td><a href="?controller=animals&action=create&photo&id=<?= $animals['id']; ?>" class="btn">photo</a></td>
+          <td><a href="?controller=animals&action=delete&suprimer=<?= $animals['id']; ?>" class="btn">delete</a></td>
       </tr>
      
 
