@@ -1,5 +1,7 @@
 <?php 
+require_once '../sécurité.php';
 require_once '../safe/JWT.php';
+
 //header
 $header=[
   'typ' => 'JWT',
@@ -19,7 +21,7 @@ $payload = [
     ];
 
                $jwt = new JWT();
-               $token = $jwt->generate($payload,$header, SECRET);
+               $token = $jwt->generate($payload,$header, SECRET, 60);
                 echo $token;
 
 
