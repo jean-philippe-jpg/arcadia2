@@ -1,14 +1,19 @@
 <?php 
-require_once '../sécurité.php';
-require_once '../safe/JWT.php';
+require_once 'sécurité.php';
+require_once 'safe/JWT.php';
+
 
 //header
-$header=[
-  'typ' => 'JWT',
-  'alg' => 'hs256'
+$header = [
+
+  "typ" => "JWT",
+  "alg" => "hs256",
+
 ];
 
-//contenue (payload)
+
+
+//contenue payload
 
 $payload = [
 
@@ -19,10 +24,13 @@ $payload = [
         'ROLE_VETO'
     ]
     ];
+   
+    //$jwt = new JWT();
 
-               $jwt = new JWT();
-               $token = $jwt->generate($payload,$header, SECRET, 60);
-                echo $token;
+//var_dump( $jwt->getHeader($token));
+               //$jwt = new JWT();
+               //$token = $jwt->generate($payload,$header, SECRET, 60);
+               //echo $signature;
 
 
 
