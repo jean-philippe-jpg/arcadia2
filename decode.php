@@ -14,7 +14,9 @@ require_once 'sécurité.php';
 require_once 'safe/JWT.php';
 
 $jwt = new JWT();
+$toto = $jwt->generate($header, $payload, SECRET);
 
-
-var_dump($jwt->check(TOKEN, SECRET));
+echo $toto;
+//var_dump($jwt->generate($jwt));
+//var_dump( $jwt->check(TOKEN));
 //var_dump( $jwt->getPayload(TOKEN));

@@ -58,7 +58,7 @@ class  JWT
         //verification du token
         $verifToken = $this->generate( $payloads, $header, $secret, 0)  ;
 
-        return $token == $verifToken;
+        return $token === $verifToken;
     }
 
 

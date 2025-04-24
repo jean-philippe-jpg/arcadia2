@@ -217,17 +217,22 @@ public function profil( ){
                 $statement = $pdo->prepare('SELECT * FROM users WHERE email = :email');
               
                 // On récupère un utilisateur ayant le même login (ici, e-mail)
-                if(empty($_POST['email'])) {
+                $email = $_POST['email'];
+
+                
+                if(empty($email)) {
+
+                    throw new Exception('Veuillez entrer un email');
+                   
 
                 } else {
-                $email = $_POST['email'];
+                
                 $sanitized_email = htmlspecialchars($email, ENT_QUOTES | ENT_HTML5, 'UTF-8');
 
                 $statement->bindValue(':email',$sanitized_email, $pdo::PARAM_STR);
                 $statement->execute();
                 $user = $statement->fetchObject( Users::class);
-                //var_dump($user);
-                //var_dump($user); echo '<br><br>';
+                
                if ($user === false) {
                         
                 // Si aucun utilisateur ne correspond au login entré, on affiche une erreur
@@ -280,7 +285,7 @@ public function profil( ){
                                 
             }    
                  } catch(\Exception $e){
-            echo 'erreur d\'insertion'. $e->getMessage();
+            echo 'erreur '.'<br>'. $e->getMessage();
            
 
         }

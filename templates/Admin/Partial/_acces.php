@@ -5,6 +5,7 @@
 
 
 if(in_array('ROLE_ADMIN', $_SESSION['roles']) ) { ?>
+
 <a href="?controller=users&action=readusers" class="btn ">utilisateurs</a>
 <a href="?controller=race&action=read" class="btn btn-warning">race</a>
     <a href="?controller=animals&action=read" class="btn btn-warning">animaux</a>
