@@ -214,19 +214,17 @@ public function profil( ){
                 $mysql = Mysql::getInstance();
                 $pdo = $mysql->getPDO();
                 session_start();
+
+
+                if(!isset($_POST['email'])) {
+                
+                    $email= null;
+                } else {
                 $statement = $pdo->prepare('SELECT * FROM users WHERE email = :email');
               
                 // On récupère un utilisateur ayant le même login (ici, e-mail)
-                $email = $_POST['email'];
+                $email = $_POST['email'] ;
 
-                
-                if(empty($email)) {
-
-                    throw new Exception('Veuillez entrer un email');
-                   
-
-                } else {
-                
                 $sanitized_email = htmlspecialchars($email, ENT_QUOTES | ENT_HTML5, 'UTF-8');
 
                 $statement->bindValue(':email',$sanitized_email, $pdo::PARAM_STR);
@@ -238,7 +236,6 @@ public function profil( ){
                 // Si aucun utilisateur ne correspond au login entré, on affiche une erreur
                 echo 'Utilisateur non trouvé';
                
-
             } else {
 
                 $password = $_POST['password'];
@@ -282,12 +279,12 @@ public function profil( ){
                 }
                 
             }
-                                
-            }    
+        }        
+                
                  } catch(\Exception $e){
             echo 'erreur '.'<br>'. $e->getMessage();
            
-
+                 
         }
     }
        

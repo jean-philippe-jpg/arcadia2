@@ -18,16 +18,19 @@ if(isset($_POST)&& isset($_POST['email']) && isset($_POST['objet']) && isset($_P
         if(!empty($email) && !empty($objet) && !empty($message)){
             $message=str_replace("\'", " ' ", $message);
                 $destinataire = "jphilippe.champion@gmail.com";
+                $email = $email ;
                 $sujet = "Contact";
                 $messages = "Email : " . $email . "\n" . "Objet : " . $objet . "\n" . "Message : " . $message."\n \n".'jean-philippe champion';
                 $headers = "From: " . $email ."\n" . "Reply-To: " . $email;
+               
         } else {
 
             echo 'Veuillez remplir tous les champs';
         }
 
-        if(mail($destinataire, $sujet, $messages, $headers)){
+        if(mail($destinataire, $sujet, $messages, $headers,$email)){
           
+            echo 'message envoyé';
         } else {
             echo 'Erreur lors de l\'envoi du message';
         }

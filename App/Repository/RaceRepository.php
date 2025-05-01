@@ -34,9 +34,11 @@ class RaceRepository {
                 $mysql = Mysql::getInstance();
                 $pdo = $mysql->getPDO();
                   
-                if(isset($_POST['name'])) {
-                
-                $stmt = $pdo->prepare('INSERT INTO race (name) VALUES (:name)');
+                if(empty($_POST['name'])) {
+                $name = null;
+              
+                    } else {
+                        $stmt = $pdo->prepare('INSERT INTO race (name) VALUES (:name)');
                 $stmt->bindParam(':name', $sanitized_name, $pdo::PARAM_STR);
                 $name = $_POST['name'];
                 $sanitized_name = htmlspecialchars($name, ENT_QUOTES | ENT_HTML5, 'UTF-8');
@@ -44,8 +46,6 @@ class RaceRepository {
                 if(!$stmt->execute()){
                     echo 'erreur de création';
                 } 
-                    } else {
-                      echo 'ajouter d\' une race';
                     }
                
             

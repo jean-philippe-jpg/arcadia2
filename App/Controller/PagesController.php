@@ -168,20 +168,27 @@ class PagesController extends Controller{
                 protected function connected(): void
                 
                 {    
+
+                  // function gestion_erreur($type,$message,$file,$ligne,$context){
+
+                    //echo "<div class='erreur'>".$message."</div>";
+                  // }
+                
                     $connected = new UsersRepository();
                     $connect = $connected->connect();
 
                    /* $connected = new UsersRepository();
                     $connect = $connected->showRoles();*/
-                       
-                    $this->render('Admin/Connexion', [
-
+                    
+                    $this->render('Admin/Connexion', [     
+                     
                         'user' => $connect
                         
-                            
                     ] );
+
+                       
                     //require_once 'templates/showanimals.php';//
-                  
+                      
                 }
 
                 protected function disconnected(): void

@@ -3,8 +3,7 @@
 
 <?php 
 
-
-if(in_array('ROLE_ADMIN', $_SESSION['roles']) ) { ?>
+if(in_array('ROLE_ADMIN', $_SESSION['roles'])) { ?>
 
 <a href="?controller=users&action=readusers" class="btn ">utilisateurs</a>
 <a href="?controller=race&action=read" class="btn btn-warning">race</a>
@@ -31,5 +30,5 @@ if(in_array('ROLE_ADMIN', $_SESSION['roles']) ) { ?>
 <a href="?controller=veto&action=read&animalslist" class="btn ">show soins</a>
 <a href="?controller=veto&action=read" class="btn ">bilan de l'animal</a>
     
- <?php }
+ <?php } ?>
 

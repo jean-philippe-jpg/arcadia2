@@ -54,14 +54,31 @@ class HabitatsRepository {
 
     public function createHabitat( ){
 
+
+        //set_error_handler(function($errno, $errstr, $errfile, $errline) {
+                          
+            //echo "une erreur s'est produite ";
+                            
+            
+                           
+      //  });
+                    
                 try{
                 $mysql = Mysql::getInstance();
                 $pdo = $mysql->getPDO();
                   
-                    if(isset($_POST['name'])){
+                   
+                       // if($_POST['name'] = false)  {
+                      if(empty($_POST['name']) ) {
 
-                        $name = $_POST['name'];
-                        $description = $_POST['description'];
+                        
+                        $name = null;
+                        $description = null;
+
+                        
+                      } else {
+                        $name = $_POST['name'] ;
+                        $description = $_POST['description']  ;
                         
             
                         $stmt = $pdo->prepare('INSERT INTO habitat (name, description ) VALUES (:name, :description )');
@@ -69,15 +86,13 @@ class HabitatsRepository {
                         $stmt->bindParam(':description', $description , $pdo::PARAM_STR);
                         
                             
-                         
+                        
                         if(!$stmt->execute()){
-                            echo 'erreur de création crée';
+                            echo 'erreur de création';
                         } 
                         
-                    } else {
-                        throw new \Exception('création d\'un habitat');
-                    }
-                
+                    
+                      }
               
             } catch(\Exception $e){
                 echo "erreur \n <br>". $e->getMessage();

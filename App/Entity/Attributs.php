@@ -13,7 +13,7 @@ protected string $hab ;
 protected string $photo ;
 protected int $id ;
 protected int $animal_id ;
-protected string $name ;
+protected string $name  ;
 protected string $animal = ' ' ;
 protected array $animal_list =[];
 protected string $nourriture   ;

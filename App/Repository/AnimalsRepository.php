@@ -83,33 +83,41 @@ use App\Tools\StringTools;
                     $mysql = Mysql::getInstance();
                     $pdo = $mysql->getPDO();
 
-                   if(isset($_POST['name'])){
+                   //if(isset($_POST['name'])){
+                   if(empty($_POST['name'])){
+                    
+                            $name = null;
+                            $habitat = null;
+                            $race = null;
 
+                   } else {
+                   
                     $name = $_POST['name']  ;
                     $sanitized_name = htmlspecialchars($name, ENT_QUOTES | ENT_HTML5, 'UTF-8');
-                        $race = $_POST['race'];
+                        $race = $_POST['race']  ;
                    $sanitized_race = htmlspecialchars($race, ENT_QUOTES | ENT_HTML5, 'UTF-8');
-                         $habitat = $_POST['habitat_id'];
+                         $habitat = $_POST['habitat_id'] ;
                     $sanitized_habitat = htmlspecialchars($habitat, ENT_QUOTES | ENT_HTML5, 'UTF-8');
-                        
+            
                      $stmt = $pdo->prepare('INSERT INTO animals (first_name, race, habitat_id ) VALUES (:first_name, :race, :habitat_id )');
                 $stmt->bindParam(':first_name',  $sanitized_name , $pdo::PARAM_STR);
                 $stmt->bindParam(':race', $sanitized_race , $pdo::PARAM_INT);
                 $stmt->bindParam(':habitat_id', $sanitized_habitat , $pdo::PARAM_INT);
         
-                if(!$stmt->execute() ){
+                if($stmt->execute() ){
                     echo 'erreur d\'insertion';
                 } 
             
-                   } else {
-                    throw new  \Exception('Veuillez remplir tous les champs.');
+                  // } else {
+                   // throw new  \Exception('Veuillez remplir tous les champs.');
                    
-                   }
-
-            } catch(\Exception $e){
-                echo "erreur \n <br>".  $e->getMessage();
+                  // }
             }
-    }
+                        } catch(\Exception $e){
+                             echo "erreur \n <br>".  $e->getMessage();
+                     }
+                }
+            
 
 
     public function images(){
