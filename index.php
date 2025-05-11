@@ -59,7 +59,7 @@ $signature = hash_hmac('sha256',
 
 
 
-phpinfo();
+//phpinfo();
 
 
 define('_ROOTPATH_',__DIR__);

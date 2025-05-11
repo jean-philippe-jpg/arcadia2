@@ -18,7 +18,7 @@ if(isset($_POST)&& isset($_POST['email']) && isset($_POST['objet']) && isset($_P
         if(!empty($email) && !empty($objet) && !empty($message)){
             $message=str_replace("\'", " ' ", $message);
                 $destinataire = "jphilippe.champion@gmail.com";
-                $email = $email ;
+               // $email = $email ;
                 $sujet = "Contact";
                 $messages = "Email : " . $email . "\n" . "Objet : " . $objet . "\n" . "Message : " . $message."\n \n".'jean-philippe champion';
                 $headers = "From: " . $email ."\n" . "Reply-To: " . $email;
@@ -28,7 +28,7 @@ if(isset($_POST)&& isset($_POST['email']) && isset($_POST['objet']) && isset($_P
             echo 'Veuillez remplir tous les champs';
         }
 
-        if(mail($destinataire, $sujet, $messages, $headers,$email)){
+        if(mail($destinataire, $sujet, $messages, $headers)){
           
             echo 'message envoyé';
         } else {
