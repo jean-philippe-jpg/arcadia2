@@ -18,8 +18,8 @@ use App\Tools\StringTools;
         $mysql = Mysql::getInstance();
         $pdo = $mysql->getPDO();
 
-        $query = $pdo->prepare('SELECT h.name as habitats, a.id as id, a.first_name as name, r.name as race, s.state as state, s.detail as detail /*, img.libele as images*/ FROM animals a
-                INNER JOIN race r ON a.race = r.id LEFT JOIN animals_state s ON a.id = s.animal RIGHT JOIN habitat h ON a.habitat_id = h.id/*JOIN img_animals img ON img.animals_id = a.id*/ where a.id = :id');   
+        $query = $pdo->prepare('SELECT h.name as habitats, a.id as id, a.first_name as name, r.name as race, s.state as state, s.detail as detail  FROM animals a
+                INNER JOIN race r ON a.race = r.id LEFT JOIN animals_state s ON a.id = s.animal RIGHT JOIN habitat h ON a.habitat_id = h.id where a.id = :id');   
         $query->bindParam(':id', $id, $pdo::PARAM_INT);
         
         
