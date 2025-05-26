@@ -2,7 +2,7 @@
 $name = 'jeAn-phI';
 $pass = 'J25061984c%#';
 $host = 'localhost';
-$dbname = 'arcadia';
+$dbname = 'db';
 
 try {
 
