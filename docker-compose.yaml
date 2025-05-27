@@ -15,13 +15,31 @@ services:
 
  db:
     image: mysql:8.0
-    container_name: mysql8
-    command: --default-authentication-plugin=mysql_native_password
+    container_name: mysql-arc
     environment:
       MYSQL_ROOT_PASSWORD: cHampiondEv85
       MYSQL_DATABASE: arcadia
       MYSQL_USER: jeAn-phI
       MYSQL_PASSWORD: J25061984c%#
+
+    volumes:
+      - .db:/var/lib/mysql
+      
     ports:
       - 3307:3306
    
+    
+   
+ phpmanager:
+    image: phpmyadmin
+    container_name: phpmyadmin-arcadia
+    environment:
+      PMA_ARBITRARY: 1
+      PMA_HOST: db
+      PMA_USER: jeAn-phI
+      PMA_PASSWORD: J25061984c%#
+      UPLOAD_LIMIT: 100M
+    ports:
+      - 8080:80
+    depends_on:
+      - db

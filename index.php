@@ -31,7 +31,7 @@ $payload = [
 
     $token = $jwt->generate($payload,$header, SECRET, 60);
 
-    echo $token;
+    //echo $token;
 
     //$jwt = $base64header . '.'.'<br>' . $base64Payload . '.'.'<br>' . $base64signature;
     //echo $jwt;
