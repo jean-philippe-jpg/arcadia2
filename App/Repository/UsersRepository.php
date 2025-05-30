@@ -213,7 +213,7 @@ public function profil( ){
                  
                 $mysql = Mysql::getInstance();
                 $pdo = $mysql->getPDO();
-                session_start();
+                //session_start();
 
 
                 if(!isset($_POST['email'])) {

@@ -4,11 +4,11 @@
 
 class  JWT 
 {
-    public function generate(array $payload, array $header, string $secret, int $validate = 1440) 
+    public function generate( $payload, $header, string $secret, int $validate = 1440) 
     
     {
 
-        if($validate > 0) {
+        if($validate > 0)  {
             $now = new DateTime();
             $expiration = $now->getTimestamp() + $validate;
             $payload['iat'] = $now->getTimestamp();

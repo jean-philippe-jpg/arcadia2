@@ -1,10 +1,5 @@
 <?php
 
-session_start();
-
-
-
-
 //$name = $_SESSION['name'];
 require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
 ?>

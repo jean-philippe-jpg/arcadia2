@@ -1,10 +1,14 @@
 <?php
-/*if (!isset( $_SESSION['roles'] )) { 
+
+
+$_SESSION['roles'] ; // Simulating roles for testing
+
+if (!isset( $_SESSION['roles'] )) { 
 
 	echo '<h1 style="color:purple;  text-align: center; margin-top: 30vh;">vous n\'avez pas l\'acces à cette page  :/</h1>';
   
   
- } else { */
+ } else { 
 
 
 require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
@@ -38,7 +42,7 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
 
 <?php
 require_once _ROOTPATH_.'/templates/Admin/Partial/_acces.php';
-
+ }
 ?>
 
 

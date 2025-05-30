@@ -1,5 +1,7 @@
 <?php 
-session_start();
+
+
+$_SESSION['roles'] = ['ROLE_ADMIN', 'ROLE_SOIGNANT']; // Simulating roles for testing
 
 
 if (!in_array('ROLE_SOIGNANT', $_SESSION['roles'])) {

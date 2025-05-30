@@ -1,10 +1,4 @@
 <?php
-session_start();
-
-
-
-
-
 require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
 ?>
 <h3 style="color: red; margin-top:200px;">tableau etat animals</h3>
