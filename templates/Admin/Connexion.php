@@ -1,9 +1,11 @@
 <?php
 
 
-$_SESSION['roles'] ; // Simulating roles for testing
+ // Simulating roles for testing
+//$_SESSION['roles'] = [];
+//$_SESSION['roles'] = ['ROLE_ADMIN', 'ROLE_SOIGNANT'];
 
-if (!isset( $_SESSION['roles'] )) { 
+if (in_array('ROLE_ADMIN', $_SESSION['roles'])) { 
 
 	echo '<h1 style="color:purple;  text-align: center; margin-top: 30vh;">vous n\'avez pas l\'acces à cette page  :/</h1>';
   

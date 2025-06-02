@@ -3,14 +3,21 @@ const mongoose = require('mongoose');
 const dotenv = require('dotenv').config();
 
 
+
+
 const connectDB = async () => {
 
 try {
      mongoose.set('strictQuery', false); 
        
-    mongoose.connect(process.env.MONGO_URI, ()=> 
+   /* mongoose.connect(process.env.MONGO_URI, ()=> 
         console.log("MongoDB connected")
+    );*/
+
+    mongoose.connect(process.env.MONGO_URI)
+    .then(() => console.log('MongoDB connected')
     );
+
 
 
 } catch (error) {

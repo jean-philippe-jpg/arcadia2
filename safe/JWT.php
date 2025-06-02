@@ -4,7 +4,7 @@
 
 class  JWT 
 {
-    public function generate( $payload, $header, string $secret, int $validate = 1440) 
+    public function generate($payload, $header, string $secret, int $validate = 1440) 
     
     {
 
@@ -53,16 +53,16 @@ class  JWT
 
 
         $header = $this->getHeader(  $token);
-        $payloads = $this->getPayload( $token);
+        $payloads = $this->getPayload ( $token) ;
 
         //verification du token
-        $verifToken = $this->generate( $header, $payloads, $secret, 0)  ;
+        $verifToken = $this->generate( $header, $payloads, $secret, 0) ;
 
        return $token === $verifToken;
     }
 
 
-    public function getHeader(string $token) {
+    public function getHeader($token) {
         
         //demontage du token
          $array = explode('.', $token);
@@ -74,7 +74,7 @@ class  JWT
 
     }
 
-    public function getPayload(string $token){
+    public function getPayload( $token){
  //demontage du token
  $token = explode('.', $token);
 

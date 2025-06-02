@@ -3,6 +3,9 @@
 
 <?php 
 
+//$_SESSION['roles'] = isset($_SESSION['roles']) ? $_SESSION['roles'] : [];
+
+
 if(in_array('ROLE_ADMIN', $_SESSION['roles'])) { ?>
 
 <a href="?controller=users&action=readusers" class="btn ">utilisateurs</a>
