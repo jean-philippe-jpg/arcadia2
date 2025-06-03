@@ -1,6 +1,7 @@
 <?php
 
-require_once _ROOTPATH_.'\templates\partial\_header.php';
+require_once _ROOTPATH_.'/templates/partial/_header.php';
+//require_once '/templates/partial/_header.php';
 ?>
 
 <h1>show animals hab</h1>

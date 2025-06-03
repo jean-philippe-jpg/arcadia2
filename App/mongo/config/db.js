@@ -14,7 +14,7 @@ try {
         console.log("MongoDB connected")
     );*/
 
-    mongoose.connect('mongodb+srv://arcadia:cHampion85@cluster0.fgnbb.mongodb.net')
+    mongoose.connect('mongodb+srv://jeanphi:champion84@cluster0.fgnbb.mongodb.net/')
     .then(() => console.log('MongoDB connected')
     );
 

@@ -1,9 +1,11 @@
 <?php 
-require_once 'sécurité.php';
 require_once 'safe/JWT.php';
+require_once 'safe/sécurité.php';
 
 
-//header
+
+
+//creation du header
 $header = [
 
   'typ' => 'JWT',
@@ -11,7 +13,7 @@ $header = [
 
 ];
 
-
+//création du contenue
 $payload = [
 
     'user_id' => 28,
@@ -22,22 +24,12 @@ $payload = [
     ]
     ];
 
-    /*$base64Payload = str_replace(['+','/','='],
-    ['-','_',''], $base64Payload);*/
+   
+$jwt = new JWT();
+$token = $jwt->generate($header, $payload, SECRET);
 
-    //echo $base64Payload;
 
-    $jwt = new JWT();
-
-    $token = $jwt->generate($payload,$header, SECRET, 60);
-
-    //echo $token;
-
-    //$jwt = $base64header . '.'.'<br>' . $base64Payload . '.'.'<br>' . $base64signature;
-    //echo $jwt;
-               //$jwt = new JWT();
-               //$token = $jwt->generate($payload,$header, SECRET, 60);
-               //echo $signature;
+var_dump($token);
 
 
 
