@@ -1,13 +1,11 @@
 const express = require("express");
 const connectDB = require('./mongo/config/db');
-const dotenv = require('dotenv').config();
+//const dotenv = require('dotenv').config();
 const port = 5000;
 
+connectDB();
 const app = express();
 
-
-
-connectDB();
 //middelware permetant de traiter les données de ma requète
 
 app.use(express.json());

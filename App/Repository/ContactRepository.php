@@ -13,7 +13,7 @@ class ContactRepository {
 
     public function createContact( ){
 
-if(isset($_POST)&& isset($_POST['email']) && isset($_POST['objet']) && isset($_POST['message'])){
+/*if(isset($_POST)&& isset($_POST['email']) && isset($_POST['objet']) && isset($_POST['message'])){
         extract($_POST);
         if(!empty($email) && !empty($objet) && !empty($message)){
             $message=str_replace("\'", " ' ", $message);
@@ -26,17 +26,22 @@ if(isset($_POST)&& isset($_POST['email']) && isset($_POST['objet']) && isset($_P
         } else {
 
             echo 'Veuillez remplir tous les champs';
-        }
+        }*/
+            $destinataire = " jphilippe.champion@gmail.com";
+            $sujet = "Contact";
+            $messages = "message de toto";  
 
-        if(mail($destinataire, $sujet, $messages, $headers)){
+          
+
+
+        if(mail($destinataire, $sujet, $messages)){
           
             echo 'message envoyé';
         } else {
             echo 'Erreur lors de l\'envoi du message';
         }
-}
+    }
 
                
     }
 
-}
