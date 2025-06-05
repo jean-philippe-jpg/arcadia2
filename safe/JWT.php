@@ -35,19 +35,20 @@ $jwt = $headerbase64 . '.' . $payloadbase64 . '.' . $signature;
 return $jwt;
     }
 
-    public function check(string $token, string $secret): bool {
+    public function check(string $token, string $secret): bool
+     {
 
-        $header = $this->getheader($token);
-        $payload = $this->getpayload($token);
+        $header = $this->getHeader($token);
+        $payload = $this->getPayload($token);
 
         //vérification de la signature
-        $verfiToken = $this->generate($header, $payload, $secret, 0);
+        $verifToken = $this->generate($header, $payload, $secret, 0);
 
-        return $token === $verfiToken;
+        return $token === $verifToken;
 
     }
 
-    public function getheader(string $token) {
+    public function getHeader(string $token) {
 
         $array = explode('.', $token);
 
@@ -57,12 +58,12 @@ return $jwt;
 
     }
 
-    public function getpayload(string $token) {
+    public function getPayload(string $token) {
 
          $array = explode('.', $token);
 
-        $header = json_decode(base64_decode($array[1]), true);
+        $payload = json_decode(base64_decode($array[1]), true);
 
-        return $header;
+        return $payload;
     }
 }
