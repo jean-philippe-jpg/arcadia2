@@ -1,12 +1,9 @@
 
 
 
-<?php 
+<?php //$_SESSION['roles'] = isset($_SESSION['roles']) ? $_SESSION['roles'] : [];
 
-//$_SESSION['roles'] = isset($_SESSION['roles']) ? $_SESSION['roles'] : [];
-
-
-if(in_array('ROLE_ADMIN', $_SESSION['roles'])) { ?>
+if(in_array('ROLE_ADMIN', $_SESSION['roles']) ) { ?>
 
 <a href="?controller=users&action=readusers" class="btn ">utilisateurs</a>
 <a href="?controller=race&action=read" class="btn btn-warning">race</a>
@@ -18,7 +15,7 @@ if(in_array('ROLE_ADMIN', $_SESSION['roles'])) { ?>
     <a href="?controller=horaires&action=read" class="btn ">horaires</a>
     
 
- <?php } elseif (in_array('ROLE_SOIGNANT', $_SESSION['roles'])) { ?>
+  <?php } elseif (in_array('ROLE_SOIGNANT', $_SESSION['roles']) /*&& !in_array('ROLE_VETO', $_SESSION['roles']) && !in_array('ROLE_ADMIN', $_SESSION['roles'])*/) { ?>
 
     <a href="?controller=animals&action=read" class="btn btn-warning">animaux</a>
 <a href="?controller=services&action=read" class="btn ">services</a>
@@ -28,7 +25,7 @@ if(in_array('ROLE_ADMIN', $_SESSION['roles'])) { ?>
 
 
 
-<?php } elseif (in_array('ROLE_VETO', $_SESSION['roles'])) { ?>
+<?php } elseif (in_array('ROLE_VETO', $_SESSION['roles']) ) { ?>
 <a href="?controller=veto&action=habitats" class="btn ">avis habitat</a>
 <a href="?controller=veto&action=read&animalslist" class="btn ">show soins</a>
 <a href="?controller=veto&action=read" class="btn ">bilan de l'animal</a>

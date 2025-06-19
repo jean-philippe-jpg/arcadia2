@@ -15,13 +15,8 @@ $header = [
 
 //création du contenue
 $payload = [
-
-    'user_id' => 28,
-    'roles' => [
-        'ROLE_ADMIN',
-        'ROLE_SOIGNANT',
-        'ROLE_VETO'
-    ]
+        "email" => "email",
+        "password" => "password"
     ];
 
    
@@ -29,7 +24,7 @@ $jwt = new JWT();
 $token = $jwt->generate($header, $payload, SECRET, 60);
 
 
- echo $token;
+ //echo $token;
 
 
 

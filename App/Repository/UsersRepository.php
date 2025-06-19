@@ -211,10 +211,29 @@ public function profil( ){
         
         try{
                  
+            
+/*if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+  if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] == $_SESSION['csrf_token']) {
+
+    die('Erreur CSRF !');
+  } else {
+    echo "<br>";
+    echo " Jeton CSRF transmis";      
+    echo "<br>";
+  }
+}
+
+$_SESSION['csrf_token'] = bin2hex(random_bytes(32));*/
+
+
+
+       
+    
                 $mysql = Mysql::getInstance();
                 $pdo = $mysql->getPDO();
                 //session_start();
-
+ 
 
                 if(!isset($_POST['email'])) {
                 
@@ -230,7 +249,7 @@ public function profil( ){
                 $statement->bindValue(':email',$sanitized_email, $pdo::PARAM_STR);
                 $statement->execute();
                 $user = $statement->fetchObject( Users::class);
-                
+                }
                if ($user === false) {
                         
                 // Si aucun utilisateur ne correspond au login entré, on affiche une erreur
@@ -279,15 +298,16 @@ public function profil( ){
                 }
                 
             }
-        }        
+               
                 
                  } catch(\Exception $e){
             echo 'erreur '.'<br>'. $e->getMessage();
-           
+                 
                  
         }
     }
-       
+
+
         
 
         public function read(){

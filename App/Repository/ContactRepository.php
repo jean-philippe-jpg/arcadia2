@@ -3,7 +3,8 @@
 namespace App\Repository;
 
 
-
+use PHPMailer\PHPMailer\PHPMailer;
+use \sendmail_config\EnvoieMail;
 use App\Bdd\Mysql;
 use App\Tools\StringTools;
 
@@ -12,32 +13,25 @@ class ContactRepository {
 
 
     public function createContact( ){
-
-/*if(isset($_POST)&& isset($_POST['email']) && isset($_POST['objet']) && isset($_POST['message'])){
-        extract($_POST);
-        if(!empty($email) && !empty($objet) && !empty($message)){
-            $message=str_replace("\'", " ' ", $message);
-                $destinataire = "jphilippe.champion@gmail.com";
-                $email = $email ;
-                $sujet = "Contact";
-                $messages = "Email : " . $email . "\n" . "Objet : " . $objet . "\n" . "Message : " . $message."\n \n".'jean-philippe champion';
-                $headers = "From: " . $email ."\n" . "Reply-To: " . $email;
-               
-        } else {
-
-            echo 'Veuillez remplir tous les champs';
-        }
-          
-          
+   
+    /*$mailToSend = $_POST['email'];
+    $message = $_POST['message'];
+    $btn = $_POST['envoyer'];*/
 
 
-        if(mail($destinataire, $sujet, $messages)){
-          
-            echo 'message envoyé';
-        } else {
-            echo 'Erreur lors de l\'envoi du message';
-        }
-    }*/
+        $mailToSend = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        $message = filter_input(INPUT_POST, 'message', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        $btn = filter_input(INPUT_POST, 'envoyer', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
+         
+       require_once './sendmail_config.php';
+       if(isset($btn) && $btn == 'Envoyer') {
+           
+        $mail = new PHPMailer(true);
+
+        EnvoieMail($mail, $mailToSend, $message);
+        echo "Votre message a été envoyé avec succès.";
+    
            /* if ($_SERVER["REQUEST_METHOD"] == "POST") {
     //$name = htmlspecialchars($_POST["name"]);
       $destinataire = "jphilippe.champion@gmail.com";
@@ -48,36 +42,24 @@ class ContactRepository {
     echo "Merci,".$email.", votre message a été envoyé !"; 
 }*/
      
-    if($_SERVER["REQUEST_METHOD"] == "POST" ) {
-        
-        $mail = htmlspecialchars(trim($_POST['email']));
-        $message = htmlspecialchars(trim($_POST['message']));
+    /*if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-        if(empty($mail)  || empty($message)) {
-            echo 'Veuillez remplir tous les champs';
-            return;
-        
+    $name = $_POST['name'];
+    $mailToSend = $_POST['email'];
+    $subject = $_POST['subject'];
+    $message = $_POST['message'];
 
-        }
-
-        $to = "jphilippe.champion@gmail.com";
-        $header = "from: " . $mail . "\r\n";
-        $header .= "Reply-To: " . $mail . "\r\n";
-        $header .= "Content-Type: text/plain; charset=UTF-8\r\n";
-        $subject = "Contact Form: ";
-        $body = "Email: " . $mail . "\n";
-        $body .=  "Message: " . $message . "\n\n";
-        $body .= "Jean-Philippe Champion";
-
-
-        if(mail($to, $subject, $body, $header)) {
-            echo 'Message envoyé avec succès';
-        } else {
-            echo 'Erreur lors de l\'envoi du message';
-        }
+    // Validation des données (exemple simple)
+    if (empty($name) || empty($mailToSend) || empty($subject) || empty($message)) {
+        echo "Tous les champs sont obligatoires.";
     } else {
-        echo 'Méthode de requête non prise en charge';
+        // Envoi de l'e-mail
+        $to = "jphilippe.champion@gmail.com";
+        $headers = "From: $name, $mailToSend";
+        mail($to, $subject, $message, $headers);
+        echo "Votre message a été envoyé avec succès.";
     }
-       
-}
+}*/
+    }
+    }
 }

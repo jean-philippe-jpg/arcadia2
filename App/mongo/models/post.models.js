@@ -12,12 +12,12 @@ const postSchema = mongoose.Schema(
         type: String,
         required: true,
         
-    },
-
-    likers :{
-        type: [string],
-       
     }
+
+    /*likers :{
+        type: [string]
+       
+    }*/
 }
 
 );

@@ -3,9 +3,15 @@
 
  // Simulating roles for testing
 //$_SESSION['roles'] = [];
-//$_SESSION['roles'] = ['ROLE_ADMIN', 'ROLE_SOIGNANT'];
 
-if (in_array('ROLE_ADMIN', $_SESSION['roles'])) { 
+
+
+
+
+
+$_SESSION['roles'] = ['ROLE_ADMIN', 'ROLE_SOIGNANT', 'ROLE_VETO'];
+
+if (!in_array('ROLE_ADMIN', $_SESSION['roles']) || !in_array('ROLE_VETO', $_SESSION['roles']) || !in_array('ROLE_SOIGNANT', $_SESSION['roles'])) { 
 
 	echo '<h1 style="color:purple;  text-align: center; margin-top: 30vh;">vous n\'avez pas l\'acces à cette page  :/</h1>';
   
@@ -17,9 +23,8 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
 
 ?>
   
-
 <h1>Connexion</h1>
-<a href="?controller=users&action=connect" class="btn btn-danger">profil</a>
+
 <a href="index.php" class="btn btn-danger">home</a>
 
 <a href="https://front.codes/" class="logo" target="_blank">
@@ -28,7 +33,6 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
 
 	<form action="" method="post">
   <ul>
-    
     <li>
       <label for="email">E-mail&nbsp;:</label>
       <input type="email" id="email" name="email" />
@@ -45,6 +49,7 @@ require_once _ROOTPATH_.'/templates/Admin/Partial/_header.php';
 <?php
 require_once _ROOTPATH_.'/templates/Admin/Partial/_acces.php';
  }
+
 ?>
 
 

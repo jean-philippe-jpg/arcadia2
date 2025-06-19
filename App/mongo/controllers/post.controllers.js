@@ -9,4 +9,16 @@ module.exports.setPosts = async (req, res) => {
 
    }
    
+
+   const post = await PostModel.create({
+         message: req.body.message,
+         content: req.body.content
+    })
+
+    res.status(201).json({
+        message: "Post créé avec succès",
+        post
+    });
 };
+
+

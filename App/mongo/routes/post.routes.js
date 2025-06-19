@@ -1,13 +1,20 @@
 const express = require('express');
+//const { setPosts } = require('../controllers/post.controllers');
 const { setPosts } = require('../controllers/post.controllers');
+const router = express.Router();
 
-const router= express.Router();
-
-router.get('/', (req, res) => {
-    res.json({message: "voici les données"});
-  });
 
   router.post('/', setPosts);
+
+
+   /* router.('/', (req, res) => {
+      console.log(req.res);
+    res.json({message: 'les données ont été modifiées'});
+    });*/
+
+   //router.put('/', (req, res) => {
+    //res.json({message: 'les données ont été modifiées'});
+    //});
 
   router.put('/:id', (req, res) => {
     res.json({message: `l'id ${req.params.id} a été modifié`});
@@ -27,4 +34,4 @@ router.get('/', (req, res) => {
                 res.json({message: `post dislike ${req.params.id} a été liké`});
                 });
 
- module.exports = route;
+ module.exports = router;

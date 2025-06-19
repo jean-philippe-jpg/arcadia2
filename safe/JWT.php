@@ -66,4 +66,23 @@ return $jwt;
 
         return $payload;
     }
+
+
+    public function isExpired(string $token): bool {
+
+        $payload = $this->getPayload($token);
+
+        $now = new DateTime();
+
+        return $payload['exp'] < $now->getTimestamp();
+
+    }
+
+
+    public function isValid(string $token): bool {
+
+
+        return preg_match('/^[A-Za-z0-9\-\_\=]+\.[A-Za-z0-9\-\_\=]+\.[A-Za-z0-9\-\_\=]+$/', $token) === 1;
+
+    }
 }
